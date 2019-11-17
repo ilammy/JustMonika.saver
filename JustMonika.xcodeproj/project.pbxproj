@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F069CA12381A7080081F32E /* JustMonikaView.h */; };
 		9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CA32381A7080081F32E /* JustMonikaView.m */; };
+		9F069CB32381B4090081F32E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CB22381B4090081F32E /* AppDelegate.m */; };
+		9F069CB52381B40C0081F32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB42381B40C0081F32E /* Assets.xcassets */; };
+		9F069CB82381B40C0081F32E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB62381B40C0081F32E /* MainMenu.xib */; };
+		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -16,10 +20,25 @@
 		9F069CA12381A7080081F32E /* JustMonikaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaView.h; sourceTree = "<group>"; };
 		9F069CA32381A7080081F32E /* JustMonikaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaView.m; sourceTree = "<group>"; };
 		9F069CA52381A7080081F32E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F069CAF2381B4090081F32E /* JustMonikaPreview.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JustMonikaPreview.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F069CB12381B4090081F32E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9F069CB22381B4090081F32E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9F069CB42381B40C0081F32E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F069CB72381B40C0081F32E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		9F069CB92381B40C0081F32E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F069CBA2381B40C0081F32E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustMonikaPreview.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9F069C9B2381A7080081F32E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F069CAC2381B4090081F32E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -33,7 +52,9 @@
 			isa = PBXGroup;
 			children = (
 				9F069CA02381A7080081F32E /* JustMonika */,
+				9F069CB02381B4090081F32E /* JustMonikaPreview */,
 				9F069C9F2381A7080081F32E /* Products */,
+				9F069CC02381B61D0081F32E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -41,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				9F069C9E2381A7080081F32E /* JustMonika.saver */,
+				9F069CAF2381B4090081F32E /* JustMonikaPreview.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -53,6 +75,27 @@
 				9F069CA52381A7080081F32E /* Info.plist */,
 			);
 			path = JustMonika;
+			sourceTree = "<group>";
+		};
+		9F069CB02381B4090081F32E /* JustMonikaPreview */ = {
+			isa = PBXGroup;
+			children = (
+				9F069CB12381B4090081F32E /* AppDelegate.h */,
+				9F069CB22381B4090081F32E /* AppDelegate.m */,
+				9F069CB42381B40C0081F32E /* Assets.xcassets */,
+				9F069CB62381B40C0081F32E /* MainMenu.xib */,
+				9F069CB92381B40C0081F32E /* Info.plist */,
+				9F069CBA2381B40C0081F32E /* main.m */,
+				9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */,
+			);
+			path = JustMonikaPreview;
+			sourceTree = "<group>";
+		};
+		9F069CC02381B61D0081F32E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +130,23 @@
 			productReference = 9F069C9E2381A7080081F32E /* JustMonika.saver */;
 			productType = "com.apple.product-type.bundle";
 		};
+		9F069CAE2381B4090081F32E /* JustMonikaPreview */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F069CBD2381B40C0081F32E /* Build configuration list for PBXNativeTarget "JustMonikaPreview" */;
+			buildPhases = (
+				9F069CAB2381B4090081F32E /* Sources */,
+				9F069CAC2381B4090081F32E /* Frameworks */,
+				9F069CAD2381B4090081F32E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JustMonikaPreview;
+			productName = JustMonikaPreview;
+			productReference = 9F069CAF2381B4090081F32E /* JustMonikaPreview.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -97,6 +157,9 @@
 				ORGANIZATIONNAME = "ilammy's tearoom";
 				TargetAttributes = {
 					9F069C9D2381A7080081F32E = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
+					9F069CAE2381B4090081F32E = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
@@ -115,6 +178,7 @@
 			projectRoot = "";
 			targets = (
 				9F069C9D2381A7080081F32E /* JustMonika */,
+				9F069CAE2381B4090081F32E /* JustMonikaPreview */,
 			);
 		};
 /* End PBXProject section */
@@ -124,6 +188,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F069CAD2381B4090081F32E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F069CB52381B40C0081F32E /* Assets.xcassets in Resources */,
+				9F069CB82381B40C0081F32E /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +211,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F069CAB2381B4090081F32E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F069CBB2381B40C0081F32E /* main.m in Sources */,
+				9F069CB32381B4090081F32E /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		9F069CB62381B40C0081F32E /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F069CB72381B40C0081F32E /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		9F069CA62381A7080081F32E /* Debug */ = {
@@ -278,6 +371,44 @@
 			};
 			name = Release;
 		};
+		9F069CBE2381B40C0081F32E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JustMonikaPreview/JustMonikaPreview.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = JustMonikaPreview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		9F069CBF2381B40C0081F32E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = JustMonikaPreview/JustMonikaPreview.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = JustMonikaPreview/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaPreview;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -295,6 +426,15 @@
 			buildConfigurations = (
 				9F069CA92381A7080081F32E /* Debug */,
 				9F069CAA2381A7080081F32E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F069CBD2381B40C0081F32E /* Build configuration list for PBXNativeTarget "JustMonikaPreview" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F069CBE2381B40C0081F32E /* Debug */,
+				9F069CBF2381B40C0081F32E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
