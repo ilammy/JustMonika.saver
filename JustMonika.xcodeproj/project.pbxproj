@@ -13,7 +13,32 @@
 		9F069CB52381B40C0081F32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB42381B40C0081F32E /* Assets.xcassets */; };
 		9F069CB82381B40C0081F32E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB62381B40C0081F32E /* MainMenu.xib */; };
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
+		9F0FE1712381BB5D001139B3 /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9F0FE1722381BB5E001139B3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F069C952381A7080081F32E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F069C9D2381A7080081F32E;
+			remoteInfo = JustMonika;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		9F0FE1742381BB5E001139B3 /* Embed PlugIns */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				9F0FE1712381BB5D001139B3 /* JustMonika.saver in Embed PlugIns */,
+			);
+			name = "Embed PlugIns";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		9F069C9E2381A7080081F32E /* JustMonika.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustMonika.saver; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -137,10 +162,12 @@
 				9F069CAB2381B4090081F32E /* Sources */,
 				9F069CAC2381B4090081F32E /* Frameworks */,
 				9F069CAD2381B4090081F32E /* Resources */,
+				9F0FE1742381BB5E001139B3 /* Embed PlugIns */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				9F0FE1732381BB5E001139B3 /* PBXTargetDependency */,
 			);
 			name = JustMonikaPreview;
 			productName = JustMonikaPreview;
@@ -221,6 +248,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9F0FE1732381BB5E001139B3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F069C9D2381A7080081F32E /* JustMonika */;
+			targetProxy = 9F0FE1722381BB5E001139B3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9F069CB62381B40C0081F32E /* MainMenu.xib */ = {

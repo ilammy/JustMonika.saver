@@ -8,6 +8,7 @@
 
 #import <ScreenSaver/ScreenSaver.h>
 
+IB_DESIGNABLE
 @interface JustMonikaView : ScreenSaverView
 
 @end
