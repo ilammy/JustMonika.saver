@@ -15,6 +15,7 @@
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 		9F0FE1712381BB5D001139B3 /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F0FE1762381D751001139B3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F0FE1752381D751001139B3 /* Assets.xcassets */; };
+		9F0FE1782382E5E6001139B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0FE1772382E5E5001139B3 /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		9F069CBA2381B40C0081F32E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustMonikaPreview.entitlements; sourceTree = "<group>"; };
 		9F0FE1752381D751001139B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9F0FE1772382E5E5001139B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F0FE1782382E5E6001139B3 /* QuartzCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,6 +125,7 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F0FE1772382E5E5001139B3 /* QuartzCore.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
