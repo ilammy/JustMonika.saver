@@ -10,10 +10,11 @@
 
 #import <QuartzCore/CoreAnimation.h>
 
+#import "DawnAnimationController.h"
+
 @interface JustMonikaView ()
 
-@property(nonatomic) CALayer *sceneLayer;
-@property(nonatomic) CALayer *lightLayer;
+@property(nonatomic) DawnAnimationController *dawnAnimation;
 
 @end
 
@@ -24,6 +25,8 @@
 {
     [super awakeFromNib];
     [self setupCALayer];
+    // TODO: start the animation more natually
+    [self.dawnAnimation startAnimation];
 }
 
 // Called by Interface Builder preview
@@ -51,18 +54,21 @@
     NSImage *scene = [bundle imageForResource:@"monika_bg"];
     NSImage *light = [bundle imageForResource:@"monika_bg_highlight"];
 
-    self.sceneLayer = centeredSublayerWithImage(scene);
-    self.lightLayer = centeredSublayerWithImage(light);
+    CALayer *sceneLayer = centeredSublayerWithImage(scene);
+    CALayer *lightLayer = centeredSublayerWithImage(light);
 
     CALayer *layer = [CALayer new];
     layer.backgroundColor = [[NSColor blackColor] CGColor];
     layer.contentsGravity = kCAGravityResizeAspectFill;
     layer.layoutManager = [CAConstraintLayoutManager layoutManager];
 
-    [layer addSublayer:self.sceneLayer];
-    [layer addSublayer:self.lightLayer];
+    [layer addSublayer:sceneLayer];
+    [layer addSublayer:lightLayer];
 
     self.layer = layer;
+
+    self.dawnAnimation = [DawnAnimationController new];
+    [self.dawnAnimation addLayer:lightLayer];
 }
 
 static CAConstraint *centerX;
@@ -96,11 +102,15 @@ static CALayer* centeredSublayerWithImage(NSImage *image)
 - (void)startAnimation
 {
     [super startAnimation];
+
+    [self.dawnAnimation startAnimation];
 }
 
 - (void)stopAnimation
 {
     [super stopAnimation];
+
+    [self.dawnAnimation stopAnimation];
 }
 
 - (void)drawRect:(NSRect)rect
