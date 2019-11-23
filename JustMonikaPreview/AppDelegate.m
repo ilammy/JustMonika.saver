@@ -8,21 +8,36 @@
 
 #import "AppDelegate.h"
 
+#import "JustMonikaView.h"
+
 @interface AppDelegate ()
 
-@property (weak) IBOutlet NSWindow *window;
+@property(weak) IBOutlet NSWindow *window;
+@property(weak) IBOutlet JustMonikaView *view;
+@property(weak) IBOutlet NSButton *settingsButton;
+
 @end
 
 @implementation AppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    // Insert code here to initialize your application
+- (IBAction)openSettings:(id)sender
+{
+//    [NSApp beginSheet:self.view.configureSheet
+//       modalForWindow:self.window
+//        modalDelegate:self
+//       didEndSelector:@selector(settingsDidClose:returnCode:contextInfo:)
+//          contextInfo:nil];
+    [self.window beginSheet:self.view.configureSheet
+          completionHandler:^(NSModalResponse returnCode){
+        self.settingsButton.enabled = self.view.hasConfigureSheet;
+    }];
 }
 
-
-- (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Insert code here to tear down your application
+- (void)settingsDidClose:(NSWindow *)sheet
+              returnCode:(NSInteger)returnCode
+             contextInfo:(void *)contextInfo
+{
+    self.settingsButton.enabled = self.view.hasConfigureSheet;
 }
-
 
 @end

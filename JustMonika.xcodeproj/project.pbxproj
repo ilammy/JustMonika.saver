@@ -18,6 +18,11 @@
 		9F0FE1782382E5E6001139B3 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F0FE1772382E5E5001139B3 /* QuartzCore.framework */; };
 		9F0FE17B23836142001139B3 /* DawnAnimationController.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F0FE17923836142001139B3 /* DawnAnimationController.h */; };
 		9F0FE17C23836143001139B3 /* DawnAnimationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F0FE17A23836142001139B3 /* DawnAnimationController.m */; };
+		9F3FC3F323891D8B00AD0621 /* ConfigureSheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* ConfigureSheet.xib */; };
+		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
+		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
+		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; };
+		9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +66,11 @@
 		9F0FE1772382E5E5001139B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9F0FE17923836142001139B3 /* DawnAnimationController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DawnAnimationController.h; sourceTree = "<group>"; };
 		9F0FE17A23836142001139B3 /* DawnAnimationController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DawnAnimationController.m; sourceTree = "<group>"; };
+		9F3FC3F223891D8B00AD0621 /* ConfigureSheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigureSheet.xib; sourceTree = "<group>"; };
+		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
+		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
+		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
+		9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaSettings.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +120,11 @@
 				9F0FE17923836142001139B3 /* DawnAnimationController.h */,
 				9F0FE17A23836142001139B3 /* DawnAnimationController.m */,
 				9F069CA52381A7080081F32E /* Info.plist */,
+				9F3FC3F223891D8B00AD0621 /* ConfigureSheet.xib */,
+				9F3FC3F42389506300AD0621 /* NSView+Subviews.h */,
+				9F3FC3F52389506300AD0621 /* NSView+Subviews.m */,
+				9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */,
+				9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */,
 			);
 			path = JustMonika;
 			sourceTree = "<group>";
@@ -143,7 +158,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
+				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
 				9F0FE17B23836142001139B3 /* DawnAnimationController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -230,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0FE1762381D751001139B3 /* Assets.xcassets in Resources */,
+				9F3FC3F323891D8B00AD0621 /* ConfigureSheet.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +268,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F0FE17C23836143001139B3 /* DawnAnimationController.m in Sources */,
+				9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */,
+				9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */,
 				9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -11,10 +11,14 @@
 #import <QuartzCore/CoreAnimation.h>
 
 #import "DawnAnimationController.h"
+#import "JustMonikaSettings.h"
+#import "NSView+Subviews.h"
 
 @interface JustMonikaView ()
 
 @property(nonatomic) DawnAnimationController *dawnAnimation;
+
+@property(strong) IBOutlet NSWindow *settingsSheet;
 
 @end
 
@@ -24,6 +28,13 @@
 - (void)awakeFromNib
 {
     [super awakeFromNib];
+
+    // This method can get called recursively due to NIB loading in setupCALayer.
+    // NIB fills in settingsSheet, so if it's there then we can just exit.
+    if (self.settingsSheet) {
+        return;
+    }
+
     [self setupCALayer];
     // TODO: start the animation more natually
     [self.dawnAnimation startAnimation];
@@ -69,6 +80,9 @@
 
     self.dawnAnimation = [DawnAnimationController new];
     [self.dawnAnimation addLayer:lightLayer];
+
+    [bundle loadNibNamed:@"ConfigureSheet" owner:self topLevelObjects:nil];
+    JustMonikaSettings.settingsSheetEnabled = YES;
 }
 
 static CAConstraint *centerX;
@@ -125,12 +139,46 @@ static CALayer* centeredSublayerWithImage(NSImage *image)
 
 - (BOOL)hasConfigureSheet
 {
-    return NO;
+    return JustMonikaSettings.settingsSheetEnabled;
 }
 
 - (NSWindow*)configureSheet
 {
-    return nil;
+    if (!JustMonikaSettings.settingsSheetEnabled) {
+        return nil;
+    }
+    return self.settingsSheet;
+}
+
+- (IBAction)disableConfigureSheet:(id)sender
+{
+    JustMonikaSettings.settingsSheetEnabled = NO;
+    [self disableScreenSaverOptionsButton];
+    [NSApp endSheet:self.settingsSheet];
+}
+
+- (void)disableScreenSaverOptionsButton
+{
+    // Unfortunately, System Settings dialog caches "hasConfigureSheet" result
+    // and shows the settings button as enabled until the user switches to some
+    // other screen saver or reopens the window. Let's play a trick on the user
+    // and actually disable the button right away.
+    //
+    // We can exploit the fact that Screen Savers are loaded as plugins into
+    // System Settings, and thus we have access to full NSView hierarchy.
+    NSView *contentView = self.settingsSheet.sheetParent.contentView;
+    for (NSView *view in contentView.subviewsRecursive) {
+        if (view.class == NSBox.class) {
+            NSBox *box = (NSBox*)view;
+            for (NSView *view in box.contentView.subviewsRecursive) {
+                if (view.class == NSButton.class) {
+                    NSButton *button = (NSButton*)view;
+                    button.enabled = NO;
+                    return;
+                }
+            }
+        }
+    }
 }
 
 @end
