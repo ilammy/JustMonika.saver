@@ -10,7 +10,6 @@
 
 @interface JustMonikaSettings : NSObject
 
-+ (BOOL)settingsSheetEnabled;
-+ (void)setSettingsSheetEnabled:(BOOL)enabled;
+@property (assign) BOOL settingsSheetEnabled;
 
 @end

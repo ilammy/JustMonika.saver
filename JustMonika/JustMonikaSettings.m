@@ -10,27 +10,41 @@
 
 #import <ScreenSaver/ScreenSaver.h>
 
-static NSString *settingsModuleName = @"net.ilammy.JustMonika";
+@interface JustMonikaSettings ()
+
+@property (nonatomic) NSUserDefaults *defaults;
+
+@end
+
+@implementation JustMonikaSettings
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        // Screen Savers are a little bit different from normal applications
+        // since they are all plugins. The framework provides us a special way
+        // to get an instance of NSUserDefaults for out needs. Documentation
+        // recommends to use bundle identifier as a module name.
+        NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
+        NSString *moduleName = thisBundle.bundleIdentifier;
+        self.defaults = [ScreenSaverDefaults defaultsForModuleWithName:moduleName];
+    }
+    return self;
+}
+
+// Since NSUserDefaults does not provide an explicit way to determine whether
+// a setting has been set or not, we treat the implicit zero value specially.
+// Also note that we *do need* to use "synchronize" with ScreenSaverDefaults.
 static NSString *settingsSheetEnabledKey = @"settingsSheetEnabled";
 static const NSInteger kSettingsSheetEnabledUnknown = 0;
 static const NSInteger kSettingsSheetEnabledNo      = 1;
 static const NSInteger kSettingsSheetEnabledYes     = 2;
 
-// For per-user installation the settings are stored here:
-// ~/Library/Preferences/ByHost/net.ilammy.JustMonika.7CCB5D00-8F7D-5C99-8F6A-E5398EFECCDE.plist
-
-@implementation JustMonikaSettings
-
-static ScreenSaverDefaults* getDefaults()
+- (BOOL)settingsSheetEnabled
 {
-    return [ScreenSaverDefaults defaultsForModuleWithName:settingsModuleName];
-}
-
-+ (BOOL)settingsSheetEnabled
-{
-    ScreenSaverDefaults *defaults = getDefaults();
-    [defaults synchronize];
-    NSInteger value = [defaults integerForKey:settingsSheetEnabledKey];
+    [self.defaults synchronize];
+    NSInteger value = [self.defaults integerForKey:settingsSheetEnabledKey];
     switch (value) {
         case kSettingsSheetEnabledNo:
             return NO;
@@ -42,12 +56,11 @@ static ScreenSaverDefaults* getDefaults()
     return YES;
 }
 
-+ (void)setSettingsSheetEnabled:(BOOL)enabled
+- (void)setSettingsSheetEnabled:(BOOL)enabled
 {
-    ScreenSaverDefaults *defaults = getDefaults();
-    [defaults setInteger:(enabled ? kSettingsSheetEnabledYes : kSettingsSheetEnabledNo)
-                  forKey:settingsSheetEnabledKey];
-    [defaults synchronize];
+    NSInteger value = (enabled ? kSettingsSheetEnabledYes : kSettingsSheetEnabledNo);
+    [self.defaults setInteger:value forKey:settingsSheetEnabledKey];
+    [self.defaults synchronize];
 }
 
 @end

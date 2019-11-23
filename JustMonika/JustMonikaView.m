@@ -17,6 +17,7 @@
 @interface JustMonikaView ()
 
 @property(nonatomic) DawnAnimationController *dawnAnimation;
+@property(nonatomic) JustMonikaSettings *settings;
 
 @property(strong) IBOutlet NSWindow *settingsSheet;
 
@@ -82,7 +83,8 @@
     [self.dawnAnimation addLayer:lightLayer];
 
     [bundle loadNibNamed:@"ConfigureSheet" owner:self topLevelObjects:nil];
-    JustMonikaSettings.settingsSheetEnabled = YES;
+
+    self.settings = [JustMonikaSettings new];
 }
 
 static CAConstraint *centerX;
@@ -139,12 +141,12 @@ static CALayer* centeredSublayerWithImage(NSImage *image)
 
 - (BOOL)hasConfigureSheet
 {
-    return JustMonikaSettings.settingsSheetEnabled;
+    return self.settings.settingsSheetEnabled;
 }
 
 - (NSWindow*)configureSheet
 {
-    if (!JustMonikaSettings.settingsSheetEnabled) {
+    if (!self.settings.settingsSheetEnabled) {
         return nil;
     }
     return self.settingsSheet;
@@ -152,7 +154,7 @@ static CALayer* centeredSublayerWithImage(NSImage *image)
 
 - (IBAction)disableConfigureSheet:(id)sender
 {
-    JustMonikaSettings.settingsSheetEnabled = NO;
+    self.settings.settingsSheetEnabled = NO;
     [self disableScreenSaverOptionsButton];
     [NSApp endSheet:self.settingsSheet];
 }
