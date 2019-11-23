@@ -63,4 +63,10 @@ static const NSInteger kSettingsSheetEnabledYes     = 2;
     [self.defaults synchronize];
 }
 
+- (void)reset
+{
+    [self.defaults removeObjectForKey:settingsSheetEnabledKey];
+    [self.defaults synchronize];
+}
+
 @end

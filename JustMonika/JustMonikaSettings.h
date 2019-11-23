@@ -12,4 +12,6 @@
 
 @property (assign) BOOL settingsSheetEnabled;
 
+- (void)reset;
+
 @end

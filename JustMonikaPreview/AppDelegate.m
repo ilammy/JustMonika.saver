@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "JustMonikaView.h"
+#import "JustMonikaSettings.h"
 
 @interface AppDelegate ()
 
@@ -38,6 +39,17 @@
              contextInfo:(void *)contextInfo
 {
     self.settingsButton.enabled = self.view.hasConfigureSheet;
+}
+
+- (IBAction)resetSettings:(id)sender
+{
+    NSString *pluginPath = [[NSBundle mainBundle] builtInPlugInsPath];
+    NSString *monikaPath = [pluginPath stringByAppendingPathComponent:@"JustMonika.saver"];
+    NSBundle *justMonika = [NSBundle bundleWithPath:monikaPath];
+
+    // Dynamically because we're not linked against the plugin.
+    // God bless Objective-C runtime and its dynamism.
+    [[[justMonika classNamed:@"JustMonikaSettings"] new] reset];
 }
 
 @end
