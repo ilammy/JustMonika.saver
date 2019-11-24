@@ -8,40 +8,77 @@
 
 #include "init.h"
 
-#include <stdio.h>
 #include <string.h>
-#include <limits.h>
 
-#include <OpenGL/gl3.h>
-#pragma clang diagnostic ignored "-Wdeprecated"
+#include "matrix.h"
+#include "shader.h"
 
-GLuint vaID = 0;
-GLuint vbID = 0;
-GLuint prID = 0;
-
-static const GLfloat triangle[] = {
-   -1.0f, -1.0f, 0.0f,
-    1.0f, -1.0f, 0.0f,
-    0.0f,  1.0f, 0.0f,
-};
-
-static const char *vertex_shader =
+static const char *vertex_shader_src =
     "#version 330 core\n"
     "layout(location = 0) in vec3 vertexPosition_modelSpace;\n"
+    "uniform mat4 transform;"
     "void main() {\n"
-    "    gl_Position.xyz = vertexPosition_modelSpace;\n"
-    "    gl_Position.w = 1.0;\n"
+    "    gl_Position = transform * vec4(vertexPosition_modelSpace, 1.0);\n"
     "}\n";
 
-static const char *fragment_shader =
+static const char *fragment_shader_src =
     "#version 330 core\n"
     "out vec3 color;\n"
     "void main() {\n"
     "    color = vec3(0.0, 0.0, 0.0);\n"
     "}\n";
 
-static GLuint compile_shader(GLenum type, const char *code, size_t size);
-static GLuint link_program(GLuint vertex_shader, GLuint fragment_shader);
+static int init_vertex_buffer_object(struct just_monika *context)
+{
+    GLfloat quad[] = {
+        0.0,                   0.0,                    0.0,
+        context->screen_width, 0.0,                    0.0,
+        context->screen_width, context->screen_height, 0.0,
+        0.0,                   0.0,                    0.0,
+        context->screen_width, context->screen_height, 0.0,
+        0.0,                   context->screen_height, 0.0,
+    };
+
+    glGenVertexArrays(1, &context->screen_vertex_array);
+    glBindVertexArray(context->screen_vertex_array);
+
+    glGenBuffers(1, &context->screen_vertex_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, context->screen_vertex_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quad), quad, GL_STATIC_DRAW);
+
+    return 0;
+}
+
+static int init_shader_program(struct just_monika *context)
+{
+    GLuint vertex_shader = 0;
+    GLuint fragment_shader = 0;
+
+    vertex_shader = compile_shader(GL_VERTEX_SHADER,
+                                   "vertex_shader",
+                                   vertex_shader_src,
+                                   strlen(vertex_shader_src));
+    fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
+                                     "fragment_shader",
+                                     fragment_shader_src,
+                                     strlen(fragment_shader_src));
+
+    context->screen_program = link_program(vertex_shader, fragment_shader);
+    if (context->screen_program != 0) {
+        goto error;
+    }
+
+    context->screen_transform = glGetUniformLocation(context->screen_program, "transform");
+
+error:
+    if (vertex_shader != 0) {
+        glDeleteShader(vertex_shader);
+    }
+    if (fragment_shader != 0) {
+        glDeleteShader(fragment_shader);
+    }
+    return -1;
+}
 
 int just_monika_init(struct just_monika *context)
 {
@@ -54,103 +91,39 @@ int just_monika_init(struct just_monika *context)
 
     glEnable(GL_MULTISAMPLE);
 
-    glGenVertexArrays(1, &vaID);
-    glBindVertexArray(vaID);
+    init_vertex_buffer_object(context);
+    init_shader_program(context);
 
-    glGenBuffers(1, &vbID);
-    glBindBuffer(GL_ARRAY_BUFFER, vbID);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(triangle), triangle, GL_STATIC_DRAW);
+    glViewport(0, 0, 100, 100);
 
-    GLuint vs = compile_shader(GL_VERTEX_SHADER, vertex_shader, strlen(vertex_shader));
-    GLuint fs = compile_shader(GL_FRAGMENT_SHADER, fragment_shader, strlen(fragment_shader));
-    prID = link_program(vs, fs);
-    if (prID != 0) {
-        goto error;
-    }
-
-    return 0;
-
-error:
-    if (vs != 0) {
-        glDeleteShader(vs);
-    }
-    if (fs != 0) {
-        glDeleteShader(fs);
-    }
-    return -1;
-}
-
-static GLuint compile_shader(GLenum type, const char *code, size_t size)
-{
-    GLuint id = 0;
-    GLint res = GL_FALSE;
-    const GLchar *shader_code = code;
-    GLint shader_length = 0;
-    GLint info_log_length = 0;
-
-    if (size <= INT_MAX) {
-        shader_length = (GLint)size;
-    } else {
-        return 0;
-    }
-
-    id = glCreateShader(type);
-    glShaderSource(id, 1, &shader_code, &shader_length);
-    glCompileShader(id);
-
-    glGetShaderiv(id, GL_COMPILE_STATUS, &res);
-    glGetShaderiv(id, GL_INFO_LOG_LENGTH, &info_log_length);
-    if (res != GL_TRUE) {
-        if (info_log_length > 0) {
-            GLchar buffer[4096] = {0};
-            GLsizei length = 0;
-
-            glGetShaderInfoLog(id, sizeof(buffer), &length, buffer);
-            fprintf(stderr, "shader compilation failed:\n%s\n", buffer);
-        }
-        goto error;
-    }
-
-    return id;
-
-error:
-    glDeleteShader(id);
     return 0;
 }
 
-static GLuint link_program(GLuint vertex_shader, GLuint fragment_shader)
+int just_monika_set_viewport(struct just_monika *context, unsigned width, unsigned height)
 {
-    GLuint id = 0;
-    GLint res = GL_FALSE;
-    GLint info_log_length = 0;
+    context->viewport_width = width;
+    context->viewport_height = height;
 
-    id = glCreateProgram();
-    glAttachShader(id, vertex_shader);
-    glAttachShader(id, fragment_shader);
-    glLinkProgram(id);
-    glDetachShader(id, vertex_shader);
-    glDetachShader(id, fragment_shader);
+    matrix_set_identity(context->screen_transform_matrix);
 
-    glGetProgramiv(id, GL_LINK_STATUS, &res);
-    glGetProgramiv(id, GL_INFO_LOG_LENGTH, &info_log_length);
-    if (res != GL_TRUE) {
-        if (info_log_length > 0) {
-            GLchar buffer[4096] = {0};
-            GLsizei length = 0;
+    /*
+     * Adjust translation so that origin (0, 0) maps onto the lower left corner
+     * of the screen quad, instead of the viewport center.
+     */
+    GLfloat shift_x = -0.5 * context->screen_width;
+    GLfloat shift_y = -0.5 * context->screen_height;
+    matrix_translate(context->screen_transform_matrix, shift_x, shift_y);
 
-            glGetProgramInfoLog(id, sizeof(buffer), &length, buffer);
-            fprintf(stderr, "program link failed:\n%s\n", buffer);
-        }
-        goto error;
-    }
+    /*
+     * Adjust scale so that the screen quad maintains apparent aspect ratio
+     * and takes the whole viewport width.
+     */
+    GLfloat scale = 2.0f / context->screen_width;
+    GLfloat scale_x = scale;
+    GLfloat scale_y = scale * ((GLfloat)width / (GLfloat)height);
+    matrix_scale(context->screen_transform_matrix, scale_x, scale_y);
 
-    /* Now owned by program */
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    glViewport(0, 0, width, height);
 
-    return id;
-
-error:
-    glDeleteProgram(id);
     return 0;
 }

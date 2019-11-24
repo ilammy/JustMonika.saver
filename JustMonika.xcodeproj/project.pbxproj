@@ -40,6 +40,11 @@
 		9F3FC44A238A14AB00AD0621 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC41E238A0BA000AD0621 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F3FC44E238A1B0900AD0621 /* JustMonikaView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC43D238A138000AD0621 /* JustMonikaView.framework */; };
 		9F3FC44F238A1B0A00AD0621 /* JustMonikaView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC43D238A138000AD0621 /* JustMonikaView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F3FC454238AF2C300AD0621 /* opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC453238AF2AE00AD0621 /* opengl.h */; };
+		9F3FC457238C908F00AD0621 /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC455238C908F00AD0621 /* matrix.h */; };
+		9F3FC458238C908F00AD0621 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC456238C908F00AD0621 /* matrix.c */; };
+		9F3FC45B238C929D00AD0621 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC459238C929D00AD0621 /* shader.h */; };
+		9F3FC45C238C929D00AD0621 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC45A238C929D00AD0621 /* shader.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +129,11 @@
 		9F3FC440238A138100AD0621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F3FC445238A13DA00AD0621 /* JustMonikaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaView.m; sourceTree = "<group>"; };
 		9F3FC447238A14A500AD0621 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		9F3FC453238AF2AE00AD0621 /* opengl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = opengl.h; sourceTree = "<group>"; };
+		9F3FC455238C908F00AD0621 /* matrix.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = matrix.h; sourceTree = "<group>"; };
+		9F3FC456238C908F00AD0621 /* matrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
+		9F3FC459238C929D00AD0621 /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
+		9F3FC45A238C929D00AD0621 /* shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +255,11 @@
 				9F3FC42C238A100C00AD0621 /* init.c */,
 				9F3FC431238A109D00AD0621 /* draw.h */,
 				9F3FC432238A109D00AD0621 /* draw.c */,
+				9F3FC453238AF2AE00AD0621 /* opengl.h */,
+				9F3FC455238C908F00AD0621 /* matrix.h */,
+				9F3FC456238C908F00AD0621 /* matrix.c */,
+				9F3FC459238C929D00AD0621 /* shader.h */,
+				9F3FC45A238C929D00AD0621 /* shader.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -301,8 +316,11 @@
 				9F3FC42D238A100C00AD0621 /* init.h in Headers */,
 				9F3FC422238A0BA000AD0621 /* JustMonikaGL.h in Headers */,
 				9F3FC435238A10E300AD0621 /* draw.h in Headers */,
+				9F3FC45B238C929D00AD0621 /* shader.h in Headers */,
+				9F3FC457238C908F00AD0621 /* matrix.h in Headers */,
 				9F3FC433238A109D00AD0621 /* draw.h in Headers */,
 				9F3FC42F238A105C00AD0621 /* init.h in Headers */,
+				9F3FC454238AF2C300AD0621 /* opengl.h in Headers */,
 				9F3FC429238A0F4500AD0621 /* context.h in Headers */,
 				9F3FC426238A0E5000AD0621 /* context.h in Headers */,
 			);
@@ -500,6 +518,8 @@
 			files = (
 				9F3FC427238A0E5A00AD0621 /* context.c in Sources */,
 				9F3FC434238A109D00AD0621 /* draw.c in Sources */,
+				9F3FC458238C908F00AD0621 /* matrix.c in Sources */,
+				9F3FC45C238C929D00AD0621 /* shader.c in Sources */,
 				9F3FC42E238A100C00AD0621 /* init.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -76,6 +76,21 @@
     [self.openGLContext makeCurrentContext];
 
     just_monika_init(self.monika);
+
+    unsigned width = NSWidth(self.frame);
+    unsigned height = NSHeight(self.frame);
+    just_monika_set_viewport(self.monika, width, height);
+}
+
+- (void)reshape
+{
+    [super reshape];
+
+    [self.openGLContext makeCurrentContext];
+
+    unsigned width = NSWidth(self.frame);
+    unsigned height = NSHeight(self.frame);
+    just_monika_set_viewport(self.monika, width, height);
 }
 
 - (void)drawRect:(NSRect)dirtyRect

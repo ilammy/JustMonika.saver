@@ -13,4 +13,6 @@ struct just_monika;
 
 int just_monika_init(struct just_monika *context);
 
+int just_monika_set_viewport(struct just_monika *context, unsigned width, unsigned height);
+
 #endif /* JUST_MONIKA_GL_INIT_H */

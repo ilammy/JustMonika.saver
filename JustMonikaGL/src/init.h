@@ -11,4 +11,7 @@
 
 #include <JustMonikaGL/init.h>
 
+#include "context.h"
+#include "opengl.h"
+
 #endif /* JUST_MONIKA_GL_PRIVATE_INIT_H */
