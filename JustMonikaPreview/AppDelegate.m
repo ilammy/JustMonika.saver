@@ -28,28 +28,28 @@
 //        modalDelegate:self
 //       didEndSelector:@selector(settingsDidClose:returnCode:contextInfo:)
 //          contextInfo:nil];
-    [self.window beginSheet:self.view.configureSheet
-          completionHandler:^(NSModalResponse returnCode){
-        self.settingsButton.enabled = self.view.hasConfigureSheet;
-    }];
+//    [self.window beginSheet:self.view.configureSheet
+//          completionHandler:^(NSModalResponse returnCode){
+//        self.settingsButton.enabled = self.view.hasConfigureSheet;
+//    }];
 }
 
 - (void)settingsDidClose:(NSWindow *)sheet
               returnCode:(NSInteger)returnCode
              contextInfo:(void *)contextInfo
 {
-    self.settingsButton.enabled = self.view.hasConfigureSheet;
+//    self.settingsButton.enabled = self.view.hasConfigureSheet;
 }
 
 - (IBAction)resetSettings:(id)sender
 {
-    NSString *pluginPath = [[NSBundle mainBundle] builtInPlugInsPath];
-    NSString *monikaPath = [pluginPath stringByAppendingPathComponent:@"JustMonika.saver"];
-    NSBundle *justMonika = [NSBundle bundleWithPath:monikaPath];
-
-    // Dynamically because we're not linked against the plugin.
-    // God bless Objective-C runtime and its dynamism.
-    [[[justMonika classNamed:@"JustMonikaSettings"] new] reset];
+//    NSString *pluginPath = [[NSBundle mainBundle] builtInPlugInsPath];
+//    NSString *monikaPath = [pluginPath stringByAppendingPathComponent:@"JustMonika.saver"];
+//    NSBundle *justMonika = [NSBundle bundleWithPath:monikaPath];
+//
+//    // Dynamically because we're not linked against the plugin.
+//    // God bless Objective-C runtime and its dynamism.
+//    [[[justMonika classNamed:@"JustMonikaSettings"] new] reset];
 }
 
 @end
