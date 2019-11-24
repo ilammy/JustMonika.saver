@@ -45,6 +45,9 @@
             NSOpenGLPFADoubleBuffer,    // double-buffered
             NSOpenGLPFADepthSize, 32,   // 32 bit depth buffer
             NSOpenGLPFAAccelerated,     // anti-aliased
+            NSOpenGLPFAMultisample,     // anti-aliasing via multisampling
+            NSOpenGLPFASampleBuffers, 1,    // one sampling buffer
+            NSOpenGLPFASamples, 9,          // 3x3 multisampling
             0
         };
         self.pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];

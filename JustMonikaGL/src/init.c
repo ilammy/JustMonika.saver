@@ -52,6 +52,8 @@ int just_monika_init(struct just_monika *context)
     glFrontFace(GL_CCW);
     glCullFace(GL_BACK);
 
+    glEnable(GL_MULTISAMPLE);
+
     glGenVertexArrays(1, &vaID);
     glBindVertexArray(vaID);
 
