@@ -41,7 +41,7 @@
     if (self.pixelFormat == nil) {
         NSOpenGLPixelFormatAttribute attributes[] =
         {
-            NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersionLegacy,
+            NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion3_2Core,
             NSOpenGLPFADoubleBuffer,    // double-buffered
             NSOpenGLPFADepthSize, 32,   // 32 bit depth buffer
             NSOpenGLPFAAccelerated,     // anti-aliased
