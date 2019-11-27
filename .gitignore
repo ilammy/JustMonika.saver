@@ -1,3 +1,6 @@
 # Xcode stuff
 DerivedData/
 xcuserdata/
+
+# CocoaPods stuff
+Pods/
