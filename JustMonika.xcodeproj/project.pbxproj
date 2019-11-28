@@ -45,6 +45,8 @@
 		9F3FC458238C908F00AD0621 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC456238C908F00AD0621 /* matrix.c */; };
 		9F3FC45B238C929D00AD0621 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC459238C929D00AD0621 /* shader.h */; };
 		9F3FC45C238C929D00AD0621 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC45A238C929D00AD0621 /* shader.c */; };
+		9FB11305238F2EEB00E0FA7E /* texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB11303238F2EEB00E0FA7E /* texture.h */; };
+		9FB11306238F2EEB00E0FA7E /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB11304238F2EEB00E0FA7E /* texture.c */; };
 		B96189954E690167B749F428 /* Pods_JustMonikaPreview_JustMonikaView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E597DEDF6D1E7E7D76083CC3 /* Pods_JustMonikaPreview_JustMonikaView.framework */; };
 		CD7B58F1EF59FA366B84E7D6 /* Pods_JustMonikaPreview.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9541CC2A5C677AD73A0528C /* Pods_JustMonikaPreview.framework */; };
 		FEF34125AD6BA8ABE8502B14 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */; };
@@ -144,6 +146,8 @@
 		9F3FC456238C908F00AD0621 /* matrix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = matrix.c; sourceTree = "<group>"; };
 		9F3FC459238C929D00AD0621 /* shader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = shader.h; sourceTree = "<group>"; };
 		9F3FC45A238C929D00AD0621 /* shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
+		9FB11303238F2EEB00E0FA7E /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
+		9FB11304238F2EEB00E0FA7E /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
 		A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.debug.xcconfig"; sourceTree = "<group>"; };
 		B3B9DBF896891E0B2817D5C4 /* Pods-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
 		C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -287,6 +291,8 @@
 				9F3FC456238C908F00AD0621 /* matrix.c */,
 				9F3FC459238C929D00AD0621 /* shader.h */,
 				9F3FC45A238C929D00AD0621 /* shader.c */,
+				9FB11303238F2EEB00E0FA7E /* texture.h */,
+				9FB11304238F2EEB00E0FA7E /* texture.c */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -338,7 +344,6 @@
 				ED14DDE16ABECE57DD658BC6 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.debug.xcconfig */,
 				2F0F20E3CB2FB021357A8125 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -365,6 +370,7 @@
 				9F3FC435238A10E300AD0621 /* draw.h in Headers */,
 				9F3FC45B238C929D00AD0621 /* shader.h in Headers */,
 				9F3FC457238C908F00AD0621 /* matrix.h in Headers */,
+				9FB11305238F2EEB00E0FA7E /* texture.h in Headers */,
 				9F3FC433238A109D00AD0621 /* draw.h in Headers */,
 				9F3FC42F238A105C00AD0621 /* init.h in Headers */,
 				9F3FC454238AF2C300AD0621 /* opengl.h in Headers */,
@@ -640,6 +646,7 @@
 				9F3FC458238C908F00AD0621 /* matrix.c in Sources */,
 				9F3FC45C238C929D00AD0621 /* shader.c in Sources */,
 				9F3FC42E238A100C00AD0621 /* init.c in Sources */,
+				9FB11306238F2EEB00E0FA7E /* texture.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
