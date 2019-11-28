@@ -9,7 +9,13 @@
 #ifndef JUST_MONIKA_GL_INIT_H
 #define JUST_MONIKA_GL_INIT_H
 
+#include <stdio.h>
+
 struct just_monika;
+
+typedef FILE*(*open_resource)(const char *path);
+
+void just_monika_set_open_resource_callback(struct just_monika *context, open_resource cb);
 
 int just_monika_init(struct just_monika *context);
 

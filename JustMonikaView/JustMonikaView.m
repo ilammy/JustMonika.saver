@@ -69,11 +69,24 @@
 
 #pragma mark - NSOpenGLView overrides
 
+static FILE* open_resource_file(const char *name)
+{
+    NSBundle *thisBundle = [NSBundle bundleForClass:JustMonikaView.class];
+    NSString *imageName = [NSString stringWithCString:name
+                                             encoding:NSUTF8StringEncoding];
+    NSString *imagePath = [thisBundle pathForResource:imageName
+                                               ofType:@"png"
+                                          inDirectory:@"Monika"];
+    return fopen([imagePath cStringUsingEncoding:NSUTF8StringEncoding], "rb");
+}
+
 - (void)prepareOpenGL
 {
     [super prepareOpenGL];
 
     [self.openGLContext makeCurrentContext];
+
+    just_monika_set_open_resource_callback(self.monika, open_resource_file);
 
     just_monika_init(self.monika);
 

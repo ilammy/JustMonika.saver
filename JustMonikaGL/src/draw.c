@@ -19,17 +19,34 @@ int just_monika_draw(struct just_monika *context)
                        GL_TRUE, /* row-major order */
                        context->screen_transform_matrix);
 
-    glEnableVertexAttribArray(0);
+    glUniform1i(context->screen_sampler, 0);
+    glActiveTexture(GL_TEXTURE0 + 0);
+    glBindTexture(GL_TEXTURE_2D, context->screen_texture);
+
+    glEnableVertexAttribArray(context->screen_vertex_id);
+    glEnableVertexAttribArray(context->screen_uv_id);
+
     glBindBuffer(GL_ARRAY_BUFFER, context->screen_vertex_buffer);
-    glVertexAttribPointer(0,        /* index */
-                          3,        /* 3D point coordinates */
+    glVertexAttribPointer(context->screen_vertex_id,
+                          2,        /* 2D XY coordinates */
                           GL_FLOAT, /* typed as floats */
                           GL_FALSE, /* not normalized */
                           0,        /* stride */
                           NULL);    /* offset */
+
+    glBindBuffer(GL_ARRAY_BUFFER, context->screen_uv_buffer);
+    glVertexAttribPointer(context->screen_uv_id,
+                          2,        /* 2D UV coordinates */
+                          GL_FLOAT, /* typed as floats */
+                          GL_FALSE, /* not normalized */
+                          0,        /* stride */
+                          NULL);    /* offset */
+
     /* Draw a quad out of 2 x 3 point set. */
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glDisableVertexAttribArray(0);
+
+    glDisableVertexAttribArray(context->screen_vertex_id);
+    glDisableVertexAttribArray(context->screen_uv_id);
 
     return 0;
 }

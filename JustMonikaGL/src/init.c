@@ -12,31 +12,45 @@
 
 #include "matrix.h"
 #include "shader.h"
+#include "texture.h"
 
 static const char *vertex_shader_src =
     "#version 330 core\n"
-    "layout(location = 0) in vec3 vertexPosition_modelSpace;\n"
+    "in vec2 vertexXY_modelSpace;\n"
+    "in vec2 vertexUV;\n"
+    "out vec2 UV;\n"
     "uniform mat4 transform;"
     "void main() {\n"
-    "    gl_Position = transform * vec4(vertexPosition_modelSpace, 1.0);\n"
+    "    gl_Position = transform * vec4(vertexXY_modelSpace, 0.0, 1.0);\n"
+    "    UV = vertexUV;\n"
     "}\n";
 
 static const char *fragment_shader_src =
     "#version 330 core\n"
+    "in vec2 UV;\n"
     "out vec3 color;\n"
+    "uniform sampler2D sampler;\n"
     "void main() {\n"
-    "    color = vec3(0.0, 0.0, 0.0);\n"
+    "    color = texture(sampler, UV).rgb;\n"
     "}\n";
 
 static int init_vertex_buffer_object(struct just_monika *context)
 {
     GLfloat quad[] = {
-        0.0,                   0.0,                    0.0,
-        context->screen_width, 0.0,                    0.0,
-        context->screen_width, context->screen_height, 0.0,
-        0.0,                   0.0,                    0.0,
-        context->screen_width, context->screen_height, 0.0,
-        0.0,                   context->screen_height, 0.0,
+        0.0,                   0.0,
+        context->screen_width, 0.0,
+        context->screen_width, context->screen_height,
+        0.0,                   0.0,
+        context->screen_width, context->screen_height,
+        0.0,                   context->screen_height,
+    };
+    GLfloat uv[] = {
+        0.0, 0.0,
+        1.0, 0.0,
+        1.0, 1.0,
+        0.0, 0.0,
+        1.0, 1.0,
+        0.0, 1.0,
     };
 
     glGenVertexArrays(1, &context->screen_vertex_array);
@@ -45,6 +59,13 @@ static int init_vertex_buffer_object(struct just_monika *context)
     glGenBuffers(1, &context->screen_vertex_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, context->screen_vertex_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(quad), quad, GL_STATIC_DRAW);
+
+    glGenVertexArrays(1, &context->screen_uv_array);
+    glBindVertexArray(context->screen_uv_array);
+
+    glGenBuffers(1, &context->screen_uv_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, context->screen_uv_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
 
     return 0;
 }
@@ -64,11 +85,14 @@ static int init_shader_program(struct just_monika *context)
                                      strlen(fragment_shader_src));
 
     context->screen_program = link_program(vertex_shader, fragment_shader);
-    if (context->screen_program != 0) {
+    if (!context->screen_program) {
         goto error;
     }
 
+    context->screen_vertex_id = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");
+    context->screen_uv_id = glGetAttribLocation(context->screen_program, "vertexUV");
     context->screen_transform = glGetUniformLocation(context->screen_program, "transform");
+    context->screen_sampler = glGetUniformLocation(context->screen_program, "sampler");
 
 error:
     if (vertex_shader != 0) {
@@ -78,6 +102,32 @@ error:
         glDeleteShader(fragment_shader);
     }
     return -1;
+}
+
+static GLuint load_texture_from_resource(struct just_monika *context, const char *path)
+{
+    GLuint texture = 0;
+    FILE *fp = context->open(path);
+    if (!fp) {
+        return 0;
+    }
+    texture = load_texture(fp);
+    fclose(fp);
+    return texture;
+}
+
+static int load_textures(struct just_monika *context)
+{
+    context->screen_texture = load_texture_from_resource(context, "monika_bg");
+    if (!context->screen_texture) {
+        return -1;
+    }
+    return 0;
+}
+
+void just_monika_set_open_resource_callback(struct just_monika *context, open_resource cb)
+{
+    context->open = cb;
 }
 
 int just_monika_init(struct just_monika *context)
@@ -93,6 +143,7 @@ int just_monika_init(struct just_monika *context)
 
     init_vertex_buffer_object(context);
     init_shader_program(context);
+    load_textures(context);
 
     glViewport(0, 0, 100, 100);
 
