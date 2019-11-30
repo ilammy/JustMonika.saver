@@ -28,11 +28,25 @@ static const char *vertex_shader_src =
 static const char *fragment_shader_src =
     "#version 330 core\n"
     "in vec2 UV;\n"
-    "out vec3 color;\n"
+    "out vec4 color;\n"
     "uniform sampler2D sampler;\n"
     "void main() {\n"
-    "    color = texture(sampler, UV).rgb;\n"
+    "    color = texture(sampler, UV);\n"
     "}\n";
+
+static GLuint closest_power_of_two(GLuint width, GLuint height)
+{
+    GLuint max = (width > height) ? width : height;
+    GLuint size = 1;
+    /* Edge case */
+    if (max == 0) {
+        return 0;
+    }
+    while (size <= max && size != 0) {
+        size *= 2;
+    }
+    return size;
+}
 
 static int init_vertex_buffer_object(struct just_monika *context)
 {
@@ -44,13 +58,17 @@ static int init_vertex_buffer_object(struct just_monika *context)
         context->screen_width, context->screen_height,
         0.0,                   context->screen_height,
     };
+    GLfloat side = closest_power_of_two(context->screen_width,
+                                        context->screen_height);
+    GLfloat width = context->screen_width;
+    GLfloat height = context->screen_height;
     GLfloat uv[] = {
-        0.0, 0.0,
-        1.0, 0.0,
-        1.0, 1.0,
-        0.0, 0.0,
-        1.0, 1.0,
-        0.0, 1.0,
+        0.0,          0.0,
+        width / side, 0.0,
+        width / side, height / side,
+        0.0,          0.0,
+        width / side, height / side,
+        0.0,          height / side,
     };
 
     glGenVertexArrays(1, &context->screen_vertex_array);
@@ -132,14 +150,12 @@ void just_monika_set_open_resource_callback(struct just_monika *context, open_re
 
 int just_monika_init(struct just_monika *context)
 {
-    /* Nice warm pink color */
-    glClearColor(251.0f/256.0f, 231.0f/256.0f, 243.0f/256.0f, 0.0f);
+    /* Use opaque black color for background */
+    glClearColor(0.0, 0.0, 0.0, 1.0);
 
-    glEnable(GL_CULL_FACE);
-    glFrontFace(GL_CCW);
-    glCullFace(GL_BACK);
-
-    glEnable(GL_MULTISAMPLE);
+    /* Enable transparency, use recommended blending function */
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     init_vertex_buffer_object(context);
     init_shader_program(context);

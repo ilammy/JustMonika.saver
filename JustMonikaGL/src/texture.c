@@ -96,7 +96,7 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
         return;
     }
     for (png_uint_32 y = 0; y < buffer->height; y++) {
-        buffer->rows[y] = &buffer->data[(buffer->height - y) * buffer->stride];
+        buffer->rows[y] = &buffer->data[(buffer->height - y) * 4 * buffer->stride];
     }
 }
 
@@ -160,8 +160,9 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
                  GL_RGBA,           /* data format */
                  GL_UNSIGNED_BYTE,  /* data type */
                  buffer.data);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
 error:
     destroy_texture_buffer(png, png_info, &buffer);
