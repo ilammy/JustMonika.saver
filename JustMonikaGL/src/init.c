@@ -15,26 +15,6 @@
 #include "shader.h"
 #include "texture.h"
 
-static const char *vertex_shader_src =
-    "#version 330 core\n"
-    "in vec2 vertexXY_modelSpace;\n"
-    "in vec2 vertexUV;\n"
-    "out vec2 UV;\n"
-    "uniform mat4 transform;"
-    "void main() {\n"
-    "    gl_Position = transform * vec4(vertexXY_modelSpace, 0.0, 1.0);\n"
-    "    UV = vertexUV;\n"
-    "}\n";
-
-static const char *fragment_shader_src =
-    "#version 330 core\n"
-    "in vec2 UV;\n"
-    "out vec4 color;\n"
-    "uniform sampler2D sampler;\n"
-    "void main() {\n"
-    "    color = texture(sampler, UV);\n"
-    "}\n";
-
 static GLuint closest_power_of_two(GLuint width, GLuint height)
 {
     GLuint max = (width > height) ? width : height;
@@ -89,19 +69,24 @@ static int init_vertex_buffer_object(struct just_monika *context)
     return 0;
 }
 
+#define MAX_SHADER_SIZE 4096
+
 static int init_shader_program(struct just_monika *context)
 {
     GLuint vertex_shader = 0;
     GLuint fragment_shader = 0;
+    GLchar buffer[MAX_SHADER_SIZE];
+    size_t length = 0;
 
+    length = load_resource("vertex.glsl", (uint8_t*)buffer, sizeof(buffer));
     vertex_shader = compile_shader(GL_VERTEX_SHADER,
                                    "vertex_shader",
-                                   vertex_shader_src,
-                                   strlen(vertex_shader_src));
+                                   buffer, length);
+
+    length = load_resource("fragment.glsl", (uint8_t*)buffer, sizeof(buffer));
     fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
                                      "fragment_shader",
-                                     fragment_shader_src,
-                                     strlen(fragment_shader_src));
+                                     buffer, length);
 
     context->screen_program = link_program(vertex_shader, fragment_shader);
     if (!context->screen_program) {

@@ -49,6 +49,7 @@
 		9FB113132392E7F000E0FA7E /* resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB113122392E7DE00E0FA7E /* resource.h */; };
 		9FB113152392E94400E0FA7E /* resource_macos.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB113142392E94400E0FA7E /* resource_macos.m */; };
 		9FB113202392EFD200E0FA7E /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
+		9FB113222392F28300E0FA7E /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		F48FA675915AE3F7D4BF48AE /* libPods-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8F41D8837D7947CB187D3 /* libPods-JustMonikaGL.a */; };
 /* End PBXBuildFile section */
 
@@ -149,6 +150,7 @@
 		9FB113122392E7DE00E0FA7E /* resource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource.h; sourceTree = "<group>"; };
 		9FB113142392E94400E0FA7E /* resource_macos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = resource_macos.m; sourceTree = "<group>"; };
 		9FB1131F2392EFD200E0FA7E /* Monika */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Monika; sourceTree = "<group>"; };
+		9FB113212392F28300E0FA7E /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
 		A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.debug.xcconfig"; sourceTree = "<group>"; };
 		B3B9DBF896891E0B2817D5C4 /* Pods-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
 		C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -340,6 +342,7 @@
 			isa = PBXGroup;
 			children = (
 				9FB1131F2392EFD200E0FA7E /* Monika */,
+				9FB113212392F28300E0FA7E /* Shaders */,
 			);
 			path = res;
 			sourceTree = "<group>";
@@ -546,6 +549,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FB113202392EFD200E0FA7E /* Monika in Resources */,
+				9FB113222392F28300E0FA7E /* Shaders in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
