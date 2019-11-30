@@ -9,10 +9,11 @@
 #ifndef JUST_MONIKA_GL_PRIVATE_TEXTURE_H
 #define JUST_MONIKA_GL_PRIVATE_TEXTURE_H
 
-#include <stdio.h>
+#include <JustMonikaGL/init.h>
+#include <JustMonikaGL/context.h>
 
 #include "opengl.h"
 
-GLuint load_texture(FILE *file);
+GLuint load_texture(struct just_monika *context, struct just_monika_texture_image *image);
 
 #endif /* JUST_MONIKA_GL_PRIVATE_TEXTURE_H */

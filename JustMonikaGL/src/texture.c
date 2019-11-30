@@ -12,6 +12,7 @@
 
 #include <libpng/png.h>
 
+#include "context.h"
 #include "opengl.h"
 
 typedef PNG_CALLBACK(void, *png_error_ptr, (png_structp, png_const_charp));
@@ -170,11 +171,32 @@ error:
     return texture;
 }
 
-GLuint load_texture(FILE *fp)
+struct read_context {
+    struct just_monika *context;
+    struct just_monika_texture_image *image;
+};
+
+static void read_data(png_structp png, png_bytep data, size_t length)
+{
+    struct read_context *read_context = png_get_io_ptr(png);
+
+    while (length > 0) {
+        size_t result = read_context->context->image.read(read_context->image, data, length);
+        if (!result) {
+            png_error(png, "failed to read PNG data");
+            return;
+        }
+        data += result;
+        length -= result;
+    }
+}
+
+GLuint load_texture(struct just_monika *context, struct just_monika_texture_image *image)
 {
     GLuint texture = 0;
     png_structp png = NULL;
     png_infop png_info = NULL;
+    struct read_context read_context = { context, image };
 
     png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL,
                                  print_error_to_stderr,
@@ -188,7 +210,7 @@ GLuint load_texture(FILE *fp)
         goto error;
     }
 
-    png_init_io(png, fp);
+    png_set_read_fn(png, &read_context, read_data);
 
     texture = load_png_texture(png, png_info);
 

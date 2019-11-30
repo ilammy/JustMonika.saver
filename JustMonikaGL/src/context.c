@@ -14,9 +14,18 @@
 static const GLuint default_screen_width = 1280;
 static const GLuint default_screen_height = 720;
 
-static FILE* open_resource_stub(const char *path)
+static struct just_monika_texture_image* stub_open(const char *name)
 {
     return NULL;
+}
+
+static size_t stub_read(struct just_monika_texture_image *image, void *buffer, size_t size)
+{
+    return 0;
+}
+
+static void stub_free(struct just_monika_texture_image *image)
+{
 }
 
 struct just_monika* just_monika_make(void)
@@ -25,7 +34,9 @@ struct just_monika* just_monika_make(void)
     if (!context) {
         return NULL;
     }
-    context->open = open_resource_stub;
+    context->image.open = stub_open;
+    context->image.read = stub_read;
+    context->image.free = stub_free;
     context->screen_width = default_screen_width;
     context->screen_height = default_screen_height;
     context->viewport_width = default_screen_width;

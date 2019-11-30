@@ -122,15 +122,17 @@ error:
     return -1;
 }
 
-static GLuint load_texture_from_resource(struct just_monika *context, const char *path)
+static GLuint load_texture_from_resource(struct just_monika *context, const char *name)
 {
     GLuint texture = 0;
-    FILE *fp = context->open(path);
-    if (!fp) {
+    struct just_monika_texture_image *image = NULL;
+
+    image = context->image.open(name);
+    if (!image) {
         return 0;
     }
-    texture = load_texture(fp);
-    fclose(fp);
+    texture = load_texture(context, image);
+    context->image.free(image);
     return texture;
 }
 
@@ -143,9 +145,9 @@ static int load_textures(struct just_monika *context)
     return 0;
 }
 
-void just_monika_set_open_resource_callback(struct just_monika *context, open_resource cb)
+void just_monika_set_texture_reader(struct just_monika *context, const struct texture_image_reader *reader)
 {
-    context->open = cb;
+    context->image = *reader;
 }
 
 int just_monika_init(struct just_monika *context)

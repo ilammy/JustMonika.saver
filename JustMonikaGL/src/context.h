@@ -15,7 +15,7 @@
 #include "opengl.h"
 
 struct just_monika {
-    open_resource open;
+    struct texture_image_reader image;
 
     GLuint viewport_width;
     GLuint viewport_height;
