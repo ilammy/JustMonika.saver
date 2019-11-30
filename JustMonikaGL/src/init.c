@@ -11,6 +11,7 @@
 #include <string.h>
 
 #include "matrix.h"
+#include "resource.h"
 #include "shader.h"
 #include "texture.h"
 
@@ -122,32 +123,27 @@ error:
     return -1;
 }
 
-static GLuint load_texture_from_resource(struct just_monika *context, const char *name)
+static GLuint load_texture_from_resource(const char *name)
 {
     GLuint texture = 0;
-    struct just_monika_texture_image *image = NULL;
+    struct resource_file *resource = NULL;
 
-    image = context->image.open(name);
-    if (!image) {
+    resource = open_resource(name);
+    if (!resource) {
         return 0;
     }
-    texture = load_texture(context, image);
-    context->image.free(image);
+    texture = load_texture(resource);
+    free_resource(resource);
     return texture;
 }
 
 static int load_textures(struct just_monika *context)
 {
-    context->screen_texture = load_texture_from_resource(context, "monika_bg");
+    context->screen_texture = load_texture_from_resource("monika_bg.png");
     if (!context->screen_texture) {
         return -1;
     }
     return 0;
-}
-
-void just_monika_set_texture_reader(struct just_monika *context, const struct texture_image_reader *reader)
-{
-    context->image = *reader;
 }
 
 int just_monika_init(struct just_monika *context)

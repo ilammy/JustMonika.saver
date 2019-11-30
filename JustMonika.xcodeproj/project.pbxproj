@@ -46,7 +46,9 @@
 		9F3FC45C238C929D00AD0621 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC45A238C929D00AD0621 /* shader.c */; };
 		9FB11305238F2EEB00E0FA7E /* texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB11303238F2EEB00E0FA7E /* texture.h */; };
 		9FB11306238F2EEB00E0FA7E /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB11304238F2EEB00E0FA7E /* texture.c */; };
-		9FB1131123924AF000E0FA7E /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131023924AF000E0FA7E /* Monika */; };
+		9FB113132392E7F000E0FA7E /* resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB113122392E7DE00E0FA7E /* resource.h */; };
+		9FB113152392E94400E0FA7E /* resource_macos.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB113142392E94400E0FA7E /* resource_macos.m */; };
+		9FB113202392EFD200E0FA7E /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
 		F48FA675915AE3F7D4BF48AE /* libPods-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8F41D8837D7947CB187D3 /* libPods-JustMonikaGL.a */; };
 /* End PBXBuildFile section */
 
@@ -144,7 +146,9 @@
 		9F3FC45A238C929D00AD0621 /* shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
 		9FB11303238F2EEB00E0FA7E /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		9FB11304238F2EEB00E0FA7E /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
-		9FB1131023924AF000E0FA7E /* Monika */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Monika; sourceTree = "<group>"; };
+		9FB113122392E7DE00E0FA7E /* resource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = resource.h; sourceTree = "<group>"; };
+		9FB113142392E94400E0FA7E /* resource_macos.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = resource_macos.m; sourceTree = "<group>"; };
+		9FB1131F2392EFD200E0FA7E /* Monika */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Monika; sourceTree = "<group>"; };
 		A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.debug.xcconfig"; sourceTree = "<group>"; };
 		B3B9DBF896891E0B2817D5C4 /* Pods-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
 		C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -286,6 +290,8 @@
 				9F3FC45A238C929D00AD0621 /* shader.c */,
 				9FB11303238F2EEB00E0FA7E /* texture.h */,
 				9FB11304238F2EEB00E0FA7E /* texture.c */,
+				9FB113122392E7DE00E0FA7E /* resource.h */,
+				9FB113142392E94400E0FA7E /* resource_macos.m */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -306,6 +312,7 @@
 			children = (
 				9F3FC406238A089100AD0621 /* include */,
 				9F3FC407238A08A700AD0621 /* src */,
+				9FB113182392EF1B00E0FA7E /* res */,
 				9F3FC421238A0BA000AD0621 /* Info.plist */,
 			);
 			path = JustMonikaGL;
@@ -314,7 +321,6 @@
 		9F3FC43E238A138100AD0621 /* JustMonikaView */ = {
 			isa = PBXGroup;
 			children = (
-				9FB1131023924AF000E0FA7E /* Monika */,
 				9F3FC43F238A138100AD0621 /* JustMonikaView.h */,
 				9F3FC445238A13DA00AD0621 /* JustMonikaView.m */,
 				9F3FC440238A138100AD0621 /* Info.plist */,
@@ -328,6 +334,14 @@
 				C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */,
 			);
 			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		9FB113182392EF1B00E0FA7E /* res */ = {
+			isa = PBXGroup;
+			children = (
+				9FB1131F2392EFD200E0FA7E /* Monika */,
+			);
+			path = res;
 			sourceTree = "<group>";
 		};
 		EB342EEFBE741A91719B9966 /* Pods */ = {
@@ -374,6 +388,7 @@
 				9F3FC454238AF2C300AD0621 /* opengl.h in Headers */,
 				9F3FC429238A0F4500AD0621 /* context.h in Headers */,
 				9F3FC426238A0E5000AD0621 /* context.h in Headers */,
+				9FB113132392E7F000E0FA7E /* resource.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +545,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB113202392EFD200E0FA7E /* Monika in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -537,7 +553,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB1131123924AF000E0FA7E /* Monika in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +611,7 @@
 				9F3FC427238A0E5A00AD0621 /* context.c in Sources */,
 				9F3FC434238A109D00AD0621 /* draw.c in Sources */,
 				9F3FC458238C908F00AD0621 /* matrix.c in Sources */,
+				9FB113152392E94400E0FA7E /* resource_macos.m in Sources */,
 				9F3FC45C238C929D00AD0621 /* shader.c in Sources */,
 				9F3FC42E238A100C00AD0621 /* init.c in Sources */,
 				9FB11306238F2EEB00E0FA7E /* texture.c in Sources */,

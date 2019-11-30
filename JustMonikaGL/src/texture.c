@@ -171,17 +171,12 @@ error:
     return texture;
 }
 
-struct read_context {
-    struct just_monika *context;
-    struct just_monika_texture_image *image;
-};
-
 static void read_data(png_structp png, png_bytep data, size_t length)
 {
-    struct read_context *read_context = png_get_io_ptr(png);
+    struct resource_file *image = png_get_io_ptr(png);
 
     while (length > 0) {
-        size_t result = read_context->context->image.read(read_context->image, data, length);
+        size_t result = read_resource(image, data, length);
         if (!result) {
             png_error(png, "failed to read PNG data");
             return;
@@ -191,12 +186,11 @@ static void read_data(png_structp png, png_bytep data, size_t length)
     }
 }
 
-GLuint load_texture(struct just_monika *context, struct just_monika_texture_image *image)
+GLuint load_texture(struct resource_file *image)
 {
     GLuint texture = 0;
     png_structp png = NULL;
     png_infop png_info = NULL;
-    struct read_context read_context = { context, image };
 
     png = png_create_read_struct(PNG_LIBPNG_VER_STRING, NULL,
                                  print_error_to_stderr,
@@ -210,7 +204,7 @@ GLuint load_texture(struct just_monika *context, struct just_monika_texture_imag
         goto error;
     }
 
-    png_set_read_fn(png, &read_context, read_data);
+    png_set_read_fn(png, image, read_data);
 
     texture = load_png_texture(png, png_info);
 
