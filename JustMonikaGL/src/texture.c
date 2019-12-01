@@ -15,27 +15,20 @@
 #include "context.h"
 #include "opengl.h"
 
-typedef PNG_CALLBACK(void, *png_error_ptr, (png_structp, png_const_charp));
-
 static void print_error_to_stderr(png_structp png, png_const_charp error)
 {
     fprintf(stderr, "libpng error: %s\n", error);
 }
 
-/*
- * OpenGL is more performant and predictable if we use squares that have
- * power-of-two sides.
- */
-static png_uint_32 closest_power_of_two(png_uint_32 width, png_uint_32 height)
+static png_uint_32 closest_power_of_two(png_uint_32 value)
 {
-    png_uint_32 max = (width > height) ? width : height;
     png_uint_32 size = 1;
     /* Edge case */
-    if (max == 0) {
+    if (value == 0) {
         return 0;
     }
     /* Multiplication may overflow for invalid PNGs */
-    while (size <= max && size != 0) {
+    while (size <= value && size != 0) {
         size *= 2;
     }
     return size;
@@ -44,7 +37,8 @@ static png_uint_32 closest_power_of_two(png_uint_32 width, png_uint_32 height)
 struct texture_buffer {
     png_uint_32 width;
     png_uint_32 height;
-    png_uint_32 stride;
+    png_uint_32 actual_width;
+    png_uint_32 actual_height;
     png_byte *data;
     png_byte **rows;
 };
@@ -54,7 +48,8 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
 {
     buffer->width = png_get_image_width(png, png_info);
     buffer->height = png_get_image_height(png, png_info);
-    buffer->stride = closest_power_of_two(buffer->width, buffer->height);
+    buffer->actual_width = closest_power_of_two(buffer->width);
+    buffer->actual_height = closest_power_of_two(buffer->height);
     buffer->data = NULL;
     buffer->rows = NULL;
 
@@ -63,21 +58,21 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
      * We need a square of stride x stride size.
      * Carefully avoid overflows (should not happen in practice).
      */
-    if (buffer->stride > (PNG_SIZE_MAX / 4) / buffer->stride) {
+    if (buffer->actual_height > (PNG_SIZE_MAX / 4) / buffer->actual_width) {
         fprintf(stderr, "allocation error: size overflow in %ux%u buffer\n",
-                buffer->stride, buffer->stride);
+                buffer->actual_width, buffer->actual_height);
         return;
     }
-    buffer->data = png_malloc(png, 4 * buffer->stride * buffer->stride);
+    buffer->data = png_malloc(png, 4 * buffer->actual_width * buffer->actual_height);
     if (!buffer->data) {
         fprintf(stderr, "allocation error: cannot allocate %ux%u buffer\n",
-                buffer->stride, buffer->stride);
+                buffer->actual_width, buffer->actual_height);
         return;
     }
     /*
      * Initialize the pixel data with opaque black color.
      */
-    for (png_uint_32 i = 0; i < buffer->stride * buffer->stride; i++) {
+    for (png_uint_32 i = 0; i < buffer->actual_width * buffer->actual_height; i++) {
         buffer->data[4 * i + 0] = 0x00;
         buffer->data[4 * i + 1] = 0x00;
         buffer->data[4 * i + 2] = 0x00;
@@ -97,7 +92,7 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
         return;
     }
     for (png_uint_32 y = 0; y < buffer->height; y++) {
-        buffer->rows[y] = &buffer->data[(buffer->height - y) * 4 * buffer->stride];
+        buffer->rows[y] = &buffer->data[4 * (buffer->height - y) * buffer->actual_width];
     }
 }
 
@@ -155,8 +150,8 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
     glTexImage2D(GL_TEXTURE_2D,
                  0,                 /* base image level */
                  GL_RGBA,           /* internal format */
-                 buffer.stride,     /* width */
-                 buffer.stride,     /* height */
+                 buffer.actual_width,
+                 buffer.actual_height,
                  0,                 /* border, must be 0 */
                  GL_RGBA,           /* data format */
                  GL_UNSIGNED_BYTE,  /* data type */

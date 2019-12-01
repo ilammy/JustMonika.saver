@@ -10,9 +10,18 @@
 
 #include <stdlib.h>
 
-/* Ideally, it matches with raw image dimensions in pixels. */
-static const GLuint default_screen_width = 1280;
-static const GLuint default_screen_height = 720;
+/*
+ * Matches dimensions of the main image.
+ */
+static const GLfloat default_screen_width = 1280;
+static const GLfloat default_screen_height = 720;
+
+/*
+ * OpenGL is more performant with power-of-two sizes,
+ * so the textures are loaded with some padding.
+ */
+static const GLfloat default_texture_width  = 2048;
+static const GLfloat default_texture_height = 1024;
 
 struct just_monika* just_monika_make(void)
 {
@@ -22,6 +31,8 @@ struct just_monika* just_monika_make(void)
     }
     context->screen_width = default_screen_width;
     context->screen_height = default_screen_height;
+    context->texture_width = default_texture_width;
+    context->texture_height = default_texture_height;
     context->viewport_width = default_screen_width;
     context->viewport_height = default_screen_height;
     return context;

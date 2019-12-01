@@ -17,8 +17,6 @@ FOUNDATION_EXPORT double JustMonikaGLVersionNumber;
 //! Project version string for JustMonikaGL.
 FOUNDATION_EXPORT const unsigned char JustMonikaGLVersionString[];
 
-#include <JustMonikaGL/context.h>
-#include <JustMonikaGL/init.h>
-#include <JustMonikaGL/draw.h>
+#import <JustMonikaGL/api.h>
 
 #endif /* JUST_MONIKA_GL_H */

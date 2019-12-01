@@ -15,23 +15,9 @@
 #include "shader.h"
 #include "texture.h"
 
-static GLuint closest_power_of_two(GLuint width, GLuint height)
+static void init_xy_array(struct just_monika *context)
 {
-    GLuint max = (width > height) ? width : height;
-    GLuint size = 1;
-    /* Edge case */
-    if (max == 0) {
-        return 0;
-    }
-    while (size <= max && size != 0) {
-        size *= 2;
-    }
-    return size;
-}
-
-static int init_vertex_buffer_object(struct just_monika *context)
-{
-    GLfloat quad[] = {
+    GLfloat quad_xy_coords[] = {
         0.0,                   0.0,
         context->screen_width, 0.0,
         context->screen_width, context->screen_height,
@@ -39,39 +25,71 @@ static int init_vertex_buffer_object(struct just_monika *context)
         context->screen_width, context->screen_height,
         0.0,                   context->screen_height,
     };
-    GLfloat side = closest_power_of_two(context->screen_width,
-                                        context->screen_height);
-    GLfloat width = context->screen_width;
-    GLfloat height = context->screen_height;
-    GLfloat uv[] = {
-        0.0,          0.0,
-        width / side, 0.0,
-        width / side, height / side,
-        0.0,          0.0,
-        width / side, height / side,
-        0.0,          height / side,
+
+    glGenVertexArrays(1, &context->xy_array);
+    glBindVertexArray(context->xy_array);
+
+    glGenBuffers(1, &context->xy_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quad_xy_coords), quad_xy_coords, GL_STATIC_DRAW);
+}
+
+static void init_uv_array(struct just_monika *context)
+{
+    GLfloat quad_uv_coords[] = {
+        0.0,                   0.0,
+        context->screen_width, 0.0,
+        context->screen_width, context->screen_height,
+        0.0,                   0.0,
+        context->screen_width, context->screen_height,
+        0.0,                   context->screen_height,
     };
 
-    glGenVertexArrays(1, &context->screen_vertex_array);
-    glBindVertexArray(context->screen_vertex_array);
+    glGenVertexArrays(1, &context->uv_array);
+    glBindVertexArray(context->uv_array);
 
-    glGenBuffers(1, &context->screen_vertex_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, context->screen_vertex_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(quad), quad, GL_STATIC_DRAW);
+    glGenBuffers(1, &context->uv_buffer);
+    glBindBuffer(GL_ARRAY_BUFFER, context->uv_buffer);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(quad_uv_coords), quad_uv_coords, GL_STATIC_DRAW);
+}
 
-    glGenVertexArrays(1, &context->screen_uv_array);
-    glBindVertexArray(context->screen_uv_array);
+static void init_xy_matrix(struct just_monika *context)
+{
+    matrix_set_identity(context->xy_transform_matrix);
 
-    glGenBuffers(1, &context->screen_uv_buffer);
-    glBindBuffer(GL_ARRAY_BUFFER, context->screen_uv_buffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(uv), uv, GL_STATIC_DRAW);
+    /*
+     * Adjust translation so that origin (0, 0) maps onto the lower left corner
+     * of the screen quad, instead of the viewport center.
+     */
+    GLfloat shift_x = -0.5 * context->screen_width;
+    GLfloat shift_y = -0.5 * context->screen_height;
+    matrix_translate(context->xy_transform_matrix, shift_x, shift_y);
 
-    return 0;
+    /*
+     * Adjust scale so that the screen quad maintains apparent aspect ratio
+     * and takes the whole viewport width.
+     */
+    GLfloat scale = 2.0f / context->screen_width;
+    GLfloat scale_x = scale;
+    GLfloat scale_y = scale * context->viewport_width / context->viewport_height;
+    matrix_scale(context->xy_transform_matrix, scale_x, scale_y);
+}
+
+static void init_uv_matrix(struct just_monika *context)
+{
+    matrix_set_identity(context->uv_transform_matrix);
+
+    /*
+     * Adjust scale so that we can use pixel coordinates for UV.
+     */
+    GLfloat scale_x = 1.0 / context->texture_width;
+    GLfloat scale_y = 1.0 / context->texture_height;
+    matrix_scale(context->uv_transform_matrix, scale_x, scale_y);
 }
 
 #define MAX_SHADER_SIZE 4096
 
-static int init_shader_program(struct just_monika *context)
+static void init_shader_program(struct just_monika *context)
 {
     GLuint vertex_shader = 0;
     GLuint fragment_shader = 0;
@@ -89,24 +107,20 @@ static int init_shader_program(struct just_monika *context)
                                      buffer, length);
 
     context->screen_program = link_program(vertex_shader, fragment_shader);
-    if (!context->screen_program) {
-        goto error;
-    }
 
-    context->screen_vertex_id = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");
-    context->screen_uv_id = glGetAttribLocation(context->screen_program, "vertexUV");
-    context->screen_transform = glGetUniformLocation(context->screen_program, "transform");
-    context->screen_sampler = glGetUniformLocation(context->screen_program, "sampler");
+    /* Shaders are now owned by linked program */
+    glDeleteShader(vertex_shader);
+    glDeleteShader(fragment_shader);
+
+    context->xy_location = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");
+    context->xy_transform_location = glGetUniformLocation(context->screen_program, "vertexXY_transform");
+
+    context->uv_location = glGetAttribLocation(context->screen_program, "vertexUV_modelSpace");
+    context->uv_transform_location = glGetUniformLocation(context->screen_program, "vertexUV_transform");
+
+    context->monika_bg_sampler = glGetUniformLocation(context->screen_program, "monika_bg");
+
     context->timer = glGetUniformLocation(context->screen_program, "timer");
-
-error:
-    if (vertex_shader != 0) {
-        glDeleteShader(vertex_shader);
-    }
-    if (fragment_shader != 0) {
-        glDeleteShader(fragment_shader);
-    }
-    return -1;
 }
 
 static GLuint load_texture_from_resource(const char *name)
@@ -115,21 +129,15 @@ static GLuint load_texture_from_resource(const char *name)
     struct resource_file *resource = NULL;
 
     resource = open_resource(name);
-    if (!resource) {
-        return 0;
-    }
     texture = load_texture(resource);
     free_resource(resource);
+
     return texture;
 }
 
-static int load_textures(struct just_monika *context)
+static void init_textures(struct just_monika *context)
 {
-    context->screen_texture = load_texture_from_resource("monika_bg.png");
-    if (!context->screen_texture) {
-        return -1;
-    }
-    return 0;
+    context->monika_bg_texture = load_texture_from_resource("monika_bg.png");
 }
 
 int just_monika_init(struct just_monika *context)
@@ -141,11 +149,11 @@ int just_monika_init(struct just_monika *context)
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-    init_vertex_buffer_object(context);
+    init_xy_array(context);
+    init_uv_array(context);
+    init_uv_matrix(context);
     init_shader_program(context);
-    load_textures(context);
-
-    glViewport(0, 0, 100, 100);
+    init_textures(context);
 
     return 0;
 }
@@ -155,24 +163,7 @@ int just_monika_set_viewport(struct just_monika *context, unsigned width, unsign
     context->viewport_width = width;
     context->viewport_height = height;
 
-    matrix_set_identity(context->screen_transform_matrix);
-
-    /*
-     * Adjust translation so that origin (0, 0) maps onto the lower left corner
-     * of the screen quad, instead of the viewport center.
-     */
-    GLfloat shift_x = -0.5 * context->screen_width;
-    GLfloat shift_y = -0.5 * context->screen_height;
-    matrix_translate(context->screen_transform_matrix, shift_x, shift_y);
-
-    /*
-     * Adjust scale so that the screen quad maintains apparent aspect ratio
-     * and takes the whole viewport width.
-     */
-    GLfloat scale = 2.0f / context->screen_width;
-    GLfloat scale_x = scale;
-    GLfloat scale_y = scale * ((GLfloat)width / (GLfloat)height);
-    matrix_scale(context->screen_transform_matrix, scale_x, scale_y);
+    init_xy_matrix(context);
 
     glViewport(0, 0, width, height);
 

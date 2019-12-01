@@ -24,13 +24,10 @@
 		9F3FC422238A0BA000AD0621 /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3FC426238A0E5000AD0621 /* context.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC40A238A0A3F00AD0621 /* context.h */; };
 		9F3FC427238A0E5A00AD0621 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC40B238A0A8300AD0621 /* context.c */; };
-		9F3FC429238A0F4500AD0621 /* context.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC428238A0EEF00AD0621 /* context.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3FC42D238A100C00AD0621 /* init.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC42B238A100C00AD0621 /* init.h */; };
 		9F3FC42E238A100C00AD0621 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC42C238A100C00AD0621 /* init.c */; };
-		9F3FC42F238A105C00AD0621 /* init.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC42A238A0FEA00AD0621 /* init.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3FC433238A109D00AD0621 /* draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC431238A109D00AD0621 /* draw.h */; };
 		9F3FC434238A109D00AD0621 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC432238A109D00AD0621 /* draw.c */; };
-		9F3FC435238A10E300AD0621 /* draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC430238A109400AD0621 /* draw.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3FC437238A118000AD0621 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC436238A118000AD0621 /* OpenGL.framework */; };
 		9F3FC441238A138100AD0621 /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F3FC446238A13DA00AD0621 /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaView.m */; };
@@ -52,6 +49,7 @@
 		9FB113222392F28300E0FA7E /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		9FB1132523939A8C00E0FA7E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB1132323939A8C00E0FA7E /* timer.h */; };
 		9FB1132623939A8C00E0FA7E /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1132423939A8C00E0FA7E /* timer.c */; };
+		9FB113282393A9EF00E0FA7E /* api.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB113272393A9BC00E0FA7E /* api.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F48FA675915AE3F7D4BF48AE /* libPods-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BA8F41D8837D7947CB187D3 /* libPods-JustMonikaGL.a */; };
 /* End PBXBuildFile section */
 
@@ -129,11 +127,8 @@
 		9F3FC41E238A0BA000AD0621 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaGL.h; sourceTree = "<group>"; };
 		9F3FC421238A0BA000AD0621 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		9F3FC428238A0EEF00AD0621 /* context.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = context.h; sourceTree = "<group>"; };
-		9F3FC42A238A0FEA00AD0621 /* init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = init.h; sourceTree = "<group>"; };
 		9F3FC42B238A100C00AD0621 /* init.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = init.h; sourceTree = "<group>"; };
 		9F3FC42C238A100C00AD0621 /* init.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = init.c; sourceTree = "<group>"; };
-		9F3FC430238A109400AD0621 /* draw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = draw.h; sourceTree = "<group>"; };
 		9F3FC431238A109D00AD0621 /* draw.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = draw.h; sourceTree = "<group>"; };
 		9F3FC432238A109D00AD0621 /* draw.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = draw.c; sourceTree = "<group>"; };
 		9F3FC436238A118000AD0621 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -155,6 +150,7 @@
 		9FB113212392F28300E0FA7E /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
 		9FB1132323939A8C00E0FA7E /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		9FB1132423939A8C00E0FA7E /* timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer.c; sourceTree = "<group>"; };
+		9FB113272393A9BC00E0FA7E /* api.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = api.h; sourceTree = "<group>"; };
 		A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.debug.xcconfig"; sourceTree = "<group>"; };
 		B3B9DBF896891E0B2817D5C4 /* Pods-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
 		C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -308,9 +304,7 @@
 			isa = PBXGroup;
 			children = (
 				9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */,
-				9F3FC428238A0EEF00AD0621 /* context.h */,
-				9F3FC42A238A0FEA00AD0621 /* init.h */,
-				9F3FC430238A109400AD0621 /* draw.h */,
+				9FB113272393A9BC00E0FA7E /* api.h */,
 			);
 			path = JustMonikaGL;
 			sourceTree = "<group>";
@@ -387,15 +381,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F3FC42D238A100C00AD0621 /* init.h in Headers */,
+				9FB113282393A9EF00E0FA7E /* api.h in Headers */,
 				9F3FC422238A0BA000AD0621 /* JustMonikaGL.h in Headers */,
-				9F3FC435238A10E300AD0621 /* draw.h in Headers */,
 				9F3FC45B238C929D00AD0621 /* shader.h in Headers */,
 				9F3FC457238C908F00AD0621 /* matrix.h in Headers */,
 				9FB11305238F2EEB00E0FA7E /* texture.h in Headers */,
 				9F3FC433238A109D00AD0621 /* draw.h in Headers */,
-				9F3FC42F238A105C00AD0621 /* init.h in Headers */,
 				9F3FC454238AF2C300AD0621 /* opengl.h in Headers */,
-				9F3FC429238A0F4500AD0621 /* context.h in Headers */,
 				9F3FC426238A0E5000AD0621 /* context.h in Headers */,
 				9FB1132523939A8C00E0FA7E /* timer.h in Headers */,
 				9FB113132392E7F000E0FA7E /* resource.h in Headers */,

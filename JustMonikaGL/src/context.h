@@ -11,29 +11,39 @@
 
 #include <stdbool.h>
 
-#include <JustMonikaGL/context.h>
-#include <JustMonikaGL/init.h>
+#include <JustMonikaGL/api.h>
 
 #include "opengl.h"
 #include "timer.h"
 
 struct just_monika {
-    GLuint viewport_width;
-    GLuint viewport_height;
+    GLfloat viewport_width;
+    GLfloat viewport_height;
 
-    GLuint screen_width;
-    GLuint screen_height;
-    GLuint screen_vertex_id;
-    GLuint screen_vertex_array;
-    GLuint screen_vertex_buffer;
-    GLuint screen_uv_id;
-    GLuint screen_uv_array;
-    GLuint screen_uv_buffer;
-    GLuint screen_sampler;
-    GLuint screen_texture;
+    GLfloat screen_width;
+    GLfloat screen_height;
+
+    GLfloat texture_width;
+    GLfloat texture_height;
+
+    GLuint xy_array;
+    GLuint xy_buffer;
+    GLuint xy_location;
+
+    GLuint  xy_transform_location;
+    GLfloat xy_transform_matrix[16];
+
+    GLuint uv_array;
+    GLuint uv_buffer;
+    GLuint uv_location;
+
+    GLuint  uv_transform_location;
+    GLfloat uv_transform_matrix[16];
+
+    GLuint monika_bg_sampler;
+    GLuint monika_bg_texture;
+
     GLuint screen_program;
-    GLuint screen_transform;
-    GLfloat screen_transform_matrix[16];
 
     struct clock clock;
     bool clock_ticking;

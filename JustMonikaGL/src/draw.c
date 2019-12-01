@@ -18,30 +18,35 @@ int just_monika_draw(struct just_monika *context)
 
     glUseProgram(context->screen_program);
 
-    glUniformMatrix4fv(context->screen_transform,
+    glUniformMatrix4fv(context->xy_transform_location,
                        1,       /* one 4x4 matrix */
                        GL_TRUE, /* row-major order */
-                       context->screen_transform_matrix);
+                       context->xy_transform_matrix);
 
-    glUniform1i(context->screen_sampler, 0);
+    glUniformMatrix4fv(context->uv_transform_location,
+                       1,       /* one 4x4 matrix */
+                       GL_TRUE, /* row-major order */
+                       context->uv_transform_matrix);
+
+    glUniform1i(context->monika_bg_sampler, 0);
     glActiveTexture(GL_TEXTURE0 + 0);
-    glBindTexture(GL_TEXTURE_2D, context->screen_texture);
+    glBindTexture(GL_TEXTURE_2D, context->monika_bg_texture);
 
     glUniform1f(context->timer, clock_seconds_elapsed(&context->clock));
 
-    glEnableVertexAttribArray(context->screen_vertex_id);
-    glEnableVertexAttribArray(context->screen_uv_id);
+    glEnableVertexAttribArray(context->xy_location);
+    glEnableVertexAttribArray(context->uv_location);
 
-    glBindBuffer(GL_ARRAY_BUFFER, context->screen_vertex_buffer);
-    glVertexAttribPointer(context->screen_vertex_id,
+    glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);
+    glVertexAttribPointer(context->xy_location,
                           2,        /* 2D XY coordinates */
                           GL_FLOAT, /* typed as floats */
                           GL_FALSE, /* not normalized */
                           0,        /* stride */
                           NULL);    /* offset */
 
-    glBindBuffer(GL_ARRAY_BUFFER, context->screen_uv_buffer);
-    glVertexAttribPointer(context->screen_uv_id,
+    glBindBuffer(GL_ARRAY_BUFFER, context->uv_buffer);
+    glVertexAttribPointer(context->uv_location,
                           2,        /* 2D UV coordinates */
                           GL_FLOAT, /* typed as floats */
                           GL_FALSE, /* not normalized */
@@ -51,8 +56,8 @@ int just_monika_draw(struct just_monika *context)
     /* Draw a quad out of 2 x 3 point set. */
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glDisableVertexAttribArray(context->screen_vertex_id);
-    glDisableVertexAttribArray(context->screen_uv_id);
+    glDisableVertexAttribArray(context->xy_location);
+    glDisableVertexAttribArray(context->uv_location);
 
     return 0;
 }
