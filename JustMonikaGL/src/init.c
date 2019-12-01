@@ -97,6 +97,7 @@ static int init_shader_program(struct just_monika *context)
     context->screen_uv_id = glGetAttribLocation(context->screen_program, "vertexUV");
     context->screen_transform = glGetUniformLocation(context->screen_program, "transform");
     context->screen_sampler = glGetUniformLocation(context->screen_program, "sampler");
+    context->timer = glGetUniformLocation(context->screen_program, "timer");
 
 error:
     if (vertex_shader != 0) {

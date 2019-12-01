@@ -10,6 +10,10 @@
 
 int just_monika_draw(struct just_monika *context)
 {
+    if (context->clock_ticking) {
+        clock_sync(&context->clock);
+    }
+
     glClear(GL_COLOR_BUFFER_BIT);
 
     glUseProgram(context->screen_program);
@@ -22,6 +26,8 @@ int just_monika_draw(struct just_monika *context)
     glUniform1i(context->screen_sampler, 0);
     glActiveTexture(GL_TEXTURE0 + 0);
     glBindTexture(GL_TEXTURE_2D, context->screen_texture);
+
+    glUniform1f(context->timer, clock_seconds_elapsed(&context->clock));
 
     glEnableVertexAttribArray(context->screen_vertex_id);
     glEnableVertexAttribArray(context->screen_uv_id);
@@ -48,5 +54,18 @@ int just_monika_draw(struct just_monika *context)
     glDisableVertexAttribArray(context->screen_vertex_id);
     glDisableVertexAttribArray(context->screen_uv_id);
 
+    return 0;
+}
+
+int just_monika_start_animation(struct just_monika *context)
+{
+    context->clock_ticking = true;
+    clock_start(&context->clock);
+    return 0;
+}
+
+int just_monika_stop_animation(struct just_monika *context)
+{
+    context->clock_ticking = false;
     return 0;
 }

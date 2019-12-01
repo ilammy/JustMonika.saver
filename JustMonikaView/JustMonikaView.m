@@ -65,6 +65,16 @@
     self.monika = NULL;
 }
 
+- (void)startAnimation
+{
+    just_monika_start_animation(self.monika);
+}
+
+- (void)stopAnimation
+{
+    just_monika_stop_animation(self.monika);
+}
+
 #pragma mark - NSOpenGLView overrides
 
 - (void)prepareOpenGL

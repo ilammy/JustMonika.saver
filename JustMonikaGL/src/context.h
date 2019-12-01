@@ -9,10 +9,13 @@
 #ifndef JUST_MONIKA_GL_PRIVATE_CONTEXT_H
 #define JUST_MONIKA_GL_PRIVATE_CONTEXT_H
 
+#include <stdbool.h>
+
 #include <JustMonikaGL/context.h>
 #include <JustMonikaGL/init.h>
 
 #include "opengl.h"
+#include "timer.h"
 
 struct just_monika {
     GLuint viewport_width;
@@ -31,6 +34,10 @@ struct just_monika {
     GLuint screen_program;
     GLuint screen_transform;
     GLfloat screen_transform_matrix[16];
+
+    struct clock clock;
+    bool clock_ticking;
+    GLuint timer;
 };
 
 #endif /* JUST_MONIKA_GL_PRIVATE_CONTEXT_H */

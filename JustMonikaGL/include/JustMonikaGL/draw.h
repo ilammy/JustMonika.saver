@@ -13,4 +13,8 @@ struct just_monika;
 
 int just_monika_draw(struct just_monika *context);
 
+int just_monika_start_animation(struct just_monika *context);
+
+int just_monika_stop_animation(struct just_monika *context);
+
 #endif /* JUST_MONIKA_GL_DRAW_H */

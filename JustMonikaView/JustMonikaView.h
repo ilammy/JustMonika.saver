@@ -22,6 +22,9 @@ FOUNDATION_EXPORT const unsigned char JustMonikaViewVersionString[];
 IB_DESIGNABLE
 @interface JustMonikaView : NSOpenGLView
 
+- (void)startAnimation;
+- (void)stopAnimation;
+
 @end
 
 #pragma clang diagnostic pop
