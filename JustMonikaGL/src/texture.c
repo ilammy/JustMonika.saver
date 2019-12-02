@@ -58,6 +58,11 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
      * We need a square of stride x stride size.
      * Carefully avoid overflows (should not happen in practice).
      */
+    if (buffer->actual_height == 0 || buffer->actual_width == 0) {
+        fprintf(stderr, "allocation error: invalid PNG size: %ux%u\n",
+                buffer->actual_width, buffer->actual_height);
+        return;
+    }
     if (buffer->actual_height > (PNG_SIZE_MAX / 4) / buffer->actual_width) {
         fprintf(stderr, "allocation error: size overflow in %ux%u buffer\n",
                 buffer->actual_width, buffer->actual_height);
@@ -109,6 +114,8 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
 {
     GLuint texture = 0;
     struct texture_buffer buffer;
+
+    memset(&buffer, 0, sizeof(buffer));
 
     /*
      * libpng uses longjmp() for error recovery. png_read_info()
