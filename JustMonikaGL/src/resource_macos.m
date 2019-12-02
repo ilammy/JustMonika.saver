@@ -19,7 +19,7 @@ struct resource_file {
 
 struct resource_file* open_resource(const char *name)
 {
-    NSBundle *thisBundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonikaGL"];
+    NSBundle *thisBundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
     NSString *resourceName = [NSString stringWithCString:name
                                                 encoding:NSUTF8StringEncoding];
     NSString *resourcePath;

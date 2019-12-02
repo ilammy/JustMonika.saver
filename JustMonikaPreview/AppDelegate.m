@@ -21,19 +21,19 @@
 
 @implementation AppDelegate
 
-static const int fps = 30;
+//static const int fps = 30;
 
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     [self.view startAnimation];
-
-    NSTimer *timer = [NSTimer timerWithTimeInterval:1.0/fps
-                                            repeats:YES
-                                              block:^(NSTimer *timer) {
-        self.view.needsDisplay = YES;
-    }];
-
-    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+//
+//    NSTimer *timer = [NSTimer timerWithTimeInterval:1.0/fps
+//                                            repeats:YES
+//                                              block:^(NSTimer *timer) {
+//        self.view.needsDisplay = YES;
+//    }];
+//
+//    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
 }
 
 - (IBAction)openSettings:(id)sender

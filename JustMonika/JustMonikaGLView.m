@@ -6,7 +6,7 @@
 //  Copyright © 2019 ilammy's tearoom. All rights reserved.
 //
 
-#include "JustMonikaView.h"
+#include "JustMonikaGLView.h"
 
 #import <JustMonikaGL/JustMonikaGL.h>
 
@@ -14,31 +14,19 @@
 // You don't need to remind me about that in every build.
 #pragma clang diagnostic ignored "-Wdeprecated"
 
-@interface JustMonikaView ()
+@interface JustMonikaGLView ()
 
 @property (nonatomic,assign) struct just_monika *monika;
 
 @end
 
-@implementation JustMonikaView
+@implementation JustMonikaGLView
 
-// Called when constructing UI made with Interface Builder.
-- (void)awakeFromNib
+- (instancetype)initWithFrame:(NSRect)frameRect
 {
-    [super awakeFromNib];
-    [self setup];
-}
-
-// Called by Interface Builder for previews.
-- (void)prepareForInterfaceBuilder
-{
-    [super prepareForInterfaceBuilder];
-    [self setup];
-}
-
-- (void)setup
-{
-    if (self.pixelFormat == nil) {
+    self = [super initWithFrame:frameRect];
+    if (self) {
+        self.monika = just_monika_make();
         NSOpenGLPixelFormatAttribute attributes[] =
         {
             NSOpenGLPFAOpenGLProfile, NSOpenGLProfileVersion3_2Core,
@@ -49,14 +37,10 @@
             0
         };
         self.pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
-    }
-    if (self.openGLContext == nil) {
         self.openGLContext = [[NSOpenGLContext alloc] initWithFormat:self.pixelFormat
                                                         shareContext:nil];
     }
-    if (self.monika == NULL) {
-        self.monika = just_monika_make();
-    }
+    return self;
 }
 
 - (void)dealloc

@@ -9,7 +9,7 @@
 #ifndef JUST_MONIKA_GL_PRIVATE_DRAW_H
 #define JUST_MONIKA_GL_PRIVATE_DRAW_H
 
-#include <JustMonikaGL/api.h>
+#include <JustMonikaGL/JustMonikaGL.h>
 
 #include "context.h"
 #include "opengl.h"

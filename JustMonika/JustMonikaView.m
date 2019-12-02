@@ -8,125 +8,90 @@
 
 #import "JustMonikaView.h"
 
-#import <QuartzCore/CoreAnimation.h>
-
-#import "DawnAnimationController.h"
+#import "JustMonikaGLView.h"
 #import "JustMonikaSettings.h"
 #import "NSView+Subviews.h"
 
 @interface JustMonikaView ()
 
-@property(nonatomic) DawnAnimationController *dawnAnimation;
-@property(nonatomic) JustMonikaSettings *settings;
+@property (nonatomic) JustMonikaSettings *settings;
 
-@property(strong) IBOutlet NSWindow *settingsSheet;
+@property (weak) IBOutlet NSWindow *settingsSheet;
+
+@property (weak) JustMonikaGLView *monika;
 
 @end
 
 @implementation JustMonikaView
 
-// Called by JustMonikaPreview.app
+// Called when constructing UI made with Interface Builder.
 - (void)awakeFromNib
 {
     [super awakeFromNib];
 
-    // This method can get called recursively due to NIB loading in setupCALayer.
+    // This method can get called recursively due to NIB loading in setup.
     // NIB fills in settingsSheet, so if it's there then we can just exit.
     if (self.settingsSheet) {
         return;
     }
 
-    [self setupCALayer];
-    // TODO: start the animation more natually
-    [self.dawnAnimation startAnimation];
+    // TODO: can we avoid this sorcery?
+    (void)[super initWithFrame:self.frame isPreview:NO];
+    [self setup];
 }
 
-// Called by Interface Builder preview
+// Called by Interface Builder for previews.
 - (void)prepareForInterfaceBuilder
 {
-    [self setupCALayer];
+    [super prepareForInterfaceBuilder];
+
+    // TODO: can we avoid this sorcery?
+    (void)[super initWithFrame:self.frame isPreview:NO];
+    [self setup];
 }
+
+static const float fps = 30;
 
 // Called by Screen Saver framework
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
     self = [super initWithFrame:frame isPreview:isPreview];
     if (self) {
-        [self setAnimationTimeInterval:1/30.0];
-        [self setupCALayer];
+        [self setAnimationTimeInterval:1.0/fps];
+        [self setup];
     }
     return self;
 }
 
-- (void)setupCALayer
+- (void)setup
 {
     // Screen savers are loaded as plugins so their main bundle is not
     // this one, but the host bundle. We need to use the name directly.
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
-    NSImage *scene = [bundle imageForResource:@"monika_bg"];
-    NSImage *light = [bundle imageForResource:@"monika_bg_highlight"];
 
-    CALayer *sceneLayer = centeredSublayerWithImage(scene);
-    CALayer *lightLayer = centeredSublayerWithImage(light);
-
-    CALayer *layer = [CALayer new];
-    layer.backgroundColor = [[NSColor blackColor] CGColor];
-    layer.contentsGravity = kCAGravityResizeAspectFill;
-    layer.layoutManager = [CAConstraintLayoutManager layoutManager];
-
-    [layer addSublayer:sceneLayer];
-    [layer addSublayer:lightLayer];
-
-    self.layer = layer;
-
-    self.dawnAnimation = [DawnAnimationController new];
-    [self.dawnAnimation addLayer:lightLayer];
-
-    [bundle loadNibNamed:@"ConfigureSheet" owner:self topLevelObjects:nil];
+    [bundle loadNibNamed:@"Monika" owner:self topLevelObjects:nil];
 
     self.settings = [JustMonikaSettings new];
-}
 
-static CAConstraint *centerX;
-static CAConstraint *centerY;
-static dispatch_once_t constraintToken;
-
-static CALayer* centeredSublayerWithImage(NSImage *image)
-{
-    CALayer *layer = [CALayer new];
-    layer.contents = image;
-
-    // Bounds need to be set explicitly for sublayers
-    layer.bounds = CGRectMake(0, 0, image.size.width, image.size.height);
-
-    // Constraints to ensure that sublayer is centered within its superlayer
-    dispatch_once(&constraintToken, ^{
-        centerX = [CAConstraint constraintWithAttribute:kCAConstraintMidY
-                                             relativeTo:@"superlayer"
-                                              attribute:kCAConstraintMidY];
-        centerY = [CAConstraint constraintWithAttribute:kCAConstraintMidX
-                                             relativeTo:@"superlayer"
-                                              attribute:kCAConstraintMidX];
-    });
-
-    [layer addConstraint:centerX];
-    [layer addConstraint:centerY];
-
-    return layer;
+    JustMonikaGLView *monika = [[JustMonikaGLView alloc] initWithFrame:self.frame];
+    [self addSubview:monika];
+    monika.frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
+    monika.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    self.monika = monika;
 }
 
 - (void)startAnimation
 {
     [super startAnimation];
 
-    [self.dawnAnimation startAnimation];
+    [self.monika startAnimation];
 }
 
 - (void)stopAnimation
 {
     [super stopAnimation];
 
-    [self.dawnAnimation stopAnimation];
+    [self.monika stopAnimation];
 }
 
 - (void)drawRect:(NSRect)rect
@@ -136,7 +101,7 @@ static CALayer* centeredSublayerWithImage(NSImage *image)
 
 - (void)animateOneFrame
 {
-    return;
+    self.needsDisplay = YES;
 }
 
 - (BOOL)hasConfigureSheet

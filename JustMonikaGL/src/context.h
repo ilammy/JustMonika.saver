@@ -11,7 +11,7 @@
 
 #include <stdbool.h>
 
-#include <JustMonikaGL/api.h>
+#include <JustMonikaGL/JustMonikaGL.h>
 
 #include "opengl.h"
 #include "timer.h"

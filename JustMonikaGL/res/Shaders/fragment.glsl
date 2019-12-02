@@ -14,5 +14,5 @@ vec4 getPixel(in sampler2D sampler, in vec2 uv)
 void main()
 {
     color = getPixel(monika_bg, UV);
-    color.a *= (sin(timer) + 1.0) / 2.0;
+    color.a *= (cos(timer) + 1.0) / 2.0;
 }

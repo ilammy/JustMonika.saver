@@ -1,5 +1,7 @@
 platform :macos, 10.14
 
-target 'JustMonikaGL' do
-  pod 'libpng', '~> 1.6'
+target 'JustMonika' do
+  target 'JustMonikaGL' do
+    pod 'libpng', '~> 1.6'
+  end
 end
