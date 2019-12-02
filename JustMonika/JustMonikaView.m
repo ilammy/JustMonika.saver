@@ -18,67 +18,61 @@
 
 @property (weak) IBOutlet NSWindow *settingsSheet;
 
-@property (weak) JustMonikaGLView *monika;
-
 @end
 
 @implementation JustMonikaView
 
-// Called when constructing UI made with Interface Builder.
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
+#pragma mark - Initialization
 
-    // This method can get called recursively due to NIB loading in setup.
-    // NIB fills in settingsSheet, so if it's there then we can just exit.
-    if (self.settingsSheet) {
-        return;
-    }
-
-    // TODO: can we avoid this sorcery?
-    (void)[super initWithFrame:self.frame isPreview:NO];
-    [self setup];
-}
-
-// Called by Interface Builder for previews.
-- (void)prepareForInterfaceBuilder
-{
-    [super prepareForInterfaceBuilder];
-
-    // TODO: can we avoid this sorcery?
-    (void)[super initWithFrame:self.frame isPreview:NO];
-    [self setup];
-}
-
-static const float fps = 30;
+static const float fps = 30.0;
 
 // Called by Screen Saver framework
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
     self = [super initWithFrame:frame isPreview:isPreview];
     if (self) {
-        [self setAnimationTimeInterval:1.0/fps];
-        [self setup];
+        [self initMonikaView];
+        [self initSettings];
     }
     return self;
 }
 
-- (void)setup
+// Called when constructing UI made with Interface Builder
+- (void)awakeFromNib
 {
+    [super awakeFromNib];
+
+    [self initMonikaView];
+}
+
+// Called by Interface Builder for previews
+- (void)prepareForInterfaceBuilder
+{
+    [super prepareForInterfaceBuilder];
+
+    [self initMonikaView];
+}
+
+- (void)initSettings
+{
+    self.settings = [JustMonikaSettings new];
     // Screen savers are loaded as plugins so their main bundle is not
     // this one, but the host bundle. We need to use the name directly.
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
-
     [bundle loadNibNamed:@"Monika" owner:self topLevelObjects:nil];
-
-    self.settings = [JustMonikaSettings new];
-
-    JustMonikaGLView *monika = [[JustMonikaGLView alloc] initWithFrame:self.frame];
-    [self addSubview:monika];
-    monika.frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
-    monika.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    self.monika = monika;
 }
+
+- (void)initMonikaView
+{
+    NSRect frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
+    JustMonikaGLView *monika = [[JustMonikaGLView alloc] initWithFrame:frame];
+    monika.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    [self addSubview:monika];
+    [self setMonika:monika];
+    [self setAnimationTimeInterval:1.0/fps];
+}
+
+#pragma mark - Animated drawing
 
 - (void)startAnimation
 {
@@ -89,20 +83,17 @@ static const float fps = 30;
 
 - (void)stopAnimation
 {
-    [super stopAnimation];
-
     [self.monika stopAnimation];
-}
 
-- (void)drawRect:(NSRect)rect
-{
-    [super drawRect:rect];
+    [super stopAnimation];
 }
 
 - (void)animateOneFrame
 {
-    self.needsDisplay = YES;
+    [self.monika drawRect:self.monika.frame];
 }
+
+#pragma mark - Configuration sheet
 
 - (BOOL)hasConfigureSheet
 {
@@ -111,9 +102,6 @@ static const float fps = 30;
 
 - (NSWindow*)configureSheet
 {
-    if (!self.settings.settingsSheetEnabled) {
-        return nil;
-    }
     return self.settingsSheet;
 }
 
