@@ -32,7 +32,11 @@ int just_monika_draw(struct just_monika *context)
     glActiveTexture(GL_TEXTURE0 + 0);
     glBindTexture(GL_TEXTURE_2D, context->monika_bg_texture);
 
-    glUniform1f(context->timer, clock_seconds_elapsed(&context->clock));
+    glUniform1i(context->monika_bg_highlight_sampler, 1);
+    glActiveTexture(GL_TEXTURE0 + 1);
+    glBindTexture(GL_TEXTURE_2D, context->monika_bg_highlight_texture);
+
+    glUniform1f(context->time, clock_seconds_elapsed(&context->clock));
 
     glEnableVertexAttribArray(context->xy_location);
     glEnableVertexAttribArray(context->uv_location);

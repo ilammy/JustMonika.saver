@@ -43,11 +43,14 @@ struct just_monika {
     GLuint monika_bg_sampler;
     GLuint monika_bg_texture;
 
+    GLuint monika_bg_highlight_sampler;
+    GLuint monika_bg_highlight_texture;
+
     GLuint screen_program;
 
     struct clock clock;
     bool clock_ticking;
-    GLuint timer;
+    GLuint time;
 };
 
 #endif /* JUST_MONIKA_GL_PRIVATE_CONTEXT_H */

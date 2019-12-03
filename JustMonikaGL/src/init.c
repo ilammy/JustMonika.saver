@@ -119,8 +119,9 @@ static void init_shader_program(struct just_monika *context)
     context->uv_transform_location = glGetUniformLocation(context->screen_program, "vertexUV_transform");
 
     context->monika_bg_sampler = glGetUniformLocation(context->screen_program, "monika_bg");
+    context->monika_bg_highlight_sampler = glGetUniformLocation(context->screen_program, "monika_bg_highlight");
 
-    context->timer = glGetUniformLocation(context->screen_program, "timer");
+    context->time = glGetUniformLocation(context->screen_program, "time");
 }
 
 static GLuint load_texture_from_resource(const char *name)
@@ -138,6 +139,7 @@ static GLuint load_texture_from_resource(const char *name)
 static void init_textures(struct just_monika *context)
 {
     context->monika_bg_texture = load_texture_from_resource("monika_bg.png");
+    context->monika_bg_highlight_texture = load_texture_from_resource("monika_bg_highlight.png");
 }
 
 int just_monika_init(struct just_monika *context)
