@@ -42,9 +42,12 @@ struct just_monika {
 
     GLuint monika_bg_sampler;
     GLuint monika_bg_texture;
-
     GLuint monika_bg_highlight_sampler;
     GLuint monika_bg_highlight_texture;
+    GLuint mask_2_sampler;
+    GLuint mask_2_texture;
+    GLuint mask_3_sampler;
+    GLuint mask_3_texture;
 
     GLuint screen_program;
 

@@ -120,6 +120,8 @@ static void init_shader_program(struct just_monika *context)
 
     context->monika_bg_sampler = glGetUniformLocation(context->screen_program, "monika_bg");
     context->monika_bg_highlight_sampler = glGetUniformLocation(context->screen_program, "monika_bg_highlight");
+    context->mask_2_sampler = glGetUniformLocation(context->screen_program, "mask_2");
+    context->mask_3_sampler = glGetUniformLocation(context->screen_program, "mask_3");
 
     context->time = glGetUniformLocation(context->screen_program, "time");
 }
@@ -140,6 +142,8 @@ static void init_textures(struct just_monika *context)
 {
     context->monika_bg_texture = load_texture_from_resource("monika_bg.png");
     context->monika_bg_highlight_texture = load_texture_from_resource("monika_bg_highlight.png");
+    context->mask_2_texture = load_texture_from_resource("mask_2.png");
+    context->mask_3_texture = load_texture_from_resource("mask_3.png");
 }
 
 int just_monika_init(struct just_monika *context)
