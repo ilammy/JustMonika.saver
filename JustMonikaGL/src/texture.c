@@ -114,6 +114,7 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
 {
     GLuint texture = 0;
     struct texture_buffer buffer;
+    float max_anisotropy = 0.0;
 
     memset(&buffer, 0, sizeof(buffer));
 
@@ -163,6 +164,8 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
                  GL_RGBA,           /* data format */
                  GL_UNSIGNED_BYTE,  /* data type */
                  buffer.data);
+    glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glGenerateMipmap(GL_TEXTURE_2D);
