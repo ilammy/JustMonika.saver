@@ -87,7 +87,7 @@ static void init_uv_matrix(struct just_monika *context)
     matrix_scale(context->uv_transform_matrix, scale_x, scale_y);
 }
 
-#define MAX_SHADER_SIZE 4096
+#define MAX_SHADER_SIZE (2 * 4096)
 
 static void init_shader_program(struct just_monika *context)
 {
@@ -122,6 +122,8 @@ static void init_shader_program(struct just_monika *context)
     context->monika_bg_highlight_sampler = glGetUniformLocation(context->screen_program, "monika_bg_highlight");
     context->mask_2_sampler = glGetUniformLocation(context->screen_program, "mask_2");
     context->mask_3_sampler = glGetUniformLocation(context->screen_program, "mask_3");
+    context->mask_sampler = glGetUniformLocation(context->screen_program, "mask");
+    context->maskb_sampler = glGetUniformLocation(context->screen_program, "maskb");
 
     context->time = glGetUniformLocation(context->screen_program, "time");
 }
@@ -144,6 +146,8 @@ static void init_textures(struct just_monika *context)
     context->monika_bg_highlight_texture = load_texture_from_resource("monika_bg_highlight.png");
     context->mask_2_texture = load_texture_from_resource("mask_2.png");
     context->mask_3_texture = load_texture_from_resource("mask_3.png");
+    context->mask_texture = load_texture_from_resource("mask.png");
+    context->maskb_texture = load_texture_from_resource("maskb.png");
 }
 
 int just_monika_init(struct just_monika *context)

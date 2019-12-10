@@ -48,6 +48,10 @@ struct just_monika {
     GLuint mask_2_texture;
     GLuint mask_3_sampler;
     GLuint mask_3_texture;
+    GLuint mask_sampler;
+    GLuint mask_texture;
+    GLuint maskb_sampler;
+    GLuint maskb_texture;
 
     GLuint screen_program;
 
