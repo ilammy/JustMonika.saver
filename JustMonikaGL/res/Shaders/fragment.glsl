@@ -2,7 +2,6 @@
 
 in vec2 UV;
 out vec4 canvas;
-uniform mat4 vertexUV_transform;
 uniform sampler2D mask;
 uniform sampler2D maskb;
 uniform sampler2D mask_2;
@@ -11,11 +10,22 @@ uniform sampler2D monika_bg;
 uniform sampler2D monika_bg_highlight;
 uniform float time;
 
+// All our textures have 2048 x 1048 size in memory and have 1280 x 720
+// starting at origin filled with actually userful data. UV coordinates
+// are expressed in source image coordinates.
+const vec2 textureSize = vec2(2048.0, 1024.0);
+const vec2 imageSize   = vec2(1280.0,  720.0);
+
 vec4 getPixel(in sampler2D sampler, in vec2 uv)
 {
-    const vec2 textureSize = vec2(1280.0, 720.0);
-    vec4 spatial = vec4(mod(uv, textureSize), 0.0, 1.0);
-    return texture(sampler, vec2(vertexUV_transform * spatial));
+    const mat4 textureTransform = mat4(
+        1.0/textureSize.x, 0.0, 0.0, 0.0,
+        0.0, 1.0/textureSize.y, 0.0, 0.0,
+        0.0,               0.0, 1.0, 0.0,
+        0.0,               0.0, 0.0, 1.0
+    );
+    vec4 spatial = vec4(mod(uv, imageSize), 0.0, 1.0);
+    return texture(sampler, vec2(textureTransform * spatial));
 }
 
 void draw(inout vec4 canvas, in vec4 color)
@@ -73,18 +83,16 @@ vec4 WindowMask(in vec4 tint, bool flip, float bias, float scale,
 
 vec2 mask_2_transform(in vec2 uv)
 {
-    const float width = 1280.0;
     const float duration = 1200.0;
-    float offset = width * clamp(time / duration, 0.0, 1.0);
-    return vec2(mod(uv.x + offset, width), uv.y);
+    float offset = imageSize.x * clamp(time / duration, 0.0, 1.0);
+    return vec2(mod(uv.x + offset, imageSize.x), uv.y);
 }
 
 vec2 mask_3_transform(in vec2 uv)
 {
-    const float width = 1280.0;
     const float duration = 180.0;
-    float offset = width * clamp(time / duration, 0.0, 1.0);
-    return vec2(mod(uv.x + offset, width), uv.y);
+    float offset = imageSize.x * clamp(time / duration, 0.0, 1.0);
+    return vec2(mod(uv.x + offset, imageSize.x), uv.y);
 }
 
 float monika_alpha()
