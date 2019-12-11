@@ -33,3 +33,9 @@ void just_monika_free(struct just_monika *context)
 {
     free(context);
 }
+
+void just_monika_set_offset(struct just_monika *context, double x, double y)
+{
+    context->offsetX = x;
+    context->offsetY = y;
+}

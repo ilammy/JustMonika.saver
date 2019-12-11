@@ -17,6 +17,11 @@
 @property(weak) IBOutlet JustMonikaView *view;
 @property(weak) IBOutlet NSButton *settingsButton;
 
+@property (weak) IBOutlet NSSlider *offsetXSlider;
+@property (weak) IBOutlet NSSlider *offsetYSlider;
+@property (weak) IBOutlet NSTextField *offsetXText;
+@property (weak) IBOutlet NSTextField *offsetYText;
+
 @end
 
 @implementation AppDelegate
@@ -33,6 +38,7 @@
     }];
 
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSEventTrackingRunLoopMode];
 }
 
 - (IBAction)openSettings:(id)sender
@@ -64,6 +70,15 @@
 //    // Dynamically because we're not linked against the plugin.
 //    // God bless Objective-C runtime and its dynamism.
 //    [[[justMonika classNamed:@"JustMonikaSettings"] new] reset];
+}
+
+- (IBAction)offsetSliderDidUpdate:(id)sender
+{
+    self.offsetXText.doubleValue = round(self.offsetXSlider.doubleValue);
+    self.offsetYText.doubleValue = round(self.offsetYSlider.doubleValue);
+
+    [self.view.monika setOffsetX:self.offsetXSlider.doubleValue
+                            andY:self.offsetYSlider.doubleValue];
 }
 
 @end

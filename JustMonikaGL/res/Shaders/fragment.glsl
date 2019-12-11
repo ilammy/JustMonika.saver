@@ -10,6 +10,9 @@ uniform sampler2D monika_bg;
 uniform sampler2D monika_bg_highlight;
 uniform float time;
 
+uniform float offsetX;
+uniform float offsetY;
+
 // All our textures have 2048 x 1048 size in memory and have 1280 x 720
 // starting at origin filled with actually userful data. UV coordinates
 // are expressed in source image coordinates.
@@ -112,10 +115,10 @@ void main()
     const vec4 white  = vec4(1.0, 1.0,   1.0, 1.0);
     overlay(canvas, WindowMask(orange, false, 0.10, 8.0,
                                windowSize, windowPosLeft,
-                               shiftALeft));
+                               shiftALeft + vec2(offsetX, offsetY)));
     overlay(canvas, WindowMask(white, false, 0.03, 16.0,
                                windowSize, windowPosLeft,
-                               shiftALeft));
+                               shiftALeft + vec2(offsetX, offsetY)));
     overlay(canvas, WindowMask(orange, true, 0.10, 8.0,
                                windowSize, windowPosRight,
                                shiftARight));

@@ -49,6 +49,9 @@ int just_monika_draw(struct just_monika *context)
 
     glUniform1f(context->time, clock_seconds_elapsed(&context->clock));
 
+    glUniform1f(context->offsetX_location, context->offsetX);
+    glUniform1f(context->offsetY_location, context->offsetY);
+
     glEnableVertexAttribArray(context->xy_location);
 
     glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);

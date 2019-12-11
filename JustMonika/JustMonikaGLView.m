@@ -58,6 +58,11 @@
     just_monika_stop_animation(self.monika);
 }
 
+- (void)setOffsetX:(double)dx andY:(double)dy
+{
+    just_monika_set_offset(self.monika, dx, dy);
+}
+
 #pragma mark - NSOpenGLView overrides
 
 - (void)prepareOpenGL

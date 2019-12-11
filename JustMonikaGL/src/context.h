@@ -48,6 +48,11 @@ struct just_monika {
     struct clock clock;
     bool clock_ticking;
     GLuint time;
+
+    GLfloat offsetX;
+    GLfloat offsetY;
+    GLuint  offsetX_location;
+    GLuint  offsetY_location;
 };
 
 #endif /* JUST_MONIKA_GL_PRIVATE_CONTEXT_H */

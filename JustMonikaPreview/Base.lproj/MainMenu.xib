@@ -15,6 +15,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
+                <outlet property="offsetXSlider" destination="ksZ-bZ-JAg" id="2m3-XQ-bIn"/>
+                <outlet property="offsetXText" destination="3n3-rl-9Eo" id="dnI-01-UNa"/>
+                <outlet property="offsetYSlider" destination="pcR-sw-smg" id="mL7-2p-Kbe"/>
+                <outlet property="offsetYText" destination="RlW-9d-dyb" id="efs-r3-wwU"/>
                 <outlet property="settingsButton" destination="USm-K0-OcV" id="Sop-98-eF2"/>
                 <outlet property="view" destination="veX-D4-mvD" id="v1N-BM-1bt"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="gIp-Ho-8D9"/>
@@ -721,6 +725,53 @@
                 </subviews>
             </view>
             <point key="canvasLocation" x="139" y="-120"/>
+        </window>
+        <window title="Adjustments" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" frameAutosaveName="" animationBehavior="default" id="Iyq-k0-Nlu" customClass="NSPanel">
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" utility="YES" HUD="YES"/>
+            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+            <rect key="contentRect" x="90" y="125" width="480" height="270"/>
+            <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+            <view key="contentView" id="eYc-Tf-MdA">
+                <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ksZ-bZ-JAg">
+                        <rect key="frame" x="18" y="18" width="444" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1280" tickMarkPosition="above" sliderType="linear" id="fgn-0T-7NN"/>
+                        <connections>
+                            <action selector="offsetSliderDidUpdate:" target="Voe-Tx-rLC" id="XZQ-c4-ZcO"/>
+                        </connections>
+                    </slider>
+                    <slider horizontalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pcR-sw-smg">
+                        <rect key="frame" x="443" y="40" width="19" height="212"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                        <sliderCell key="cell" continuous="YES" alignment="left" maxValue="720" tickMarkPosition="right" sliderType="linear" id="nVF-W6-zuD"/>
+                        <connections>
+                            <action selector="offsetSliderDidUpdate:" target="Voe-Tx-rLC" id="9kU-Zx-qEa"/>
+                        </connections>
+                    </slider>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3n3-rl-9Eo">
+                        <rect key="frame" x="192" y="43" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0" drawsBackground="YES" id="vOM-PN-s59">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RlW-9d-dyb">
+                        <rect key="frame" x="341" y="136" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0" drawsBackground="YES" id="1LQ-g5-Fe4">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                </subviews>
+            </view>
+            <point key="canvasLocation" x="139" y="-543"/>
         </window>
     </objects>
 </document>

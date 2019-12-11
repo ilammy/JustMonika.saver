@@ -21,6 +21,8 @@ IB_DESIGNABLE
 - (void)startAnimation;
 - (void)stopAnimation;
 
+- (void)setOffsetX:(double)dx andY:(double)dy;
+
 @end
 
 #pragma clang diagnostic pop

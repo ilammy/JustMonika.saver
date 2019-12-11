@@ -87,4 +87,6 @@ int just_monika_start_animation(struct just_monika *context);
 JUST_MONIKA_API
 int just_monika_stop_animation(struct just_monika *context);
 
+void just_monika_set_offset(struct just_monika *context, double x, double y);
+
 #endif /* JUST_MONIKA_GL_H */
