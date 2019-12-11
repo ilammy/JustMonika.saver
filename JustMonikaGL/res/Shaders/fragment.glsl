@@ -52,13 +52,11 @@ const vec2 windowSize     = vec2(320.0, 180.0);
 const vec2 windowPosLeft  = vec2( 30.0, 340.0);
 const vec2 windowPosRight = vec2(935.0, 340.0);
 const vec2 shiftALeft     = vec2(  0.0,   0.0);
-const vec2 shiftBLeft     = vec2(  0.0,   0.0);
 const vec2 shiftARight    = vec2(  0.0,   0.0);
-const vec2 shiftBRight    = vec2(  0.0,   0.0);
 
 vec4 WindowMask(in vec4 tint, bool flip, float bias, float scale,
                 in vec2 size, in vec2 pos,
-                in vec2 shiftA, in vec2 shiftB)
+                in vec2 shiftA)
 {
     if (UV.x < pos.x || pos.x + size.x < UV.x ||
         UV.y < pos.y || pos.y + size.y < UV.y)
@@ -69,8 +67,13 @@ vec4 WindowMask(in vec4 tint, bool flip, float bias, float scale,
     vec2 posA = UV + shiftA;
     posA.x += 2.0 * 1280.0 + mod(50.0 * time, 2.0 * 1280.0);
 
-    vec2 posB = UV + shiftB;
-    posB.x += 1280.0 / 2.0;
+    const mat4 maskbTransform = mat4(
+        0.6 * imageSize.x / windowSize.x, 0.0, 0.0, 0.0,
+        0.0, 1.0 * imageSize.y / windowSize.y, 0.0, 0.0,
+        0.0,                              0.0, 1.0, 0.0,
+        2.7 * windowSize.x,               0.0, 0.0, 1.0
+    );
+    vec2 posB = vec2(maskbTransform * vec4(UV - pos, 0.0, 1.0));
 
     vec4 light = vec4(0.0, 0.0, 0.0, 0.0);
     draw(light, getPixel(mask,  posA));
@@ -109,16 +112,16 @@ void main()
     const vec4 white  = vec4(1.0, 1.0,   1.0, 1.0);
     overlay(canvas, WindowMask(orange, false, 0.10, 8.0,
                                windowSize, windowPosLeft,
-                               shiftALeft, shiftBLeft));
+                               shiftALeft));
     overlay(canvas, WindowMask(white, false, 0.03, 16.0,
                                windowSize, windowPosLeft,
-                               shiftALeft, shiftBLeft));
+                               shiftALeft));
     overlay(canvas, WindowMask(orange, true, 0.10, 8.0,
                                windowSize, windowPosRight,
-                               shiftARight, shiftBRight));
+                               shiftARight));
     overlay(canvas, WindowMask(white, true, 0.03, 16.0,
                                windowSize, windowPosRight,
-                               shiftARight, shiftBRight));
+                               shiftARight));
     vec4 backdrop  = getPixel(monika_bg, UV);
     vec4 highlight = getPixel(monika_bg_highlight, UV);
     draw(canvas, blend(backdrop, highlight, monika_alpha()));
