@@ -17,6 +17,7 @@
 @property(weak) IBOutlet JustMonikaView *view;
 @property(weak) IBOutlet NSButton *settingsButton;
 
+@property (weak) IBOutlet NSWindow *adjustments;
 @property (weak) IBOutlet NSSlider *offsetXSlider;
 @property (weak) IBOutlet NSSlider *offsetYSlider;
 @property (weak) IBOutlet NSTextField *offsetXText;
@@ -70,6 +71,11 @@
 //    // Dynamically because we're not linked against the plugin.
 //    // God bless Objective-C runtime and its dynamism.
 //    [[[justMonika classNamed:@"JustMonikaSettings"] new] reset];
+}
+
+- (IBAction)adjustButtonPressed:(id)sender
+{
+    [self.adjustments orderFront:sender];
 }
 
 - (IBAction)offsetSliderDidUpdate:(id)sender
