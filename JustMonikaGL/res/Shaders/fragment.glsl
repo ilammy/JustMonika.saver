@@ -33,17 +33,12 @@ vec4 getPixel(in sampler2D sampler, in vec2 uv)
 
 void draw(inout vec4 canvas, in vec4 color)
 {
-    canvas = (1.0 - color.a) * canvas + color.a * color;
+    canvas = mix(canvas, color, color.a);
 }
 
 void overlay(inout vec4 canvas, in vec4 color)
 {
     canvas = clamp(canvas + color, 0.0, 1.0);
-}
-
-vec4 blend(in vec4 src, in vec4 dst, in float k)
-{
-    return clamp((1.0 - k) * src + k * dst, 0.0, 1.0);
 }
 
 float amplify(float a, float offset, float scale)
@@ -127,5 +122,5 @@ void main()
                                shiftARight));
     vec4 backdrop  = getPixel(monika_bg, UV);
     vec4 highlight = getPixel(monika_bg_highlight, UV);
-    draw(canvas, blend(backdrop, highlight, monika_alpha()));
+    draw(canvas, mix(backdrop, highlight, monika_alpha()));
 }
