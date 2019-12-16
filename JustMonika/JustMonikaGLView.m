@@ -58,9 +58,11 @@
     just_monika_stop_animation(self.monika);
 }
 
-- (void)setOffsetX:(double)dx andY:(double)dy
+#pragma mark - Configuration API
+
+- (void)configureWith:(const struct just_monika_settings *)settings
 {
-    just_monika_set_offset(self.monika, dx, dy);
+    just_monika_configure(self.monika, settings);
 }
 
 #pragma mark - NSOpenGLView overrides

@@ -34,8 +34,9 @@ void just_monika_free(struct just_monika *context)
     free(context);
 }
 
-void just_monika_set_offset(struct just_monika *context, double x, double y)
+void just_monika_configure(struct just_monika *context,
+                           const struct just_monika_settings *settings)
 {
-    context->offsetX = x;
-    context->offsetY = y;
+    context->offsetX = settings->offsetX;
+    context->offsetY = settings->offsetY;
 }

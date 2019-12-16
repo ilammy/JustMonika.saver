@@ -13,6 +13,8 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"
 
+struct just_monika_settings;
+
 IB_DESIGNABLE
 @interface JustMonikaGLView : NSOpenGLView
 
@@ -21,7 +23,7 @@ IB_DESIGNABLE
 - (void)startAnimation;
 - (void)stopAnimation;
 
-- (void)setOffsetX:(double)dx andY:(double)dy;
+- (void)configureWith:(const struct just_monika_settings *)settings;
 
 @end
 

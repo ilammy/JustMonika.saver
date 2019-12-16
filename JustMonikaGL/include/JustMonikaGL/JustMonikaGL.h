@@ -87,6 +87,17 @@ int just_monika_start_animation(struct just_monika *context);
 JUST_MONIKA_API
 int just_monika_stop_animation(struct just_monika *context);
 
-void just_monika_set_offset(struct just_monika *context, double x, double y);
+#pragma mark - Configuration API
+/*
+ * All of the below is temporary development API.
+ */
+
+struct just_monika_settings {
+    double offsetX;
+    double offsetY;
+};
+
+void just_monika_configure(struct just_monika *context,
+                           const struct just_monika_settings *settings);
 
 #endif /* JUST_MONIKA_GL_H */

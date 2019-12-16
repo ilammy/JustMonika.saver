@@ -10,6 +10,7 @@
 
 #import "JustMonikaView.h"
 #import "JustMonikaSettings.h"
+#import "JustMonikaGL.h"
 
 @interface AppDelegate ()
 
@@ -83,8 +84,11 @@
     self.offsetXText.doubleValue = round(self.offsetXSlider.doubleValue);
     self.offsetYText.doubleValue = round(self.offsetYSlider.doubleValue);
 
-    [self.view.monika setOffsetX:self.offsetXSlider.doubleValue
-                            andY:self.offsetYSlider.doubleValue];
+    struct just_monika_settings settings = {
+        .offsetX = self.offsetXSlider.doubleValue,
+        .offsetY = self.offsetYSlider.doubleValue,
+    };
+    [self.view.monika configureWith:&settings];
 }
 
 @end
