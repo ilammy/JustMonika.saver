@@ -8,6 +8,7 @@
 
 #include "init.h"
 
+#include <stdlib.h>
 #include <string.h>
 
 #include "matrix.h"
@@ -56,24 +57,24 @@ static void init_xy_matrix(struct just_monika *context)
     matrix_scale(context->xy_transform_matrix, scale_x, scale_y);
 }
 
-#define MAX_SHADER_SIZE (2 * 4096)
-
 static void init_shader_program(struct just_monika *context)
 {
     GLuint vertex_shader = 0;
     GLuint fragment_shader = 0;
-    GLchar buffer[MAX_SHADER_SIZE];
+    GLchar *buffer = NULL;
     size_t length = 0;
 
-    length = load_resource("vertex.glsl", (uint8_t*)buffer, sizeof(buffer));
+    length = load_resource("vertex.glsl", (uint8_t**)&buffer);
     vertex_shader = compile_shader(GL_VERTEX_SHADER,
                                    "vertex_shader",
                                    buffer, length);
 
-    length = load_resource("fragment.glsl", (uint8_t*)buffer, sizeof(buffer));
+    length = load_resource("fragment.glsl", (uint8_t**)&buffer);
     fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
                                      "fragment_shader",
                                      buffer, length);
+
+    free(buffer);
 
     context->screen_program = link_program(vertex_shader, fragment_shader);
 

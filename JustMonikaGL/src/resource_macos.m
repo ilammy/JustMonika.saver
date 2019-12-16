@@ -68,24 +68,45 @@ size_t read_resource(struct resource_file *resource, uint8_t *buffer, size_t siz
     return fread(buffer, sizeof(uint8_t), size, resource->fp);
 }
 
-size_t load_resource(const char *name, uint8_t *buffer, size_t size)
+static size_t get_resource_size(struct resource_file *resource)
+{
+    size_t length = 0;
+    if (resource && resource->fp) {
+        fseek(resource->fp, 0, SEEK_END);
+        length = ftell(resource->fp);
+        rewind(resource->fp);
+    }
+    return length;
+}
+
+size_t load_resource(const char *name, uint8_t **buffer)
 {
     struct resource_file *resource = NULL;
     size_t read = 0;
     size_t total = 0;
+    ssize_t remaining = 0;
+    uint8_t *next = NULL;
 
     resource = open_resource(name);
+    remaining = get_resource_size(resource);
 
-    for (;;) {
-        read = read_resource(resource, buffer, size);
+    next = realloc(*buffer, remaining);
+    if (!next) {
+        goto error;
+    }
+    *buffer = next;
+
+    while (remaining > 0) {
+        read = read_resource(resource, next, remaining);
         if (read == 0) {
             break;
         }
-        buffer += read;
+        next += read;
         total += read;
-        size -= read;
+        remaining -= read;
     }
 
+error:
     free_resource(resource);
 
     return total;

@@ -20,6 +20,6 @@ void free_resource(struct resource_file *resource);
 
 size_t read_resource(struct resource_file *resource, uint8_t *buffer, size_t size);
 
-size_t load_resource(const char *name, uint8_t *buffer, size_t size);
+size_t load_resource(const char *name, uint8_t **buffer);
 
 #endif /* JUST_MONIKA_GL_PRIVATE_RESOURCE_H */
