@@ -43,14 +43,15 @@ void overlay(inout vec4 canvas, in vec4 color)
 
 float amplify(float a, float offset, float scale)
 {
-    return clamp(scale * (a + offset) - (scale - 1.0) / 2.0, 0.0, 1.0);
+    float shift = (0.5 - offset) * (1.0 + 1.0 / scale);
+    return clamp(scale * ((a - shift) - 0.5) + 0.5, 0.0, 1.0);
 }
 
 const vec2 windowSize     = vec2(320.0, 180.0);
 const vec2 windowPosLeft  = vec2( 30.0, 340.0);
 const vec2 windowPosRight = vec2(935.0, 340.0);
-const vec2 shiftALeft     = vec2(  0.0,   0.0);
-const vec2 shiftARight    = vec2(  0.0,   0.0);
+const vec2 shiftALeft     = vec2(-100.0, 600.0);
+const vec2 shiftARight    = vec2(560.0, 200.0);
 
 vec4 WindowMask(in vec4 tint, bool flip, float bias, float scale,
                 in vec2 size, in vec2 pos,
@@ -63,23 +64,28 @@ vec4 WindowMask(in vec4 tint, bool flip, float bias, float scale,
     }
 
     vec2 posA = UV + shiftA;
-    posA.x += 2.0 * 1280.0 + mod(50.0 * time, 2.0 * 1280.0);
+    float d = flip ? size.x : 0;
+    posA.x += mod(16.0 * time + d, size.x * 1.5 + 160.0) + size.x * 2;
+    vec4 pixelA = getPixel(mask, posA);
 
     const mat4 maskbTransform = mat4(
         0.6 * imageSize.x / windowSize.x, 0.0, 0.0, 0.0,
         0.0, 1.0 * imageSize.y / windowSize.y, 0.0, 0.0,
         0.0,                              0.0, 1.0, 0.0,
-        2.7 * windowSize.x,               0.0, 0.0, 1.0
+        2.5 * windowSize.x,               0.0, 0.0, 1.0
     );
     vec2 posB = vec2(maskbTransform * vec4(UV - pos, 0.0, 1.0));
+    vec4 pixelB = getPixel(maskb, posB);
 
     vec4 light = vec4(0.0, 0.0, 0.0, 0.0);
-    draw(light, getPixel(mask,  posA));
-    draw(light, getPixel(maskb, posB));
+    draw(light, pixelA);
+    draw(light, pixelB);
+    // TODO: compute without calling draw?
+    float alpha = light.a;
 
     float offset = bias + pow(sin(time / 8.0), 64.0) * 0.5;
 
-    return tint * amplify(light.a, offset, scale);
+    return tint * amplify(alpha, offset, scale);
 }
 
 vec2 mask_2_transform(in vec2 uv)
@@ -101,6 +107,11 @@ float monika_alpha()
     return pow(sin(time / 8.0), 64.0) * 1.4;
 }
 
+uniform float biasA;
+uniform float biasB;
+uniform float scaleA;
+uniform float scaleB;
+
 void main()
 {
     canvas = vec4(0.0, 0.0, 0.0, 0.0);
@@ -108,16 +119,16 @@ void main()
     draw(canvas, getPixel(mask_3, mask_3_transform(UV)));
     const vec4 orange = vec4(1.0, 0.375, 0.0, 1.0);
     const vec4 white  = vec4(1.0, 1.0,   1.0, 1.0);
-    overlay(canvas, WindowMask(orange, false, 0.10, 8.0,
+    overlay(canvas, WindowMask(orange, false, 0.35, 6.0,
                                windowSize, windowPosLeft,
-                               shiftALeft + vec2(offsetX, offsetY)));
-    overlay(canvas, WindowMask(white, false, 0.03, 16.0,
+                               shiftALeft));
+    overlay(canvas, WindowMask(white, false, 0.29, 16.0,
                                windowSize, windowPosLeft,
-                               shiftALeft + vec2(offsetX, offsetY)));
-    overlay(canvas, WindowMask(orange, true, 0.10, 8.0,
+                               shiftALeft));
+    overlay(canvas, WindowMask(orange, true, 0.35, 6.0,
                                windowSize, windowPosRight,
                                shiftARight));
-    overlay(canvas, WindowMask(white, true, 0.03, 16.0,
+    overlay(canvas, WindowMask(white, true, 0.29, 16.0,
                                windowSize, windowPosRight,
                                shiftARight));
     vec4 backdrop  = getPixel(monika_bg, UV);

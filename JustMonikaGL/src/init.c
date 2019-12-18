@@ -96,6 +96,11 @@ static void init_shader_program(struct just_monika *context)
 
     context->offsetX_location = glGetUniformLocation(context->screen_program, "offsetX");
     context->offsetY_location = glGetUniformLocation(context->screen_program, "offsetY");
+
+    context->biasA_location = glGetUniformLocation(context->screen_program, "biasA");
+    context->biasB_location = glGetUniformLocation(context->screen_program, "biasB");
+    context->scaleA_location = glGetUniformLocation(context->screen_program, "scaleA");
+    context->scaleB_location = glGetUniformLocation(context->screen_program, "scaleB");
 }
 
 static GLuint load_texture_from_resource(const char *name)

@@ -95,6 +95,9 @@ int just_monika_stop_animation(struct just_monika *context);
 struct just_monika_settings {
     double offsetX;
     double offsetY;
+
+    double biasA, biasB;
+    double scaleA, scaleB;
 };
 
 void just_monika_configure(struct just_monika *context,

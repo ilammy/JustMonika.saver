@@ -24,6 +24,11 @@
 @property (weak) IBOutlet NSTextField *offsetXText;
 @property (weak) IBOutlet NSTextField *offsetYText;
 
+@property (weak) IBOutlet NSTextField *biasAText;
+@property (weak) IBOutlet NSTextField *biasBText;
+@property (weak) IBOutlet NSTextField *scaleAText;
+@property (weak) IBOutlet NSTextField *scaleBText;
+
 @end
 
 @implementation AppDelegate
@@ -87,6 +92,10 @@
     struct just_monika_settings settings = {
         .offsetX = self.offsetXSlider.doubleValue,
         .offsetY = self.offsetYSlider.doubleValue,
+        .biasA = self.biasAText.doubleValue,
+        .biasB = self.biasBText.doubleValue,
+        .scaleA = self.scaleAText.doubleValue,
+        .scaleB = self.scaleBText.doubleValue,
     };
     [self.view.monika configureWith:&settings];
 }

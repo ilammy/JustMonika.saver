@@ -53,6 +53,11 @@ struct just_monika {
     GLfloat offsetY;
     GLuint  offsetX_location;
     GLuint  offsetY_location;
+
+    GLfloat biasA,  biasB;
+    GLfloat scaleA, scaleB;
+    GLuint  biasA_location,  biasB_location;
+    GLuint  scaleA_location, scaleB_location;
 };
 
 #endif /* JUST_MONIKA_GL_PRIVATE_CONTEXT_H */
