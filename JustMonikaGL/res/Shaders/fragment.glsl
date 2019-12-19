@@ -27,7 +27,7 @@ vec4 getPixel(in sampler2D sampler, in vec2 uv)
         0.0,               0.0, 1.0, 0.0,
         0.0,               0.0, 0.0, 1.0
     );
-    vec4 spatial = vec4(mod(uv, imageSize), 0.0, 1.0);
+    vec4 spatial = vec4(mod(uv, imageSize) + vec2(0.5, 0.5), 0.0, 1.0);
     return texture(sampler, vec2(textureTransform * spatial));
 }
 
