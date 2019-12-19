@@ -117,16 +117,16 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
  *                | OpenGL width (2048 px) |
  *
  *           --   +-----------------+------+
- *                |12222222222222223|1    3|
+ *                |78888888888888889|9    7|
  *                |                 |      |
- *                |78888888888888889|7    9|
+ *                |12222222222222223|3    1|
  *                +-----------------+------+   --
- * OpenGL height  |12222222222222223|1    3|
- *   (2048 px)    |45555555555555556|4    6|
- *                |45555555555555556|4    6|  Image height
- *                |45555555555555556|4    6|    (720 px)
- *                |45555555555555556|4    6|
- *                |78888888888888889|7    9|
+ * OpenGL height  |12222222222222223|3    1|
+ *   (2048 px)    |45555555555555556|6    4|
+ *                |45555555555555556|6    4|  Image height
+ *                |45555555555555556|6    4|    (720 px)
+ *                |45555555555555556|6    4|
+ *                |78888888888888889|9    7|
  *           --   +-----------------+------+   --
  *
  *                |   Image width   |
@@ -138,35 +138,35 @@ static void wrap_texture_border(struct texture_buffer *buffer)
     const size_t stride = 4 * buffer->actual_width;
     const size_t width = 4 * buffer->width;
 
-    /* 12222222222222223 row */
-    memcpy(&buffer->data[0],
-           &buffer->data[stride * padding],
-           width);
-
     /* 78888888888888889 row */
-    memcpy(&buffer->data[stride * (padding - 1)],
+    memcpy(&buffer->data[0],
            &buffer->data[stride * (buffer->actual_height - 1)],
            width);
 
+    /* 12222222222222223 row */
+    memcpy(&buffer->data[stride * (padding - 1)],
+           &buffer->data[stride * padding],
+           width);
+
     for (size_t y = padding; y < buffer->actual_height; y++) {
-        /* 144447 column */
-        memcpy(&buffer->data[stride * y + width],
+        /* 366669 column */
+        memcpy(&buffer->data[stride * y + stride - 4],
                &buffer->data[stride * y],
                4);
 
-        /* 366669 column */
-        memcpy(&buffer->data[stride * y + stride - 4],
+        /* 144447 column */
+        memcpy(&buffer->data[stride * y + width],
                &buffer->data[stride * y + width - 4],
                4);
     }
 
     /* Those pesky 1379 corners */
-    memcpy(&buffer->data[width], &buffer->data[0], 4);
-    memcpy(&buffer->data[stride - 4], &buffer->data[width - 4], 4);
+    memcpy(&buffer->data[stride - 4], &buffer->data[0], 4);
+    memcpy(&buffer->data[width], &buffer->data[width - 4], 4);
     memcpy(&buffer->data[stride * (padding - 1) + width],
-           &buffer->data[stride * (padding - 1)], 4);
-    memcpy(&buffer->data[stride * (padding - 1) + stride - 4],
            &buffer->data[stride * (padding - 1) + width - 4], 4);
+    memcpy(&buffer->data[stride * (padding - 1) + stride - 4],
+           &buffer->data[stride * (padding - 1)], 4);
 }
 
 static GLuint load_png_texture(png_structp png, png_infop png_info)
