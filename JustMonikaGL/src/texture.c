@@ -78,7 +78,7 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
      * Initialize the pixel data with opaque black color.
      */
     for (png_uint_32 i = 0; i < buffer->actual_width * buffer->actual_height; i++) {
-        buffer->data[4 * i + 0] = 0x00;
+        buffer->data[4 * i + 0] = 0xFF;
         buffer->data[4 * i + 1] = 0x00;
         buffer->data[4 * i + 2] = 0x00;
         buffer->data[4 * i + 3] = 0xFF;
