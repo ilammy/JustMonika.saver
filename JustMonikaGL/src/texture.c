@@ -113,6 +113,7 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
 /*
  * Copy pixels from opposite side of the image in order for OpenGL's
  * texture interpolation to produce good results, not phantom black.
+ * This effectively simulates GL_CLAMP_TO_EDGE.
  *
  *                | OpenGL width (2048 px) |
  *
@@ -150,13 +151,13 @@ static void wrap_texture_border(struct texture_buffer *buffer)
 
     for (size_t y = padding; y < buffer->actual_height; y++) {
         /* 366669 column */
-        memcpy(&buffer->data[stride * y + stride - 4],
-               &buffer->data[stride * y],
+        memcpy(&buffer->data[stride * y + width],
+               &buffer->data[stride * y + width - 4],
                4);
 
         /* 144447 column */
-        memcpy(&buffer->data[stride * y + width],
-               &buffer->data[stride * y + width - 4],
+        memcpy(&buffer->data[stride * y + stride - 4],
+               &buffer->data[stride * y],
                4);
     }
 
