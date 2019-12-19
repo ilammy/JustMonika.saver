@@ -112,7 +112,7 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
 
 /*
  * Copy pixels from opposite side of the image in order for OpenGL's
- * texture interpolation to produce good results, not phantom black.
+ * texture interpolation to produce good results, not bleeding black.
  * This effectively simulates GL_CLAMP_TO_EDGE.
  *
  *                | OpenGL width (2048 px) |
