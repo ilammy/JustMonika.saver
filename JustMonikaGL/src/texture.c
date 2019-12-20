@@ -165,18 +165,18 @@ static void wrap_texture_border(struct texture_buffer *buffer)
     const size_t width = 4 * buffer->width;
 
     for (size_t y = 0; y < paddingY; y++) {
-        /* 78888888888888889 row */
-        memcpy(&buffer->data[stride * y],
-               &buffer->data[stride * (buffer->actual_height - 1)],
+        /* 12222222222222223 row */
+        memcpy(&buffer->data[stride * (buffer->height + y)],
+               &buffer->data[stride * (buffer->height - 1)],
                width);
 
-        /* 12222222222222223 row */
-        memcpy(&buffer->data[stride * (voffset - 1 - y)],
-               &buffer->data[stride * voffset],
+        /* 78888888888888889 row */
+        memcpy(&buffer->data[stride * (buffer->actual_height - 1 - y)],
+               &buffer->data[stride * 0],
                width);
     }
 
-    for (size_t y = voffset; y < buffer->actual_height; y++) {
+    for (size_t y = 0; y < buffer->height; y++) {
         for (size_t x = 0; x < paddingX; x++) {
             /* 366669 column */
             memcpy(&buffer->data[stride * y + width + 4 * x],
@@ -190,6 +190,7 @@ static void wrap_texture_border(struct texture_buffer *buffer)
         }
     }
 
+#if 0 // TODO: implement corners
     /* Those pesky 1379 corners */
     for (size_t y = 0; y < paddingY; y++) {
         for (size_t x = 0; x < paddingX; x++) {
@@ -210,6 +211,7 @@ static void wrap_texture_border(struct texture_buffer *buffer)
                    &buffer->data[stride * (voffset - 1)], 4);
         }
     }
+#endif
 }
 
 static GLuint load_png_texture(png_structp png, png_infop png_info)
