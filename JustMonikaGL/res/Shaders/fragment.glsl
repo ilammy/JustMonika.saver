@@ -13,10 +13,10 @@ uniform float time;
 uniform float offsetX;
 uniform float offsetY;
 
-// All our textures have 2048 x 1048 size in memory and have 1280 x 720
+// All our textures have 2048 x 2048 size in memory and have 1280 x 720
 // starting at origin filled with actually userful data. UV coordinates
 // are expressed in source image coordinates.
-const vec2 textureSize2 = vec2(2048.0, 1024.0);
+const vec2 textureSize2 = vec2(2048.0, 2048.0);
 const vec2 imageSize   = vec2(1280.0,  720.0);
 
 vec4 cubic(float v) {
