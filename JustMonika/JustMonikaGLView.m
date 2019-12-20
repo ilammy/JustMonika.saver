@@ -33,6 +33,9 @@
             NSOpenGLPFADoubleBuffer,    // double-buffered
             NSOpenGLPFAColorSize, 24,   // RGBA pixels with alpha
             NSOpenGLPFAAlphaSize, 8,
+            NSOpenGLPFAMultisample,     // enable 2x2 antialiasing
+            NSOpenGLPFASampleBuffers, 1,
+            NSOpenGLPFASamples,       4,
             0
         };
         self.pixelFormat = [[NSOpenGLPixelFormat alloc] initWithAttributes:attributes];
