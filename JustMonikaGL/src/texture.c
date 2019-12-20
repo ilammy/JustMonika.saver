@@ -111,8 +111,8 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
 }
 
 /*
- * Copy pixels from opposite side of the image in order for OpenGL's
- * texture interpolation to produce good results, not bleeding black.
+ * Copy pixels from the image edges in order for OpenGL's mipmaps and texture
+ * interpolation to produce good results, avoiding background color bleeding.
  * This effectively simulates GL_CLAMP_TO_EDGE.
  *
  *                | OpenGL width (2048 px) |
@@ -135,7 +135,7 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
  */
 static void wrap_texture_border(struct texture_buffer *buffer)
 {
-    const size_t padding = buffer->actual_height - buffer->height;
+    const size_t voffset = buffer->actual_height - buffer->height;
     const size_t stride = 4 * buffer->actual_width;
     const size_t width = 4 * buffer->width;
 
@@ -145,11 +145,11 @@ static void wrap_texture_border(struct texture_buffer *buffer)
            width);
 
     /* 12222222222222223 row */
-    memcpy(&buffer->data[stride * (padding - 1)],
-           &buffer->data[stride * padding],
+    memcpy(&buffer->data[stride * (voffset - 1)],
+           &buffer->data[stride * voffset],
            width);
 
-    for (size_t y = padding; y < buffer->actual_height; y++) {
+    for (size_t y = voffset; y < buffer->actual_height; y++) {
         /* 366669 column */
         memcpy(&buffer->data[stride * y + width],
                &buffer->data[stride * y + width - 4],
@@ -164,10 +164,10 @@ static void wrap_texture_border(struct texture_buffer *buffer)
     /* Those pesky 1379 corners */
     memcpy(&buffer->data[stride - 4], &buffer->data[0], 4);
     memcpy(&buffer->data[width], &buffer->data[width - 4], 4);
-    memcpy(&buffer->data[stride * (padding - 1) + width],
-           &buffer->data[stride * (padding - 1) + width - 4], 4);
-    memcpy(&buffer->data[stride * (padding - 1) + stride - 4],
-           &buffer->data[stride * (padding - 1)], 4);
+    memcpy(&buffer->data[stride * (voffset - 1) + width],
+           &buffer->data[stride * (voffset - 1) + width - 4], 4);
+    memcpy(&buffer->data[stride * (voffset - 1) + stride - 4],
+           &buffer->data[stride * (voffset - 1)], 4);
 }
 
 static GLuint load_png_texture(png_structp png, png_infop png_info)
