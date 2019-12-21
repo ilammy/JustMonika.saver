@@ -60,6 +60,7 @@ static void init_xy_matrix(struct just_monika *context)
 static void init_shader_program(struct just_monika *context)
 {
     GLuint vertex_shader = 0;
+    GLuint screen_shader = 0;
     GLuint fragment_shader = 0;
     GLchar *buffer = NULL;
     size_t length = 0;
@@ -67,6 +68,11 @@ static void init_shader_program(struct just_monika *context)
     length = load_resource("vertex.glsl", (uint8_t**)&buffer);
     vertex_shader = compile_shader(GL_VERTEX_SHADER,
                                    "vertex_shader",
+                                   buffer, length);
+
+    length = load_resource("screen.glsl", (uint8_t**)&buffer);
+    screen_shader = compile_shader(GL_FRAGMENT_SHADER,
+                                   "screen_shader",
                                    buffer, length);
 
     length = load_resource("fragment.glsl", (uint8_t**)&buffer);
@@ -77,9 +83,11 @@ static void init_shader_program(struct just_monika *context)
     free(buffer);
 
     context->screen_program = link_program(vertex_shader, fragment_shader);
+    context->screen_program_rename_me = link_program(vertex_shader, screen_shader);
 
     /* Shaders are now owned by linked program */
     glDeleteShader(vertex_shader);
+    glDeleteShader(screen_shader);
     glDeleteShader(fragment_shader);
 
     context->xy_location = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");

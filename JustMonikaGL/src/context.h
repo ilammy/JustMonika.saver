@@ -43,6 +43,11 @@ struct just_monika {
     GLuint maskb_sampler;
     GLuint maskb_texture;
 
+    GLuint screen_frambuffer;
+    GLuint screen_sampler;
+    GLuint screen_texture;
+    GLuint screen_program_rename_me;
+
     GLuint screen_program;
 
     struct clock clock;

@@ -75,10 +75,6 @@ GLuint link_program(GLuint vertex_shader, GLuint fragment_shader)
         goto error;
     }
 
-    /* Now owned by program */
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
-
     return id;
 
 error:
