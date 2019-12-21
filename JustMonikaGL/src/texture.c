@@ -34,6 +34,11 @@ static png_uint_32 closest_power_of_two(png_uint_32 value)
     return size;
 }
 
+static png_uint_32 max(png_uint_32 a, png_uint_32 b)
+{
+    return (a > b) ? a : b;
+}
+
 struct texture_buffer {
     png_uint_32 width;
     png_uint_32 height;
@@ -48,8 +53,10 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
 {
     buffer->width = png_get_image_width(png, png_info);
     buffer->height = png_get_image_height(png, png_info);
-    buffer->actual_width = closest_power_of_two(buffer->width);
-    buffer->actual_height = closest_power_of_two(buffer->height);
+    png_uint_32 size = max(closest_power_of_two(buffer->width),
+                           closest_power_of_two(buffer->height));
+    buffer->actual_width = size;
+    buffer->actual_height = size;
     buffer->data = NULL;
     buffer->rows = NULL;
 

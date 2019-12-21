@@ -13,22 +13,17 @@ uniform float time;
 uniform float offsetX;
 uniform float offsetY;
 
-// All our textures have 2048 x 1048 size in memory and have 1280 x 720
+// All our textures have 2048 x 2048 size in memory and have 1280 x 720
 // starting at origin filled with actually userful data. UV coordinates
 // are expressed in source image coordinates.
-const vec2 textureSize = vec2(2048.0, 1024.0);
-const vec2 imageSize   = vec2(1280.0,  720.0);
+const vec2 imageSize = vec2(1280.0, 720.0);
 
 vec4 getPixel(in sampler2D sampler, in vec2 uv)
 {
-    const mat4 textureTransform = mat4(
-        1.0/textureSize.x, 0.0, 0.0, 0.0,
-        0.0, 1.0/textureSize.y, 0.0, 0.0,
-        0.0,               0.0, 1.0, 0.0,
-        0.0,               0.0, 0.0, 1.0
-    );
-    vec4 spatial = vec4(mod(uv, imageSize), 0.0, 1.0);
-    return texture(sampler, vec2(textureTransform * spatial));
+    // Full texture size at LOD 0
+    vec2 actualSize = textureSize(sampler, 0);
+    vec2 st = mod(uv, imageSize) / actualSize;
+    return texture(sampler, st);
 }
 
 void draw(inout vec4 canvas, in vec4 color)
