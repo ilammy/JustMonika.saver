@@ -194,7 +194,6 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
 {
     GLuint texture = 0;
     struct texture_buffer buffer;
-    float max_anisotropy = 0.0;
 
     memset(&buffer, 0, sizeof(buffer));
 
@@ -246,11 +245,14 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
                  GL_RGBA,           /* data format */
                  GL_UNSIGNED_BYTE,  /* data type */
                  buffer.data);
-    glGetFloatv(GL_MAX_TEXTURE_MAX_ANISOTROPY_EXT, &max_anisotropy);
-    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, max_anisotropy);
+    /*
+     * Do not use mipmaps or anisotropic filtering. Since our texture data
+     * does not fill the entire square, these filters tend to cause texture
+     * bleeding which looks awful. We compensate at edges for linear filter,
+     * but anything more advanced does not work right now, unfortunately.
+     */
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glGenerateMipmap(GL_TEXTURE_2D);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 error:
     destroy_texture_buffer(png, png_info, &buffer);
