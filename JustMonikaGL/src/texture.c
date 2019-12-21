@@ -117,6 +117,79 @@ static void destroy_texture_buffer(png_structp png, png_infop png_info,
     buffer->rows = NULL;
 }
 
+/*
+ * Copy a single pixel from image edge into the outer rim in order for upscale
+ * filters to produce good results without the background color bleeding in.
+ * This border is required because we effectively use "texture atlas" (albeit,
+ * with only a single texture in it). And this effectively simulates behavior
+ * of GL_CLAMP_TO_EDGE wrapping for that one texel in an atlas.
+ *
+ *                | OpenGL width (2048 px) |
+ *
+ *           --   +-----------------+------+   --  bottom
+ *                |78888888888888889|9    7|
+ *                |45555555555555556|6    4|
+ *                |45555555555555556|6    4|  Image height
+ *                |45555555555555556|6    4|    (720 px)
+ * OpenGL height  |45555555555555556|6    4|
+ *   (2048 px)    |12222222222222223|3    1|
+ *                +-----------------+------+   --  top
+ *                |12222222222222223|3    1|
+ *                |                 |      |
+ *                |78888888888888889|9    7|
+ *           --   +-----------------+------+
+ *
+ *                |   Image width   |
+ *                     (1280 px)
+ */
+static void clamp_texture_buffer_edges(struct texture_buffer *buffer)
+{
+    const size_t stride = 4 * buffer->actual_width;
+    const size_t width = 4 * buffer->width;
+
+    /* 12222222222222223 row */
+    memcpy(&buffer->data[stride * (buffer->height + 0)],
+           &buffer->data[stride * (buffer->height - 1)],
+           width);
+
+    /* 78888888888888889 row */
+    memcpy(&buffer->data[stride * (buffer->actual_height - 1)],
+           &buffer->data[stride * 0],
+           width);
+
+    for (size_t y = 0; y < buffer->height; y++) {
+        /* 366669 column */
+        memcpy(&buffer->data[stride * y + width + 0],
+               &buffer->data[stride * y + width - 4],
+               4);
+
+        /* 144447 column */
+        memcpy(&buffer->data[stride * y + stride - 4],
+               &buffer->data[stride * y + 0],
+               4);
+    }
+
+    /* 3 corner */
+    memcpy(&buffer->data[stride * buffer->height + width + 0],
+           &buffer->data[stride * buffer->height + width - 4],
+           4);
+
+    /* 1 corner */
+    memcpy(&buffer->data[stride * buffer->height + stride - 4],
+           &buffer->data[stride * buffer->height + 0],
+           4);
+
+    /* 9 corner */
+    memcpy(&buffer->data[stride * buffer->height + width + 0],
+           &buffer->data[stride * buffer->height + width - 4],
+           4);
+
+    /* 7 corner */
+    memcpy(&buffer->data[stride * (buffer->actual_height - 1) + stride - 4],
+           &buffer->data[stride * (buffer->actual_height - 1) + 0],
+           4);
+}
+
 static GLuint load_png_texture(png_structp png, png_infop png_info)
 {
     GLuint texture = 0;
@@ -156,6 +229,8 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
         goto error;
     }
     png_read_end(png, NULL);
+
+    clamp_texture_buffer_edges(&buffer);
 
     /*
      * Now actually load the texture into the GPU.
