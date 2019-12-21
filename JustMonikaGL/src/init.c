@@ -137,6 +137,32 @@ static void init_textures(struct just_monika *context)
     context->maskb_texture = load_texture_from_resource("maskb.png");
 }
 
+static void init_screen_framebuffer(struct just_monika *context)
+{
+    glGenFramebuffers(1, &context->screen_frambuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, context->screen_frambuffer);
+
+    glGenTextures(1, &context->screen_texture);
+    glBindTexture(GL_TEXTURE_2D, context->screen_texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2048, 2048, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+
+    glFramebufferTexture(GL_FRAMEBUFFER,
+                         GL_COLOR_ATTACHMENT0,
+                         context->screen_texture,
+                         0);
+
+    GLenum attachment = GL_COLOR_ATTACHMENT0;
+    glDrawBuffers(1, &attachment);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        // TODO: log error
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 int just_monika_init(struct just_monika *context)
 {
     /* Use opaque black color for background */
@@ -149,6 +175,7 @@ int just_monika_init(struct just_monika *context)
     init_xy_array(context);
     init_shader_program(context);
     init_textures(context);
+    init_screen_framebuffer(context);
 
     return 0;
 }
