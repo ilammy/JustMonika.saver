@@ -75,21 +75,14 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
                 buffer->actual_width, buffer->actual_height);
         return;
     }
+
     buffer->data = png_malloc(png, 4 * buffer->actual_width * buffer->actual_height);
     if (!buffer->data) {
         fprintf(stderr, "allocation error: cannot allocate %ux%u buffer\n",
                 buffer->actual_width, buffer->actual_height);
         return;
     }
-    /*
-     * Initialize the pixel data with opaque black color.
-     */
-    for (png_uint_32 i = 0; i < buffer->actual_width * buffer->actual_height; i++) {
-        buffer->data[4 * i + 0] = 0x00;
-        buffer->data[4 * i + 1] = 0x00;
-        buffer->data[4 * i + 2] = 0x00;
-        buffer->data[4 * i + 3] = 0xFF;
-    }
+    memset(buffer->data, 0, 4 * buffer->actual_width * buffer->actual_height);
 
     /*
      * Now allocate, prepare and set the row pointers.
