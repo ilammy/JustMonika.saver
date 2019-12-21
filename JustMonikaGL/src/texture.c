@@ -90,7 +90,11 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
         buffer->data[4 * i + 2] = 0x00;
         buffer->data[4 * i + 3] = 0xFF;
     }
+}
 
+static void allocate_texture_row_pointers(png_structp png,
+                                          struct texture_buffer *buffer)
+{
     /*
      * Now allocate, prepare and set the row pointers.
      * Note that OpenGL reads textures bottom-up while PNG is stored top-down.
@@ -99,8 +103,6 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
     if (!buffer->rows) {
         fprintf(stderr, "allocation error: cannot allocate %u row pointers\n",
                 buffer->height);
-        png_free(png, buffer->data);
-        buffer->data = NULL;
         return;
     }
     for (png_uint_32 y = 0; y < buffer->height; y++) {
@@ -190,12 +192,90 @@ static void clamp_texture_buffer_edges(struct texture_buffer *buffer)
            4);
 }
 
+static png_byte* texture_pixel(struct texture_buffer *src, size_t x, size_t y)
+{
+    return &src->data[4 * (src->actual_width * y + x)];
+}
+
+/*
+ * Scale down a bitmap into a smaller bitmap for computing mipmap,
+ * using linear averaging.
+ *
+ * Here's what we have in src:
+ *
+ * +---+---+---+---+
+ * | 0 | 1 | 4 | 5 |
+ * +---+---+---+---+
+ * | 2 | 3 | 6 | 7 |
+ * +---+---+---+---+
+ * | 8 | 9 | C | D |
+ * +---+---+---+---+
+ * | A | B | E | F |
+ * +---+---+---+---+
+ *
+ * And here's what we get in dst:
+ *
+ * +-------+-------+
+ * |0+1+2+3|4+5+6+7|
+ * | ----- | ----- |
+ * |   4   |   4   |
+ * +-------+-------+
+ * |8+9+A+B|C+D+E+F|
+ * | ----- | ----- |
+ * |   4   |   4   |
+ * +-------+-------+
+ *
+ * It's simple, but effective enough for our cause. Smarter approach would
+ * cause more overlap with neighboring pixels using signal processing magic.
+ *
+ * We could have used SIMD here for a speedup, but given that this code is
+ * executed on a cold path and can have very small texture sizes, it's not
+ * really worth the complexity.
+ */
+static void scale_down_mipmap(struct texture_buffer *src,
+                              struct texture_buffer *dst)
+{
+    /* Half the size, rounding up */
+    dst->width = (src->width + 1) / 2;
+    dst->height = (src->height + 1) / 2;
+    dst->actual_width = (src->actual_width + 1) / 2;
+    dst->actual_height = (src->actual_height + 1) / 2;
+
+    for (size_t y = 0; y < dst->height; y++) {
+        for (size_t x = 0; x < dst->width; x++) {
+            png_uint_16 r = 0, g = 0, b = 0, a = 0;
+            r += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 0)) + 0];
+            g += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 0)) + 1];
+            b += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 0)) + 2];
+            a += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 0)) + 3];
+            r += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 1)) + 0];
+            g += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 1)) + 1];
+            b += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 1)) + 2];
+            a += src->data[4 * (src->actual_width * (2 * y + 0) + (2 * x + 1)) + 3];
+            r += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 0)) + 0];
+            g += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 0)) + 1];
+            b += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 0)) + 2];
+            a += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 0)) + 3];
+            r += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 1)) + 0];
+            g += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 1)) + 1];
+            b += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 1)) + 2];
+            a += src->data[4 * (src->actual_width * (2 * y + 1) + (2 * x + 1)) + 3];
+            dst->data[4 * (dst->actual_width * y + x) + 0] = r / 4;
+            dst->data[4 * (dst->actual_width * y + x) + 1] = g / 4;
+            dst->data[4 * (dst->actual_width * y + x) + 2] = b / 4;
+            dst->data[4 * (dst->actual_width * y + x) + 3] = a / 4;
+        }
+    }
+}
+
 static GLuint load_png_texture(png_structp png, png_infop png_info)
 {
     GLuint texture = 0;
     struct texture_buffer buffer;
+    struct texture_buffer mipmap;
 
     memset(&buffer, 0, sizeof(buffer));
+    memset(&mipmap, 0, sizeof(mipmap));
 
     /*
      * libpng uses longjmp() for error recovery. png_read_info()
@@ -218,6 +298,11 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
     }
 
     allocate_texture_buffer(png, png_info, &buffer);
+    allocate_texture_buffer(png, png_info, &mipmap);
+    allocate_texture_row_pointers(png, &buffer);
+    if (!buffer.data || !buffer.rows || !mipmap.data) {
+        goto error;
+    }
 
     if (setjmp(png_jmpbuf(png))) {
         goto error;
@@ -229,24 +314,45 @@ static GLuint load_png_texture(png_structp png, png_infop png_info)
     }
     png_read_end(png, NULL);
 
-    clamp_texture_buffer_edges(&buffer);
-
     /*
      * Now actually load the texture into the GPU.
      */
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glTexImage2D(GL_TEXTURE_2D,
-                 0,                 /* base image level */
-                 GL_RGBA,           /* internal format */
-                 buffer.actual_width,
-                 buffer.actual_height,
-                 0,                 /* border, must be 0 */
-                 GL_RGBA,           /* data format */
-                 GL_UNSIGNED_BYTE,  /* data type */
-                 buffer.data);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
+//    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+
+    GLint current_lod = 0;
+    struct texture_buffer *curr_buffer = &buffer;
+    struct texture_buffer *next_mipmap = &mipmap;
+    struct texture_buffer *tmp = NULL;
+    for (;;) {
+        clamp_texture_buffer_edges(curr_buffer);
+
+        glTexImage2D(GL_TEXTURE_2D,
+                     current_lod,       /* level of detail */
+                     GL_RGBA,           /* internal format */
+                     curr_buffer->actual_width,
+                     curr_buffer->actual_height,
+                     0,                 /* border, must be 0 */
+                     GL_RGBA,           /* data format */
+                     GL_UNSIGNED_BYTE,  /* data type */
+                     curr_buffer->data);
+        /* We stop at 1x1 mipmap texture */
+        if (curr_buffer->actual_width == 1 || curr_buffer->actual_height == 1) {
+            break;
+        }
+        scale_down_mipmap(curr_buffer, next_mipmap);
+        tmp = curr_buffer;
+        curr_buffer = next_mipmap;
+        next_mipmap = tmp;
+        current_lod++;
+    }
 
 error:
     destroy_texture_buffer(png, png_info, &buffer);
