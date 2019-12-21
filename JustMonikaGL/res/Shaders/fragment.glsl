@@ -14,6 +14,23 @@ uniform float offsetX;
 uniform float offsetY;
 
 // Compute four samples of a cubic B-spline
+//
+// Cubic B-spline has symmetric bell-shaped figure with maximum value at x = 0
+// and tapering to zero for x outside (-2, 2).
+//
+//        1
+// B(x) = - [(x + 2)^3 - 4(x + 1)^3 + 6(x)^3 - 4(x - 1)^3 + (x - 2)^3]
+//        6
+//
+// It is effectively composed of four cubic splines, each covering its own
+// region: (-2, -1), (-1, 0), (0, 1), (1, 2).
+//
+// This function returns the following four intermediate values:
+//
+// c.x = - 1/6 (v - 1)^3
+// c.y =   2/3 (v - 1)^3 - 1/6 (v - 2)^3
+// c.z = -     (v - 1)^3 + 2/3 (v - 2)^3 - 1/6 (v - 3)^3
+// c.w =   1/2 (v - 1)^3 - 1/2 (v - 2)^3 + 1/6 (v - 3)^3 + 1
 vec4 cubic(float v)
 {
     vec4 n = vec4(1.0, 2.0, 3.0, 4.0) - v;
@@ -27,34 +44,86 @@ vec4 cubic(float v)
 
 vec4 textureBicubic(sampler2D sampler, vec2 texCoords)
 {
-    vec2 texSize = textureSize(sampler, 0);
-    vec2 invTexSize = 1.0 / texSize;
+    // This will be useful for normalizing coordinates
+    vec2 invTextureSize = 1.0 / textureSize(sampler, 0);
 
+    // Extract fractional part of the texture coordinates
+    // relative to the center of the texel:
+    //
+    // +-----------+
+    // |           |
+    // |       f.x |
+    // |     X--   |
+    // |  f.y| o   |
+    // |           |
+    // +-----------+
+    //
+    // Also shifts "texCoords" into the lower left corner of the texel,
+    // this will be used later for neighbors computation.
     texCoords = texCoords - 0.5;
-
     vec2 fxy = fract(texCoords);
     texCoords -= fxy;
 
+    // Compute intermediate cubic values for f.x and f.y
     vec4 xcubic = cubic(fxy.x);
     vec4 ycubic = cubic(fxy.y);
 
+    // Compute coordinates of neighboring 4 texels:
+    //
+    // +---+   +---+
+    // | 3 |c.w| 4 |
+    // +---+   +---+
+    //  c.x  o  c.y
+    // +---+   +---+
+    // | 1 |c.z| 2 |
+    // +---+   +---+
+    //
+    // Note that these are *diagonally* located around the central texel
+    // and each component of "c" contains only one coordinate. They can
+    // be extracted like "c.xz" to get coordinates of texel 1's center.
     vec4 c = texCoords.xxyy + vec2(-0.5, +1.5).xyxy;
 
+    // More intermediate cubic values
+    //
+    // s.x =  1/2 (f.x - 1)^3 - 1/6 (f.x - 2)^3
+    // s.y = -1/2 (f.x - 1)^3 + 1/6 (f.x - 2)^3 + 1
+    // s.z =  1/2 (f.y - 1)^3 - 1/6 (f.y - 2)^3
+    // s.w = -1/2 (f.y - 1)^3 + 1/6 (f.y - 2)^3 + 1
     vec4 s = vec4(xcubic.xz + xcubic.yw, ycubic.xz + ycubic.yw);
+
+    //                  (2 - f.x)^3 - 4(1 - f.x)^3
+    // offset.x = c.x + --------------------------
+    //                  (2 - f.x)^3 - 3(1 - f.x)^3
+    //
+    //                  6 - (3 - f.x)^3 + 3(2 - f.x)^3 - 3(1 - f.x)^3
+    // offset.y = c.y + ---------------------------------------------
+    //                  6               -  (2 - f.x)^3 + 3(1 - f.x)^3
+    //
+    //                  (2 - f.y)^3 - 4(1 - f.y)^3
+    // offset.z = c.z + --------------------------
+    //                  (2 - f.y)^3 - 3(1 - f.y)^3
+    //
+    //                  6 - (3 - f.y)^3 + 3(2 - f.y)^3 - 3(1 - f.y)^3
+    // offset.w = c.w + ---------------------------------------------
+    //                  6               -  (2 - f.y)^3 + 3(1 - f.y)^3
     vec4 offset = c + vec4 (xcubic.yw, ycubic.yw) / s;
 
-    offset *= invTexSize.xxyy;
+    // Normalize sampling offsets to (0.0, 1.0) range expected by OpenGL
+    offset *= invTextureSize.xxyy;
 
-    vec4 sample0 = texture(sampler, offset.xz);
-    vec4 sample1 = texture(sampler, offset.yz);
-    vec4 sample2 = texture(sampler, offset.xw);
-    vec4 sample3 = texture(sampler, offset.yw);
+    // Sample texture colors
+    vec4 sample1 = texture(sampler, offset.xz);
+    vec4 sample2 = texture(sampler, offset.yz);
+    vec4 sample3 = texture(sampler, offset.xw);
+    vec4 sample4 = texture(sampler, offset.yw);
+
+    // s.x / (s.x + s.y)
 
     float sx = s.x / (s.x + s.y);
     float sy = s.z / (s.z + s.w);
 
-    return mix(mix(sample3, sample2, sx),
-               mix(sample1, sample0, sx),
+    return mix(mix(sample4, sample3, sx),
+               mix(sample2, sample1, sx),
                sy);
 }
 
