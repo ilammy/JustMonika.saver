@@ -33,12 +33,14 @@ uniform float offsetY;
 // c.w =   1/2 (v - 1)^3 - 1/2 (v - 2)^3 + 1/6 (v - 3)^3 + 1
 vec4 cubic(float v)
 {
+    // n = [-(v - 1),   -(v - 2),   -(v - 3),   -(v - 4)]
     vec4 n = vec4(1.0, 2.0, 3.0, 4.0) - v;
+    // s = [-(v - 1)^3, -(v - 2)^3, -(v - 3)^3, -(v - 4)^3]
     vec4 s = n * n * n;
-    float x = s.x;
-    float y = s.y - 4.0 * s.x;
-    float z = s.z - 4.0 * s.y + 6.0 * s.x;
-    float w = 6.0 - x - y - z;
+    float x = s.x;                          // -(v - 1)^3
+    float y = s.y - 4.0 * s.x;              // -(v - 2)^3 + 4(v - 1)^3
+    float z = s.z - 4.0 * s.y + 6.0 * s.x;  // -(v - 3)^3 + 4(v - 2)^3 - 6(v - 1)^3
+    float w = 6.0 - x - y - z;              //  (v - 3)^3 - 3(v - 2)^3 + 3(v - 1)^3 + 6
     return vec4(x, y, z, w) * (1.0 / 6.0);
 }
 
