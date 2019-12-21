@@ -47,6 +47,8 @@ struct just_monika {
     GLuint screen_sampler;
     GLuint screen_texture;
     GLuint screen_program_rename_me;
+    GLuint screen_xy_location;
+    GLuint screen_xy_transform_location;
 
     GLuint screen_program;
 
