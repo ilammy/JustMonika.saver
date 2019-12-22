@@ -147,6 +147,8 @@ static const float fps = 30.0;
 
 -(void)initThumbnail
 {
+    return;
+
     // For some reason Apple decided that all third-party screen savers
     // should have a shitty looking thumbnail while all Apple-provided
     // screen savers display their high-DPI thumbnails nicely. This is
