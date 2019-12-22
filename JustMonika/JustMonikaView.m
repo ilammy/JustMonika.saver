@@ -58,6 +58,7 @@ static const float fps = 30.0;
 - (void)initSettings
 {
     self.settings = [JustMonikaSettings new];
+    [self.settings reset];
     // Screen savers are loaded as plugins so their main bundle is not
     // this one, but the host bundle. We need to use the name directly.
     NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
