@@ -13,6 +13,6 @@
 
 GLuint compile_shader(GLenum type, const char *name, const char *code, size_t size);
 
-GLuint link_program(GLuint vertex_shader, GLuint fragment_shader);
+GLuint link_program(const char *name, GLuint vertex_shader, GLuint fragment_shader);
 
 #endif /* JUST_MONIKA_GL_PRIVATE_SHADER_H */

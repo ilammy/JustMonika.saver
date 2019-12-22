@@ -47,7 +47,7 @@ error:
     return 0;
 }
 
-GLuint link_program(GLuint vertex_shader, GLuint fragment_shader)
+GLuint link_program(const char *name, GLuint vertex_shader, GLuint fragment_shader)
 {
     GLuint id = 0;
     GLint res = GL_FALSE;
@@ -68,16 +68,12 @@ GLuint link_program(GLuint vertex_shader, GLuint fragment_shader)
             GLchar buffer[ERROR_BUFFER_LENGTH] = {0};
 
             glGetProgramInfoLog(id, sizeof(buffer), &length, buffer);
-            fprintf(stderr, "program link failed:\n%s%s",
-                    buffer,
+            fprintf(stderr, "program link failed (%s):\n%s%s",
+                    name, buffer,
                     ((length + 1) < info_log_length) ? "\n(truncated)\n" : "");
         }
         goto error;
     }
-
-    /* Now owned by program */
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
 
     return id;
 

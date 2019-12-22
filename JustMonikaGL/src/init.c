@@ -59,28 +59,30 @@ static void init_xy_matrix(struct just_monika *context)
 
 static void init_shader_program(struct just_monika *context)
 {
-    GLuint vertex_shader = 0;
-    GLuint fragment_shader = 0;
+    GLuint viewport_vertex_shader = 0;
+    GLuint screen_fragment_shader = 0;
     GLchar *buffer = NULL;
     size_t length = 0;
 
-    length = load_resource("vertex.glsl", (uint8_t**)&buffer);
-    vertex_shader = compile_shader(GL_VERTEX_SHADER,
-                                   "vertex_shader",
-                                   buffer, length);
+    length = load_resource("viewport-vertex.glsl", (uint8_t**)&buffer);
+    viewport_vertex_shader = compile_shader(GL_VERTEX_SHADER,
+                                            "viewport_vertex_shader",
+                                            buffer, length);
 
-    length = load_resource("fragment.glsl", (uint8_t**)&buffer);
-    fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
-                                     "fragment_shader",
-                                     buffer, length);
+    length = load_resource("screen-fragment.glsl", (uint8_t**)&buffer);
+    screen_fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
+                                            "screen_fragment_shader",
+                                            buffer, length);
 
     free(buffer);
 
-    context->screen_program = link_program(vertex_shader, fragment_shader);
+    context->screen_program = link_program("screen_program",
+                                           viewport_vertex_shader,
+                                           screen_fragment_shader);
 
     /* Shaders are now owned by linked program */
-    glDeleteShader(vertex_shader);
-    glDeleteShader(fragment_shader);
+    glDeleteShader(viewport_vertex_shader);
+    glDeleteShader(screen_fragment_shader);
 
     context->xy_location = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");
     context->xy_transform_location = glGetUniformLocation(context->screen_program, "vertexXY_transform");
