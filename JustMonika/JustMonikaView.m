@@ -17,6 +17,7 @@
 @property (nonatomic) JustMonikaSettings *settings;
 
 @property (weak) IBOutlet NSWindow *settingsSheet;
+@property (weak) IBOutlet NSTextField *ttt;
 
 @end
 
@@ -33,6 +34,7 @@ static const float fps = 30.0;
     if (self) {
         [self initMonikaView];
         [self initSettings];
+        [self initThumbnail];
     }
     return self;
 }
@@ -97,7 +99,7 @@ static const float fps = 30.0;
 
 - (BOOL)hasConfigureSheet
 {
-    return self.settings.settingsSheetEnabled;
+    return YES; // self.settings.settingsSheetEnabled;
 }
 
 - (NSWindow*)configureSheet
@@ -107,8 +109,8 @@ static const float fps = 30.0;
 
 - (IBAction)disableConfigureSheet:(id)sender
 {
-    self.settings.settingsSheetEnabled = NO;
-    [self disableScreenSaverOptionsButton];
+//    self.settings.settingsSheetEnabled = NO;
+//    [self disableScreenSaverOptionsButton];
     [NSApp endSheet:self.settingsSheet];
 }
 
@@ -134,6 +136,33 @@ static const float fps = 30.0;
             }
         }
     }
+}
+
+#pragma mark - Thumbnail fixups
+
+-(void)initThumbnail
+{
+    // For some reason Apple decided that all third-party screen savers
+    // should have a shitty looking thumbnail while all Apple-provided
+    // screen savers display their high-DPI thumbnails nicely. This is
+    // unforgivable. Bring justice to the table.
+    NSView *contentView = self.settingsSheet.sheetParent.contentView;
+    NSString *msg = @"";
+    for (NSView *view in contentView.subviewsRecursive) {
+        msg = [msg stringByAppendingFormat:@"Subview of %@:\n", view.class];
+        if (view.class == NSBox.class) {
+            NSBox *box = (NSBox *)view;
+            for (NSView *view in box.contentView.subviewsRecursive) {
+                msg = [msg stringByAppendingFormat:@"%@\n", view.className];
+//                if (view.class == NSButton.class) {
+//                    NSButton *button = (NSButton*)view;
+//                    button.enabled = NO;
+//                    return;
+//                }
+            }
+        }
+    }
+    self.ttt.stringValue = msg;
 }
 
 @end

@@ -9,6 +9,7 @@
         <customObject id="-2" userLabel="File's Owner" customClass="JustMonikaView">
             <connections>
                 <outlet property="settingsSheet" destination="QvC-M9-y7g" id="7Ih-CK-3AI"/>
+                <outlet property="ttt" destination="aQv-8a-03A" id="rJG-h0-b5U"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
