@@ -60,6 +60,8 @@ static void init_xy_matrix(struct just_monika *context)
 static void init_shader_program(struct just_monika *context)
 {
     GLuint viewport_vertex_shader = 0;
+    GLuint viewport_fragment_shader = 0;
+    GLuint screen_vertex_shader = 0;
     GLuint screen_fragment_shader = 0;
     GLchar *buffer = NULL;
     size_t length = 0;
@@ -69,6 +71,16 @@ static void init_shader_program(struct just_monika *context)
                                             "viewport_vertex_shader",
                                             buffer, length);
 
+    length = load_resource("viewport-fragment.glsl", (uint8_t**)&buffer);
+    viewport_fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
+                                              "viewport_fragment_shader",
+                                              buffer, length);
+
+    length = load_resource("screen-vertex.glsl", (uint8_t**)&buffer);
+    screen_vertex_shader = compile_shader(GL_VERTEX_SHADER,
+                                          "screen_vertex_shader",
+                                          buffer, length);
+
     length = load_resource("screen-fragment.glsl", (uint8_t**)&buffer);
     screen_fragment_shader = compile_shader(GL_FRAGMENT_SHADER,
                                             "screen_fragment_shader",
@@ -76,16 +88,30 @@ static void init_shader_program(struct just_monika *context)
 
     free(buffer);
 
+    context->viewport_program = link_program("viewport_program",
+                                             viewport_vertex_shader,
+                                             viewport_fragment_shader);
+
     context->screen_program = link_program("screen_program",
-                                           viewport_vertex_shader,
+                                           screen_vertex_shader,
                                            screen_fragment_shader);
 
-    /* Shaders are now owned by linked program */
+    /* Shaders are now owned by linked programs */
     glDeleteShader(viewport_vertex_shader);
+    glDeleteShader(viewport_fragment_shader);
+    glDeleteShader(screen_vertex_shader);
     glDeleteShader(screen_fragment_shader);
 
-    context->xy_location = glGetAttribLocation(context->screen_program, "vertexXY_modelSpace");
-    context->xy_transform_location = glGetUniformLocation(context->screen_program, "vertexXY_transform");
+    /* viewport_program locations */
+
+    context->viewport_xy_location = glGetAttribLocation(context->viewport_program, "vertexXY_modelSpace");
+    context->viewport_xy_transform_location = glGetUniformLocation(context->viewport_program, "vertexXY_transform");
+
+    context->screen_sampler = glGetUniformLocation(context->viewport_program, "sampler");
+
+    /* screen_program locations */
+
+    context->screen_xy_location = glGetAttribLocation(context->screen_program, "XY");
 
     context->monika_bg_sampler = glGetUniformLocation(context->screen_program, "monika_bg");
     context->monika_bg_highlight_sampler = glGetUniformLocation(context->screen_program, "monika_bg_highlight");
@@ -127,6 +153,45 @@ static void init_textures(struct just_monika *context)
     context->maskb_texture = load_texture_from_resource("maskb.png");
 }
 
+static void init_screen_framebuffer(struct just_monika *context)
+{
+    /* Make ourselves a new framebuffer */
+    glGenFramebuffers(1, &context->screen_framebuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, context->screen_framebuffer);
+
+    /* Allocate a texture where framebuffer will be rendered to */
+    glGenTextures(1, &context->screen_texture);
+    glBindTexture(GL_TEXTURE_RECTANGLE, context->screen_texture);
+    /* Use bilinear filtering for scaling with appropriate clamping */
+    glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_RECTANGLE, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    /* Just make an empty texture, we don't care about initial contents */
+    glTexImage2D(GL_TEXTURE_RECTANGLE,
+                 0,                 /* base image level */
+                 GL_RGBA,           /* internal format */
+                 context->screen_width,
+                 context->screen_height,
+                 0,                 /* border, must be 0 */
+                 GL_RGBA,           /* data format */
+                 GL_UNSIGNED_BYTE,  /* data type */
+                 NULL);             /* no initial data */
+
+    /* Attach the texture to the framebuffer for color output */
+    glFramebufferTexture(GL_FRAMEBUFFER,
+                         GL_COLOR_ATTACHMENT0,
+                         context->screen_texture,
+                         0);        /* base image level */
+
+    /* And tell the framebuffer to render color there */
+    GLenum attachment = GL_COLOR_ATTACHMENT0;
+    glDrawBuffers(1, &attachment);
+
+    /* Switch back to the default framebuffer for now */
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
 int just_monika_init(struct just_monika *context)
 {
     /* Use opaque black color for background */
@@ -139,6 +204,7 @@ int just_monika_init(struct just_monika *context)
     init_xy_array(context);
     init_shader_program(context);
     init_textures(context);
+    init_screen_framebuffer(context);
 
     return 0;
 }
@@ -149,8 +215,6 @@ int just_monika_set_viewport(struct just_monika *context, unsigned width, unsign
     context->viewport_height = height;
 
     init_xy_matrix(context);
-
-    glViewport(0, 0, width, height);
 
     return 0;
 }

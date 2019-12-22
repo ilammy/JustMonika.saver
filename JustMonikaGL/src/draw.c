@@ -8,20 +8,19 @@
 
 #include "draw.h"
 
-int just_monika_draw(struct just_monika *context)
+static void draw_into_framebuffer(struct just_monika *context)
 {
-    if (context->clock_ticking) {
-        clock_sync(&context->clock);
-    }
-
+    /*
+     * Draw into our framebuffer instead of the default one,
+     * set the viewport appropriately, clear the screen,
+     * and select the main shader program.
+     */
+    glBindFramebuffer(GL_FRAMEBUFFER, context->screen_framebuffer);
+    glViewport(0, 0, context->screen_width, context->screen_height);
     glClear(GL_COLOR_BUFFER_BIT);
-
     glUseProgram(context->screen_program);
 
-    glUniformMatrix4fv(context->xy_transform_location,
-                       1,       /* one 4x4 matrix */
-                       GL_TRUE, /* row-major order */
-                       context->xy_transform_matrix);
+    /* Bind textures to samplers */
 
     glUniform1i(context->monika_bg_sampler, 0);
     glActiveTexture(GL_TEXTURE0 + 0);
@@ -47,6 +46,8 @@ int just_monika_draw(struct just_monika *context)
     glActiveTexture(GL_TEXTURE0 + 5);
     glBindTexture(GL_TEXTURE_RECTANGLE, context->maskb_texture);
 
+    /* Set other uniform parameters */
+
     glUniform1f(context->time, clock_seconds_elapsed(&context->clock));
 
     glUniform1f(context->offsetX_location, context->offsetX);
@@ -57,10 +58,12 @@ int just_monika_draw(struct just_monika *context)
     glUniform1f(context->scaleA_location, context->scaleA);
     glUniform1f(context->scaleB_location, context->scaleB);
 
-    glEnableVertexAttribArray(context->xy_location);
+    /* Do actual drawing now... */
+
+    glEnableVertexAttribArray(context->screen_xy_location);
 
     glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);
-    glVertexAttribPointer(context->xy_location,
+    glVertexAttribPointer(context->screen_xy_location,
                           2,        /* 2D XY coordinates */
                           GL_FLOAT, /* typed as floats */
                           GL_FALSE, /* not normalized */
@@ -70,7 +73,59 @@ int just_monika_draw(struct just_monika *context)
     /* Draw a quad out of 2 x 3 point set. */
     glDrawArrays(GL_TRIANGLES, 0, 6);
 
-    glDisableVertexAttribArray(context->xy_location);
+    glDisableVertexAttribArray(context->screen_xy_location);
+}
+
+static void transfer_to_screen(struct just_monika *context)
+{
+    /*
+     * Draw into the default framebuffer now, reset the viewport
+     * and clear the screen again, use a simpler shader program.
+     */
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(0, 0, context->viewport_width, context->viewport_height);
+    glClear(GL_COLOR_BUFFER_BIT);
+    glUseProgram(context->viewport_program);
+
+    /* Bind textures to samplers */
+
+    glUniform1i(context->screen_sampler, 0);
+    glActiveTexture(GL_TEXTURE0 + 0);
+    glBindTexture(GL_TEXTURE_RECTANGLE, context->screen_texture);
+
+    /* Set other uniform parameters */
+
+    glUniformMatrix4fv(context->viewport_xy_transform_location,
+                       1,       /* one 4x4 matrix */
+                       GL_TRUE, /* row-major order */
+                       context->xy_transform_matrix);
+
+    /* Do drawing once more */
+
+    glEnableVertexAttribArray(context->viewport_xy_location);
+
+    glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);
+    glVertexAttribPointer(context->viewport_xy_location,
+                          2,        /* 2D XY coordinates */
+                          GL_FLOAT, /* typed as floats */
+                          GL_FALSE, /* not normalized */
+                          0,        /* stride */
+                          NULL);    /* offset */
+
+    /* Draw a quad out of 2 x 3 point set. */
+    glDrawArrays(GL_TRIANGLES, 0, 6);
+
+    glDisableVertexAttribArray(context->viewport_xy_location);
+}
+
+int just_monika_draw(struct just_monika *context)
+{
+    if (context->clock_ticking) {
+        clock_sync(&context->clock);
+    }
+
+    draw_into_framebuffer(context);
+    transfer_to_screen(context);
 
     return 0;
 }

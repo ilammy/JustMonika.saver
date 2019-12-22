@@ -23,11 +23,8 @@ struct just_monika {
     GLfloat screen_width;
     GLfloat screen_height;
 
-    GLuint xy_array;
-    GLuint xy_buffer;
-    GLuint xy_location;
-
-    GLuint  xy_transform_location;
+    GLuint  xy_array;
+    GLuint  xy_buffer;
     GLfloat xy_transform_matrix[16];
 
     GLuint monika_bg_sampler;
@@ -43,7 +40,15 @@ struct just_monika {
     GLuint maskb_sampler;
     GLuint maskb_texture;
 
+    GLuint screen_framebuffer;
     GLuint screen_program;
+    GLuint screen_texture;
+    GLuint screen_sampler;
+    GLuint screen_xy_location;
+
+    GLuint viewport_program;
+    GLuint viewport_xy_location;
+    GLuint viewport_xy_transform_location;
 
     struct clock clock;
     bool clock_ticking;
