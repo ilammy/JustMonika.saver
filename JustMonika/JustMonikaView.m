@@ -102,6 +102,8 @@ static const float fps = 30.0;
 
 - (BOOL)hasConfigureSheet
 {
+    [self initThumbnail];
+
     return YES; // self.settings.settingsSheetEnabled;
 }
 
@@ -143,19 +145,12 @@ static const float fps = 30.0;
 
 #pragma mark - Thumbnail fixups
 
-void init_thing(void) __attribute__((constructor));
-void init_thing(void)
+- (void)viewDidMoveToSuperview
 {
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-                   dispatch_get_main_queue(), ^{
-        NSAlert *alert = [[NSAlert alloc] init];
-        alert.messageText = @"OMIGOD I'M IN";
-        [alert runModal];
-//        [JustMonikaView initThumbnail:[NSApp mainWindow]];
-    });
+    [self initThumbnail];
 }
 
-+(void)initThumbnail:(NSWindow *)window
+- (void)initThumbnail
 {
     // For some reason Apple decided that all third-party screen savers
     // should have a shitty looking thumbnail while all Apple-provided
@@ -166,10 +161,18 @@ void init_thing(void)
     NSString *saverTitle = bundle.localizedBundleName;
     NSImage *saverThumbnail = [bundle imageForResource:@"thumbnail"];
 
-    NSWindow *topWindow = window;
+    NSWindow *topWindow = self.window;
     while (topWindow.parentWindow != nil) {
         topWindow = topWindow.parentWindow;
     }
+
+    // Actually, if we cannot switch the image in time, let's just kill
+    // all other screensavers. Just Monika. But do it gently, so that
+    // the user does not realize that the screensavers are gone before
+    // they want to change them.
+
+    NSMutableArray<NSView *> *otherScreenSavers = [NSMutableArray new];
+    NSCollectionView *screenSaverCollectionView;
 
     for (NSView *view in topWindow.contentView.subviewsRecursive) {
         // This is a private class so we don't have headers for it,
@@ -178,12 +181,228 @@ void init_thing(void)
         if ([view.className isEqualToString:@"IndividualSaverIconView"]) {
             NSString *title = [view performSelector:@selector(title)];
             if ([title isEqualToString:saverTitle]) {
+                screenSaverCollectionView = (NSCollectionView *)view.superview;
                 [view performSelector:@selector(setImage:)
                            withObject:saverThumbnail];
-                return;
+            } else {
+                [otherScreenSavers addObject:view];
             }
         }
     }
+
+/*
+
+    id<NSCollectionViewDataSource> data = screenSaverCollectionView.dataSource;
+//    NSInteger num = [data collectionView:screenSaverCollectionView numberOfItemsInSection:0];
+
+    NSString *message = @"";
+
+    unsigned int outCount, i;
+    Method *methods = class_copyMethodList(data.class, &outCount);
+    for (i = 0; i < outCount; i++) {
+        char buffer[256] = {0};
+        NSString *method = @"";
+        const char *name = sel_getName(method_getName(methods[i]));
+        method = [method stringByAppendingFormat:@"%s", name];
+        unsigned int argCount = method_getNumberOfArguments(methods[i]);
+        for (unsigned j = 0; j < argCount; j++) {
+            method_getArgumentType(methods[i], j, buffer, sizeof(buffer));
+            method = [method stringByAppendingFormat:@"$%s", buffer];
+        }
+        message = [message stringByAppendingFormat:@"%@\n", method];
+    }
+    free(methods);
+
+    */
+
+//    NSAlert *alert = [[NSAlert alloc] init];
+//    alert.messageText = message;
+//    [alert runModal];
+
+    // It seems that Cocoa architecture does not make it easy to remove
+    // items from collection. Well, we have removeFromSuperview on other
+    // modules, but that will not remove them immediately and they will
+    // still be there as a volume.
+
+    // I don't know... maybe glitch out the images and zalgo the text?
+    // That we can do without crashing.
+
+    for (NSView *view in otherScreenSavers) {
+        NSImage *image = [view performSelector:@selector(image)];
+        NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithData:image.TIFFRepresentation];
+        NSData* jpegData = [bitmap representationUsingType:NSBitmapImageFileTypeJPEG
+                                                properties:@{NSImageCompressionFactor: @0.1}];
+        NSMutableData *jpegDataMut = [[NSMutableData alloc] initWithData:jpegData];
+//        // TODO: corrupt JPEG data somehow
+        uint8_t *bytes = jpegDataMut.mutableBytes;
+        for (NSUInteger i = 400; i < jpegDataMut.length; i += 13) {
+            bytes[i] = ~bytes[i];
+        }
+        NSImage *newImage = [[NSImage alloc] initWithData:jpegDataMut];
+        [view performSelector:@selector(setImage:) withObject:newImage];
+    }
+
+    // Sht. It does not really work the way GlithPEG works. If I randomly
+    // flip bytes then NSImage just fails to decode and gives up.
+    // It seems we need to be more smart about that.
+
+/*
+
+ deleteConfirmationSheetDidEnd:returnCode:contextInfo:$@$:$@$q$^v
+ createAndAttachPreviewChildWindowsIfNeeded$@$:
+ _selectTableViewItemForModuleName:$@$:$@
+ collectionView:menuForRightClickOnItem:$@$:$@$@
+ configureSheetDidEnd:returnCode:contextInfo:$@$:$@$q$^v
+ scrollToSelectedCollectionViewItem$@$:
+ reAddChildWindowsAfterAnimationCompletes$@$:
+ _deleteModuleFromOV:$@$:$@
+ moduleConfigure:$@$:$@
+ activationTimePopUpItemClicked:$@$:$@
+ doScreenSaverHelpLookup:$@$:$@
+ hotCornerConfigure:$@$:$@
+ hotCornerPanelCompleted:$@$:$@
+ openEnergySaverPrefs:$@$:$@
+ randomSaverOptionChanged:$@$:$@
+ showClockOptionChanged:$@$:$@
+ _deleteModuleFromRemoveButton:$@$:$@
+ beginSaverPreview$@$:
+ notifySelectModule:$@$:$@
+ setStyleIsHidden:$@$:$c
+ _delayedModuleSelect:$@$:$@
+ fetchDisplaySleep$@$:
+ _prefCrashedPreviously$@$:
+ updateContentsOfCollectionViews$@$:
+ DESTROYPreviewChildWindows$@$:
+ delayedLoadPreviewArea$@$:
+ willResignActive:$@$:$@
+ setSelectedModule:$@$:$@
+ createCollectionViews$@$:
+ _setPreviewContentView:$@$:$@
+ updateDisplayDimmingAlert$@$:
+ reloadModulesAndSelect:$@$:$@
+ _setActivationTimeUIFromPrefs$@$:
+ screenSaverDidEnd:$@$:$@
+ _selectTableViewItemForModule:$@$:$@
+ screenSaverDidStart:$@$:$@
+ willBecomeActive:$@$:$@
+ changeActivationTimeToSeconds:$@$:$q
+ _deleteModule:withConfirmation:$@$:$@$c
+ _selectCollectionItemForModule:$@$:$@
+ finishModuleInstall:$@$:$@
+ _finishModuleDelete$@$:
+ _deleteModuleReallySeriously:$@$:$@
+ framedThumbnail:$@$:$@
+ deleteModuleMenuClick:$@$:$@
+ collectionViewItemWasSelected:$@$:$@
+ collectionView:hadKeyDownEvent:$@$:$@$@
+ setupUI$@$:
+ willHide:$@$:$@
+ _stopPreview$@$:
+ _selectedModule$@$:
+ _installModule:$@$:$@
+ moduleTest:$@$:$@
+ _revealModule:$@$:$@
+ styleIsHidden$@$:
+ dealloc$@$:
+ windowDidMiniaturize:$@$:$@
+ windowDidDeminiaturize:$@$:$@
+ collectionView:numberOfItemsInSection:$@$:$@$q
+ collectionView:itemForRepresentedObjectAtIndexPath:$@$:$@$@
+ numberOfSectionsInCollectionView:$@$:$@
+ mainViewDidLoad$@$:
+ openDocumentAtPath:$@$:$@
+ engineFinished:$@$:$@
+ _startPreview$@$:
+ didBecomeActive:$@$:$@
+ didSelect$@$:
+ willUnselect$@$:
+
+
+ createAndAttachPreviewChildWindowsIfNeeded
+ configureSheetDidEnd:returnCode:contextInfo:
+ _selectTableViewItemForModuleName:
+ collectionView:menuForRightClickOnItem:
+ scrollToSelectedCollectionViewItem
+ reAddChildWindowsAfterAnimationCompletes
+ beginSaverPreview
+ notifySelectModule:
+ _prefCrashedPreviously
+ _delayedModuleSelect:
+ fetchDisplaySleep
+ setStyleIsHidden:
+ updateContentsOfCollectionViews
+ DESTROYPreviewChildWindows
+ delayedLoadPreviewArea
+ willResignActive:
+ setSelectedModule:
+ createCollectionViews
+ _setPreviewContentView:
+ updateDisplayDimmingAlert
+ reloadModulesAndSelect:
+ _setActivationTimeUIFromPrefs
+ screenSaverDidEnd:
+ _selectTableViewItemForModule:
+ screenSaverDidStart:
+ willBecomeActive:
+ changeActivationTimeToSeconds:
+ _deleteModule:withConfirmation:
+ _selectCollectionItemForModule:
+ finishModuleInstall:
+ _finishModuleDelete
+ _deleteModuleReallySeriously:
+ framedThumbnail:
+ deleteModuleMenuClick:
+ collectionViewItemWasSelected:
+ collectionView:hadKeyDownEvent:
+ hotCornerConfigure:
+ _deleteModuleFromRemoveButton:
+ showClockOptionChanged:
+ randomSaverOptionChanged:
+ openEnergySaverPrefs:
+ hotCornerPanelCompleted:
+ doScreenSaverHelpLookup:
+ activationTimePopUpItemClicked:
+ moduleConfigure:
+ _deleteModuleFromOV:
+ _selectedModule
+ setupUI
+ willHide:
+ _stopPreview
+ _installModule:
+ moduleTest:
+ _revealModule:
+ styleIsHidden
+ deleteConfirmationSheetDidEnd:returnCode:contextInfo:
+ dealloc
+ windowDidMiniaturize:
+ windowDidDeminiaturize:
+ collectionView:numberOfItemsInSection:
+ collectionView:itemForRepresentedObjectAtIndexPath:
+ numberOfSectionsInCollectionView:
+ mainViewDidLoad
+ openDocumentAtPath:
+ engineFinished:
+ _startPreview
+ didBecomeActive:
+ didSelect
+ willUnselect
+
+ */
+
+//    for (NSView *view in otherScreenSavers) {
+//        [view removeFromSuperview];
+//    }
+
+//    [screenSaverCollectionView layout];
+
+//    [screenSaverCollectionView reloadData];
+
+//    NSSet<NSIndexPath *> *items = screenSaverCollectionView.selectionIndexPaths;
+//    [screenSaverCollectionView performBatchUpdates:^(void) {
+//        [screenSaverCollectionView deleteItemsAtIndexPaths:items];
+//    }
+//                                 completionHandler:nil];
+
 #if 0
     NSString *msg = @"walking up:\n";
     NSWindow *window = self.window;
