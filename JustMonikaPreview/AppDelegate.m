@@ -29,6 +29,9 @@
 @property (weak) IBOutlet NSTextField *scaleAText;
 @property (weak) IBOutlet NSTextField *scaleBText;
 
+@property (weak) IBOutlet NSTextField *blurText;
+@property (weak) IBOutlet NSSlider *blurSlider;
+
 @end
 
 @implementation AppDelegate
@@ -89,6 +92,10 @@
     self.offsetXText.doubleValue = round(self.offsetXSlider.doubleValue);
     self.offsetYText.doubleValue = round(self.offsetYSlider.doubleValue);
 
+    if (sender == self.blurSlider) {
+        self.blurText.doubleValue = self.blurSlider.doubleValue;
+    }
+
     struct just_monika_settings settings = {
         .offsetX = self.offsetXSlider.doubleValue,
         .offsetY = self.offsetYSlider.doubleValue,
@@ -96,6 +103,7 @@
         .biasB = self.biasBText.doubleValue,
         .scaleA = self.scaleAText.doubleValue,
         .scaleB = self.scaleBText.doubleValue,
+        .blur_parameter = self.blurText.doubleValue,
     };
     [self.view.monika configureWith:&settings];
 }

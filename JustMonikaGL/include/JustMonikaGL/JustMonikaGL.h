@@ -98,6 +98,8 @@ struct just_monika_settings {
 
     double biasA, biasB;
     double scaleA, scaleB;
+
+    double blur_parameter;
 };
 
 void just_monika_configure(struct just_monika *context,

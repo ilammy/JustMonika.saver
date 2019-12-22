@@ -100,6 +100,9 @@ static void transfer_to_screen(struct just_monika *context)
                        GL_TRUE, /* row-major order */
                        context->xy_transform_matrix);
 
+    glUniform1f(context->blur_parameter_location, context->blur_parameter);
+    glUniform1i(context->viewport_use_blur_location, true);
+
     /* Do drawing once more */
 
     glEnableVertexAttribArray(context->viewport_xy_location);

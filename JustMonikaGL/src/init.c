@@ -109,6 +109,9 @@ static void init_shader_program(struct just_monika *context)
 
     context->screen_sampler = glGetUniformLocation(context->viewport_program, "sampler");
 
+    context->viewport_use_blur_location = glGetUniformLocation(context->viewport_program, "useBlur");
+    context->blur_parameter_location = glGetUniformLocation(context->viewport_program, "blurParameter");
+
     /* screen_program locations */
 
     context->screen_xy_location = glGetAttribLocation(context->screen_program, "XY");

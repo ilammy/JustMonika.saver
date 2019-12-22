@@ -18,6 +18,8 @@
                 <outlet property="adjustments" destination="Iyq-k0-Nlu" id="xBt-Lx-QrI"/>
                 <outlet property="biasAText" destination="z4W-Y9-3FJ" id="ZTV-dF-GxN"/>
                 <outlet property="biasBText" destination="Lcf-EH-PIe" id="SO7-Gi-eZt"/>
+                <outlet property="blurSlider" destination="Snf-6O-Q3U" id="uPz-fu-UzG"/>
+                <outlet property="blurText" destination="8J5-VP-UL7" id="DaD-lX-CMJ"/>
                 <outlet property="offsetXSlider" destination="ksZ-bZ-JAg" id="2m3-XQ-bIn"/>
                 <outlet property="offsetXText" destination="3n3-rl-9Eo" id="dnI-01-UNa"/>
                 <outlet property="offsetYSlider" destination="pcR-sw-smg" id="mL7-2p-Kbe"/>
@@ -869,6 +871,35 @@
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
+                    <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8J5-VP-UL7">
+                        <rect key="frame" x="33" y="100" width="96" height="21"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" title="0.25" drawsBackground="YES" id="cdU-fh-Hhg">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                        <connections>
+                            <action selector="offsetSliderDidUpdate:" target="Voe-Tx-rLC" id="S8g-7Q-4Sa"/>
+                        </connections>
+                    </textField>
+                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BXr-h8-PpR">
+                        <rect key="frame" x="133" y="103" width="28" height="16"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textFieldCell key="cell" lineBreakMode="clipping" title="blur" id="nub-0F-SYe">
+                            <font key="font" metaFont="system"/>
+                            <color key="textColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </textFieldCell>
+                    </textField>
+                    <slider verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Snf-6O-Q3U">
+                        <rect key="frame" x="165" y="101" width="125" height="19"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="10" doubleValue="0.25" tickMarkPosition="above" sliderType="linear" id="KfC-eU-cdm"/>
+                        <connections>
+                            <action selector="offsetSliderDidUpdate:" target="Voe-Tx-rLC" id="fdl-jZ-fwI"/>
+                        </connections>
+                    </slider>
                 </subviews>
             </view>
             <point key="canvasLocation" x="139" y="-543"/>

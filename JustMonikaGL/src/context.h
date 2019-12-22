@@ -47,6 +47,7 @@ struct just_monika {
     GLuint screen_xy_location;
 
     GLuint viewport_program;
+    GLuint viewport_use_blur_location;
     GLuint viewport_xy_location;
     GLuint viewport_xy_transform_location;
 
@@ -63,6 +64,9 @@ struct just_monika {
     GLfloat scaleA, scaleB;
     GLuint  biasA_location,  biasB_location;
     GLuint  scaleA_location, scaleB_location;
+
+    GLfloat blur_parameter;
+    GLuint  blur_parameter_location;
 };
 
 #endif /* JUST_MONIKA_GL_PRIVATE_CONTEXT_H */

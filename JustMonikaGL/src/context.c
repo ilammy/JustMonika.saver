@@ -30,6 +30,7 @@ struct just_monika* just_monika_make(void)
     context->biasA = 0.03;
     context->scaleA = 8.0;
     context->scaleB = 16.0;
+    context->blur_parameter = 0.25;
     return context;
 }
 
@@ -48,4 +49,6 @@ void just_monika_configure(struct just_monika *context,
     context->biasB = settings->biasB;
     context->scaleA = settings->scaleA;
     context->scaleB = settings->scaleB;
+
+    context->blur_parameter = settings->blur_parameter;
 }
