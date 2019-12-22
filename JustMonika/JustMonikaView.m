@@ -11,6 +11,9 @@
 #import "JustMonikaGLView.h"
 #import "JustMonikaSettings.h"
 #import "NSView+Subviews.h"
+#import "NSBundle+Name.h"
+
+#import <objc/runtime.h>
 
 @interface JustMonikaView ()
 
@@ -34,7 +37,6 @@ static const float fps = 30.0;
     if (self) {
         [self initMonikaView];
         [self initSettings];
-        [self initThumbnail];
     }
     return self;
 }
@@ -100,6 +102,8 @@ static const float fps = 30.0;
 
 - (BOOL)hasConfigureSheet
 {
+    [self initThumbnail]; // ehehey!
+
     return YES; // self.settings.settingsSheetEnabled;
 }
 
@@ -146,24 +150,68 @@ static const float fps = 30.0;
     // For some reason Apple decided that all third-party screen savers
     // should have a shitty looking thumbnail while all Apple-provided
     // screen savers display their high-DPI thumbnails nicely. This is
-    // unforgivable. Bring justice to the table.
-    NSView *contentView = self.settingsSheet.sheetParent.contentView;
-    NSString *msg = @"";
-    for (NSView *view in contentView.subviewsRecursive) {
-        msg = [msg stringByAppendingFormat:@"Subview of %@:\n", view.class];
-        if (view.class == NSBox.class) {
-            NSBox *box = (NSBox *)view;
-            for (NSView *view in box.contentView.subviewsRecursive) {
-                msg = [msg stringByAppendingFormat:@"%@\n", view.className];
-//                if (view.class == NSButton.class) {
-//                    NSButton *button = (NSButton*)view;
-//                    button.enabled = NO;
-//                    return;
-//                }
+    // unforgivable. Let's renew some justic here.
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
+
+    NSString *saverTitle = bundle.localizedBundleName;
+    NSImage *saverThumbnail = [bundle imageForResource:@"thumbnail"];
+
+    NSWindow *topWindow = self.window;
+    while (topWindow.parentWindow != nil) {
+        topWindow = topWindow.parentWindow;
+    }
+
+    for (NSView *view in topWindow.contentView.subviewsRecursive) {
+        // This is a private class so we don't have headers for it,
+        // but its structure does not really change between systems.
+        // Thank you, Objective-C, for your dynamic Smalltalk heritage.
+        if ([view.className isEqualToString:@"IndividualSaverIconView"]) {
+            NSString *title = [view performSelector:@selector(title)];
+            if ([title isEqualToString:saverTitle]) {
+                [view performSelector:@selector(setImage:)
+                           withObject:saverThumbnail];
+                return;
             }
         }
     }
-    self.ttt.stringValue = msg;
+#if 0
+    NSString *msg = @"walking up:\n";
+    NSWindow *window = self.window;
+    do {
+        window = window.parentWindow;
+    } while (window.parentWindow != nil);
+    NSView *view = window.contentView;
+    msg = [msg stringByAppendingString:@"subobjects of content view:\n"];
+    for (NSView *v in view.subviewsRecursive) {
+        if ([v.className isEqualToString:@"IndividualSaverIconView"]) {
+            NSString *title = [v performSelector:@selector(title)];
+            if ([title isEqualToString:@"Monika"]) {
+                NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
+                NSImage *image = [bundle imageForResource:@"thumbnail"];
+                [v performSelector:@selector(setImage:) withObject:image];
+                break;
+            }
+            continue;
+            unsigned int outCount, i;
+            objc_property_t *properties = class_copyPropertyList(v.class, &outCount);
+            msg = [msg stringByAppendingFormat:@"properties (%u):\n",
+                   outCount];
+            for(i = 0; i < outCount; i++) {
+                objc_property_t property = properties[i];
+                const char *propName = property_getName(property);
+                msg = [msg stringByAppendingFormat:@"%s\n",
+                       propName];
+            }
+            free(properties);
+            id image = [v performSelector:@selector(image)];
+            msg = [msg stringByAppendingFormat:@"image: %@\n", image];
+            break;
+        }
+    }
+    NSAlert *alert = [[NSAlert alloc] init];
+    alert.messageText = msg;
+    [alert runModal];
+#endif
 }
 
 @end

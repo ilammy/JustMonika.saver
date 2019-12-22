@@ -16,6 +16,9 @@
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 		9F2D80C423AF68560028A8CA /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2D80C223AF68550028A8CA /* thumbnail.png */; };
 		9F2D80C523AF68560028A8CA /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F2D80C323AF68550028A8CA /* thumbnail@2x.png */; };
+		9F2D80C823AF9A3C0028A8CA /* libobjc.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F2D80C623AF9A190028A8CA /* libobjc.tbd */; };
+		9F2D80CA23AFA6A60028A8CA /* NSBundle+Name.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F2D80C923AFA6A60028A8CA /* NSBundle+Name.m */; };
+		9F2D80CC23AFA89A0028A8CA /* NSBundle+Name.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F2D80CB23AFA6B30028A8CA /* NSBundle+Name.h */; };
 		9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* Monika.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
@@ -105,6 +108,10 @@
 		9F0FE1772382E5E5001139B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9F2D80C223AF68550028A8CA /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F2D80C323AF68550028A8CA /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
+		9F2D80C623AF9A190028A8CA /* libobjc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.tbd; path = usr/lib/libobjc.tbd; sourceTree = SDKROOT; };
+		9F2D80C723AF9A320028A8CA /* libobjc.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libobjc.A.tbd; path = usr/lib/libobjc.A.tbd; sourceTree = SDKROOT; };
+		9F2D80C923AFA6A60028A8CA /* NSBundle+Name.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Name.m"; sourceTree = "<group>"; };
+		9F2D80CB23AFA6B30028A8CA /* NSBundle+Name.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Name.h"; sourceTree = "<group>"; };
 		9F3FC3F223891D8B00AD0621 /* Monika.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Monika.xib; sourceTree = "<group>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
@@ -156,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F2D80C823AF9A3C0028A8CA /* libobjc.tbd in Frameworks */,
 				9FB113592393EF6600E0FA7E /* libJustMonikaGL.a in Frameworks */,
 				9FB1135E2393EF8400E0FA7E /* OpenGL.framework in Frameworks */,
 				BAEF07B16F50F3CC34BE496E /* libPods-JustMonika.a in Frameworks */,
@@ -219,6 +227,8 @@
 				9F069CA52381A7080081F32E /* Info.plist */,
 				9F3FC3F42389506300AD0621 /* NSView+Subviews.h */,
 				9F3FC3F52389506300AD0621 /* NSView+Subviews.m */,
+				9F2D80CB23AFA6B30028A8CA /* NSBundle+Name.h */,
+				9F2D80C923AFA6A60028A8CA /* NSBundle+Name.m */,
 			);
 			path = JustMonika;
 			sourceTree = "<group>";
@@ -240,6 +250,8 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F2D80C723AF9A320028A8CA /* libobjc.A.tbd */,
+				9F2D80C623AF9A190028A8CA /* libobjc.tbd */,
 				9FB113612393EFBB00E0FA7E /* liblibpng.a */,
 				9FB1135F2393EF9400E0FA7E /* liblibpng.a */,
 				9FB1135C2393EF7900E0FA7E /* libPods-JustMonikaGL2.a */,
@@ -353,6 +365,7 @@
 				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
 				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
+				9F2D80CC23AFA89A0028A8CA /* NSBundle+Name.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +564,7 @@
 			files = (
 				9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */,
 				9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */,
+				9F2D80CA23AFA6A60028A8CA /* NSBundle+Name.m in Sources */,
 				9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */,
 				9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */,
 			);
