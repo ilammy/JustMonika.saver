@@ -2,28 +2,23 @@
 
 in vec2 UV;
 out vec4 canvas;
-uniform sampler2D mask;
-uniform sampler2D maskb;
-uniform sampler2D mask_2;
-uniform sampler2D mask_3;
-uniform sampler2D monika_bg;
-uniform sampler2D monika_bg_highlight;
+uniform sampler2DRect mask;
+uniform sampler2DRect maskb;
+uniform sampler2DRect mask_2;
+uniform sampler2DRect mask_3;
+uniform sampler2DRect monika_bg;
+uniform sampler2DRect monika_bg_highlight;
 uniform float time;
 
 uniform float offsetX;
 uniform float offsetY;
 
-// All our textures have 2048 x 2048 size in memory and have 1280 x 720
-// starting at origin filled with actually userful data. UV coordinates
-// are expressed in source image coordinates.
 const vec2 imageSize = vec2(1280.0, 720.0);
 
-vec4 getPixel(in sampler2D sampler, in vec2 uv)
+vec4 getPixel(in sampler2DRect sampler, in vec2 uv)
 {
-    // Full texture size at LOD 0
-    vec2 actualSize = textureSize(sampler, 0);
-    vec2 st = mod(uv, imageSize) / actualSize;
-    return texture(sampler, st);
+    // Rectangular textures don't do wrapping on their own
+    return texture(sampler, mod(uv, textureSize(sampler)));
 }
 
 void draw(inout vec4 canvas, in vec4 color)
