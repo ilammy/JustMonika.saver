@@ -32,6 +32,8 @@
 @property (weak) IBOutlet NSTextField *blurText;
 @property (weak) IBOutlet NSSlider *blurSlider;
 
+@property (weak) IBOutlet NSTextField *sizeText;
+
 @end
 
 @implementation AppDelegate
@@ -49,6 +51,11 @@
 
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSEventTrackingRunLoopMode];
+
+    [self.view.monika addObserver:self
+                       forKeyPath:@"frame"
+                          options:NSKeyValueObservingOptionNew
+                          context:nil];
 }
 
 - (IBAction)openSettings:(id)sender
@@ -106,6 +113,17 @@
         .blur_parameter = self.blurText.doubleValue,
     };
     [self.view.monika configureWith:&settings];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath
+                      ofObject:(id)object
+                        change:(NSDictionary<NSKeyValueChangeKey,id> *)change
+                       context:(void *)context
+{
+    if (object == self.view.monika && [keyPath isEqualToString:@"frame"]) {
+        double width = NSWidth(self.view.monika.frame);
+        self.sizeText.stringValue = [NSString stringWithFormat:@"Size: %f", width];
+    }
 }
 
 @end

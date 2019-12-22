@@ -10,6 +10,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 
 #include "matrix.h"
 #include "resource.h"
@@ -212,12 +213,46 @@ int just_monika_init(struct just_monika *context)
     return 0;
 }
 
+/*
+ * I have visually experimented with blur radius for different viewport widths
+ * and obtained this data:
+ *
+ *     width  radius
+ *      600     0.0    bigger than this is fine with no blur
+ *      500     1.0    around this is fine
+ *      400     1.5    definitely looks better than 1.0
+ *      300     2.5    it looks better than 2.0
+ *      200     3.0    almost no difference with 2.5, but 3.5 looks blurry
+ *      100     6.0    this looks way nicer than, say, 4.0
+ *
+ * Putting it through a logarithmic regression yields the following
+ * approximation:
+ *
+ *     radius = 20.0 - 3.11 ln width
+ *
+ * with correlation |r| = 0.98 it is pretty close to 1.0 to convince me.
+ */
+static GLfloat blur_radius_for_width(unsigned width)
+{
+    GLfloat radius = 20.0f - 3.11f * logf(width);
+    if (radius < 0.0f) {
+        radius = 0.0f;
+    }
+    return radius;
+}
+
 int just_monika_set_viewport(struct just_monika *context, unsigned width, unsigned height)
 {
     context->viewport_width = width;
     context->viewport_height = height;
 
     init_xy_matrix(context);
+
+    /*
+     * Adapt the blur radius to viewport width. We need more blur for smaller
+     * viewports to look better.
+     */
+    context->blur_parameter = blur_radius_for_width(width);
 
     return 0;
 }
