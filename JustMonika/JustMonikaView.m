@@ -16,7 +16,7 @@
 
 @property (nonatomic) JustMonikaSettings *settings;
 
-@property (weak) IBOutlet NSWindow *settingsSheet;
+@property (strong) IBOutlet NSWindow *settingsSheet;
 @property (weak) IBOutlet NSTextField *ttt;
 
 @end
