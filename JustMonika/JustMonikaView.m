@@ -102,8 +102,6 @@ static const float fps = 30.0;
 
 - (BOOL)hasConfigureSheet
 {
-    [self initThumbnail]; // ehehey!
-
     return YES; // self.settings.settingsSheetEnabled;
 }
 
@@ -145,7 +143,19 @@ static const float fps = 30.0;
 
 #pragma mark - Thumbnail fixups
 
--(void)initThumbnail
+void init_thing(void) __attribute__((constructor));
+void init_thing(void)
+{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+                   dispatch_get_main_queue(), ^{
+        NSAlert *alert = [[NSAlert alloc] init];
+        alert.messageText = @"OMIGOD I'M IN";
+        [alert runModal];
+//        [JustMonikaView initThumbnail:[NSApp mainWindow]];
+    });
+}
+
++(void)initThumbnail:(NSWindow *)window
 {
     // For some reason Apple decided that all third-party screen savers
     // should have a shitty looking thumbnail while all Apple-provided
@@ -156,7 +166,7 @@ static const float fps = 30.0;
     NSString *saverTitle = bundle.localizedBundleName;
     NSImage *saverThumbnail = [bundle imageForResource:@"thumbnail"];
 
-    NSWindow *topWindow = self.window;
+    NSWindow *topWindow = window;
     while (topWindow.parentWindow != nil) {
         topWindow = topWindow.parentWindow;
     }
