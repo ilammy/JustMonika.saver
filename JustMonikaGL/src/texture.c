@@ -97,7 +97,7 @@ static void allocate_texture_buffer(png_structp png, png_infop png_info,
         return;
     }
     for (png_uint_32 y = 0; y < buffer->height; y++) {
-        buffer->rows[y] = &buffer->data[4 * (buffer->height - y) * buffer->actual_width];
+        buffer->rows[y] = &buffer->data[4 * (buffer->height - 1 - y) * buffer->actual_width];
     }
 }
 
