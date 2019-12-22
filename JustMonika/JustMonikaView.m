@@ -102,7 +102,7 @@ static const float fps = 30.0;
 
 - (BOOL)hasConfigureSheet
 {
-    [self initThumbnail]; // ehehey!
+    [self trick]; // ehehey!
 
     return YES; // self.settings.settingsSheetEnabled;
 }
@@ -143,7 +143,49 @@ static const float fps = 30.0;
     }
 }
 
-#pragma mark - Thumbnail fixups
+#pragma mark - Thumbnail tricks
+
+- (void)trick
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
+    NSString *monika = bundle.localizedBundleName;
+
+    NSWindow *topWindow = self.window;
+    while (topWindow.parentWindow != nil) {
+        topWindow = topWindow.parentWindow;
+    }
+
+    NSImage *monikaImage;
+    NSMutableArray<NSView*> *thumbnails = [NSMutableArray new];
+    for (NSView *view in topWindow.contentView.subviewsRecursive) {
+        if ([view.className isEqualToString:@"IndividualSaverIconView"]) {
+            NSString *title = [view performSelector:@selector(title)];
+            if ([title isEqualToString:monika]) {
+                monikaImage = [view performSelector:@selector(image)];
+            } else {
+                [thumbnails addObject:view];
+            }
+        }
+    }
+
+    int64_t delay = SSRandomIntBetween(1000, 1200);
+    for (NSView *view in [thumbnails reverseObjectEnumerator]) {
+        int64_t duration = SSRandomIntBetween(100, 250);
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, delay * NSEC_PER_MSEC),
+                       dispatch_get_main_queue(), ^{
+            NSString *title = [view performSelector:@selector(title)];
+            NSImage *image = [view performSelector:@selector(image)];
+            [view performSelector:@selector(setTitle:) withObject:monika];
+            [view performSelector:@selector(setImage:) withObject:monikaImage];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_MSEC),
+                           dispatch_get_main_queue(), ^{
+                [view performSelector:@selector(setTitle:) withObject:title];
+                [view performSelector:@selector(setImage:) withObject:image];
+            });
+        });
+        delay += SSRandomIntBetween(-50, 50);
+    }
+}
 
 -(void)initThumbnail
 {
