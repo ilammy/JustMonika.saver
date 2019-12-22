@@ -721,7 +721,7 @@
 			baseConfigurationReference = D0E4D4E079F84ADD19BCBB64 /* Pods-JustMonika.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
@@ -736,7 +736,7 @@
 			baseConfigurationReference = 21BF6592F18A5A56754ED57D /* Pods-JustMonika.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
+				COMBINE_HIDPI_IMAGES = NO;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
