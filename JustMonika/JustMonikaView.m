@@ -150,6 +150,77 @@ static const float fps = 30.0;
     [self initThumbnail];
 }
 
+// Here, Apple, this is how you *should* have written your
+// [ScreenSaverPref framedThumbnail], but it's too unimportant
+// for you to bother updating it to support Retina displays.
++ (NSImage *)framedThumbnail:(NSImage *)thumbnail
+{
+    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
+
+    NSImage *frame = [bundle imageForResource:@"ScreenSaverThumbFrame"];
+    NSImage *mask = [bundle imageForResource:@"ScreenSaverThumbMask"];
+
+    // Frame and mask are a little bit smaller than the thumbnail.
+    // Position them in the center.
+    NSRect thumbnailRect = rectOfSize(thumbnail.size);
+    NSRect frameRect = centerRectIn(thumbnailRect, rectOfSize(frame.size));
+    NSRect maskRect = centerRectIn(thumbnailRect, rectOfSize(mask.size));
+
+    NSImage *result = [[NSImage alloc] initWithSize:thumbnail.size];
+
+    [result lockFocus];
+    {
+        NSGraphicsContext *currentContext = NSGraphicsContext.currentContext;
+
+        [currentContext saveGraphicsState];
+
+        CGImageRef maskImage = [mask CGImageForProposedRect:nil
+                                                    context:currentContext
+                                                      hints:nil];
+        CGImageRef maskMask =
+            CGImageMaskCreate(CGImageGetWidth(maskImage),
+                              CGImageGetHeight(maskImage),
+                              CGImageGetBitsPerComponent(maskImage),
+                              CGImageGetBitsPerPixel(maskImage),
+                              CGImageGetBytesPerRow(maskImage),
+                              CGImageGetDataProvider(maskImage),
+                              CGImageGetDecode(maskImage),
+                              CGImageGetShouldInterpolate(maskImage));
+
+        CGContextClipToMask(currentContext.CGContext,
+                            maskRect,
+                            maskMask);
+
+        [thumbnail drawInRect:thumbnailRect
+                     fromRect:NSZeroRect
+                    operation:NSCompositingOperationSourceOver
+                     fraction:1.0f];
+
+        [currentContext restoreGraphicsState];
+
+        [frame drawInRect:frameRect
+                 fromRect:NSZeroRect
+                operation:NSCompositingOperationSourceOver
+                 fraction:1.0f];
+
+    }
+    [result unlockFocus];
+
+    return result;
+}
+
+static NSRect rectOfSize(NSSize size)
+{
+    return NSMakeRect(0.0f, 0.0f, size.width, size.height);
+}
+
+static NSRect centerRectIn(NSRect dst, NSRect src)
+{
+    CGFloat dX = (NSWidth(dst) - NSWidth(src))/2.0f;
+    CGFloat dY = (NSHeight(dst) - NSHeight(src))/2.0f;
+    return NSOffsetRect(src, dX, dY);
+}
+
 - (void)initThumbnail
 {
     // For some reason Apple decided that all third-party screen savers
@@ -160,6 +231,7 @@ static const float fps = 30.0;
 
     NSString *saverTitle = bundle.localizedBundleName;
     NSImage *saverThumbnail = [bundle imageForResource:@"thumbnail"];
+    saverThumbnail = [JustMonikaView framedThumbnail:saverThumbnail];
 
     NSWindow *topWindow = self.window;
     while (topWindow.parentWindow != nil) {
@@ -227,20 +299,20 @@ static const float fps = 30.0;
     // I don't know... maybe glitch out the images and zalgo the text?
     // That we can do without crashing.
 
-    for (NSView *view in otherScreenSavers) {
-        NSImage *image = [view performSelector:@selector(image)];
-        NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithData:image.TIFFRepresentation];
-        NSData* jpegData = [bitmap representationUsingType:NSBitmapImageFileTypeJPEG
-                                                properties:@{NSImageCompressionFactor: @0.1}];
-        NSMutableData *jpegDataMut = [[NSMutableData alloc] initWithData:jpegData];
-//        // TODO: corrupt JPEG data somehow
-        uint8_t *bytes = jpegDataMut.mutableBytes;
-        for (NSUInteger i = 400; i < jpegDataMut.length; i += 13) {
-            bytes[i] = ~bytes[i];
-        }
-        NSImage *newImage = [[NSImage alloc] initWithData:jpegDataMut];
-        [view performSelector:@selector(setImage:) withObject:newImage];
-    }
+//    for (NSView *view in otherScreenSavers) {
+//        NSImage *image = [view performSelector:@selector(image)];
+//        NSBitmapImageRep *bitmap = [[NSBitmapImageRep alloc] initWithData:image.TIFFRepresentation];
+//        NSData* jpegData = [bitmap representationUsingType:NSBitmapImageFileTypeJPEG
+//                                                properties:@{NSImageCompressionFactor: @0.1}];
+//        NSMutableData *jpegDataMut = [[NSMutableData alloc] initWithData:jpegData];
+////        // TODO: corrupt JPEG data somehow
+//        uint8_t *bytes = jpegDataMut.mutableBytes;
+//        for (NSUInteger i = 400; i < jpegDataMut.length; i += 13) {
+//            bytes[i] = ~bytes[i];
+//        }
+//        NSImage *newImage = [[NSImage alloc] initWithData:jpegDataMut];
+//        [view performSelector:@selector(setImage:) withObject:newImage];
+//    }
 
     // Sht. It does not really work the way GlithPEG works. If I randomly
     // flip bytes then NSImage just fails to decode and gives up.
