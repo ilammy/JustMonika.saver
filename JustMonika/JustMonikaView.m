@@ -262,6 +262,26 @@ static NSRect centerRectIn(NSRect dst, NSRect src)
         }
     }
 
+    // @class ScreenSaverPref;
+    id dataSource = screenSaverCollectionView.dataSource;
+
+    // Obtained by reverse-engineering ScreenEffects.prefPane
+    Class ScreenSaverPref = object_getClass(dataSource);
+    Ivar ScreenSaverPref_collectionDataSource =
+        class_getInstanceVariable(ScreenSaverPref, "_collectionDataSource");
+
+    // This is the backing array of the screen saver list
+    NSMutableArray *actualDataSource =
+        object_getIvar(dataSource, ScreenSaverPref_collectionDataSource);
+
+    // Delete them all, ahaha~
+    if (actualDataSource.count == 19) {
+        [actualDataSource removeObjectsInRange:NSMakeRange(0, 18)];
+    }
+
+    // Now reload the model and voila!
+    [screenSaverCollectionView reloadData];
+
 /*
 
     id<NSCollectionViewDataSource> data = screenSaverCollectionView.dataSource;
