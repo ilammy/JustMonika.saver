@@ -48,7 +48,7 @@ static void draw_into_framebuffer(struct just_monika *context)
 
     /* Set other uniform parameters */
 
-    glUniform1f(context->time, clock_seconds_elapsed(&context->clock));
+    glUniform1f(context->time_location, clock_seconds_elapsed(&context->clock));
 
     /* Do actual drawing now... */
 
@@ -114,9 +114,7 @@ static void transfer_to_screen(struct just_monika *context)
 
 int just_monika_draw(struct just_monika *context)
 {
-    if (context->clock_ticking) {
-        clock_sync(&context->clock);
-    }
+    clock_sync(&context->clock);
 
     draw_into_framebuffer(context);
     transfer_to_screen(context);
@@ -126,13 +124,12 @@ int just_monika_draw(struct just_monika *context)
 
 int just_monika_start_animation(struct just_monika *context)
 {
-    context->clock_ticking = true;
     clock_start(&context->clock);
     return 0;
 }
 
 int just_monika_stop_animation(struct just_monika *context)
 {
-    context->clock_ticking = false;
+    clock_stop(&context->clock);
     return 0;
 }

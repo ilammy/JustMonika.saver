@@ -23,11 +23,21 @@ int clock_start(struct clock *clock)
     /* Preserve existing difference so that this is more like "restart" */
     clock->start.tv_sec -= diff.tv_sec;
     clock->start.tv_nsec -= diff.tv_nsec;
+    clock->ticking = true;
+    return 0;
+}
+
+int clock_stop(struct clock *clock)
+{
+    clock->ticking = false;
     return 0;
 }
 
 int clock_sync(struct clock *clock)
 {
+    if (!clock->ticking) {
+        return 0;
+    }
     return clock_gettime(CLOCK_MONOTONIC, &clock->current);
 }
 

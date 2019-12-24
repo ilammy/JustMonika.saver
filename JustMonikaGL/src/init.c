@@ -20,17 +20,19 @@
 static void init_xy_array(struct just_monika *context)
 {
     GLfloat quad_xy_coords[] = {
-        0.0,                   0.0,
-        context->screen_width, 0.0,
+        0.0f,                  0.0f,
+        context->screen_width, 0.0f,
         context->screen_width, context->screen_height,
-        0.0,                   0.0,
+        0.0f,                  0.0f,
         context->screen_width, context->screen_height,
-        0.0,                   context->screen_height,
+        0.0f,                  context->screen_height,
     };
 
+    /* Make a new vertex array */
     glGenVertexArrays(1, &context->xy_array);
     glBindVertexArray(context->xy_array);
 
+    /* Allocate and upload a buffer for vertex array */
     glGenBuffers(1, &context->xy_buffer);
     glBindBuffer(GL_ARRAY_BUFFER, context->xy_buffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(quad_xy_coords), quad_xy_coords, GL_STATIC_DRAW);
@@ -44,8 +46,8 @@ static void init_xy_matrix(struct just_monika *context)
      * Adjust translation so that origin (0, 0) maps onto the lower left corner
      * of the screen quad, instead of the viewport center.
      */
-    GLfloat shift_x = -0.5 * context->screen_width;
-    GLfloat shift_y = -0.5 * context->screen_height;
+    GLfloat shift_x = -0.5f * context->screen_width;
+    GLfloat shift_y = -0.5f * context->screen_height;
     matrix_translate(context->xy_transform_matrix, shift_x, shift_y);
 
     /*
@@ -123,7 +125,7 @@ static void init_shader_program(struct just_monika *context)
     context->mask_sampler = glGetUniformLocation(context->screen_program, "mask");
     context->maskb_sampler = glGetUniformLocation(context->screen_program, "maskb");
 
-    context->time = glGetUniformLocation(context->screen_program, "time");
+    context->time_location = glGetUniformLocation(context->screen_program, "time");
 }
 
 static GLuint load_texture_from_resource(const char *name)
@@ -190,7 +192,7 @@ static void init_screen_framebuffer(struct just_monika *context)
 int just_monika_init(struct just_monika *context)
 {
     /* Use opaque black color for background */
-    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     /* Enable transparency, use recommended blending function */
     glEnable(GL_BLEND);
