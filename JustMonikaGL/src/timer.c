@@ -11,11 +11,18 @@
 int clock_start(struct clock *clock)
 {
     int res;
+    struct timespec diff = {
+        clock->current.tv_sec - clock->start.tv_sec,
+        clock->current.tv_nsec - clock->start.tv_nsec,
+    };
     res = clock_gettime(CLOCK_MONOTONIC, &clock->start);
     if (res) {
         return res;
     }
     clock->current = clock->start;
+    /* Preserve existing difference so that this is more like "restart" */
+    clock->start.tv_sec -= diff.tv_sec;
+    clock->start.tv_nsec -= diff.tv_nsec;
     return 0;
 }
 

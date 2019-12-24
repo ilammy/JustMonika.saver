@@ -34,6 +34,8 @@
 
 @property (weak) IBOutlet NSTextField *sizeText;
 
+@property (weak) IBOutlet NSButton *animationCheckBox;
+
 @end
 
 @implementation AppDelegate
@@ -101,6 +103,15 @@
 
     if (sender == self.blurSlider) {
         self.blurText.doubleValue = self.blurSlider.doubleValue;
+    }
+}
+
+- (IBAction)animationCheckBoxPressed:(id)sender
+{
+    if (self.animationCheckBox.state == YES) {
+        [self.view.monika startAnimation];
+    } else {
+        [self.view.monika stopAnimation];
     }
 }
 

@@ -16,6 +16,7 @@
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate">
             <connections>
                 <outlet property="adjustments" destination="Iyq-k0-Nlu" id="xBt-Lx-QrI"/>
+                <outlet property="animationCheckBox" destination="H5M-dD-ZGy" id="V7p-mL-kcs"/>
                 <outlet property="biasAText" destination="z4W-Y9-3FJ" id="ZTV-dF-GxN"/>
                 <outlet property="biasBText" destination="Lcf-EH-PIe" id="SO7-Gi-eZt"/>
                 <outlet property="blurSlider" destination="Snf-6O-Q3U" id="uPz-fu-UzG"/>
@@ -739,6 +740,17 @@
                         </buttonCell>
                         <connections>
                             <action selector="adjustButtonPressed:" target="Voe-Tx-rLC" id="eoc-gf-Nrg"/>
+                        </connections>
+                    </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H5M-dD-ZGy">
+                        <rect key="frame" x="176" y="22" width="83" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <buttonCell key="cell" type="check" title="Animation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Pfl-0N-FRW">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="animationCheckBoxPressed:" target="Voe-Tx-rLC" id="Ear-8N-w8A"/>
                         </connections>
                     </button>
                 </subviews>
