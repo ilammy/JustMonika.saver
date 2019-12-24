@@ -8,11 +8,7 @@
 
 #import <ScreenSaver/ScreenSaver.h>
 
-#import "JustMonikaGLView.h"
-
 IB_DESIGNABLE
 @interface JustMonikaView : ScreenSaverView
-
-@property (weak) JustMonikaGLView *monika;
 
 @end

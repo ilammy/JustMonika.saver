@@ -14,9 +14,10 @@
 
 @interface JustMonikaView ()
 
-@property (nonatomic) JustMonikaSettings *settings;
-
 @property (strong) IBOutlet NSWindow *settingsSheet;
+
+@property (weak) JustMonikaGLView *monika;
+@property (strong) JustMonikaSettings *settings;
 
 @end
 
@@ -42,7 +43,14 @@ static const float fps = 30.0;
 {
     [super awakeFromNib];
 
+    // This method may be called recursively when loading NIB file
+    // for the settings sheet below. Break recursion here.
+    if (self.monika != nil) {
+        return;
+    }
+
     [self initMonikaView];
+    [self initSettings];
 }
 
 // Called by Interface Builder for previews
@@ -51,6 +59,7 @@ static const float fps = 30.0;
     [super prepareForInterfaceBuilder];
 
     [self initMonikaView];
+    [self initSettings];
 }
 
 - (void)initSettings

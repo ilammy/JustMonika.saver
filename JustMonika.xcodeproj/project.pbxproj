@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7F1DE1403B2FBF0F2C40A9A8 /* libPods-JustMonika.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */; };
 		90311291C839184E9D507CD4 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 707419F7FEE43A90343AC9DB /* libPods-JustMonika-JustMonikaGL.a */; };
-		9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F069CA12381A7080081F32E /* JustMonikaView.h */; };
+		9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F069CA12381A7080081F32E /* JustMonikaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CA32381A7080081F32E /* JustMonikaView.m */; };
 		9F069CB32381B4090081F32E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CB22381B4090081F32E /* AppDelegate.m */; };
 		9F069CB52381B40C0081F32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB42381B40C0081F32E /* Assets.xcassets */; };
@@ -40,10 +40,11 @@
 		9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F242B8523B2832100EF94D7 /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
 		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
+		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* Monika.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
-		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; };
+		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */; };
 		9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */; };
 		9FB113332393D8AF00E0FA7E /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -328,8 +329,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
+				9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */,
+				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
 				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

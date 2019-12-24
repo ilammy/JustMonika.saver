@@ -8,6 +8,8 @@
 
 #import <AppKit/AppKit.h>
 
+#import "JustMonikaView.h"
+
 // Yes, I know that Apple deprecates OpenGL in favor of its Metal.
 // You don't need to remind me about that in every build.
 #pragma clang diagnostic push
@@ -15,7 +17,6 @@
 
 struct just_monika_settings;
 
-IB_DESIGNABLE
 @interface JustMonikaGLView : NSOpenGLView
 
 - (instancetype)initWithFrame:(NSRect)frameRect;
@@ -26,3 +27,8 @@ IB_DESIGNABLE
 @end
 
 #pragma clang diagnostic pop
+
+// Expose this property to the preview app
+@interface JustMonikaView (OpenGLView)
+@property (readonly,weak) JustMonikaGLView *monika;
+@end
