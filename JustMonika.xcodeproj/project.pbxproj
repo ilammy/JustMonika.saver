@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4432D1B89FB59236F405F835 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13128A2B0D85941DE5D29895 /* libPods-JustMonika-JustMonikaGL.a */; };
+		7F1DE1403B2FBF0F2C40A9A8 /* libPods-JustMonika.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */; };
+		90311291C839184E9D507CD4 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 707419F7FEE43A90343AC9DB /* libPods-JustMonika-JustMonikaGL.a */; };
 		9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F069CA12381A7080081F32E /* JustMonikaView.h */; };
 		9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CA32381A7080081F32E /* JustMonikaView.m */; };
 		9F069CB32381B4090081F32E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CB22381B4090081F32E /* AppDelegate.m */; };
@@ -16,6 +17,29 @@
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 		9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
 		9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
+		9F242B6B23B276B300EF94D7 /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F242B6C23B276C000EF94D7 /* context.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC40A238A0A3F00AD0621 /* context.h */; };
+		9F242B6D23B276C200EF94D7 /* init.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC42B238A100C00AD0621 /* init.h */; };
+		9F242B6E23B276C500EF94D7 /* draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC431238A109D00AD0621 /* draw.h */; };
+		9F242B6F23B276C900EF94D7 /* opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC453238AF2AE00AD0621 /* opengl.h */; };
+		9F242B7023B276CB00EF94D7 /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC455238C908F00AD0621 /* matrix.h */; };
+		9F242B7123B276D000EF94D7 /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC459238C929D00AD0621 /* shader.h */; };
+		9F242B7223B276D600EF94D7 /* texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB11303238F2EEB00E0FA7E /* texture.h */; };
+		9F242B7323B276D900EF94D7 /* resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB113122392E7DE00E0FA7E /* resource.h */; };
+		9F242B7423B276DB00EF94D7 /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB1132323939A8C00E0FA7E /* timer.h */; };
+		9F242B7523B276EE00EF94D7 /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC40B238A0A8300AD0621 /* context.c */; };
+		9F242B7623B276F000EF94D7 /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC42C238A100C00AD0621 /* init.c */; };
+		9F242B7723B276F300EF94D7 /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC432238A109D00AD0621 /* draw.c */; };
+		9F242B7823B276F600EF94D7 /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC456238C908F00AD0621 /* matrix.c */; };
+		9F242B7923B276FA00EF94D7 /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC45A238C929D00AD0621 /* shader.c */; };
+		9F242B7A23B276FD00EF94D7 /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB11304238F2EEB00E0FA7E /* texture.c */; };
+		9F242B7B23B2770000EF94D7 /* resource_macos.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB113142392E94400E0FA7E /* resource_macos.m */; };
+		9F242B7C23B2770200EF94D7 /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1132423939A8C00E0FA7E /* timer.c */; };
+		9F242B7D23B277D600EF94D7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC436238A118000AD0621 /* OpenGL.framework */; };
+		9F242B8023B279F000EF94D7 /* JustMonikaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; };
+		9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9F242B8523B2832100EF94D7 /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
+		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* Monika.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
@@ -23,33 +47,16 @@
 		9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */; };
 		9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */; };
 		9FB113332393D8AF00E0FA7E /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9FB113422393EE8400E0FA7E /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9FB113442393EE9600E0FA7E /* context.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC40A238A0A3F00AD0621 /* context.h */; };
-		9FB113452393EE9600E0FA7E /* init.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC42B238A100C00AD0621 /* init.h */; };
-		9FB113462393EE9600E0FA7E /* draw.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC431238A109D00AD0621 /* draw.h */; };
-		9FB113472393EE9600E0FA7E /* opengl.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC453238AF2AE00AD0621 /* opengl.h */; };
-		9FB113482393EE9600E0FA7E /* matrix.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC455238C908F00AD0621 /* matrix.h */; };
-		9FB113492393EE9600E0FA7E /* shader.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC459238C929D00AD0621 /* shader.h */; };
-		9FB1134A2393EE9600E0FA7E /* texture.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB11303238F2EEB00E0FA7E /* texture.h */; };
-		9FB1134B2393EE9600E0FA7E /* resource.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB113122392E7DE00E0FA7E /* resource.h */; };
-		9FB1134C2393EE9600E0FA7E /* timer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9FB1132323939A8C00E0FA7E /* timer.h */; };
-		9FB1134D2393EEA800E0FA7E /* context.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC40B238A0A8300AD0621 /* context.c */; };
-		9FB1134E2393EEA800E0FA7E /* init.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC42C238A100C00AD0621 /* init.c */; };
-		9FB1134F2393EEA800E0FA7E /* draw.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC432238A109D00AD0621 /* draw.c */; };
-		9FB113502393EEA800E0FA7E /* matrix.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC456238C908F00AD0621 /* matrix.c */; };
-		9FB113512393EEA800E0FA7E /* shader.c in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC45A238C929D00AD0621 /* shader.c */; };
-		9FB113522393EEA800E0FA7E /* texture.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB11304238F2EEB00E0FA7E /* texture.c */; };
-		9FB113532393EEA800E0FA7E /* resource_macos.m in Sources */ = {isa = PBXBuildFile; fileRef = 9FB113142392E94400E0FA7E /* resource_macos.m */; };
-		9FB113542393EEA800E0FA7E /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1132423939A8C00E0FA7E /* timer.c */; };
-		9FB113552393EEB500E0FA7E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC436238A118000AD0621 /* OpenGL.framework */; };
-		9FB113592393EF6600E0FA7E /* libJustMonikaGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FB1133E2393EE6B00E0FA7E /* libJustMonikaGL.a */; };
-		9FB1135E2393EF8400E0FA7E /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC436238A118000AD0621 /* OpenGL.framework */; };
-		9FB113632393F0D900E0FA7E /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
-		9FB113642393F0DD00E0FA7E /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
-		BAEF07B16F50F3CC34BE496E /* libPods-JustMonika.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CF9DE3BE4298E035E0EEFC0A /* libPods-JustMonika.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		9F242B8223B279F000EF94D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F069C952381A7080081F32E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F242B6223B275EE00EF94D7;
+			remoteInfo = JustMonikaGL;
+		};
 		9FB113342393D8AF00E0FA7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F069C952381A7080081F32E /* Project object */;
@@ -57,16 +64,20 @@
 			remoteGlobalIDString = 9F069C9D2381A7080081F32E;
 			remoteInfo = JustMonika;
 		};
-		9FB1135A2393EF6600E0FA7E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9F069C952381A7080081F32E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 9FB1133D2393EE6B00E0FA7E;
-			remoteInfo = JustMonikaGL2;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		9F242B8423B279F000EF94D7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9FB113362393D8AF00E0FA7E /* Embed PlugIns */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -78,18 +89,23 @@
 			name = "Embed PlugIns";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9FCA72AE23B2A0FD0063E773 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		13128A2B0D85941DE5D29895 /* libPods-JustMonika-JustMonikaGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonika-JustMonikaGL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		21BF6592F18A5A56754ED57D /* Pods-JustMonika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika.release.xcconfig"; path = "Target Support Files/Pods-JustMonika/Pods-JustMonika.release.xcconfig"; sourceTree = "<group>"; };
-		2F0F20E3CB2FB021357A8125 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL/Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.release.xcconfig"; sourceTree = "<group>"; };
-		383C9FF4941F97F8D93F387C /* Pods-JustMonikaGL2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL2.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL2/Pods-JustMonikaGL2.release.xcconfig"; sourceTree = "<group>"; };
-		3BA8F41D8837D7947CB187D3 /* libPods-JustMonikaGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonikaGL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E6A5A7AF657B08A2D2B3053 /* Pods-JustMonikaGL2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL2.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL2/Pods-JustMonikaGL2.debug.xcconfig"; sourceTree = "<group>"; };
-		5702F484A3EC823DEA115B02 /* Pods-JustMonikaView-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView-JustMonikaGL/Pods-JustMonikaView-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
-		88AE5418CE87F5144D533BE1 /* Pods-JustMonikaView-JustMonikaGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView-JustMonikaGL.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaView-JustMonikaGL/Pods-JustMonikaView-JustMonikaGL.release.xcconfig"; sourceTree = "<group>"; };
-		938938CB9F5AA65C1FBCB64C /* Pods-JustMonikaView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.release.xcconfig"; sourceTree = "<group>"; };
+		3217C32AC8FB40E8770CA75B /* Pods-JustMonika-JustMonikaGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL.release.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL/Pods-JustMonika-JustMonikaGL.release.xcconfig"; sourceTree = "<group>"; };
+		53602FE507F4F77028C3C821 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL/Pods-JustMonika-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
+		707419F7FEE43A90343AC9DB /* libPods-JustMonika-JustMonikaGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonika-JustMonikaGL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonika.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F069C9E2381A7080081F32E /* JustMonika.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustMonika.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F069CA12381A7080081F32E /* JustMonikaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaView.h; sourceTree = "<group>"; };
 		9F069CA32381A7080081F32E /* JustMonikaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaView.m; sourceTree = "<group>"; };
@@ -102,9 +118,10 @@
 		9F069CB92381B40C0081F32E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F069CBA2381B40C0081F32E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustMonikaPreview.entitlements; sourceTree = "<group>"; };
-		9F0FE1772382E5E5001139B3 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		9F242B5A23B26D7800EF94D7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
+		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F242B7E23B2780600EF94D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
 		9F3FC3F223891D8B00AD0621 /* Monika.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Monika.xib; sourceTree = "<group>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
@@ -134,21 +151,8 @@
 		9FB113212392F28300E0FA7E /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
 		9FB1132323939A8C00E0FA7E /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		9FB1132423939A8C00E0FA7E /* timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer.c; sourceTree = "<group>"; };
-		9FB1133E2393EE6B00E0FA7E /* libJustMonikaGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libJustMonikaGL.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FB1135C2393EF7900E0FA7E /* libPods-JustMonikaGL2.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = "libPods-JustMonikaGL2.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FB1135F2393EF9400E0FA7E /* liblibpng.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibpng.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		9FB113612393EFBB00E0FA7E /* liblibpng.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = liblibpng.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaView.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaView/Pods-JustMonikaView.debug.xcconfig"; sourceTree = "<group>"; };
-		BB037B4CA97DA6D49C1A16D8 /* Pods-JustMonika-JustMonikaGL2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL2.debug.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL2/Pods-JustMonika-JustMonikaGL2.debug.xcconfig"; sourceTree = "<group>"; };
-		C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C9541CC2A5C677AD73A0528C /* Pods_JustMonikaPreview.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEEA4767870A6CCC13257F70 /* Pods-JustMonika-JustMonikaGL2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL2.release.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL2/Pods-JustMonika-JustMonikaGL2.release.xcconfig"; sourceTree = "<group>"; };
-		CF9DE3BE4298E035E0EEFC0A /* libPods-JustMonika.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonika.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D0E4D4E079F84ADD19BCBB64 /* Pods-JustMonika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika.debug.xcconfig"; path = "Target Support Files/Pods-JustMonika/Pods-JustMonika.debug.xcconfig"; sourceTree = "<group>"; };
-		D7FF6D891AD86FB8405A2460 /* Pods-JustMonika-JustMonikaGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL.release.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL/Pods-JustMonika-JustMonikaGL.release.xcconfig"; sourceTree = "<group>"; };
-		E597DEDF6D1E7E7D76083CC3 /* Pods_JustMonikaPreview_JustMonikaView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JustMonikaPreview_JustMonikaView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED14DDE16ABECE57DD658BC6 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL/Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
-		F2C1B5A601DEF0EE3D3E6C97 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonika-JustMonikaGL/Pods-JustMonika-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
+		BDE8E6A253D519005F87AF3A /* Pods-JustMonika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika.release.xcconfig"; path = "Target Support Files/Pods-JustMonika/Pods-JustMonika.release.xcconfig"; sourceTree = "<group>"; };
+		C21473527FB785A62FDA48F0 /* Pods-JustMonika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonika.debug.xcconfig"; path = "Target Support Files/Pods-JustMonika/Pods-JustMonika.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,9 +160,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB113592393EF6600E0FA7E /* libJustMonikaGL.a in Frameworks */,
-				9FB1135E2393EF8400E0FA7E /* OpenGL.framework in Frameworks */,
-				BAEF07B16F50F3CC34BE496E /* libPods-JustMonika.a in Frameworks */,
+				9F242B8023B279F000EF94D7 /* JustMonikaGL.framework in Frameworks */,
+				7F1DE1403B2FBF0F2C40A9A8 /* libPods-JustMonika.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,12 +172,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FB1133C2393EE6B00E0FA7E /* Frameworks */ = {
+		9F242B6023B275EE00EF94D7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB113552393EEB500E0FA7E /* OpenGL.framework in Frameworks */,
-				4432D1B89FB59236F405F835 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */,
+				9F242B7D23B277D600EF94D7 /* OpenGL.framework in Frameworks */,
+				90311291C839184E9D507CD4 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,8 +192,7 @@
 				9F069CB02381B4090081F32E /* JustMonikaPreview */,
 				9F069C9F2381A7080081F32E /* Products */,
 				9F069CC02381B61D0081F32E /* Frameworks */,
-				EB342EEFBE741A91719B9966 /* Pods */,
-				9FB1130E238F6B6900E0FA7E /* Recovered References */,
+				D17BA13CEB5FA06B26B13846 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -199,7 +201,7 @@
 			children = (
 				9F069C9E2381A7080081F32E /* JustMonika.saver */,
 				9F069CAF2381B4090081F32E /* JustMonikaPreview.app */,
-				9FB1133E2393EE6B00E0FA7E /* libJustMonikaGL.a */,
+				9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -240,17 +242,10 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9FB113612393EFBB00E0FA7E /* liblibpng.a */,
-				9FB1135F2393EF9400E0FA7E /* liblibpng.a */,
-				9FB1135C2393EF7900E0FA7E /* libPods-JustMonikaGL2.a */,
 				9F3FC447238A14A500AD0621 /* AppKit.framework */,
 				9F3FC436238A118000AD0621 /* OpenGL.framework */,
-				9F0FE1772382E5E5001139B3 /* QuartzCore.framework */,
-				CF9DE3BE4298E035E0EEFC0A /* libPods-JustMonika.a */,
-				C9541CC2A5C677AD73A0528C /* Pods_JustMonikaPreview.framework */,
-				E597DEDF6D1E7E7D76083CC3 /* Pods_JustMonikaPreview_JustMonikaView.framework */,
-				3BA8F41D8837D7947CB187D3 /* libPods-JustMonikaGL.a */,
-				13128A2B0D85941DE5D29895 /* libPods-JustMonika-JustMonikaGL.a */,
+				89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */,
+				707419F7FEE43A90343AC9DB /* libPods-JustMonika-JustMonikaGL.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -301,16 +296,9 @@
 				9F3FC406238A089100AD0621 /* include */,
 				9F3FC407238A08A700AD0621 /* src */,
 				9FB113182392EF1B00E0FA7E /* res */,
+				9F242B7E23B2780600EF94D7 /* Info.plist */,
 			);
 			path = JustMonikaGL;
-			sourceTree = "<group>";
-		};
-		9FB1130E238F6B6900E0FA7E /* Recovered References */ = {
-			isa = PBXGroup;
-			children = (
-				C50AB54381E8BBC188B4F259 /* Pods_JustMonikaPreview_JustMonikaView_JustMonikaGL.framework */,
-			);
-			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		9FB113182392EF1B00E0FA7E /* res */ = {
@@ -322,23 +310,13 @@
 			path = res;
 			sourceTree = "<group>";
 		};
-		EB342EEFBE741A91719B9966 /* Pods */ = {
+		D17BA13CEB5FA06B26B13846 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A4320E4125E0231127A77F32 /* Pods-JustMonikaView.debug.xcconfig */,
-				938938CB9F5AA65C1FBCB64C /* Pods-JustMonikaView.release.xcconfig */,
-				5702F484A3EC823DEA115B02 /* Pods-JustMonikaView-JustMonikaGL.debug.xcconfig */,
-				88AE5418CE87F5144D533BE1 /* Pods-JustMonikaView-JustMonikaGL.release.xcconfig */,
-				ED14DDE16ABECE57DD658BC6 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.debug.xcconfig */,
-				2F0F20E3CB2FB021357A8125 /* Pods-JustMonikaPreview-JustMonikaView-JustMonikaGL.release.xcconfig */,
-				4E6A5A7AF657B08A2D2B3053 /* Pods-JustMonikaGL2.debug.xcconfig */,
-				383C9FF4941F97F8D93F387C /* Pods-JustMonikaGL2.release.xcconfig */,
-				D0E4D4E079F84ADD19BCBB64 /* Pods-JustMonika.debug.xcconfig */,
-				21BF6592F18A5A56754ED57D /* Pods-JustMonika.release.xcconfig */,
-				BB037B4CA97DA6D49C1A16D8 /* Pods-JustMonika-JustMonikaGL2.debug.xcconfig */,
-				CEEA4767870A6CCC13257F70 /* Pods-JustMonika-JustMonikaGL2.release.xcconfig */,
-				F2C1B5A601DEF0EE3D3E6C97 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */,
-				D7FF6D891AD86FB8405A2460 /* Pods-JustMonika-JustMonikaGL.release.xcconfig */,
+				C21473527FB785A62FDA48F0 /* Pods-JustMonika.debug.xcconfig */,
+				BDE8E6A253D519005F87AF3A /* Pods-JustMonika.release.xcconfig */,
+				53602FE507F4F77028C3C821 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */,
+				3217C32AC8FB40E8770CA75B /* Pods-JustMonika-JustMonikaGL.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -356,20 +334,20 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FB1133A2393EE6B00E0FA7E /* Headers */ = {
+		9F242B5E23B275EE00EF94D7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB113422393EE8400E0FA7E /* JustMonikaGL.h in Headers */,
-				9FB113442393EE9600E0FA7E /* context.h in Headers */,
-				9FB113452393EE9600E0FA7E /* init.h in Headers */,
-				9FB113462393EE9600E0FA7E /* draw.h in Headers */,
-				9FB113472393EE9600E0FA7E /* opengl.h in Headers */,
-				9FB113482393EE9600E0FA7E /* matrix.h in Headers */,
-				9FB113492393EE9600E0FA7E /* shader.h in Headers */,
-				9FB1134A2393EE9600E0FA7E /* texture.h in Headers */,
-				9FB1134B2393EE9600E0FA7E /* resource.h in Headers */,
-				9FB1134C2393EE9600E0FA7E /* timer.h in Headers */,
+				9F242B6B23B276B300EF94D7 /* JustMonikaGL.h in Headers */,
+				9F242B6C23B276C000EF94D7 /* context.h in Headers */,
+				9F242B6D23B276C200EF94D7 /* init.h in Headers */,
+				9F242B6E23B276C500EF94D7 /* draw.h in Headers */,
+				9F242B6F23B276C900EF94D7 /* opengl.h in Headers */,
+				9F242B7023B276CB00EF94D7 /* matrix.h in Headers */,
+				9F242B7123B276D000EF94D7 /* shader.h in Headers */,
+				9F242B7223B276D600EF94D7 /* texture.h in Headers */,
+				9F242B7323B276D900EF94D7 /* resource.h in Headers */,
+				9F242B7423B276DB00EF94D7 /* timer.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -380,16 +358,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9F069CA82381A7080081F32E /* Build configuration list for PBXNativeTarget "JustMonika" */;
 			buildPhases = (
-				91FE7EF179D18938A7D387C0 /* [CP] Check Pods Manifest.lock */,
+				67AF41F6CC5F83726B1471B6 /* [CP] Check Pods Manifest.lock */,
 				9F069C992381A7080081F32E /* Headers */,
 				9F069C9A2381A7080081F32E /* Sources */,
 				9F069C9B2381A7080081F32E /* Frameworks */,
 				9F069C9C2381A7080081F32E /* Resources */,
+				9F242B8423B279F000EF94D7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9FB1135B2393EF6600E0FA7E /* PBXTargetDependency */,
+				9F242B8323B279F000EF94D7 /* PBXTargetDependency */,
 			);
 			name = JustMonika;
 			productName = JustMonika;
@@ -415,23 +394,25 @@
 			productReference = 9F069CAF2381B4090081F32E /* JustMonikaPreview.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9FB1133D2393EE6B00E0FA7E /* JustMonikaGL */ = {
+		9F242B6223B275EE00EF94D7 /* JustMonikaGL */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9FB1133F2393EE6B00E0FA7E /* Build configuration list for PBXNativeTarget "JustMonikaGL" */;
+			buildConfigurationList = 9F242B6823B275EE00EF94D7 /* Build configuration list for PBXNativeTarget "JustMonikaGL" */;
 			buildPhases = (
-				9ACE1FB53035082880019C11 /* [CP] Check Pods Manifest.lock */,
-				9FB1133A2393EE6B00E0FA7E /* Headers */,
-				9FB1133B2393EE6B00E0FA7E /* Sources */,
-				9FB1133C2393EE6B00E0FA7E /* Frameworks */,
+				CA491EC2226C6DB07B0C1534 /* [CP] Check Pods Manifest.lock */,
+				9F242B5E23B275EE00EF94D7 /* Headers */,
+				9F242B5F23B275EE00EF94D7 /* Sources */,
+				9F242B6023B275EE00EF94D7 /* Frameworks */,
+				9F242B6123B275EE00EF94D7 /* Resources */,
+				9FCA72AE23B2A0FD0063E773 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = JustMonikaGL;
-			productName = JustMonikaGL2;
-			productReference = 9FB1133E2393EE6B00E0FA7E /* libJustMonikaGL.a */;
-			productType = "com.apple.product-type.library.static";
+			productName = JustMonikaGL;
+			productReference = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
@@ -448,7 +429,7 @@
 					9F069CAE2381B4090081F32E = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
-					9FB1133D2393EE6B00E0FA7E = {
+					9F242B6223B275EE00EF94D7 = {
 						CreatedOnToolsVersion = 11.2.1;
 					};
 				};
@@ -467,8 +448,8 @@
 			projectRoot = "";
 			targets = (
 				9F069C9D2381A7080081F32E /* JustMonika */,
+				9F242B6223B275EE00EF94D7 /* JustMonikaGL */,
 				9F069CAE2381B4090081F32E /* JustMonikaPreview */,
-				9FB1133D2393EE6B00E0FA7E /* JustMonikaGL */,
 			);
 		};
 /* End PBXProject section */
@@ -480,9 +461,7 @@
 			files = (
 				9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */,
 				9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */,
-				9FB113632393F0D900E0FA7E /* Monika in Resources */,
 				9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */,
-				9FB113642393F0DD00E0FA7E /* Shaders in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,10 +474,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F242B6123B275EE00EF94D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F242B8523B2832100EF94D7 /* Monika in Resources */,
+				9F242B8623B2832400EF94D7 /* Shaders in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		91FE7EF179D18938A7D387C0 /* [CP] Check Pods Manifest.lock */ = {
+		67AF41F6CC5F83726B1471B6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -520,7 +508,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9ACE1FB53035082880019C11 /* [CP] Check Pods Manifest.lock */ = {
+		CA491EC2226C6DB07B0C1534 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -565,33 +553,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9FB1133B2393EE6B00E0FA7E /* Sources */ = {
+		9F242B5F23B275EE00EF94D7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9FB1134D2393EEA800E0FA7E /* context.c in Sources */,
-				9FB1134E2393EEA800E0FA7E /* init.c in Sources */,
-				9FB1134F2393EEA800E0FA7E /* draw.c in Sources */,
-				9FB113502393EEA800E0FA7E /* matrix.c in Sources */,
-				9FB113512393EEA800E0FA7E /* shader.c in Sources */,
-				9FB113522393EEA800E0FA7E /* texture.c in Sources */,
-				9FB113532393EEA800E0FA7E /* resource_macos.m in Sources */,
-				9FB113542393EEA800E0FA7E /* timer.c in Sources */,
+				9F242B7523B276EE00EF94D7 /* context.c in Sources */,
+				9F242B7623B276F000EF94D7 /* init.c in Sources */,
+				9F242B7723B276F300EF94D7 /* draw.c in Sources */,
+				9F242B7823B276F600EF94D7 /* matrix.c in Sources */,
+				9F242B7923B276FA00EF94D7 /* shader.c in Sources */,
+				9F242B7A23B276FD00EF94D7 /* texture.c in Sources */,
+				9F242B7B23B2770000EF94D7 /* resource_macos.m in Sources */,
+				9F242B7C23B2770200EF94D7 /* timer.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		9F242B8323B279F000EF94D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F242B6223B275EE00EF94D7 /* JustMonikaGL */;
+			targetProxy = 9F242B8223B279F000EF94D7 /* PBXContainerItemProxy */;
+		};
 		9FB113352393D8AF00E0FA7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 9F069C9D2381A7080081F32E /* JustMonika */;
 			targetProxy = 9FB113342393D8AF00E0FA7E /* PBXContainerItemProxy */;
-		};
-		9FB1135B2393EF6600E0FA7E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 9FB1133D2393EE6B00E0FA7E /* JustMonikaGL */;
-			targetProxy = 9FB1135A2393EF6600E0FA7E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -718,13 +706,18 @@
 		};
 		9F069CA92381A7080081F32E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D0E4D4E079F84ADD19BCBB64 /* Pods-JustMonika.debug.xcconfig */;
+			baseConfigurationReference = C21473527FB785A62FDA48F0 /* Pods-JustMonika.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -733,13 +726,18 @@
 		};
 		9F069CAA2381A7080081F32E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21BF6592F18A5A56754ED57D /* Pods-JustMonika.release.xcconfig */;
+			baseConfigurationReference = BDE8E6A253D519005F87AF3A /* Pods-JustMonika.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -751,9 +749,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JustMonikaPreview/JustMonikaPreview.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = JustMonikaPreview/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -784,27 +783,58 @@
 			};
 			name = Release;
 		};
-		9FB113402393EE6B00E0FA7E /* Debug */ = {
+		9F242B6923B275EE00EF94D7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F2C1B5A601DEF0EE3D3E6C97 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */;
+			baseConfigurationReference = 53602FE507F4F77028C3C821 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JustMonikaGL/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaGL;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		9FB113412393EE6B00E0FA7E /* Release */ = {
+		9F242B6A23B275EE00EF94D7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D7FF6D891AD86FB8405A2460 /* Pods-JustMonika-JustMonikaGL.release.xcconfig */;
+			baseConfigurationReference = 3217C32AC8FB40E8770CA75B /* Pods-JustMonika-JustMonikaGL.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
-				EXECUTABLE_PREFIX = lib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = JustMonikaGL/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaGL;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -838,11 +868,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9FB1133F2393EE6B00E0FA7E /* Build configuration list for PBXNativeTarget "JustMonikaGL" */ = {
+		9F242B6823B275EE00EF94D7 /* Build configuration list for PBXNativeTarget "JustMonikaGL" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9FB113402393EE6B00E0FA7E /* Debug */,
-				9FB113412393EE6B00E0FA7E /* Release */,
+				9F242B6923B275EE00EF94D7 /* Debug */,
+				9F242B6A23B275EE00EF94D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
