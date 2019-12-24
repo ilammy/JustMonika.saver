@@ -102,17 +102,6 @@
     if (sender == self.blurSlider) {
         self.blurText.doubleValue = self.blurSlider.doubleValue;
     }
-
-    struct just_monika_settings settings = {
-        .offsetX = self.offsetXSlider.doubleValue,
-        .offsetY = self.offsetYSlider.doubleValue,
-        .biasA = self.biasAText.doubleValue,
-        .biasB = self.biasBText.doubleValue,
-        .scaleA = self.scaleAText.doubleValue,
-        .scaleB = self.scaleBText.doubleValue,
-        .blur_parameter = self.blurText.doubleValue,
-    };
-    [self.view.monika configureWith:&settings];
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath

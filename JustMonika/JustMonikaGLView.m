@@ -58,13 +58,6 @@
     just_monika_stop_animation(self.monika);
 }
 
-#pragma mark - Configuration API
-
-- (void)configureWith:(const struct just_monika_settings *)settings
-{
-    just_monika_configure(self.monika, settings);
-}
-
 #pragma mark - NSOpenGLView overrides
 
 - (void)prepareOpenGL

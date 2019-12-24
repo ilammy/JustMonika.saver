@@ -10,9 +10,6 @@ uniform sampler2DRect monika_bg;
 uniform sampler2DRect monika_bg_highlight;
 uniform float time;
 
-uniform float offsetX;
-uniform float offsetY;
-
 const vec2 imageSize = vec2(1280.0, 720.0);
 
 vec4 getPixel(in sampler2DRect sampler, in vec2 uv)
@@ -96,11 +93,6 @@ float monika_alpha()
 {
     return pow(sin(time / 8.0), 64.0) * 1.4;
 }
-
-uniform float biasA;
-uniform float biasB;
-uniform float scaleA;
-uniform float scaleB;
 
 void main()
 {

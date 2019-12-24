@@ -50,14 +50,6 @@ static void draw_into_framebuffer(struct just_monika *context)
 
     glUniform1f(context->time, clock_seconds_elapsed(&context->clock));
 
-    glUniform1f(context->offsetX_location, context->offsetX);
-    glUniform1f(context->offsetY_location, context->offsetY);
-
-    glUniform1f(context->biasA_location, context->biasA);
-    glUniform1f(context->biasB_location, context->biasB);
-    glUniform1f(context->scaleA_location, context->scaleA);
-    glUniform1f(context->scaleB_location, context->scaleB);
-
     /* Do actual drawing now... */
 
     glEnableVertexAttribArray(context->screen_xy_location);
@@ -100,8 +92,7 @@ static void transfer_to_screen(struct just_monika *context)
                        GL_TRUE, /* row-major order */
                        context->xy_transform_matrix);
 
-    glUniform1f(context->blur_parameter_location, context->blur_parameter);
-    glUniform1i(context->viewport_use_blur_location, true);
+    glUniform1f(context->blur_radius_location, context->blur_radius);
 
     /* Do drawing once more */
 

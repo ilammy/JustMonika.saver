@@ -110,8 +110,7 @@ static void init_shader_program(struct just_monika *context)
 
     context->screen_sampler = glGetUniformLocation(context->viewport_program, "sampler");
 
-    context->viewport_use_blur_location = glGetUniformLocation(context->viewport_program, "useBlur");
-    context->blur_parameter_location = glGetUniformLocation(context->viewport_program, "blurParameter");
+    context->blur_radius_location = glGetUniformLocation(context->viewport_program, "blurRadius");
 
     /* screen_program locations */
 
@@ -125,14 +124,6 @@ static void init_shader_program(struct just_monika *context)
     context->maskb_sampler = glGetUniformLocation(context->screen_program, "maskb");
 
     context->time = glGetUniformLocation(context->screen_program, "time");
-
-    context->offsetX_location = glGetUniformLocation(context->screen_program, "offsetX");
-    context->offsetY_location = glGetUniformLocation(context->screen_program, "offsetY");
-
-    context->biasA_location = glGetUniformLocation(context->screen_program, "biasA");
-    context->biasB_location = glGetUniformLocation(context->screen_program, "biasB");
-    context->scaleA_location = glGetUniformLocation(context->screen_program, "scaleA");
-    context->scaleB_location = glGetUniformLocation(context->screen_program, "scaleB");
 }
 
 static GLuint load_texture_from_resource(const char *name)
@@ -248,11 +239,8 @@ int just_monika_set_viewport(struct just_monika *context, unsigned width, unsign
 
     init_xy_matrix(context);
 
-    /*
-     * Adapt the blur radius to viewport width. We need more blur for smaller
-     * viewports to look better.
-     */
-    context->blur_parameter = blur_radius_for_width(width);
+    /* We need more blur for smaller viewports to look better */
+    context->blur_radius = blur_radius_for_width(width);
 
     return 0;
 }

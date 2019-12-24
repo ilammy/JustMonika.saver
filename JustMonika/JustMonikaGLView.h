@@ -23,8 +23,6 @@ IB_DESIGNABLE
 - (void)startAnimation;
 - (void)stopAnimation;
 
-- (void)configureWith:(const struct just_monika_settings *)settings;
-
 @end
 
 #pragma clang diagnostic pop

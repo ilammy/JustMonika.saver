@@ -3,17 +3,18 @@
 in  vec2 UV;
 out vec4 color;
 
-uniform bool useBlur;
-uniform float blurParameter;
+uniform float blurRadius;
 uniform sampler2DRect sampler;
 
 // Use a simple Gaussian blur with a 3x3 kernel. This can be done more
 // efficiently with two separate passes, but FBOs are such a royal pain
 // to deal with that I'd rather convolute directly. Since the kernel is
 // small, don't use too big radius to avoid ringing.
-vec4 gaussianBlur(in sampler2DRect sampler, in vec2 uv)
+vec4 gaussianBlur(in sampler2DRect sampler, in vec2 uv, in float r)
 {
-    float r = blurParameter;
+    if (r == 0.0) {
+        return texture(sampler, uv);
+    }
     float d = r * 0.707107;
     vec3 soffset = vec3(-r, 0.0, r);
     vec2 doffset = vec2(-d, d);
@@ -32,11 +33,6 @@ vec4 gaussianBlur(in sampler2DRect sampler, in vec2 uv)
 
 void main()
 {
-    // If we're drawing a preview then blur the output for nicer downsampling,
-    // otherwise just pass through color as is
-    if (useBlur) {
-        color = gaussianBlur(sampler, UV);
-    } else {
-        color = texture(sampler, UV);
-    }
+    // Blur the output for for nicer downsampling when drawing preview
+    color = gaussianBlur(sampler, UV, blurRadius);
 }
