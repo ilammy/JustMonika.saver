@@ -1,10 +1,6 @@
-//
-//  main.m
-//  JustMonikaPreview
-//
-//  Created by Alexei Lozovsky on 2019-11-17.
-//  Copyright © 2019 ilammy's tearoom. All rights reserved.
-//
+// SPDX-License-Identifier: GPL-3.0-or-later
+// JustMonikaPreview
+// Copyright (c) 2019 ilammy's tearoom
 
 #import <Cocoa/Cocoa.h>
 

@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: Apache-2.0
+// JustMonikaGL
+// Copyright (c) 2019 ilammy's tearoom
+
 #version 330 core
 
 in vec2 UV;

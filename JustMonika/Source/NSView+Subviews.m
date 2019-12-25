@@ -1,10 +1,6 @@
-//
-//  NSView+Subviews.m
-//  JustMonika
-//
-//  Created by Alexei Lozovsky on 2019-11-23.
-//  Copyright © 2019 ilammy's tearoom. All rights reserved.
-//
+// SPDX-License-Identifier: GPL-3.0-or-later
+// JustMonika.saver
+// Copyright (c) 2019 ilammy's tearoom
 
 #import "NSView+Subviews.h"
 

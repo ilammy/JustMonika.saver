@@ -1,10 +1,5 @@
-//
-//  resource_macos.m
-//  JustMonikaGL
-//
-//  Created by Alexei Lozovsky on 2019-11-30.
-//  Copyright © 2019 ilammy's tearoom. All rights reserved.
-//
+/* SPDX-License-Identifier: Apache-2.0 */
+/* JustMonikaGL, (c) 2019 ilammy's tearoom */
 
 #include "resource.h"
 

@@ -1,10 +1,5 @@
-//
-//  matrix.h
-//  JustMonikaGL
-//
-//  Created by Alexei Lozovsky on 2019-11-26.
-//  Copyright © 2019 ilammy's tearoom. All rights reserved.
-//
+/* SPDX-License-Identifier: Apache-2.0 */
+/* JustMonikaGL, (c) 2019 ilammy's tearoom */
 
 #ifndef JUST_MONIKA_GL_PRIVATE_MATRIX_H
 #define JUST_MONIKA_GL_PRIVATE_MATRIX_H

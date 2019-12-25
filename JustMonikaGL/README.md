@@ -45,3 +45,10 @@ This code is intended to be easily portable to UNIX-like systems with a C99 comp
 
 Resource loading is platform-specific.
 Bundle files from [`res`](res) directory, implement loading interface from [`resource.h`](src/resource.h).
+
+## License
+
+The library is distributed under the terms of [**Apache Software License**](LICENSE) version 2.0.
+
+Resources in [`res/Monika`](res/Monika) directory are original DDLC assets.
+Please follow [Team Salvato IP Guidelines](http://teamsalvato.com/ip-guidelines/) when distibuting them.
