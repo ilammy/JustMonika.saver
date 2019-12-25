@@ -41,6 +41,7 @@
 		9F242B8523B2832100EF94D7 /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
 		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9F33485B23B3C25200368291 /* monika.chr in Resources */ = {isa = PBXBuildFile; fileRef = 9F33485A23B3C25200368291 /* monika.chr */; };
 		9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* Monika.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
@@ -123,6 +124,7 @@
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F242B7E23B2780600EF94D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
 		9F3FC3F223891D8B00AD0621 /* Monika.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Monika.xib; sourceTree = "<group>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		9F33485523B2D56A00368291 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F33485A23B3C25200368291 /* monika.chr */,
 				9F3FC3F223891D8B00AD0621 /* Monika.xib */,
 				9F242B5A23B26D7800EF94D7 /* thumbnail.png */,
 				9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */,
@@ -493,8 +496,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */,
+				9F33485B23B3C25200368291 /* monika.chr in Resources */,
 				9F3FC3F323891D8B00AD0621 /* Monika.xib in Resources */,
+				9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */,
 				9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
