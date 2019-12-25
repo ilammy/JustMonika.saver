@@ -15,6 +15,7 @@
 @interface JustMonikaView ()
 
 @property (strong) IBOutlet NSWindow *settingsSheet;
+@property (weak) IBOutlet NSTextField *textOfDoom;
 
 @property (weak) JustMonikaGLView *monika;
 @property (strong) JustMonikaSettings *settings;
@@ -67,8 +68,12 @@ static const float fps = 30.0;
     self.settings = [JustMonikaSettings new];
     // Screen savers are loaded as plugins so their main bundle is not
     // this one, but the host bundle. We need to use the name directly.
-    NSBundle *bundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonika"];
-    [bundle loadNibNamed:@"Monika" owner:self topLevelObjects:nil];
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    [bundle loadNibNamed:@"sheet" owner:self topLevelObjects:nil];
+    // Fill in the placeholder for the user name
+    self.textOfDoom.stringValue =
+        [self.textOfDoom.stringValue stringByReplacingOccurrencesOfString:@"[player]"
+                                                               withString:NSUserName()];
 }
 
 - (void)initMonikaView

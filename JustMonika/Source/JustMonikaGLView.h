@@ -15,8 +15,6 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated"
 
-struct just_monika_settings;
-
 @interface JustMonikaGLView : NSOpenGLView
 
 - (instancetype)initWithFrame:(NSRect)frameRect;

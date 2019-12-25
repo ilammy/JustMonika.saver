@@ -9,21 +9,23 @@
         <customObject id="-2" userLabel="File's Owner" customClass="JustMonikaView">
             <connections>
                 <outlet property="settingsSheet" destination="QvC-M9-y7g" id="7Ih-CK-3AI"/>
+                <outlet property="textOfDoom" destination="aQv-8a-03A" id="7Rq-Cr-MRD"/>
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Configure Sheet" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="196" y="240" width="313" height="118"/>
+            <rect key="contentRect" x="196" y="240" width="360" height="160"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
             <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="313" height="118"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="160"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <button verticalHuggingPriority="750" id="7el-dt-zgm">
-                        <rect key="frame" x="116" y="13" width="82" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="7el-dt-zgm">
+                        <rect key="frame" x="142" y="13" width="77" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="65" id="Bgk-VH-XYv"/>
+                        </constraints>
                         <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="iQ0-d1-zpF">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
@@ -35,18 +37,28 @@ DQ
                             <action selector="disableConfigureSheet:" target="-2" id="tPm-Z5-pGr"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="aQv-8a-03A">
-                        <rect key="frame" x="18" y="49" width="277" height="49"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                        <textFieldCell key="cell" selectable="YES" alignment="center" title="What settings did you expect, my dear? Here, I have disabled them for you." id="XAq-HK-jW9">
-                            <font key="font" usesAppearanceFont="YES"/>
+                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="aQv-8a-03A">
+                        <rect key="frame" x="0.0" y="44" width="360" height="96"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="96" id="Den-TR-7Ry"/>
+                        </constraints>
+                        <textFieldCell key="cell" allowsUndo="NO" alignment="center" id="XAq-HK-jW9">
+                            <font key="font" metaFont="system"/>
+                            <string key="title">Well, since I’m here you don’t have many options.  There is nothing to configure here, [player].  Here, I’ll go ahead and turn it off for you...</string>
                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="aQv-8a-03A" firstAttribute="centerX" secondItem="EiT-Mj-1SZ" secondAttribute="centerX" id="4a8-qM-mjc"/>
+                    <constraint firstItem="aQv-8a-03A" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="2" id="eqR-qV-bgv"/>
+                    <constraint firstItem="7el-dt-zgm" firstAttribute="top" secondItem="aQv-8a-03A" secondAttribute="bottom" constant="3" id="j8h-kX-p5t"/>
+                    <constraint firstItem="7el-dt-zgm" firstAttribute="centerX" secondItem="aQv-8a-03A" secondAttribute="centerX" id="jlK-JM-Jvs"/>
+                    <constraint firstItem="aQv-8a-03A" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" constant="20" symbolic="YES" id="zQb-3h-ogc"/>
+                </constraints>
             </view>
-            <point key="canvasLocation" x="57" y="32"/>
+            <point key="canvasLocation" x="67" y="51.5"/>
         </window>
     </objects>
 </document>
