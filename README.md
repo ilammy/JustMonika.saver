@@ -4,13 +4,13 @@ _A little bit of Monika in my life_
 
 ## 📦 Installation
 
-### Manual
+### macOS
 
 1. ~~Download the screen saver here~~ (oh, that’s not possible now, so build it yourself)
-2. Open **JustMonika.saver** by double-clicking.
-3. “_JustMonika.saver_ can’t be opened because it is from an unidentified developer” appears, it’s OK.
-4. Open _System Preferences_ | _Security & Privacy_, _General_ tab.
-5. In the bottom there should be a similar banner with “Open Anyway” button. Click it.
+2. Close _System Preferences_ window if you have it open.
+3. Open **JustMonika.saver** by right-clicking it and selecting _Open_ in the dropdown menu.
+4. “_JustMonika.saver_ can’t be opened because it is from an unidentified developer” appears. This is [Gatekeeper security feature](https://support.apple.com/en-us/HT202491) which activates because the screen saver has not been notarized by Apple.
+5. Press _Open_ in the dialog box to install the screen saver.
 
 ## 🛠 Building
 
