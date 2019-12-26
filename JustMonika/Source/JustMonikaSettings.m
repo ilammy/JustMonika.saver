@@ -24,7 +24,9 @@
         // recommends to use bundle identifier as a module name.
         NSString *moduleName = [NSBundle bundleForClass:self.class].bundleIdentifier;
         self.defaults = [ScreenSaverDefaults defaultsForModuleWithName:moduleName];
-
+        // Also note that we need to explicity call "synchronize" because
+        // otherwise the settings might not end up being persisted.
+        [self.defaults synchronize];
         [self.defaults registerDefaults:@{
             settingsSheetEnabledKey: @YES,
         }];
