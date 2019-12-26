@@ -27,6 +27,7 @@ Screen saver as a whole is distributed under the terms of [**GNU GPL**](LICENSE)
 Screen saver OpenGL library is available under the terms of [**Apache Software License**](JustMonikaGL/LICENSE) version 2.0.
 
 We use and distribute [**libpng**](http://www.libpng.org/pub/png/libpng.html) as a part of the screen saver binaries for macOS.
+[**Sparkle**](https://sparkle-project.org) framework is also embedded for automatic updates on macOS.
 
 This screen saver is a fan work that includes original DDLC assets.
 They are hosted here and distributed in good faith,

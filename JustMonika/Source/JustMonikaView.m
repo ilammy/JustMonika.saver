@@ -6,6 +6,7 @@
 
 #import "JustMonikaGLView.h"
 #import "JustMonikaSettings.h"
+#import "JustMonikaUpdater.h"
 #import "NSView+Subviews.h"
 
 @interface JustMonikaView ()
@@ -17,6 +18,8 @@
 @property (strong) JustMonikaSettings *settings;
 
 @property (nonatomic, weak) NSTextField *versionText;
+
+@property (strong) JustMonikaUpdater *updater;
 
 @end
 
@@ -34,7 +37,7 @@ static const float fps = 30.0;
         [self initMonikaView];
         [self initSettings];
         [self initVersionText];
-        [self setShowVersionText:isPreview];
+        [self initUpdater];
     }
     return self;
 }
@@ -53,6 +56,7 @@ static const float fps = 30.0;
     [self initMonikaView];
     [self initSettings];
     [self initVersionText];
+    [self initUpdater];
 }
 
 // Called by Interface Builder for previews
@@ -63,6 +67,7 @@ static const float fps = 30.0;
     [self initMonikaView];
     [self initSettings];
     [self initVersionText];
+    [self initUpdater];
 }
 
 - (void)initSettings
@@ -86,6 +91,13 @@ static const float fps = 30.0;
     [self addSubview:monika];
     [self setMonika:monika];
     [self setAnimationTimeInterval:1.0/fps];
+}
+
+#pragma mark - Automatic updates
+
+- (void)initUpdater
+{
+    self.updater = [JustMonikaUpdater forView:self];
 }
 
 #pragma mark - Version display
@@ -117,6 +129,7 @@ static const CGFloat kVersionTextMargin = 3.0f;
     // Now actually put it there and save for later use
     [self addSubview:versionText];
     self.versionText = versionText;
+    self.showVersionText = self.isPreview;
 }
 
 - (BOOL)showVersionText

@@ -22,5 +22,9 @@
 	<string>Copyright © 2019 ilammy&apos;s tearoom. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string>JustMonikaView</string>
+	<key>SUFeedURL</key>
+	<string>https://gist.githubusercontent.com/ilammy/2acde6be583fc4c516da48c41c5e7335/raw/686c3fc2490eabf1bfeb52fd6c818a1e42b5bc51/appcast.xml</string>
+	<key>SUPublicEDKey</key>
+	<string>kh7dRpBNkgz73AEQPFi6ZvUFBCa7bZ12xzNo+DBN/no=</string>
 </dict>
 </plist>
