@@ -16,6 +16,8 @@
 @property (weak) JustMonikaGLView *monika;
 @property (strong) JustMonikaSettings *settings;
 
+@property (nonatomic, weak) NSTextField *versionText;
+
 @end
 
 @implementation JustMonikaView
@@ -31,6 +33,8 @@ static const float fps = 30.0;
     if (self) {
         [self initMonikaView];
         [self initSettings];
+        [self initVersionText];
+        [self setShowVersionText:isPreview];
     }
     return self;
 }
@@ -48,6 +52,7 @@ static const float fps = 30.0;
 
     [self initMonikaView];
     [self initSettings];
+    [self initVersionText];
 }
 
 // Called by Interface Builder for previews
@@ -57,6 +62,7 @@ static const float fps = 30.0;
 
     [self initMonikaView];
     [self initSettings];
+    [self initVersionText];
 }
 
 - (void)initSettings
@@ -80,6 +86,54 @@ static const float fps = 30.0;
     [self addSubview:monika];
     [self setMonika:monika];
     [self setAnimationTimeInterval:1.0/fps];
+}
+
+#pragma mark - Version display
+
+static const CGFloat kVersionTextMargin = 3.0f;
+
+- (void)initVersionText
+{
+    NSTextField *versionText = [[NSTextField alloc] initWithFrame:NSZeroRect];
+    versionText.stringValue = self.versionString;
+    // Transparent and non-interactive text label
+    versionText.bezeled = NO;
+    versionText.drawsBackground = NO;
+    versionText.editable = NO;
+    versionText.selectable = NO;
+    // Use light color, we're on black background
+    versionText.textColor = NSColor.lightGrayColor;
+    versionText.backgroundColor = NSColor.clearColor;
+    versionText.font = [NSFont labelFontOfSize:NSFont.smallSystemFontSize];
+    // Keep the label in the bottom right corner
+    [versionText sizeToFit];
+    CGFloat x = NSWidth(self.frame) - NSWidth(versionText.frame) - kVersionTextMargin;
+    CGFloat y = kVersionTextMargin;
+    CGFloat w = NSWidth(versionText.frame);
+    CGFloat h = NSHeight(versionText.frame);
+    versionText.frame = NSMakeRect(x, y, w, h);
+    versionText.autoresizingMask = NSViewMinXMargin | NSViewMaxYMargin;
+
+    // Now actually put it there and save for later use
+    [self addSubview:versionText];
+    self.versionText = versionText;
+}
+
+- (BOOL)showVersionText
+{
+    return !self.versionText.hidden;
+}
+
+- (void)setShowVersionText:(BOOL)showVersionText
+{
+    self.versionText.hidden = !showVersionText;
+}
+
+- (NSString *)versionString
+{
+    NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
+    NSString *version = thisBundle.infoDictionary[@"CFBundleShortVersionString"];
+    return [NSString stringWithFormat:@"v%@", version];
 }
 
 #pragma mark - Animated drawing

@@ -759,6 +759,17 @@
                             <action selector="resetSettings:" target="Voe-Tx-rLC" id="bkk-TP-o9L"/>
                         </connections>
                     </button>
+                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-nG-SkE">
+                        <rect key="frame" x="18" y="214" width="94" height="18"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="check" title="Version text" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0CV-sb-mF9">
+                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <binding destination="Voe-Tx-rLC" name="value" keyPath="self.view.showVersionText" id="hsA-gf-sPP"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="H5M-dD-ZGy" firstAttribute="top" secondItem="eYc-Tf-MdA" secondAttribute="top" constant="20" symbolic="YES" id="4QS-FM-A0g"/>

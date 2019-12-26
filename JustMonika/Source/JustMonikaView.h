@@ -7,4 +7,6 @@
 IB_DESIGNABLE
 @interface JustMonikaView : ScreenSaverView
 
+@property (nonatomic) BOOL showVersionText;
+
 @end
