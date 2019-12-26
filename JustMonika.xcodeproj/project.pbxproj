@@ -749,6 +749,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
@@ -756,6 +757,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MARKETING_VERSION = "1.1-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -769,6 +771,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
@@ -776,6 +779,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
+				MARKETING_VERSION = "1.1-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = saver;
@@ -828,7 +832,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -842,6 +846,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = "1.1-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaGL;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
@@ -856,7 +861,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -870,6 +875,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = "1.1-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonikaGL;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
