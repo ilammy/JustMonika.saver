@@ -15,6 +15,8 @@
 		9F069CB52381B40C0081F32E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB42381B40C0081F32E /* Assets.xcassets */; };
 		9F069CB82381B40C0081F32E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB62381B40C0081F32E /* MainMenu.xib */; };
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
+		9F1A08AF23B57F13007B6A80 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; };
+		9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
 		9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
 		9F242B6B23B276B300EF94D7 /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -76,6 +78,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */,
+				9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,6 +124,7 @@
 		9F069CBA2381B40C0081F32E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustMonikaPreview.entitlements; sourceTree = "<group>"; };
 		9F1A08A123B3E264007B6A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F1A08AE23B57F13007B6A80 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Pods/Sparkle/Sparkle.framework; sourceTree = "<group>"; };
 		9F242B5A23B26D7800EF94D7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F242B8023B279F000EF94D7 /* JustMonikaGL.framework in Frameworks */,
+				9F1A08AF23B57F13007B6A80 /* Sparkle.framework in Frameworks */,
 				7F1DE1403B2FBF0F2C40A9A8 /* libPods-JustMonika.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,6 +237,7 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F1A08AE23B57F13007B6A80 /* Sparkle.framework */,
 				9F3FC447238A14A500AD0621 /* AppKit.framework */,
 				9F3FC436238A118000AD0621 /* OpenGL.framework */,
 				89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */,
@@ -751,9 +757,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Sparkle",
+				);
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
@@ -773,9 +784,14 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Sparkle",
+				);
 				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
 					"@executable_path/../Frameworks",
 					"@loader_path/../Frameworks",
 				);
