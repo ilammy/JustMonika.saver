@@ -14,6 +14,7 @@
 @property (weak) JustMonikaView *view;
 
 @property (nonatomic) BOOL notificationsAllowed;
+@property (strong) NSString *updateAlertCategory;
 
 @end
 
@@ -28,6 +29,7 @@
         self.view = view;
 
         [self requestNotificationPermission];
+        [self registerNotificationCategories];
     }
     return self;
 }
@@ -57,6 +59,44 @@
                           completionHandler:^(BOOL granted, NSError *error) {
         self.notificationsAllowed = granted;
     }];
+}
+
+static NSString *kUpdateAlertCategoryID = @"net.ilammy.JustMonika.UpdateAlert";
+static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK";
+
+- (void)registerNotificationCategories
+{
+    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
+
+    // Initially I wanted to display the notification as a simple alert with
+    // no action buttons. However, clicking the notification (or any actions)
+    // when the application is not running results in the application
+    // being relaunched. That is, when the screen saver finally closes and
+    // the user click the notification, the screen saver activates again,
+    // locking the screen back! Moreover, in order to react to the action
+    // we have to install a delegate early at startup, that's not when our
+    // code executes at all. Therefore we cannot, say, put a button to open
+    // the System Preferences dialog. Even if we could, the screen saver will
+    // still launch. So... let it launch! And hope the user gets the joke.
+    UNNotificationAction *justMonika =
+        [UNNotificationAction actionWithIdentifier:kUpdateAlertActionOKID
+                                             title:@"Just Monika"
+                                           options:UNNotificationActionOptionNone];
+
+    UNNotificationCategory *updateAlert =
+        [UNNotificationCategory categoryWithIdentifier:kUpdateAlertCategoryID
+                                               // macOS displays up to 10 actions
+                                               actions:@[justMonika, justMonika,
+                                                         justMonika, justMonika,
+                                                         justMonika, justMonika,
+                                                         justMonika, justMonika,
+                                                         justMonika, justMonika]
+                                     intentIdentifiers:@[]
+                                               options:UNNotificationCategoryOptionNone];
+
+    self.updateAlertCategory = updateAlert.identifier;
+
+    [center setNotificationCategories:[NSSet setWithObject:updateAlert]];
 }
 
 - (void)notifyAboutUpdate:(SUAppcastItem *)item
@@ -98,13 +138,14 @@
 
 - (NSString *)notificationIDForUpdate:(SUAppcastItem *)item
 {
-    return [@"net.ilammy.JustMonika.UpdateAlert."
-            stringByAppendingString:item.versionString];
+    return [NSString stringWithFormat:@"%@.%@",
+            kUpdateAlertCategoryID, item.versionString];
 }
 
 - (UNNotificationContent *)notificationContentForUpdate:(SUAppcastItem *)item
 {
     UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+    content.categoryIdentifier = self.updateAlertCategory;
     // The space is gold here. We have around 40 characters for the title
     // and then two more lines of text for the body. Keep it short.
     if (item.isCriticalUpdate) {
