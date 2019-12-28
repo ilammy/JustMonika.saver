@@ -219,9 +219,9 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
     }
 
     // If this is a critical update then be a little more persuasive.
-    if (item.isCriticalUpdate) {
+//    if (item.isCriticalUpdate) {
         [self.view showCriticalUpdateBannerForVersion:item.displayVersionString];
-    }
+//    }
 }
 
 @end
