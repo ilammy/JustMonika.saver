@@ -6,7 +6,7 @@
 
 #import <UserNotifications/UserNotifications.h>
 
-#import "JustMonikaView.h"
+#import "JustMonikaViewPrivate.h"
 
 @interface JustMonikaUpdater ()
 
@@ -216,6 +216,11 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
     // Don't bother sending a notification if they were denied by the user.
     if (self.notificationsAllowed) {
         [self notifyAboutUpdate:item];
+    }
+
+    // If this is a critical update then be a little more persuasive.
+    if (item.isCriticalUpdate) {
+        [self.view showCriticalUpdateBannerForVersion:item.displayVersionString];
     }
 }
 

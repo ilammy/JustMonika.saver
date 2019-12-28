@@ -20,6 +20,7 @@
 		9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */; };
 		9F1A08B423B66691007B6A80 /* JustMonikaUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */; };
 		9F1A08BA23B7E25E007B6A80 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; };
+		9F1A08BE23B81164007B6A80 /* JustMonikaViewPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08BD23B8114A007B6A80 /* JustMonikaViewPrivate.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
 		9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
 		9F242B6B23B276B300EF94D7 /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -131,6 +132,7 @@
 		9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaUpdater.h; sourceTree = "<group>"; };
 		9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaUpdater.m; sourceTree = "<group>"; };
 		9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		9F1A08BD23B8114A007B6A80 /* JustMonikaViewPrivate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaViewPrivate.h; sourceTree = "<group>"; };
 		9F242B5A23B26D7800EF94D7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -290,6 +292,7 @@
 			children = (
 				9F069CA12381A7080081F32E /* JustMonikaView.h */,
 				9F069CA32381A7080081F32E /* JustMonikaView.m */,
+				9F1A08BD23B8114A007B6A80 /* JustMonikaViewPrivate.h */,
 				9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */,
 				9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */,
 				9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */,
@@ -383,6 +386,7 @@
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
 				9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */,
 				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
+				9F1A08BE23B81164007B6A80 /* JustMonikaViewPrivate.h in Headers */,
 				9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */,
 				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
 			);

@@ -118,18 +118,24 @@ static const CGFloat kVersionTextMargin = 3.0f;
     versionText.backgroundColor = NSColor.clearColor;
     versionText.font = [NSFont labelFontOfSize:NSFont.smallSystemFontSize];
     // Keep the label in the bottom right corner
-    [versionText sizeToFit];
-    CGFloat x = NSWidth(self.frame) - NSWidth(versionText.frame) - kVersionTextMargin;
-    CGFloat y = kVersionTextMargin;
-    CGFloat w = NSWidth(versionText.frame);
-    CGFloat h = NSHeight(versionText.frame);
-    versionText.frame = NSMakeRect(x, y, w, h);
     versionText.autoresizingMask = NSViewMinXMargin | NSViewMaxYMargin;
 
     // Now actually put it there and save for later use
     [self addSubview:versionText];
     self.versionText = versionText;
     self.showVersionText = self.isPreview;
+    [self repositionVersionText];
+}
+
+- (void)repositionVersionText
+{
+    [self.versionText sizeToFit];
+    NSRect frame = self.versionText.frame;
+    CGFloat x = NSWidth(self.frame) - NSWidth(frame) - kVersionTextMargin;
+    CGFloat y = kVersionTextMargin;
+    CGFloat w = NSWidth(frame);
+    CGFloat h = NSHeight(frame);
+    self.versionText.frame = NSMakeRect(x, y, w, h);
 }
 
 - (BOOL)showVersionText
@@ -140,6 +146,15 @@ static const CGFloat kVersionTextMargin = 3.0f;
 - (void)setShowVersionText:(BOOL)showVersionText
 {
     self.versionText.hidden = !showVersionText;
+}
+
+- (void)showCriticalUpdateBannerForVersion:(NSString *)newVersion
+{
+    self.versionText.textColor = NSColor.systemRedColor;
+    self.versionText.stringValue =
+        [NSString stringWithFormat:@"Critical update available: v%@ (current %@)",
+         newVersion, self.versionString];
+    [self repositionVersionText];
 }
 
 - (NSString *)versionString
