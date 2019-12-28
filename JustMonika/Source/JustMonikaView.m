@@ -124,7 +124,6 @@ static const CGFloat kVersionTextMargin = 3.0f;
     [self addSubview:versionText];
     self.versionText = versionText;
     self.showVersionText = self.isPreview;
-    [self repositionVersionText];
 }
 
 - (void)repositionVersionText
@@ -145,6 +144,9 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
 - (void)setShowVersionText:(BOOL)showVersionText
 {
+    if (showVersionText) {
+        [self repositionVersionText];
+    }
     self.versionText.hidden = !showVersionText;
 }
 
@@ -154,7 +156,7 @@ static const CGFloat kVersionTextMargin = 3.0f;
     self.versionText.stringValue =
         [NSString stringWithFormat:@"Critical update available: v%@ (current %@)",
          newVersion, self.versionString];
-    [self repositionVersionText];
+    self.showVersionText = YES;
 }
 
 - (NSString *)versionString
