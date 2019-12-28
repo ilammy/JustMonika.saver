@@ -19,6 +19,7 @@
 		9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */; };
 		9F1A08B423B66691007B6A80 /* JustMonikaUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */; };
+		9F1A08BA23B7E25E007B6A80 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; };
 		9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
 		9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
 		9F242B6B23B276B300EF94D7 /* JustMonikaGL.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC420238A0BA000AD0621 /* JustMonikaGL.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -129,6 +130,7 @@
 		9F1A08AE23B57F13007B6A80 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Pods/Sparkle/Sparkle.framework; sourceTree = "<group>"; };
 		9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaUpdater.h; sourceTree = "<group>"; };
 		9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaUpdater.m; sourceTree = "<group>"; };
+		9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		9F242B5A23B26D7800EF94D7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F1A08BA23B7E25E007B6A80 /* UserNotifications.framework in Frameworks */,
 				9F242B8023B279F000EF94D7 /* JustMonikaGL.framework in Frameworks */,
 				9F1A08AF23B57F13007B6A80 /* Sparkle.framework in Frameworks */,
 				7F1DE1403B2FBF0F2C40A9A8 /* libPods-JustMonika.a in Frameworks */,
@@ -241,6 +244,7 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */,
 				9F1A08AE23B57F13007B6A80 /* Sparkle.framework */,
 				9F3FC447238A14A500AD0621 /* AppKit.framework */,
 				9F3FC436238A118000AD0621 /* OpenGL.framework */,

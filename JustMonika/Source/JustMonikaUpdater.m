@@ -4,12 +4,16 @@
 
 #import "JustMonikaUpdater.h"
 
+#import <UserNotifications/UserNotifications.h>
+
 #import "JustMonikaView.h"
 
 @interface JustMonikaUpdater ()
 
 @property (strong) SUUpdater *updater;
 @property (weak) JustMonikaView *view;
+
+@property (nonatomic) BOOL notificationsAllowed;
 
 @end
 
@@ -22,6 +26,8 @@
         self.updater = updater;
         self.updater.delegate = self;
         self.view = view;
+
+        [self requestNotificationPermission];
     }
     return self;
 }
@@ -33,6 +39,88 @@
     updater.sendsSystemProfile = NO; // don't you ever dare
     return [[JustMonikaUpdater alloc] initWithUpdater:updater
                                               andView:view];
+}
+
+#pragma mark - User Notifications
+
+// UserNotifications.framework is macOS 10.14+ thing which I'm fine with^W^W
+// submitted to. It's not nice, but I do not have an older version of macOS
+// available so I have no personal reason to support anything older than 10.14
+// which I'm currently running. However, there should be no significant issues
+// with porting all of this to the deprecated NSUserNotification interface.
+
+- (void)requestNotificationPermission
+{
+    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
+
+    [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert
+                          completionHandler:^(BOOL granted, NSError *error) {
+        self.notificationsAllowed = granted;
+    }];
+}
+
+- (void)notifyAboutUpdate:(SUAppcastItem *)item
+{
+    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
+
+    NSString *identifier = [self notificationIDForUpdate:item];
+
+    // If we have already shown a notification for this version then don't
+    // nag the user about it every time when a screen saver is opened,
+    // unless it's a critical update. Unfortunately, there isn't a way
+    // other that waiting for the full list and iterating through it.
+    [center getDeliveredNotificationsWithCompletionHandler:
+     ^(NSArray<UNNotification *> *notifications) {
+        if (!item.isCriticalUpdate) {
+            for (UNNotification *notification in notifications) {
+                if ([notification.request.identifier isEqualToString:identifier]) {
+                    return;
+                }
+            }
+        }
+        // Now that we're sure we're not being annoying without a reason,
+        // show a notification.
+        //
+        // The notification will be sent on behalf of the ScreenSaverEngine
+        // and will display its application icon. This cannot be changed and
+        // is intentional feature of macOS so that the source application
+        // cannot be spoofed for the user.
+        UNNotificationContent *content = [self notificationContentForUpdate:item];
+        UNNotificationRequest *notification =
+            [UNNotificationRequest requestWithIdentifier:identifier
+                                                 content:content
+                                                 trigger:nil];
+
+        [center addNotificationRequest:notification
+                 withCompletionHandler:nil];
+    }];
+}
+
+- (NSString *)notificationIDForUpdate:(SUAppcastItem *)item
+{
+    return [@"net.ilammy.JustMonika.UpdateAlert."
+            stringByAppendingString:item.versionString];
+}
+
+- (UNNotificationContent *)notificationContentForUpdate:(SUAppcastItem *)item
+{
+    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
+    // The space is gold here. We have around 40 characters for the title
+    // and then two more lines of text for the body. Keep it short.
+    if (item.isCriticalUpdate) {
+        content.title =
+            [NSString stringWithFormat:@"Critical Update Available: Monika %@",
+             item.displayVersionString];
+        content.body = @"An important update to this screen saver is available. "
+            @"Please open \"System Preferences\" to install it.";
+    } else {
+        content.title =
+            [NSString stringWithFormat:@"Update Available: Monika %@",
+             item.displayVersionString];
+        content.body = @"A new version of this screen saver is available. "
+            @"Please open \"System Preferences\" to install it.";
+    }
+    return content;
 }
 
 #pragma mark - SUUpdaterDelegate
@@ -72,6 +160,22 @@
                                                forItem:(SUAppcastItem *)item
 {
     return self.view.isPreview;
+}
+
+// Now, if we have found a valid update while we are running in screen saver
+// mode, Sparkle does not show any alerts. However, we would like to notify
+// the user about the update when the screen saver finishes.
+- (void)updater:(SUUpdater *)updater didFindValidUpdate:(SUAppcastItem *)item
+{
+    // If we're running as preview then the user should see an alert instead.
+    if (self.view.isPreview) {
+        return;
+    }
+
+    // Don't bother sending a notification if they were denied by the user.
+    if (self.notificationsAllowed) {
+        [self notifyAboutUpdate:item];
+    }
 }
 
 @end
