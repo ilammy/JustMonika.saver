@@ -107,7 +107,7 @@ static const CGFloat kVersionTextMargin = 3.0f;
 - (void)initVersionText
 {
     NSTextField *versionText = [[NSTextField alloc] initWithFrame:NSZeroRect];
-    versionText.stringValue = self.versionString;
+    versionText.stringValue = [self formatVersion:self.displayVersionString];
     // Transparent and non-interactive text label
     versionText.bezeled = NO;
     versionText.drawsBackground = NO;
@@ -154,16 +154,21 @@ static const CGFloat kVersionTextMargin = 3.0f;
 {
     self.versionText.textColor = NSColor.systemRedColor;
     self.versionText.stringValue =
-        [NSString stringWithFormat:@"Critical update available: v%@ (current %@)",
-         newVersion, self.versionString];
+        [NSString stringWithFormat:@"Critical update available: %@ (current: %@)",
+         [self formatVersion:newVersion],
+         [self formatVersion:self.displayVersionString]];
     self.showVersionText = YES;
 }
 
-- (NSString *)versionString
+- (NSString *)formatVersion:(NSString *)version
+{
+    return [NSString stringWithFormat:@"v%@", version];
+}
+
+- (NSString *)displayVersionString
 {
     NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
-    NSString *version = thisBundle.infoDictionary[@"CFBundleShortVersionString"];
-    return [NSString stringWithFormat:@"v%@", version];
+    return thisBundle.infoDictionary[@"CFBundleShortVersionString"];
 }
 
 #pragma mark - Animated drawing
