@@ -4,17 +4,16 @@
 
 #import "JustMonikaUpdater.h"
 
-#import <UserNotifications/UserNotifications.h>
+#import <Sparkle/Sparkle.h>
 
+#import "JustMonikaNotifications.h"
 #import "JustMonikaView.h"
 
-@interface JustMonikaUpdater ()
+@interface JustMonikaUpdater () <SUUpdaterDelegate>
 
+@property (strong) JustMonikaNotifications *notifications;
 @property (strong) SUUpdater *updater;
 @property (weak) JustMonikaView *view;
-
-@property (nonatomic) BOOL notificationsAllowed;
-@property (strong) NSString *updateAlertCategory;
 
 @end
 
@@ -24,12 +23,11 @@
 {
     self = [super init];
     if (self) {
+        self.notifications = [JustMonikaNotifications new];
         self.updater = updater;
         self.updater.delegate = self;
         self.view = view;
 
-        [self requestNotificationPermission];
-        [self registerNotificationCategories];
         [self listenToSparkleRestarts];
     }
     return self;
@@ -46,123 +44,28 @@
 
 #pragma mark - User Notifications
 
-// UserNotifications.framework is macOS 10.14+ thing which I'm fine with^W^W
-// submitted to. It's not nice, but I do not have an older version of macOS
-// available so I have no personal reason to support anything older than 10.14
-// which I'm currently running. However, there should be no significant issues
-// with porting all of this to the deprecated NSUserNotification interface.
-
-- (void)requestNotificationPermission
-{
-    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
-
-    [center requestAuthorizationWithOptions:UNAuthorizationOptionAlert
-                          completionHandler:^(BOOL granted, NSError *error) {
-        self.notificationsAllowed = granted;
-    }];
-}
-
-static NSString *kUpdateAlertCategoryID = @"net.ilammy.JustMonika.UpdateAlert";
-static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK";
-
-- (void)registerNotificationCategories
-{
-    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
-
-    // Initially I wanted to display the notification as a simple alert with
-    // no action buttons. However, clicking the notification (or any actions)
-    // when the application is not running results in the application
-    // being relaunched. That is, when the screen saver finally closes and
-    // the user click the notification, the screen saver activates again,
-    // locking the screen back! Moreover, in order to react to the action
-    // we have to install a delegate early at startup, that's not when our
-    // code executes at all. Therefore we cannot, say, put a button to open
-    // the System Preferences dialog. Even if we could, the screen saver will
-    // still launch. So... let it launch! And hope the user gets the joke.
-    UNNotificationAction *justMonika =
-        [UNNotificationAction actionWithIdentifier:kUpdateAlertActionOKID
-                                             title:@"Just Monika"
-                                           options:UNNotificationActionOptionNone];
-
-    UNNotificationCategory *updateAlert =
-        [UNNotificationCategory categoryWithIdentifier:kUpdateAlertCategoryID
-                                               // macOS displays up to 10 actions
-                                               actions:@[justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika]
-                                     intentIdentifiers:@[]
-                                               options:UNNotificationCategoryOptionNone];
-
-    self.updateAlertCategory = updateAlert.identifier;
-
-    [center setNotificationCategories:[NSSet setWithObject:updateAlert]];
-}
-
 - (void)notifyAboutUpdate:(SUAppcastItem *)item
 {
-    UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
-
-    NSString *identifier = [self notificationIDForUpdate:item];
-
-    // If we have already shown a notification for this version then don't
-    // nag the user about it every time when a screen saver is opened,
-    // unless it's a critical update. Unfortunately, there isn't a way
-    // other that waiting for the full list and iterating through it.
-    [center getDeliveredNotificationsWithCompletionHandler:
-     ^(NSArray<UNNotification *> *notifications) {
-        if (!item.isCriticalUpdate) {
-            for (UNNotification *notification in notifications) {
-                if ([notification.request.identifier isEqualToString:identifier]) {
-                    return;
-                }
-            }
-        }
-        // Now that we're sure we're not being annoying without a reason,
-        // show a notification.
-        //
-        // The notification will be sent on behalf of the ScreenSaverEngine
-        // and will display its application icon. This cannot be changed and
-        // is intentional feature of macOS so that the source application
-        // cannot be spoofed for the user.
-        UNNotificationContent *content = [self notificationContentForUpdate:item];
-        UNNotificationRequest *notification =
-            [UNNotificationRequest requestWithIdentifier:identifier
-                                                 content:content
-                                                 trigger:nil];
-
-        [center addNotificationRequest:notification
-                 withCompletionHandler:nil];
-    }];
-}
-
-- (NSString *)notificationIDForUpdate:(SUAppcastItem *)item
-{
-    return [NSString stringWithFormat:@"%@.%@",
-            kUpdateAlertCategoryID, item.versionString];
-}
-
-- (UNNotificationContent *)notificationContentForUpdate:(SUAppcastItem *)item
-{
-    UNMutableNotificationContent *content = [UNMutableNotificationContent new];
-    content.categoryIdentifier = self.updateAlertCategory;
     // The space is gold here. We have around 40 characters for the title
     // and then two more lines of text for the body. Keep it short.
+    JustMonikaNotification *notification = [JustMonikaNotification new];
+    notification.isCritical = item.isCriticalUpdate;
+    notification.versionString = item.versionString;
     if (item.isCriticalUpdate) {
-        content.title =
+        notification.title =
             [NSString stringWithFormat:@"Critical Update Available: Monika %@",
              item.displayVersionString];
-        content.body = @"An important update to this screen saver is available. "
+        notification.body = @"An important update to this screen saver is available. "
             @"Please open \"System Preferences\" to install it.";
     } else {
-        content.title =
+        notification.title =
             [NSString stringWithFormat:@"Update Available: Monika %@",
              item.displayVersionString];
-        content.body = @"A new version of this screen saver is available. "
+        notification.body = @"A new version of this screen saver is available. "
             @"Please open \"System Preferences\" to install it.";
     }
-    return content;
+
+    [self.notifications show:notification];
 }
 
 #pragma mark - Restart handling
@@ -248,10 +151,7 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
         return;
     }
 
-    // Don't bother sending a notification if they were denied by the user.
-    if (self.notificationsAllowed) {
-        [self notifyAboutUpdate:item];
-    }
+    [self notifyAboutUpdate:item];
 }
 
 @end

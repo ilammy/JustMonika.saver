@@ -3,13 +3,12 @@
 // Copyright (c) 2019 ilammy's tearoom
 
 #import <Foundation/Foundation.h>
-#import <Sparkle/Sparkle.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class JustMonikaView;
 
-@interface JustMonikaUpdater : NSObject <SUUpdaterDelegate>
+@interface JustMonikaUpdater : NSObject
 
 + (instancetype)forView:(JustMonikaView *)view;
 
