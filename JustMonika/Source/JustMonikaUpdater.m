@@ -30,6 +30,7 @@
 
         [self requestNotificationPermission];
         [self registerNotificationCategories];
+        [self listenToSparkleRestarts];
     }
     return self;
 }
@@ -164,17 +165,51 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
     return content;
 }
 
+#pragma mark - Restart handling
+
+// Learned about this caveat in Aerial:
+// https://github.com/JohnCoates/Aerial
+//
+// Before Sparkle tries to restart our screen saver we have to quit System
+// Preferences dialog. Otherwise Sparkle tries to terminate the Screen Saver
+// preference pane process which crashes it and fails the update.
+//
+// Note that this does not work in Catalina (macOS 10.15+) because Apple is
+// a dick and sandboxed all screen savers even more tightly:
+// https://github.com/JohnCoates/Aerial/issues/801
+// https://github.com/sparkle-project/Sparkle/issues/1476
+// Well, it's not a issue for me because I'm running 10.14 and 10.15 requires
+// all screen savers to be signed by Developer ID and notarized by Apple.
+// Which I do not have. Please accept my condolences if you're using 10.15.
+
+- (void)listenToSparkleRestarts
+{
+    [NSNotificationCenter.defaultCenter addObserver:self
+                                           selector:@selector(sparkleWillRestart)
+                                               name:SUUpdaterWillRestartNotification
+                                             object:nil];
+}
+
+- (void)sparkleWillRestart
+{
+    for (NSRunningApplication *app in NSWorkspace.sharedWorkspace.runningApplications) {
+        if ([app.bundleIdentifier isEqualToString:@"com.apple.systempreferences"]) {
+            [app terminate];
+        }
+    }
+}
+
 #pragma mark - SUUpdaterDelegate
 
-// This is a screen saver and it cannot be relaunched the way application can.
-// We cannot prompt for an update when the screen saver is running. In fact,
-// we should not ever prompt for anything unless System Preferences is open
-// and the user is focused on configuring our screen saver. In any case, we
-// should not reopen the application (ScreenSaverEngine) because that will
-// lock the screen unexpectedly for the user.
+// Sparkle always relaunches after installing an update, unless it's an
+// automatic background update. We allow automatic updates only when we're
+// in screen saver mode. Opening System Preferences triggers manual update
+// which we have to relaunch for the preference pane to see the new version.
+// We need to return YES here to proceed with updates. Sparkes's automatic
+// update driver ensures that it will not relaunch the screen saver.
 - (BOOL)updaterShouldRelaunchApplication:(SUUpdater *)updater
 {
-    return NO;
+    return YES;
 }
 
 // Prompt right away at the first launch after installation, normally when

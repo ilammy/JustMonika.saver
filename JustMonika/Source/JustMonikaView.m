@@ -111,6 +111,13 @@ static const float fps = 30.0;
 
 - (void)initUpdater
 {
+    // Sparkle does not work in Catalina, go read a rant in JustMonikaUpdater.m
+    // This may change in future, but our Cupertino overlords are currently
+    // keeping silence.
+    NSOperatingSystemVersion version = NSProcessInfo.processInfo.operatingSystemVersion;
+    if (version.majorVersion == 10 && version.minorVersion >= 15) {
+        return;
+    }
     self.updater = [JustMonikaUpdater forView:self];
 }
 
