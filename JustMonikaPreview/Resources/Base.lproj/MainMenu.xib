@@ -697,6 +697,9 @@
                     <customView id="veX-D4-mvD" customClass="JustMonikaView">
                         <rect key="frame" x="20" y="61" width="440" height="279"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="boolean" keyPath="initAsPreview" value="YES"/>
+                        </userDefinedRuntimeAttributes>
                     </customView>
                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="USm-K0-OcV">
                         <rect key="frame" x="286" y="13" width="180" height="32"/>

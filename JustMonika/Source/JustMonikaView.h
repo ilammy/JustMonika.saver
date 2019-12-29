@@ -9,4 +9,7 @@ IB_DESIGNABLE
 
 @property (nonatomic) BOOL showVersionText;
 
+/// Initialize this view as a preview in awakeFromNib.
+@property (nonatomic) IBInspectable BOOL initAsPreview;
+
 @end

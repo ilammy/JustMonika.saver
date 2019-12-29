@@ -25,8 +25,11 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)notification
 {
     // We have to do it manually since we're not Screen Saver framework
-    [self.view.monika startAnimation];
+    [self syncAnimationState];
+    [self syncSettingsButtonState];
 
+    // We still need to run a timer for redraws since JustMonikaView does not
+    // update itself. It updates the image when "animateOneFrame" is called.
     NSTimer *timer = [NSTimer timerWithTimeInterval:self.view.animationTimeInterval
                                             repeats:YES
                                               block:^(NSTimer *timer) {
@@ -36,8 +39,15 @@
     // Useful to have both in case we have some slider for live updates
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSEventTrackingRunLoopMode];
+}
 
-    [self syncSettingsButtonState];
+- (void)syncAnimationState
+{
+    if (self.animationCheckBox.state == YES) {
+        [self.view startAnimation];
+    } else {
+        [self.view stopAnimation];
+    }
 }
 
 #pragma mark - Configuration sheet
@@ -70,13 +80,7 @@
 
 - (IBAction)animationCheckBoxPressed:(id)sender
 {
-    // We need to call JustMonikaGLView directly because we are not
-    // Screen Saver framework and did not initialize its timer.
-    if (self.animationCheckBox.state == YES) {
-        [self.view.monika startAnimation];
-    } else {
-        [self.view.monika stopAnimation];
-    }
+    [self syncAnimationState];
 }
 
 @end

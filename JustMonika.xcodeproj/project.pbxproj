@@ -45,7 +45,7 @@
 		9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F242B8523B2832100EF94D7 /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
 		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
-		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; };
 		9F33485B23B3C25200368291 /* monika.chr in Resources */ = {isa = PBXBuildFile; fileRef = 9F33485A23B3C25200368291 /* monika.chr */; };
 		9F3FC3F323891D8B00AD0621 /* sheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* sheet.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
@@ -381,8 +381,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
-				9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */,
 				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
+				9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */,
 				9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */,
 				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
 			);

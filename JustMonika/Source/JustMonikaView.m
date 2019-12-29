@@ -29,7 +29,7 @@
 
 static const float fps = 30.0;
 
-// Called by Screen Saver framework
+// Designated initializer called by Screen Saver framework
 - (instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview
 {
     self = [super initWithFrame:frame isPreview:isPreview];
@@ -53,10 +53,10 @@ static const float fps = 30.0;
         return;
     }
 
-    [self initMonikaView];
-    [self initSettings];
-    [self initVersionText];
-    [self initUpdater];
+    // Call the designated initializer. We cannot assign "self" here
+    // but we know that ScreenSaverView returns the same object.
+    (void)[self initWithFrame:self.frame
+                    isPreview:self.initAsPreview];
 }
 
 // Called by Interface Builder for previews
