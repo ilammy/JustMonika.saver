@@ -762,9 +762,8 @@
                             <action selector="resetSettings:" target="Voe-Tx-rLC" id="bkk-TP-o9L"/>
                         </connections>
                     </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-nG-SkE">
+                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gpJ-nG-SkE">
                         <rect key="frame" x="18" y="214" width="94" height="18"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="check" title="Version text" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="0CV-sb-mF9">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
@@ -775,9 +774,12 @@
                     </button>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="gpJ-nG-SkE" firstAttribute="top" secondItem="H5M-dD-ZGy" secondAttribute="bottom" constant="6" symbolic="YES" id="36T-aT-8c4"/>
                     <constraint firstItem="H5M-dD-ZGy" firstAttribute="top" secondItem="eYc-Tf-MdA" secondAttribute="top" constant="20" symbolic="YES" id="4QS-FM-A0g"/>
                     <constraint firstItem="H5M-dD-ZGy" firstAttribute="leading" secondItem="hJ1-gB-vZp" secondAttribute="leading" id="GyQ-5N-9PR"/>
+                    <constraint firstItem="gpJ-nG-SkE" firstAttribute="leading" secondItem="H5M-dD-ZGy" secondAttribute="leading" id="RWq-a6-IJN"/>
                     <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="H5M-dD-ZGy" secondAttribute="trailing" constant="20" symbolic="YES" id="cTP-eb-FCe"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gpJ-nG-SkE" secondAttribute="trailing" constant="20" symbolic="YES" id="pUU-Zd-zek"/>
                 </constraints>
             </view>
             <point key="canvasLocation" x="139" y="-543"/>

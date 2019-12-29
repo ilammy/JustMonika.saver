@@ -64,10 +64,11 @@ static const float fps = 30.0;
 {
     [super prepareForInterfaceBuilder];
 
-    [self initMonikaView];
-    [self initSettings];
+    // We can't load all resources, initialize OpenGL, and render an image
+    // in 200 ms required by Interface Builder preview. So we cheat a bit.
+    // An we don't need settings, autoupdates, and stuff for a preview.
+    [self initFakeMonika];
     [self initVersionText];
-    [self initUpdater];
 }
 
 - (void)initSettings
@@ -91,6 +92,19 @@ static const float fps = 30.0;
     [self addSubview:monika];
     [self setMonika:monika];
     [self setAnimationTimeInterval:1.0/fps];
+}
+
+- (void)initFakeMonika
+{
+    // We cannot use full-sized image from JustMonikaGL because Apple.
+    // So use a crap-quality preview image which should load in 200 ms.
+    NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
+    NSImage *monikaImage = [thisBundle imageForResource:@"ib_preview"];
+
+    NSImageView *monika = [NSImageView imageViewWithImage:monikaImage];
+    monika.frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
+    monika.imageScaling = NSImageScaleProportionallyUpOrDown;
+    [self addSubview:monika];
 }
 
 #pragma mark - Automatic updates
