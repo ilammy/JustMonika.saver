@@ -12,7 +12,7 @@
 
 @end
 
-@interface JustMonikaNotifications ()
+@interface JustMonikaNotifications () <NSUserNotificationCenterDelegate>
 
 @property (nonatomic,assign) BOOL notificationsAllowed;
 @property (nonatomic,strong) NSString *updateAlertCategory;
@@ -25,15 +25,27 @@
 {
     self = [super init];
     if (self) {
-        [self requestNotificationPermission];
-        [self registerNotificationCategories];
+        if (@available(macOS 10.14, *)) {
+            [self requestNotificationPermission];
+            [self registerNotificationCategories];
+        } else {
+            [self initUserNotificationDelegate];
+            [self setNotificationsAllowed:YES];
+        }
     }
     return self;
 }
 
 - (void)show:(JustMonikaNotification *)notification
 {
-    [self postUNNotification:notification];
+    if (!self.notificationsAllowed) {
+        return;
+    }
+    if (@available(macOS 10.14, *)) {
+        [self postUNNotification:notification];
+    } else {
+        [self postNSNotification:notification];
+    }
 }
 
 #pragma mark - UserNotifications
@@ -44,7 +56,7 @@
 // which I'm currently running. However, there should be no significant issues
 // with porting all of this to the deprecated NSUserNotification interface.
 
-- (void)requestNotificationPermission
+- (void)requestNotificationPermission API_AVAILABLE(macosx(10.14))
 {
     UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
 
@@ -58,6 +70,7 @@ static NSString *kUpdateAlertCategoryID = @"net.ilammy.JustMonika.UpdateAlert";
 static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK";
 
 - (void)registerNotificationCategories
+    API_AVAILABLE(macosx(10.14))
 {
     UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
 
@@ -93,6 +106,7 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
 }
 
 - (UNNotificationContent *)makeUNNnotificationContent:(JustMonikaNotification *)notification
+    API_AVAILABLE(macosx(10.14))
 {
     UNMutableNotificationContent *content = [UNMutableNotificationContent new];
     content.categoryIdentifier = self.updateAlertCategory;
@@ -102,6 +116,7 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
 }
 
 - (void)postUNNotification:(JustMonikaNotification *)notification
+    API_AVAILABLE(macosx(10.14))
 {
     UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
 
@@ -131,6 +146,69 @@ static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK
         [center addNotificationRequest:notification
                  withCompletionHandler:nil];
     }];
+}
+
+#pragma mark - NSUserNotification
+
+// This is legacy API that was available until macOS 10.14 came with a new
+// UserNotifications.framework. Unfortunately, it does not seem to work on
+// macOS 10.14 so I'm not really able to test it. After some experimentation
+// I have found out that Notification Center *remembers* which API you have
+// used: NSUserNotification or UserNotification.framework, and forbids you
+// to use the other API. Brilliant decision, Apple! /s
+
+- (void)initUserNotificationDelegate
+{
+    NSUserNotificationCenter.defaultUserNotificationCenter.delegate = self;
+}
+
+- (NSUserNotification *)makeNSNotification:(JustMonikaNotification *)notification
+    API_DEPRECATED("use UserNotifications.framework", macos(10.8, 10.14))
+{
+    // No jokes here because NSUserNotification API does not cause the
+    // application to launch whenever the user accidentally click the
+    // notification. It supports actions, but to handle them we need
+    // to be running, which we aren't doing once screen saver stops.
+    NSUserNotification *userNotification = [NSUserNotification new];
+    userNotification.identifier = notification.identifier;
+    userNotification.title = notification.title;
+    userNotification.informativeText = notification.body;
+    userNotification.hasActionButton = NO;
+    return userNotification;
+}
+
+- (void)postNSNotification:(JustMonikaNotification *)notification
+    API_DEPRECATED("use UserNotifications.framework", macos(10.8, 10.14))
+{
+    NSUserNotificationCenter *center = NSUserNotificationCenter.defaultUserNotificationCenter;
+
+    NSString *identifier = notification.identifier;
+
+    // If we have already shown a notification for this version then don't
+    // nag the user about it every time when a screen saver is opened,
+    // unless it's a critical update. Unfortunately, there isn't a way
+    // other that waiting for the full list and iterating through it.
+    if (!notification.isCritical) {
+        for (NSUserNotification *notification in center.deliveredNotifications) {
+            if ([notification.identifier isEqualToString:identifier]) {
+                return;
+            }
+        }
+    }
+    // Now that we're sure we're not being annoying without a reason,
+    // show a notification.
+    [center deliverNotification:[self makeNSNotification:notification]];
+}
+
+#pragma mark - NSUserNotificationCenterDelegate
+
+// By default notifications are not displayed if you application is in
+// foreground, like if you are a screen saver. Override this behavior
+// and always allow showing our notifications.
+- (BOOL)userNotificationCenter:(NSUserNotificationCenter *)center
+     shouldPresentNotification:(NSUserNotification *)notification
+{
+    return YES;
 }
 
 @end
