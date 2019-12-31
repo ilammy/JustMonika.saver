@@ -67,36 +67,42 @@
 }
 
 static NSString *kUpdateAlertCategoryID = @"net.ilammy.JustMonika.UpdateAlert";
-static NSString *kUpdateAlertActionOKID = @"net.ilammy.JustMonika.UpdateAlert.OK";
 
 - (void)registerNotificationCategories
     API_AVAILABLE(macosx(10.14))
 {
     UNUserNotificationCenter *center = UNUserNotificationCenter.currentNotificationCenter;
 
-    // Initially I wanted to display the notification as a simple alert with
-    // no action buttons. However, clicking the notification (or any actions)
-    // when the application is not running results in the application
-    // being relaunched. That is, when the screen saver finally closes and
-    // the user click the notification, the screen saver activates again,
-    // locking the screen back! Moreover, in order to react to the action
-    // we have to install a delegate early at startup, that's not when our
-    // code executes at all. Therefore we cannot, say, put a button to open
-    // the System Preferences dialog. Even if we could, the screen saver will
-    // still launch. So... let it launch! And hope the user gets the joke.
-    UNNotificationAction *justMonika =
-        [UNNotificationAction actionWithIdentifier:kUpdateAlertActionOKID
-                                             title:@"Just Monika"
-                                           options:UNNotificationActionOptionNone];
-
+    // UserNotifications have an issue: if the user clicks on the notification
+    // (or any of its registered actions) then the system notifies the source
+    // application about that. If the application is not running then it gets
+    // relaunched and then notified. That is, when the screen saver finally
+    // closes, the notification is displayed again, and if the user clicks
+    // the notification, the screen saver activates again, locking the screen!
+    //
+    // There seems to be no way to prevent this. UserNotifications kinda unify
+    // macOS behavior with iOS because Apple.
+    //
+    // Furthermore, in case of screen savers you cannot register a delegate to
+    // handle notification actions, because the notifications about actions get
+    // delivered before we get a chance to register a (global) delegate. What
+    // an amazing new API, indeed! (Well, it's us who's weird by using it with
+    // screen savers, honestly, but it's still frustrating.)
+    //
+    // Initially I did not want any actions, just display a banner. Another
+    // idea was to have an action to open System Preferences, but we cannot
+    // handle actions, as described above. Another idea was to turn this issue
+    // into an easter egg by showing "Just Monika" actions which do nothing,
+    // but still have a side effect of opening the screen saver back. It sounds
+    // fun, but unfortunately make the notification an alert that does not go
+    // away automatically. So we're back to banners now.
+    //
+    // Well, I still leave the category registration code in faint hope that
+    // Apple some day provides a new framework^W API to disable app relaunch.
+    // However, it does not do anything useful.
     UNNotificationCategory *updateAlert =
         [UNNotificationCategory categoryWithIdentifier:kUpdateAlertCategoryID
-                                               // macOS displays up to 10 actions
-                                               actions:@[justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika,
-                                                         justMonika, justMonika]
+                                               actions:@[]
                                      intentIdentifiers:@[]
                                                options:UNNotificationCategoryOptionNone];
 
