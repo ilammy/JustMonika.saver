@@ -252,6 +252,7 @@ static const CGFloat kVersionTextMargin = 3.0f;
     NSView *monikaScreenSaver = [self locateMonikaScreenSaver:screenSavers];
 
     NSImage *thumbnail = [NSBundle.justMonika imageForResource:@"thumbnail"];
+    thumbnail = [self framedThumbnail:thumbnail];
 
     monikaScreenSaver.thumbnailImage = thumbnail;
 
@@ -291,6 +292,82 @@ static const CGFloat kVersionTextMargin = 3.0f;
         }
     }
     return nil;
+}
+
+// Here, Apple, this is how you *should* have written your
+// [ScreenSaverPref framedThumbnail], but it's too unimportant
+// for you to bother updating it to support Retina displays.
+- (NSImage *)framedThumbnail:(NSImage *)thumbnail
+{
+    NSImage *frame = [NSBundle.justMonika imageForResource:@"ScreenSaverThumbFrame"];
+    NSImage *mask = [NSBundle.justMonika imageForResource:@"ScreenSaverThumbMask"];
+
+    // Frame and mask are a little bit smaller than the thumbnail.
+    // Position them in the center.
+    NSRect thumbnailRect = rectOfSize(thumbnail.size);
+    NSRect frameRect = centerRectIn(thumbnailRect, rectOfSize(frame.size));
+    NSRect maskRect = centerRectIn(thumbnailRect, rectOfSize(mask.size));
+
+    NSImage *result = [[NSImage alloc] initWithSize:thumbnail.size];
+
+    // Draw into this image in this block:
+    [result lockFocus];
+    {
+        NSGraphicsContext *currentContext = NSGraphicsContext.currentContext;
+
+        // Set a clip mask in this block only:
+        [currentContext saveGraphicsState];
+        {
+            CGContextClipToMask(currentContext.CGContext,
+                                maskRect,
+                                loadImageMask(mask));
+
+            [thumbnail drawInRect:thumbnailRect
+                         fromRect:NSZeroRect
+                        operation:NSCompositingOperationSourceOver
+                         fraction:1.0f];
+        }
+        [currentContext restoreGraphicsState];
+
+        [frame drawInRect:frameRect
+                 fromRect:NSZeroRect
+                operation:NSCompositingOperationSourceOver
+                 fraction:1.0f];
+
+    }
+    [result unlockFocus];
+
+    return result;
+}
+
+static NSRect rectOfSize(NSSize size)
+{
+    return NSMakeRect(0.0f, 0.0f, size.width, size.height);
+}
+
+static NSRect centerRectIn(NSRect dst, NSRect src)
+{
+    CGFloat dX = (NSWidth(dst) - NSWidth(src))/2.0f;
+    CGFloat dY = (NSHeight(dst) - NSHeight(src))/2.0f;
+    return NSOffsetRect(src, dX, dY);
+}
+
+static CGImageRef loadImageMask(NSImage *image)
+{
+    NSGraphicsContext *currentContext = NSGraphicsContext.currentContext;
+
+    CGImageRef maskImage = [image CGImageForProposedRect:nil
+                                                context:currentContext
+                                                  hints:nil];
+
+    return CGImageMaskCreate(CGImageGetWidth(maskImage),
+                             CGImageGetHeight(maskImage),
+                             CGImageGetBitsPerComponent(maskImage),
+                             CGImageGetBitsPerPixel(maskImage),
+                             CGImageGetBytesPerRow(maskImage),
+                             CGImageGetDataProvider(maskImage),
+                             CGImageGetDecode(maskImage),
+                             CGImageGetShouldInterpolate(maskImage));
 }
 
 @end

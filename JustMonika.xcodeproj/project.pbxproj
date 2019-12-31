@@ -56,6 +56,10 @@
 		9F4A148A23BB727A003E9CB9 /* NSBundle+Monika.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */; };
 		9F4A148D23BB7F77003E9CB9 /* NSView+Thumbnails.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */; };
 		9F4A148E23BB7F77003E9CB9 /* NSView+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */; };
+		9F4A149323BBAB1E003E9CB9 /* ScreenSaverThumbFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A148F23BBAB1D003E9CB9 /* ScreenSaverThumbFrame.png */; };
+		9F4A149423BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */; };
+		9F4A149523BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */; };
+		9F4A149623BBAB1E003E9CB9 /* ScreenSaverThumbMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */; };
 		9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */; };
 		9F6CC84B23B9485A00540B08 /* JustMonikaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */; };
 		9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
@@ -167,6 +171,10 @@
 		9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Monika.m"; sourceTree = "<group>"; };
 		9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Thumbnails.h"; sourceTree = "<group>"; };
 		9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Thumbnails.m"; sourceTree = "<group>"; };
+		9F4A148F23BBAB1D003E9CB9 /* ScreenSaverThumbFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenSaverThumbFrame.png; sourceTree = "<group>"; };
+		9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScreenSaverThumbMask@2x.png"; sourceTree = "<group>"; };
+		9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScreenSaverThumbFrame@2x.png"; sourceTree = "<group>"; };
+		9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenSaverThumbMask.png; sourceTree = "<group>"; };
 		9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaNotifications.h; sourceTree = "<group>"; };
 		9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaNotifications.m; sourceTree = "<group>"; };
 		9FA5BF1423B8BCEA0019F956 /* ib_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ib_preview.png; sourceTree = "<group>"; };
@@ -291,6 +299,10 @@
 		9F33485523B2D56A00368291 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9F4A148F23BBAB1D003E9CB9 /* ScreenSaverThumbFrame.png */,
+				9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */,
+				9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */,
+				9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */,
 				9FA5BF1423B8BCEA0019F956 /* ib_preview.png */,
 				9F33485A23B3C25200368291 /* monika.chr */,
 				9F3FC3F223891D8B00AD0621 /* sheet.xib */,
@@ -543,6 +555,10 @@
 				9F3FC3F323891D8B00AD0621 /* sheet.xib in Resources */,
 				9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */,
 				9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */,
+				9F4A149623BBAB1E003E9CB9 /* ScreenSaverThumbMask.png in Resources */,
+				9F4A149423BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png in Resources */,
+				9F4A149323BBAB1E003E9CB9 /* ScreenSaverThumbFrame.png in Resources */,
+				9F4A149523BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
