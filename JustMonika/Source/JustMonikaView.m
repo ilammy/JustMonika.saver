@@ -7,6 +7,7 @@
 #import "JustMonikaGLView.h"
 #import "JustMonikaSettings.h"
 #import "JustMonikaUpdater.h"
+#import "NSBundle+Monika.h"
 #import "NSView+Subviews.h"
 
 @interface JustMonikaView ()
@@ -76,8 +77,7 @@ static const float fps = 30.0;
     self.settings = [JustMonikaSettings new];
     // Screen savers are loaded as plugins so their main bundle is not
     // this one, but the host bundle. We need to use the name directly.
-    NSBundle *bundle = [NSBundle bundleForClass:self.class];
-    [bundle loadNibNamed:@"sheet" owner:self topLevelObjects:nil];
+    [NSBundle.justMonika loadNibNamed:@"sheet" owner:self topLevelObjects:nil];
     // Fill in the placeholder for the user name
     self.textOfDoom.stringValue =
         [self.textOfDoom.stringValue stringByReplacingOccurrencesOfString:@"[player]"
@@ -98,8 +98,7 @@ static const float fps = 30.0;
 {
     // We cannot use full-sized image from JustMonikaGL because Apple.
     // So use a crap-quality preview image which should load in 200 ms.
-    NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
-    NSImage *monikaImage = [thisBundle imageForResource:@"ib_preview"];
+    NSImage *monikaImage = [NSBundle.justMonika imageForResource:@"ib_preview"];
 
     NSImageView *monika = [NSImageView imageViewWithImage:monikaImage];
     monika.frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
@@ -128,7 +127,8 @@ static const CGFloat kVersionTextMargin = 3.0f;
 - (void)initVersionText
 {
     NSTextField *versionText = [[NSTextField alloc] initWithFrame:NSZeroRect];
-    versionText.stringValue = self.versionString;
+    versionText.stringValue = [NSString stringWithFormat:@"v%@",
+                               NSBundle.justMonika.versionString];
     // Transparent and non-interactive text label
     versionText.bezeled = NO;
     versionText.drawsBackground = NO;
@@ -161,13 +161,6 @@ static const CGFloat kVersionTextMargin = 3.0f;
 - (void)setShowVersionText:(BOOL)showVersionText
 {
     self.versionText.hidden = !showVersionText;
-}
-
-- (NSString *)versionString
-{
-    NSBundle *thisBundle = [NSBundle bundleForClass:self.class];
-    NSString *version = thisBundle.infoDictionary[@"CFBundleShortVersionString"];
-    return [NSString stringWithFormat:@"v%@", version];
 }
 
 #pragma mark - Animated drawing

@@ -8,6 +8,7 @@
 
 #import "JustMonikaNotifications.h"
 #import "JustMonikaView.h"
+#import "NSBundle+Monika.h"
 
 @interface JustMonikaUpdater () <SUUpdaterDelegate>
 
@@ -35,8 +36,7 @@
 
 + (instancetype)forView:(JustMonikaView *)view
 {
-    NSBundle *thisBundle = [NSBundle bundleForClass:JustMonikaUpdater.class];
-    SUUpdater *updater = [SUUpdater updaterForBundle:thisBundle];
+    SUUpdater *updater = [SUUpdater updaterForBundle:NSBundle.justMonika];
     updater.sendsSystemProfile = NO; // don't you ever dare
     return [[JustMonikaUpdater alloc] initWithUpdater:updater
                                               andView:view];
