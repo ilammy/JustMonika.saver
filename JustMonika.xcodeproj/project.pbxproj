@@ -54,6 +54,8 @@
 		9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */; };
 		9F4A148923BB727A003E9CB9 /* NSBundle+Monika.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F4A148723BB727A003E9CB9 /* NSBundle+Monika.h */; };
 		9F4A148A23BB727A003E9CB9 /* NSBundle+Monika.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */; };
+		9F4A148D23BB7F77003E9CB9 /* NSView+Thumbnails.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */; };
+		9F4A148E23BB7F77003E9CB9 /* NSView+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */; };
 		9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */; };
 		9F6CC84B23B9485A00540B08 /* JustMonikaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */; };
 		9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
@@ -163,6 +165,8 @@
 		9F3FC45A238C929D00AD0621 /* shader.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = shader.c; sourceTree = "<group>"; };
 		9F4A148723BB727A003E9CB9 /* NSBundle+Monika.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSBundle+Monika.h"; sourceTree = "<group>"; };
 		9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSBundle+Monika.m"; sourceTree = "<group>"; };
+		9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Thumbnails.h"; sourceTree = "<group>"; };
+		9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Thumbnails.m"; sourceTree = "<group>"; };
 		9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaNotifications.h; sourceTree = "<group>"; };
 		9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaNotifications.m; sourceTree = "<group>"; };
 		9FA5BF1423B8BCEA0019F956 /* ib_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ib_preview.png; sourceTree = "<group>"; };
@@ -313,6 +317,8 @@
 				9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */,
 				9F3FC3F42389506300AD0621 /* NSView+Subviews.h */,
 				9F3FC3F52389506300AD0621 /* NSView+Subviews.m */,
+				9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */,
+				9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -401,6 +407,7 @@
 				9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */,
 				9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */,
 				9F4A148923BB727A003E9CB9 /* NSBundle+Monika.h in Headers */,
+				9F4A148D23BB7F77003E9CB9 /* NSView+Thumbnails.h in Headers */,
 				9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -630,6 +637,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F4A148E23BB7F77003E9CB9 /* NSView+Thumbnails.m in Sources */,
 				9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */,
 				9F6CC84B23B9485A00540B08 /* JustMonikaNotifications.m in Sources */,
 				9F4A148A23BB727A003E9CB9 /* NSBundle+Monika.m in Sources */,

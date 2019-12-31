@@ -13,6 +13,11 @@
     return [NSBundle bundleForClass:JustMonikaView.class];
 }
 
+- (NSString *)bundleName
+{
+    return self.infoDictionary[(NSString *)kCFBundleNameKey];
+}
+
 - (NSString *)versionString
 {
     return self.infoDictionary[@"CFBundleShortVersionString"];

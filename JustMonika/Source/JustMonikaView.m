@@ -9,6 +9,7 @@
 #import "JustMonikaUpdater.h"
 #import "NSBundle+Monika.h"
 #import "NSView+Subviews.h"
+#import "NSView+Thumbnails.h"
 
 @interface JustMonikaView ()
 
@@ -21,6 +22,8 @@
 @property (nonatomic, weak) NSTextField *versionText;
 
 @property (strong) JustMonikaUpdater *updater;
+
+@property (nonatomic,assign) BOOL improvedThumbnail;
 
 @end
 
@@ -170,6 +173,8 @@ static const CGFloat kVersionTextMargin = 3.0f;
     [super startAnimation];
 
     [self.monika startAnimation];
+
+    [self improveThumbnail];
 }
 
 - (void)stopAnimation
@@ -225,6 +230,67 @@ static const CGFloat kVersionTextMargin = 3.0f;
             }
         }
     }
+}
+
+#pragma mark - Thumbnail tricks
+
+// For some reason Apple decided that all third-party screen savers must have
+// a shitty looking thumbnail while all Apple-provided screen savers display
+// their high-DPI thumbnails nicely. Let's do some justice here.
+//
+// Again, we're exploiting the fact that screen savers are running as plugins
+// and have access to the whole view hierarchy.
+
+- (void)improveThumbnail
+{
+    if (!self.isPreview || self.improvedThumbnail) {
+        return;
+    }
+
+    NSCollectionView *screenSavers = [self locateScreenSavers];
+
+    NSView *monikaScreenSaver = [self locateMonikaScreenSaver:screenSavers];
+
+    NSImage *thumbnail = [NSBundle.justMonika imageForResource:@"thumbnail"];
+
+    monikaScreenSaver.thumbnailImage = thumbnail;
+
+    self.improvedThumbnail = YES;
+}
+
+- (NSCollectionView *)locateScreenSavers
+{
+    // It's a little bit not the same as [NSApp.mainWindow] because we are
+    // running as a plugin inside a preference pane.
+    NSWindow *topWindow = self.window;
+    while (topWindow.parentWindow != nil) {
+        topWindow = topWindow.parentWindow;
+    }
+    // Now go look for a certain child view with a certain private class...
+    for (NSView *view in topWindow.contentView.subviewsRecursive) {
+        if ([view.className isEqualToString:@"IndividualSaverIconView"]) {
+            NSView *allScreenSavers = view.superview;
+            // Make sure we've got it right before casting
+            if ([allScreenSavers.class isSubclassOfClass:NSCollectionView.class]) {
+                return (NSCollectionView *)allScreenSavers;
+            }
+            return nil;
+        }
+    }
+    return nil;
+}
+
+- (NSView *)locateMonikaScreenSaver:(NSCollectionView *)screenSavers
+{
+    NSString *monikaName = NSBundle.justMonika.bundleName;
+
+    // Look only at direct subviews here. We need a certain one of them.
+    for (NSView *view in screenSavers.subviews) {
+        if ([view.thumbnailTitle isEqualToString:monikaName]) {
+            return view;
+        }
+    }
+    return nil;
 }
 
 @end

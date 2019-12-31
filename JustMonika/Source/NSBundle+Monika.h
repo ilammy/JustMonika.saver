@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (nullable NSBundle *)justMonika;
 
+- (nullable NSString *)bundleName;
 - (nullable NSString *)versionString;
 
 @end
