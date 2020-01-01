@@ -303,10 +303,12 @@ static const CGFloat kVersionTextMargin = 3.0f;
     NSImage *mask = [NSBundle.justMonika imageForResource:@"ScreenSaverThumbMask"];
 
     // Frame and mask are a little bit smaller than the thumbnail.
-    // Position them in the center.
+    // Position them in the center, with a slight offset.
     NSRect thumbnailRect = rectOfSize(thumbnail.size);
     NSRect frameRect = centerRectIn(thumbnailRect, rectOfSize(frame.size));
     NSRect maskRect = centerRectIn(thumbnailRect, rectOfSize(mask.size));
+    frameRect = NSOffsetRect(frameRect, 0.0f, -0.5f);
+    maskRect = NSOffsetRect(maskRect, 0.0f, 0.5f);
 
     NSImage *result = [[NSImage alloc] initWithSize:thumbnail.size];
 
