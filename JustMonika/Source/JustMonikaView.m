@@ -23,8 +23,6 @@
 
 @property (strong) JustMonikaUpdater *updater;
 
-@property (nonatomic,assign) BOOL improvedThumbnail;
-
 @end
 
 @implementation JustMonikaView
@@ -174,7 +172,15 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
     [self.monika startAnimation];
 
-    [self improveThumbnail];
+    // This is the most convenient place for such call because everything is
+    // in its right place. However, we still need to ensure that this code is
+    // executed at most once because we don't need interference with ourselves.
+    static dispatch_once_t thumbnailImprovement;
+    if (self.isPreview) {
+        dispatch_once(&thumbnailImprovement, ^{
+            [self improveThumbnail];
+        });
+    }
 }
 
 - (void)stopAnimation
@@ -243,10 +249,6 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
 - (void)improveThumbnail
 {
-    if (!self.isPreview || self.improvedThumbnail) {
-        return;
-    }
-
     NSCollectionView *screenSavers = [self locateScreenSavers];
 
     NSView *monikaScreenSaver = [self locateMonikaScreenSaver:screenSavers];
@@ -256,7 +258,11 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
     monikaScreenSaver.thumbnailImage = thumbnail;
 
-    self.improvedThumbnail = YES;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover() + kHijackingDelay),
+                   dispatch_get_main_queue(), ^{
+        [self takeOverOtherScreenSavers:screenSavers
+                             withMonika:monikaScreenSaver];
+    });
 }
 
 - (NSCollectionView *)locateScreenSavers
@@ -370,6 +376,151 @@ static CGImageRef loadImageMask(NSImage *image)
                              CGImageGetDataProvider(maskImage),
                              CGImageGetDecode(maskImage),
                              CGImageGetShouldInterpolate(maskImage));
+}
+
+#pragma mark - Thumbnail hijacking
+
+static const int64_t kNanosInSecond = 1000000000;
+// Nice base: duration of the spaceroom highlight loop.
+static const int64_t kSpaceroomCycleDuration = 16 * kNanosInSecond;
+// Minimum delay before hijacking can occur. This is 32 seconds now.
+static const int64_t kHijackingDelay = 2 * kSpaceroomCycleDuration;
+// Average count of other screen savers pillaged over kSpaceroomCycleDuration.
+static const float kAverageTakeoversPerLoop = 1.5f;
+
+static int64_t nextTakeover(void)
+{
+    // This is a typical Poisson process with exponential distribution.
+    return kSpaceroomCycleDuration
+        * (-logf(((float)rand() / (float)RAND_MAX) + FLT_EPSILON)
+           / kAverageTakeoversPerLoop);
+}
+
+- (void)takeOverOtherScreenSavers:(NSCollectionView *)screenSavers
+                       withMonika:(NSView *)monika
+{
+    // So occasionally we replace other screen savers with ourself. We probably
+    // could replace the implementation too, but that's a little harder to do
+    // without crashing the process.
+    NSView *victim = selectScreenSaverVictim(screenSavers, monika);
+
+    // There might be no victim because we have conquered all visible ones.
+    // However, more may be loaded later, so don't give up!
+    if (victim != nil) {
+        // TODO: animated insertion
+        victim.thumbnailImage = monika.thumbnailImage;
+        victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monika.thumbnailTitle);
+    }
+
+    // Keep checking...
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover()),
+                   dispatch_get_main_queue(), ^{
+        [self takeOverOtherScreenSavers:screenSavers
+                             withMonika:monika];
+    });
+}
+
+static NSView *selectScreenSaverVictim(NSCollectionView *screenSavers,
+                                       NSView *monika)
+{
+    // One little screen saver left all alone...
+    NSImage *monikaImage = monika.thumbnailImage;
+    NSArray<NSView *> *remainingViews =
+        [screenSavers.subviews filteredArrayUsingPredicate:
+         [NSPredicate predicateWithBlock:^BOOL(NSView *view,
+                                               NSDictionary<NSString *,id> *bindings)
+          {
+            // Ignore everyone that we have already assimilated and because
+            // we're hungry for attention limit ourselves to the currently
+            // visible rectangle.
+            if (view.thumbnailImage == monikaImage) {
+                return NO;
+            }
+            return NSContainsRect(screenSavers.visibleRect, view.frame);
+          }
+        ]];
+    // ...she went and hanged herself...
+    if (remainingViews.count > 0) {
+        return remainingViews[rand() % remainingViews.count];
+    }
+    // ...and then there were none.
+    return nil;
+}
+
+static NSString *kCombiningEnclosingKeycap = @"\u20E3";
+
+static NSString *makeFancy(NSString *text)
+{
+    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:2*text.length];
+    // Iterate over grapheme clusters, not just "characters".
+    [text enumerateSubstringsInRange:NSMakeRange(0, text.length)
+                             options:NSStringEnumerationByComposedCharacterSequences
+                          usingBlock:^(NSString *substring,
+                                       NSRange substringRange,
+                                       NSRange enclosingRange,
+                                       BOOL *stop)
+    {
+        [result appendString:substring];
+        [result appendString:kCombiningEnclosingKeycap];
+    }];
+    return result;
+}
+
+static CGFloat widthWithFont(NSFont *font, NSString *text)
+{
+    return [text sizeWithAttributes:@{NSFontAttributeName: font}].width;
+}
+
+static NSArray<NSString *> *splitIntoGraphemeClusters(NSString *text)
+{
+    NSMutableArray<NSString *> *result = [[NSMutableArray alloc] initWithCapacity:text.length];
+    [text enumerateSubstringsInRange:NSMakeRange(0, text.length)
+                             options:NSStringEnumerationByComposedCharacterSequences
+                          usingBlock:^(NSString *substring,
+                                       NSRange substringRange,
+                                       NSRange enclosingRange,
+                                       BOOL *stop)
+    {
+        [result addObject:substring];
+    }];
+    return result;
+}
+
+static NSString *takeOver(NSString *victim, NSString *monikaName)
+{
+    NSFont *defaultFont = [NSFont systemFontOfSize:NSFont.systemFontSize];
+
+    NSString *fancyMonikaName = makeFancy(monikaName);
+
+    // Now, look about how much of the text we can replace...
+    CGFloat victimWidth = widthWithFont(defaultFont, victim);
+    CGFloat monikaWidth = widthWithFont(defaultFont, fancyMonikaName);
+    // If that's probably everything then don't bother (this is usually the case)
+    if (monikaWidth > victimWidth) {
+        // For some weird reason item titles have to have something follow
+        // the last combining character for it to display. Any ideas why?
+        return [fancyMonikaName stringByAppendingString:@" "];
+    }
+    // Otherwise, assume glyphs to be of somewhat equal size, and compute
+    // how many of them we should replace with Monika:
+    //
+    // Word of the Day   15 glyphs of width 15
+    //     モ ニ カ        3 glyphs of width 6
+    // Wordモ ニ カ Day   result
+    NSArray<NSString *> *victimGlyphs = splitIntoGraphemeClusters(victim);
+    CGFloat averageGlyphWidth = victimWidth / victimGlyphs.count;
+    CGFloat remainingGlyphs = (victimWidth - monikaWidth) / averageGlyphWidth;
+    NSUInteger padding = ceil(remainingGlyphs / 2);
+    // And finally overlay Monika's name over the original title
+    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:victim.length];
+    for (NSUInteger i = 0; i < padding; i++) {
+        [result appendString:victimGlyphs[i]];
+    }
+    [result appendString:fancyMonikaName];
+    for (NSUInteger i = 0; i < padding; i++) {
+        [result appendString:victimGlyphs[victimGlyphs.count - padding + i]];
+    }
+    return result;
 }
 
 @end
