@@ -23,6 +23,8 @@
 
 @property (strong) JustMonikaUpdater *updater;
 
+@property (strong) NSArray<NSImage *> *whiteNoise;
+
 @end
 
 @implementation JustMonikaView
@@ -258,6 +260,7 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
     monikaScreenSaver.thumbnailImage = thumbnail;
 
+    [self prepareWhiteNoiseImages];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover() + kHijackingDelay),
                    dispatch_get_main_queue(), ^{
         [self takeOverOtherScreenSavers:screenSavers
@@ -387,6 +390,9 @@ static const int64_t kSpaceroomCycleDuration = 16 * kNanosInSecond;
 static const int64_t kHijackingDelay = 2 * kSpaceroomCycleDuration;
 // Average count of other screen savers pillaged over kSpaceroomCycleDuration.
 static const float kAverageTakeoversPerLoop = 1.5f;
+// Duration of while noise blip before takeover.
+static const int64_t kNoiseDuration = 0.5 * kNanosInSecond;
+static const int64_t kNoiseFrameDuration = kNanosInSecond / 60;
 
 static int64_t nextTakeover(void)
 {
@@ -407,9 +413,12 @@ static int64_t nextTakeover(void)
     // There might be no victim because we have conquered all visible ones.
     // However, more may be loaded later, so don't give up!
     if (victim != nil) {
-        // TODO: animated insertion
-        victim.thumbnailImage = monika.thumbnailImage;
-        victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monika.thumbnailTitle);
+        [self showWhiteNoiseInThumbnail:victim
+                                forTime:kNoiseDuration
+                                andThen:^{
+            victim.thumbnailImage = monika.thumbnailImage;
+            victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monika.thumbnailTitle);
+        }];
     }
 
     // Keep checking...
@@ -417,6 +426,74 @@ static int64_t nextTakeover(void)
                    dispatch_get_main_queue(), ^{
         [self takeOverOtherScreenSavers:screenSavers
                              withMonika:monika];
+    });
+}
+
+- (void)prepareWhiteNoiseImages
+{
+    // It looks good with this many frames
+    static const NSUInteger count = 10;
+    // Size used by Screen Saver preference pane
+    static const NSUInteger frameWidth  = 90;
+    static const NSUInteger frameHeight = 58;
+
+    NSMutableArray<NSImage *> *images = [[NSMutableArray alloc] initWithCapacity:count];
+    for (NSUInteger i = 0; i < count; i++) {
+        NSImage *noise = makeWhiteNoise(frameWidth, frameHeight);
+        [images addObject:[self framedThumbnail:noise]];
+    }
+    self.whiteNoise = images;
+}
+
+static NSImage *makeWhiteNoise(NSUInteger width, NSUInteger height)
+{
+    // Use twice the size for the image to look good on Retina.
+    // We do not provide low-resultion data, NSImage will know.
+    NSUInteger bitmapWidth = 2 * width;
+    NSUInteger bitmapHeight = 2 * height;
+    // Yay! This is one of the longest method names in Cocoa:
+    NSBitmapImageRep *data =
+        [[NSBitmapImageRep alloc] initWithBitmapDataPlanes:NULL
+                                                pixelsWide:bitmapWidth
+                                                pixelsHigh:bitmapHeight
+                                             bitsPerSample:8
+                                           samplesPerPixel:3
+                                                  hasAlpha:NO
+                                                  isPlanar:NO
+                                            colorSpaceName:NSCalibratedRGBColorSpace
+                                               bytesPerRow:3 * bitmapWidth
+                                              bitsPerPixel:24];
+    // Now generate some noise into that bitmap. Not the most efficient way,
+    // but it gets the job done. NSBitmapImageRep cannot make us grayscale
+    // 1-byte bitmaps, so we have to do it in RGB representation, sadly.
+    for (NSUInteger i = 0; i < bitmapWidth * bitmapHeight; i++) {
+        uint8_t pixel = rand() % 256;
+        data.bitmapData[3 * i + 0] = pixel;
+        data.bitmapData[3 * i + 1] = pixel;
+        data.bitmapData[3 * i + 2] = pixel;
+    }
+    // Finally wrap the bitmap into an image
+    NSImage *image = [[NSImage alloc] initWithSize:NSMakeSize(width, height)];
+    [image addRepresentation:data];
+    return image;
+}
+
+// It's probably not the best approach to doing animations, but it works. orz
+- (void)showWhiteNoiseInThumbnail:(NSView *)view
+                          forTime:(int64_t)nanoseconds
+                          andThen:(void (^)(void))block
+{
+    if (nanoseconds < 0) {
+        block();
+        return;
+    }
+
+    view.thumbnailImage = self.whiteNoise[rand() % self.whiteNoise.count];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, kNoiseFrameDuration),
+                   dispatch_get_main_queue(), ^{
+        [self showWhiteNoiseInThumbnail:view
+                                forTime:nanoseconds - kNoiseFrameDuration
+                                andThen:block];
     });
 }
 
@@ -432,11 +509,11 @@ static NSView *selectScreenSaverVictim(NSCollectionView *screenSavers,
           {
             // Ignore everyone that we have already assimilated and because
             // we're hungry for attention limit ourselves to the currently
-            // visible rectangle.
+            // visible rectangle (partially visible is ok).
             if (view.thumbnailImage == monikaImage) {
                 return NO;
             }
-            return NSContainsRect(screenSavers.visibleRect, view.frame);
+            return NSIntersectsRect(screenSavers.visibleRect, view.frame);
           }
         ]];
     // ...she went and hanged herself...
