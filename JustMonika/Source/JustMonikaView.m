@@ -393,6 +393,8 @@ static const float kAverageTakeoversPerLoop = 1.5f;
 // Duration of while noise blip before takeover.
 static const int64_t kNoiseDuration = 0.5 * kNanosInSecond;
 static const int64_t kNoiseFrameDuration = kNanosInSecond / 60;
+// Probability of screwing up thumbnail update.
+static const float kGlitchProbability = 0.3333;
 
 static int64_t nextTakeover(void)
 {
@@ -416,6 +418,11 @@ static int64_t nextTakeover(void)
         [self showWhiteNoiseInThumbnail:victim
                                 forTime:kNoiseDuration
                                 andThen:^{
+            // Sometimes we break and don't quite replace the image.
+            if (rand() < (int)(kGlitchProbability * RAND_MAX)) {
+                victim.thumbnailTitle = makeCorrupted(monika.thumbnailTitle);
+                return;
+            }
             victim.thumbnailImage = monika.thumbnailImage;
             victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monika.thumbnailTitle);
         }];
@@ -540,6 +547,25 @@ static NSString *makeFancy(NSString *text)
         [result appendString:substring];
         [result appendString:kCombiningEnclosingKeycap];
     }];
+    return result;
+}
+
+// Latin-1, Latin Extended A, B, IPA Extensions
+static const unichar kMojibakeLow  = 0x0080;
+static const unichar kMojibakeHigh = 0x02AF;
+
+static NSString *makeCorrupted(NSString *text)
+{
+    // Use approximate length of the text (we don't care for exatness here),
+    // fill that up with random mojibake and occasionally miss a keycap.
+    NSMutableString *result = [[NSMutableString alloc] initWithCapacity:2*text.length];
+    for (NSUInteger i = 0; i < text.length; i++) {
+        unichar ch = kMojibakeLow + rand() % (kMojibakeHigh - kMojibakeLow);
+        [result appendString:[NSString stringWithCharacters:&ch length:1]];
+        if ((rand() % 10) < 7) {
+            [result appendString:kCombiningEnclosingKeycap];
+        }
+    }
     return result;
 }
 
