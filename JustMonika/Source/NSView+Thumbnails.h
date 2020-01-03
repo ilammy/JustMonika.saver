@@ -4,14 +4,22 @@
 
 #import <AppKit/AppKit.h>
 
-// Accessors to private class "IndividualSaverIconView"
-
 NS_ASSUME_NONNULL_BEGIN
+
+// Accessors to private class "IndividualSaverIconView"
 
 @interface NSView (Thumbnails)
 
 @property (strong,nullable) NSString *thumbnailTitle;
 @property (strong,nullable) NSImage *thumbnailImage;
+
+@end
+
+// Accessors to private class "ScreenSaverPref"
+
+@interface NSCollectionView (ScreenSavers)
+
+- (void)leaveOnlyThisScreenSaver:(NSView *)screenSaver;
 
 @end
 

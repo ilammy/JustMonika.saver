@@ -421,6 +421,12 @@ static int64_t nextTakeover(void)
             // Sometimes we break and don't quite replace the image.
             if (rand() < (int)(kGlitchProbability * RAND_MAX)) {
                 victim.thumbnailTitle = makeCorrupted(monika.thumbnailTitle);
+                // And in some time just have a fit and kill them all.
+                // Just Monika.
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover()),
+                               dispatch_get_main_queue(), ^{
+                    [screenSavers leaveOnlyThisScreenSaver:monika];
+                });
                 return;
             }
             victim.thumbnailImage = monika.thumbnailImage;
