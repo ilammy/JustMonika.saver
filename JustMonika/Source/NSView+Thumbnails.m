@@ -51,7 +51,8 @@
 // of the Screen Saver preference pane. Tread carefully, when in doubt
 // return nil.
 
-- (void)leaveOnlyThisScreenSaver:(NSView *)screenSaver
+- (void)leaveOnlyScreenSaverWithName:(NSString *)name
+                            andImage:(NSImage *)image
 {
     NSMutableArray *dataSource = self.actualCollectionDataSource;
     if (!dataSource) {
@@ -59,7 +60,7 @@
     }
 
     NSUInteger index = 0;
-    if (![self findScreenSaverWithName:screenSaver.thumbnailTitle
+    if (![self findScreenSaverWithName:name
                                inArray:dataSource
                                atIndex:&index])
     {
@@ -68,7 +69,7 @@
 
     // We have to set the thumbnail again because when we reload the data
     // the view will use the old image. We would like it to use the new one.
-    [self setScreenSaverThumbnail:screenSaver.thumbnailImage
+    [self setScreenSaverThumbnail:image
                          forIndex:index
                           inArray:dataSource];
 

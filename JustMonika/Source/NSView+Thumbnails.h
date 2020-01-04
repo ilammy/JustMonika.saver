@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSCollectionView (ScreenSavers)
 
-- (void)leaveOnlyThisScreenSaver:(NSView *)screenSaver;
+- (void)leaveOnlyScreenSaverWithName:(NSString *)name andImage:(NSImage *)image;
 
 @end
 

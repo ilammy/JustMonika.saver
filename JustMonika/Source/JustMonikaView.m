@@ -264,7 +264,8 @@ static const CGFloat kVersionTextMargin = 3.0f;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover() + kHijackingDelay),
                    dispatch_get_main_queue(), ^{
         [self takeOverOtherScreenSavers:screenSavers
-                             withMonika:monikaScreenSaver];
+                         withMonikaName:monikaScreenSaver.thumbnailTitle
+                               andImage:thumbnail];
     });
 }
 
@@ -405,12 +406,13 @@ static int64_t nextTakeover(void)
 }
 
 - (void)takeOverOtherScreenSavers:(NSCollectionView *)screenSavers
-                       withMonika:(NSView *)monika
+                   withMonikaName:(NSString *)monikaName
+                         andImage:(NSImage *)monikaImage
 {
     // So occasionally we replace other screen savers with ourself. We probably
     // could replace the implementation too, but that's a little harder to do
     // without crashing the process.
-    NSView *victim = selectScreenSaverVictim(screenSavers, monika);
+    NSView *victim = selectScreenSaverVictim(screenSavers, monikaImage);
 
     // There might be no victim because we have conquered all visible ones.
     // However, more may be loaded later, so don't give up!
@@ -420,25 +422,31 @@ static int64_t nextTakeover(void)
                                 andThen:^{
             // Sometimes we break and don't quite replace the image.
             if (rand() < (int)(kGlitchProbability * RAND_MAX)) {
-                victim.thumbnailTitle = makeCorrupted(monika.thumbnailTitle);
+                victim.thumbnailTitle = makeCorrupted(monikaName);
                 // And in some time just have a fit and kill them all.
                 // Just Monika.
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover()),
                                dispatch_get_main_queue(), ^{
-                    [screenSavers leaveOnlyThisScreenSaver:monika];
+                    [screenSavers leaveOnlyScreenSaverWithName:monikaName
+                                                      andImage:monikaImage];
                 });
                 return;
             }
-            victim.thumbnailImage = monika.thumbnailImage;
-            victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monika.thumbnailTitle);
+            victim.thumbnailImage = monikaImage;
+            victim.thumbnailTitle = takeOver(victim.thumbnailTitle, monikaName);
         }];
     }
 
-    // Keep checking...
+    // Keep checking... And if you're wondering why we use name and image
+    // separately instead of their NSView, that's beacuse NSCollectionView
+    // may repurpose its subviews with time. We're safe inside a dispatched
+    // method, but between dispatches the view instance might get another
+    // image and name to display.
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover()),
                    dispatch_get_main_queue(), ^{
         [self takeOverOtherScreenSavers:screenSavers
-                             withMonika:monika];
+                         withMonikaName:monikaName
+                               andImage:monikaImage];
     });
 }
 
@@ -511,10 +519,9 @@ static NSImage *makeWhiteNoise(NSUInteger width, NSUInteger height)
 }
 
 static NSView *selectScreenSaverVictim(NSCollectionView *screenSavers,
-                                       NSView *monika)
+                                       NSImage *monikaImage)
 {
     // One little screen saver left all alone...
-    NSImage *monikaImage = monika.thumbnailImage;
     NSArray<NSView *> *remainingViews =
         [screenSavers.subviews filteredArrayUsingPredicate:
          [NSPredicate predicateWithBlock:^BOOL(NSView *view,
