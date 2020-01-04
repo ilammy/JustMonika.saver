@@ -16,3 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
+
+// Since we're a screen saver plugin bundle, we can't just use the main bundle
+#define JMLocalizedString(key, comment) \
+    NSLocalizedStringFromTableInBundle((key), @"JustMonika", NSBundle.justMonika, (comment))

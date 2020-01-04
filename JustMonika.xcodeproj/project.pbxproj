@@ -47,7 +47,6 @@
 		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; };
 		9F33485B23B3C25200368291 /* monika.chr in Resources */ = {isa = PBXBuildFile; fileRef = 9F33485A23B3C25200368291 /* monika.chr */; };
-		9F3FC3F323891D8B00AD0621 /* sheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F223891D8B00AD0621 /* sheet.xib */; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
 		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -60,6 +59,9 @@
 		9F4A149423BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */; };
 		9F4A149523BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */; };
 		9F4A149623BBAB1E003E9CB9 /* ScreenSaverThumbMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */; };
+		9F4A149923C0E987003E9CB9 /* sheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149B23C0E987003E9CB9 /* sheet.xib */; };
+		9F4A14A023C0F201003E9CB9 /* JustMonika.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149E23C0F201003E9CB9 /* JustMonika.strings */; };
+		9F4A14A423C0FB8E003E9CB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */; };
 		9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */; };
 		9F6CC84B23B9485A00540B08 /* JustMonikaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */; };
 		9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
@@ -146,7 +148,6 @@
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
-		9F3FC3F223891D8B00AD0621 /* sheet.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = sheet.xib; sourceTree = "<group>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
 		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
@@ -175,6 +176,11 @@
 		9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScreenSaverThumbMask@2x.png"; sourceTree = "<group>"; };
 		9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ScreenSaverThumbFrame@2x.png"; sourceTree = "<group>"; };
 		9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ScreenSaverThumbMask.png; sourceTree = "<group>"; };
+		9F4A149A23C0E987003E9CB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/sheet.xib; sourceTree = "<group>"; };
+		9F4A149D23C0E9B4003E9CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/sheet.strings; sourceTree = "<group>"; };
+		9F4A149F23C0F201003E9CB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/JustMonika.strings; sourceTree = "<group>"; };
+		9F4A14A123C0F209003E9CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JustMonika.strings; sourceTree = "<group>"; };
+		9F4A14A523C0FB8E003E9CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaNotifications.h; sourceTree = "<group>"; };
 		9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaNotifications.m; sourceTree = "<group>"; };
 		9FA5BF1423B8BCEA0019F956 /* ib_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ib_preview.png; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 				9F069CA52381A7080081F32E /* Info.plist */,
 				9F33485623B2D57300368291 /* Source */,
 				9F33485523B2D56A00368291 /* Resources */,
+				9F4A14B023C2314D003E9CB9 /* Translations */,
 			);
 			path = JustMonika;
 			sourceTree = "<group>";
@@ -305,7 +312,6 @@
 				9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */,
 				9FA5BF1423B8BCEA0019F956 /* ib_preview.png */,
 				9F33485A23B3C25200368291 /* monika.chr */,
-				9F3FC3F223891D8B00AD0621 /* sheet.xib */,
 				9F242B5A23B26D7800EF94D7 /* thumbnail.png */,
 				9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */,
 			);
@@ -384,6 +390,16 @@
 				9FB113182392EF1B00E0FA7E /* res */,
 			);
 			path = JustMonikaGL;
+			sourceTree = "<group>";
+		};
+		9F4A14B023C2314D003E9CB9 /* Translations */ = {
+			isa = PBXGroup;
+			children = (
+				9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */,
+				9F4A149E23C0F201003E9CB9 /* JustMonika.strings */,
+				9F4A149B23C0E987003E9CB9 /* sheet.xib */,
+			);
+			path = Translations;
 			sourceTree = "<group>";
 		};
 		9FB113182392EF1B00E0FA7E /* res */ = {
@@ -551,14 +567,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */,
-				9F33485B23B3C25200368291 /* monika.chr in Resources */,
-				9F3FC3F323891D8B00AD0621 /* sheet.xib in Resources */,
 				9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */,
 				9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */,
 				9F4A149623BBAB1E003E9CB9 /* ScreenSaverThumbMask.png in Resources */,
 				9F4A149423BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png in Resources */,
 				9F4A149323BBAB1E003E9CB9 /* ScreenSaverThumbFrame.png in Resources */,
 				9F4A149523BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png in Resources */,
+				9F33485B23B3C25200368291 /* monika.chr in Resources */,
+				9F4A149923C0E987003E9CB9 /* sheet.xib in Resources */,
+				9F4A14A423C0FB8E003E9CB9 /* InfoPlist.strings in Resources */,
+				9F4A14A023C0F201003E9CB9 /* JustMonika.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -712,6 +730,32 @@
 			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
+		9F4A149B23C0E987003E9CB9 /* sheet.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F4A149A23C0E987003E9CB9 /* Base */,
+				9F4A149D23C0E9B4003E9CB9 /* en */,
+			);
+			name = sheet.xib;
+			sourceTree = "<group>";
+		};
+		9F4A149E23C0F201003E9CB9 /* JustMonika.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F4A149F23C0F201003E9CB9 /* Base */,
+				9F4A14A123C0F209003E9CB9 /* en */,
+			);
+			name = JustMonika.strings;
+			sourceTree = "<group>";
+		};
+		9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F4A14A523C0FB8E003E9CB9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -719,6 +763,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLY_RULES_IN_COPY_FILES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -770,6 +815,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = Debug;
 		};
@@ -777,6 +823,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLY_RULES_IN_COPY_FILES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -821,6 +868,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRINGS_FILE_OUTPUT_ENCODING = "UTF-16";
 			};
 			name = Release;
 		};

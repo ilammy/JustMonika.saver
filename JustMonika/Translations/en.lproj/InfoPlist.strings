@@ -1,0 +1,5 @@
+/* Screen saver name as displayed in the system. */
+CFBundleName = "Monika";
+
+/* Bundle copyright information. */
+NSHumanReadableCopyright = "Copyright © 2019 ilammy's tearoom. All rights reserved.";

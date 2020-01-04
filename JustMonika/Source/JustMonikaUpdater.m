@@ -53,16 +53,26 @@
     notification.versionString = item.versionString;
     if (item.isCriticalUpdate) {
         notification.title =
-            [NSString stringWithFormat:@"Critical Update Available: Monika %@",
+            [NSString stringWithFormat:
+             JMLocalizedString(@"Critical Update Available: Monika %@",
+                               @"Notification title for critical updates. "
+                               @"%@ is replaced with version (e.g., 2.0)"),
              item.displayVersionString];
-        notification.body = @"An important update to this screen saver is available. "
-            @"Please open \"System Preferences\" to install it.";
+        notification.body =
+            JMLocalizedString(@"An important update to this screen saver is available. "
+                              @"Please open \"System Preferences\" to install it.",
+                              @"Notification body for critical updates.");
     } else {
         notification.title =
-            [NSString stringWithFormat:@"Update Available: Monika %@",
+            [NSString stringWithFormat:
+             JMLocalizedString(@"Update Available: Monika %@",
+                               @"Notification title for regular updates. "
+                               @"%@ is replaced with version (e.g., 2.0)"),
              item.displayVersionString];
-        notification.body = @"A new version of this screen saver is available. "
-            @"Please open \"System Preferences\" to install it.";
+        notification.body =
+            JMLocalizedString(@"A new version of this screen saver is available. "
+                              @"Please open \"System Preferences\" to install it.",
+                              @"Notification body for regular updates.");
     }
 
     [self.notifications show:notification];
