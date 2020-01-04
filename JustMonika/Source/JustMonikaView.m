@@ -175,13 +175,9 @@ static const CGFloat kVersionTextMargin = 3.0f;
     [self.monika startAnimation];
 
     // This is the most convenient place for such call because everything is
-    // in its right place. However, we still need to ensure that this code is
-    // executed at most once because we don't need interference with ourselves.
-    static dispatch_once_t thumbnailImprovement;
+    // in its right place. Do this only for Screen Saver preference pane.
     if (self.isPreview) {
-        dispatch_once(&thumbnailImprovement, ^{
-            [self improveThumbnail];
-        });
+        [self improveThumbnail];
     }
 }
 
@@ -254,18 +250,26 @@ static const CGFloat kVersionTextMargin = 3.0f;
     NSCollectionView *screenSavers = [self locateScreenSavers];
 
     NSView *monikaScreenSaver = [self locateMonikaScreenSaver:screenSavers];
+    NSString *monikaName = monikaScreenSaver.thumbnailTitle;
 
     NSImage *thumbnail = [NSBundle.justMonika imageForResource:@"thumbnail"];
     thumbnail = [self framedThumbnail:thumbnail];
 
     monikaScreenSaver.thumbnailImage = thumbnail;
 
-    [self prepareWhiteNoiseImages];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover() + kHijackingDelay),
-                   dispatch_get_main_queue(), ^{
-        [self takeOverOtherScreenSavers:screenSavers
-                         withMonikaName:monikaScreenSaver.thumbnailTitle
-                               andImage:thumbnail];
+    // This code might get executed multiple times because Screen Saver
+    // preference panel makes multiple instances of our view and calls
+    // "startAnimation" on all of them. However, there is only one
+    // NSCollectionView that we want to conquer and dominate.
+    static dispatch_once_t thumbnailImprovement;
+    dispatch_once(&thumbnailImprovement, ^{
+        [self prepareWhiteNoiseImages];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, nextTakeover() + kHijackingDelay),
+                       dispatch_get_main_queue(), ^{
+            [self takeOverOtherScreenSavers:screenSavers
+                             withMonikaName:monikaName
+                                   andImage:thumbnail];
+        });
     });
 }
 
