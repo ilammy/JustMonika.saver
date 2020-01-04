@@ -416,7 +416,7 @@ static int64_t nextTakeover(void)
     // So occasionally we replace other screen savers with ourself. We probably
     // could replace the implementation too, but that's a little harder to do
     // without crashing the process.
-    NSView *victim = selectScreenSaverVictim(screenSavers, monikaImage);
+    NSView *victim = selectScreenSaverVictim(screenSavers, monikaName);
 
     // There might be no victim because we have conquered all visible ones.
     // However, more may be loaded later, so don't give up!
@@ -523,7 +523,7 @@ static NSImage *makeWhiteNoise(NSUInteger width, NSUInteger height)
 }
 
 static NSView *selectScreenSaverVictim(NSCollectionView *screenSavers,
-                                       NSImage *monikaImage)
+                                       NSString *monikaName)
 {
     // One little screen saver left all alone...
     NSArray<NSView *> *remainingViews =
@@ -534,7 +534,7 @@ static NSView *selectScreenSaverVictim(NSCollectionView *screenSavers,
             // Ignore everyone that we have already assimilated and because
             // we're hungry for attention limit ourselves to the currently
             // visible rectangle (partially visible is ok).
-            if (view.thumbnailImage == monikaImage) {
+            if ([view.thumbnailTitle isEqualToString:monikaName]) {
                 return NO;
             }
             return NSIntersectsRect(screenSavers.visibleRect, view.frame);
