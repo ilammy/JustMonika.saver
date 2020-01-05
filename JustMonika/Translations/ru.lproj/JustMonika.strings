@@ -1,0 +1,11 @@
+/* Notification body for regular updates. */
+"A new version of this screen saver is available. Please open \"System Preferences\" to install it." = "Доступна новая версия заставки. Для установки откройте «Системные настройки», пожалуйста.";
+
+/* Notification body for critical updates. */
+"An important update to this screen saver is available. Please open \"System Preferences\" to install it." = "Доступно важное обновление заставки. Для установки откройте «Системные настройки».";
+
+/* Notification title for critical updates. %@ is replaced with version (e.g., 2.0) */
+"Critical Update Available: Monika %@" = "Важное обновление: Моника %@";
+
+/* Notification title for regular updates. %@ is replaced with version (e.g., 2.0) */
+"Update Available: Monika %@" = "Доступно обновление: Моника %@";

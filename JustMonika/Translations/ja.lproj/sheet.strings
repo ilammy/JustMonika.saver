@@ -3,7 +3,7 @@
 "QvC-M9-y7g.title" = "Configure Sheet";
 
 /* Class = "NSTextFieldCell"; title = "Since I'm here you don't have many options.  There is nothing to configure here, [player].  Here, I'll go ahead and turn it off for you... "; ObjectID = "XAq-HK-jW9"; */
-"XAq-HK-jW9.title" = "Since I’m here you don’t have many options.  There is nothing to configure here, [player].  Here, I’ll go ahead and turn it off for you... ";
+"XAq-HK-jW9.title" = "一緒にいるから、多くのオプションがない。  ここには設定もない、[player]。  じゃあ〜それを無効にしてさせたいませんか？ ";
 
 /* Class = "NSButtonCell"; title = "OK"; ObjectID = "iQ0-d1-zpF"; */
 "iQ0-d1-zpF.title" = "OK";

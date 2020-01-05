@@ -181,6 +181,15 @@
 		9F4A149F23C0F201003E9CB9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/JustMonika.strings; sourceTree = "<group>"; };
 		9F4A14A123C0F209003E9CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/JustMonika.strings; sourceTree = "<group>"; };
 		9F4A14A523C0FB8E003E9CB9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F4A14B123C2359C003E9CB9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/sheet.strings; sourceTree = "<group>"; };
+		9F4A14B223C2359C003E9CB9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F4A14B323C2359C003E9CB9 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/JustMonika.strings; sourceTree = "<group>"; };
+		9F4A14B423C235A6003E9CB9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/sheet.strings; sourceTree = "<group>"; };
+		9F4A14B523C235A6003E9CB9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F4A14B623C235A6003E9CB9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/JustMonika.strings; sourceTree = "<group>"; };
+		9F4A14B723C235AE003E9CB9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/sheet.strings; sourceTree = "<group>"; };
+		9F4A14B823C235AE003E9CB9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		9F4A14B923C235AE003E9CB9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/JustMonika.strings; sourceTree = "<group>"; };
 		9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaNotifications.h; sourceTree = "<group>"; };
 		9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaNotifications.m; sourceTree = "<group>"; };
 		9FA5BF1423B8BCEA0019F956 /* ib_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ib_preview.png; sourceTree = "<group>"; };
@@ -548,6 +557,9 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
+				ru,
+				uk,
 			);
 			mainGroup = 9F069C942381A7080081F32E;
 			productRefGroup = 9F069C9F2381A7080081F32E /* Products */;
@@ -735,6 +747,9 @@
 			children = (
 				9F4A149A23C0E987003E9CB9 /* Base */,
 				9F4A149D23C0E9B4003E9CB9 /* en */,
+				9F4A14B123C2359C003E9CB9 /* ja */,
+				9F4A14B423C235A6003E9CB9 /* ru */,
+				9F4A14B723C235AE003E9CB9 /* uk */,
 			);
 			name = sheet.xib;
 			sourceTree = "<group>";
@@ -744,6 +759,9 @@
 			children = (
 				9F4A149F23C0F201003E9CB9 /* Base */,
 				9F4A14A123C0F209003E9CB9 /* en */,
+				9F4A14B323C2359C003E9CB9 /* ja */,
+				9F4A14B623C235A6003E9CB9 /* ru */,
+				9F4A14B923C235AE003E9CB9 /* uk */,
 			);
 			name = JustMonika.strings;
 			sourceTree = "<group>";
@@ -752,6 +770,9 @@
 			isa = PBXVariantGroup;
 			children = (
 				9F4A14A523C0FB8E003E9CB9 /* en */,
+				9F4A14B223C2359C003E9CB9 /* ja */,
+				9F4A14B523C235A6003E9CB9 /* ru */,
+				9F4A14B823C235AE003E9CB9 /* uk */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -764,6 +785,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -824,6 +846,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				APPLY_RULES_IN_COPY_FILES = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

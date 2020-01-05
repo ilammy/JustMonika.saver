@@ -1,0 +1,5 @@
+/* Screen saver name as displayed in the system. */
+CFBundleName = "Моніка";
+
+/* Bundle copyright information. */
+NSHumanReadableCopyright = "© 2019 Чайна Іламмі. Усі права захищено.";
