@@ -15,7 +15,16 @@
 
 - (NSString *)bundleName
 {
-    return self.infoDictionary[(NSString *)kCFBundleNameKey];
+    NSString *result;
+    result = self.localizedInfoDictionary[(NSString *)kCFBundleNameKey];
+    if (result) {
+        return result;
+    }
+    result = self.infoDictionary[(NSString *)kCFBundleNameKey];
+    if (result) {
+        return result;
+    }
+    return nil;
 }
 
 - (NSString *)versionString
