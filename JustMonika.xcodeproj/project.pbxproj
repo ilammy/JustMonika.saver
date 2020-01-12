@@ -148,6 +148,7 @@
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
+		9F39589E23CB50E10026C6E8 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Sparkle.strings; sourceTree = "<group>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
 		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
@@ -350,6 +351,14 @@
 			path = Source;
 			sourceTree = "<group>";
 		};
+		9F39589423CB50880026C6E8 /* Sparkle */ = {
+			isa = PBXGroup;
+			children = (
+				9F39589F23CB50E10026C6E8 /* Sparkle.strings */,
+			);
+			path = Sparkle;
+			sourceTree = "<group>";
+		};
 		9F3FC406238A089100AD0621 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +413,7 @@
 		9F4A14B023C2314D003E9CB9 /* Translations */ = {
 			isa = PBXGroup;
 			children = (
+				9F39589423CB50880026C6E8 /* Sparkle */,
 				9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */,
 				9F4A149E23C0F201003E9CB9 /* JustMonika.strings */,
 				9F4A149B23C0E987003E9CB9 /* sheet.xib */,
@@ -479,6 +489,7 @@
 				9F069C9B2381A7080081F32E /* Frameworks */,
 				9F069C9C2381A7080081F32E /* Resources */,
 				9F242B8423B279F000EF94D7 /* Embed Frameworks */,
+				9F3958A223CB9E680026C6E8 /* Replace Sparkle Translations */,
 				9FA5BF1623B8D60F0019F956 /* Code Sign Sparkle Autoupdater */,
 			);
 			buildRules = (
@@ -635,6 +646,25 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		9F3958A223CB9E680026C6E8 /* Replace Sparkle Translations */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Replace Sparkle Translations";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "SPARKLE_RESOURCES=\"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sparkle.framework/Versions/A/Resources\"\nSPARKLE_AUTOUPDATE=\"${SPARKLE_RESOURCES}/Autoupdate.app/Contents/Resources\"\n\ncd \"${SRCROOT}/JustMonika/Translations/Sparkle\"\nfind . -type f -name '*.strings' \\\n    -exec cp \"{}\" \"${SPARKLE_RESOURCES}/{}\" \\;\nfind . -type f -name '*.strings' \\\n    -exec cp \"{}\" \"${SPARKLE_AUTOUPDATE}/{}\" \\;\n";
+			showEnvVarsInLog = 0;
+		};
 		9FA5BF1623B8D60F0019F956 /* Code Sign Sparkle Autoupdater */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -740,6 +770,14 @@
 				9F069CB72381B40C0081F32E /* Base */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		9F39589F23CB50E10026C6E8 /* Sparkle.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F39589E23CB50E10026C6E8 /* en */,
+			);
+			name = Sparkle.strings;
 			sourceTree = "<group>";
 		};
 		9F4A149B23C0E987003E9CB9 /* sheet.xib */ = {
