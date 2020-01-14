@@ -1,22 +1,20 @@
-/* damn well! */
+"%1$@ %2$@ has been downloaded and is ready to use! This is an important update; would you like to install it and relaunch %1$@ now?" = "Okay, everyone! I’ve downloaded Me %2$@ and we are ready to update! This is an important update and I am a bit scared; would you like to reopen System Preferences now?";
 
-"%1$@ %2$@ has been downloaded and is ready to use! This is an important update; would you like to install it and relaunch %1$@ now?" = "%1$@ %2$@ has been downloaded and is ready to use! This is an important update; would you like to install it and relaunch %1$@ now?";
+"%1$@ %2$@ has been downloaded and is ready to use! Would you like to install it and relaunch %1$@ now?" = "Okay, everyone! I’ve downloaded Me %2$@ and we are ready to update! Would you like to reopen System Preferences now?";
 
-"%1$@ %2$@ has been downloaded and is ready to use! Would you like to install it and relaunch %1$@ now?" = "%1$@ %2$@ has been downloaded and is ready to use! Would you like to install it and relaunch %1$@ now?";
+"%1$@ can't be updated, because it was opened from a read-only or a temporary location. Use Finder to copy %1$@ to the Applications folder, relaunch it from there, and try again." = "I can‘t update because it seems you put me into a read-only or a temporary location. Use Finder to move JustMonika.saver to your “~/Library/Screen Savers” folder, relaunch System Preferences, and try again.";
 
-"%1$@ can't be updated, because it was opened from a read-only or a temporary location. Use Finder to copy %1$@ to the Applications folder, relaunch it from there, and try again." = "%1$@ can't be updated, because it was opened from a read-only or a temporary location. Use Finder to copy %1$@ to the Applications folder, relaunch it from there, and try again.";
+"Quit %1$@, move it into your Applications folder, relaunch it from there and try again. %2$@ can’t be updated if it’s running from the location it was downloaded to." = "Quit System Preferences, move JustMonika.saver to your “~/Library/Screen Savers” folder, relaunch System Preferences and try again. I can’t update if I’m running from the location I was downloaded to. How did you even manage to do this?";
 
-"Quit %1$@, move it into your Applications folder, relaunch it from there and try again. %2$@ can’t be updated if it’s running from the location it was downloaded to." = "Quit %1$@, move it into your Applications folder, relaunch it from there and try again. %2$@ can’t be updated if it’s running from the location it was downloaded to.";
+"%@ %@ is currently the newest version available." = "I‘m currently the newest version available: %2$@, yay!";
 
-"%@ %@ is currently the newest version available." = "%1$@ %2$@ is currently the newest version available.";
-
-"%@ %@ is currently the newest version available.\n(You are currently running version %@.)" = "%1$@ %2$@ is currently the newest version available.\n(You are currently running version %3$@.)";
+"%@ %@ is currently the newest version available.\n(You are currently running version %@.)" = "Monika %2$@ is the newest version available.\n(I‘m currently running %3$@.)";
 
 /* Description text for SUUpdateAlert when the update is downloadable. */
-"%@ %@ is now available--you have %@. Would you like to download it now?" = "%1$@ %2$@ is now available—you have %3$@. Would you like to download it now?";
+"%@ %@ is now available--you have %@. Would you like to download it now?" = "Monika %2$@ is now available—and I’m %3$@. Would you like to download her now?";
 
 /* Description text for SUUpdateAlert when the update informational with no download. */
-"%@ %@ is now available--you have %@. Would you like to learn more about this update on the web?" = "%1$@ %2$@ is now available—you have %3$@. Would you like to learn more about this update on the web?";
+"%@ %@ is now available--you have %@. Would you like to learn more about this update on the web?" = "Monika %2$@ is now available—and I’m %3$@. Would you like to learn more about this update on the web?";
 
 "%@ downloaded" = "%@ downloaded";
 
@@ -80,7 +78,7 @@
 "Ready to Install" = "Ready to Install";
 
 /* Message that is optionally shown at startup to allow users to turn on/off update checks. */
-"Should %1$@ automatically check for updates? You can always check for updates manually from the %1$@ menu." = "Should %1$@ automatically check for updates? You can always check for updates manually from the %1$@ menu.";
+"Should %1$@ automatically check for updates? You can always check for updates manually from the %1$@ menu." = "Should I automatically check for updates? You can always check for updates manually by opening “Desktop & Screen Saver” preferences.";
 
 "The update is improperly signed." = "The update is improperly signed.";
 
