@@ -1,0 +1,12 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>JustMonika</title>
+        <item>
+            <title>2.0-preview</title>
+            <pubDate>Fri, 17 Jan 2020 06:21:49 +0200</pubDate>
+            <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
+            <enclosure url="https://gist.github.com/ilammy/2acde6be583fc4c516da48c41c5e7335/raw/92e2c2f59745dda1487e961459e172880fc051ab/JustMonika.saver.zip" sparkle:version="3" sparkle:shortVersionString="2.0-preview" length="6920528" type="application/octet-stream" sparkle:edSignature="mwMZlULpQaStbo7t6HhxKluBvHgHC0YdCb0rAQwA7zPeExp56WEUyR1egWoBEKN70DQ/xo+N0gO1NAOtfy+YDw=="/>
+        </item>
+    </channel>
+</rss>
