@@ -4,9 +4,9 @@
         <title>JustMonika</title>
         <item>
             <title>1.1</title>
-            <pubDate>Fri, 17 Jan 2020 08:16:37 +0200</pubDate>
+            <pubDate>Fri, 17 Jan 2020 10:27:30 +0200</pubDate>
             <sparkle:minimumSystemVersion>10.12</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/ilammy/JustMonika.saver/releases/download/v1.1/JustMonika.saver.zip" sparkle:version="2" sparkle:shortVersionString="1.1" length="6905558" type="application/octet-stream" sparkle:edSignature="5YE9kiaslvWBwrgAnb+i78bwEK4C7770FCVyZ1fb7nbhX561Erose8+VNdWh7EFkVCBswPpQoVKvu2fwN+hTCg=="/>
+            <enclosure url="https://github.com/ilammy/JustMonika.saver/releases/download/v1.1/JustMonika.saver.zip" sparkle:version="2" sparkle:shortVersionString="1.1" length="6902493" type="application/octet-stream" sparkle:edSignature="YnVzFWe0OH45WtrtfFk1hrLXEuir/sTlJIwt8KTpqpUWUTNqP7qkLwZaVyJhPreoPM1esk3xyz1FAIzWp5g+Dg=="/>
         </item>
     </channel>
 </rss>
