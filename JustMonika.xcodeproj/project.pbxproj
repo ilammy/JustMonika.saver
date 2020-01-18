@@ -118,12 +118,12 @@
 			remoteGlobalIDString = 9F242B6223B275EE00EF94D7;
 			remoteInfo = JustMonikaGL;
 		};
-		9FB113342393D8AF00E0FA7E /* PBXContainerItemProxy */ = {
+		9F3958D623D2BE4F0026C6E8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F069C952381A7080081F32E /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 9F069C9D2381A7080081F32E;
-			remoteInfo = JustMonika;
+			remoteGlobalIDString = 9F3958A523D2B90E0026C6E8;
+			remoteInfo = "JustMonika (no Sparkle)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -591,7 +591,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				9FB113352393D8AF00E0FA7E /* PBXTargetDependency */,
+				9F3958D723D2BE4F0026C6E8 /* PBXTargetDependency */,
 			);
 			name = JustMonikaPreview;
 			productName = JustMonikaPreview;
@@ -916,10 +916,10 @@
 			target = 9F242B6223B275EE00EF94D7 /* JustMonikaGL */;
 			targetProxy = 9F3958A723D2B90E0026C6E8 /* PBXContainerItemProxy */;
 		};
-		9FB113352393D8AF00E0FA7E /* PBXTargetDependency */ = {
+		9F3958D723D2BE4F0026C6E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9F069C9D2381A7080081F32E /* JustMonika */;
-			targetProxy = 9FB113342393D8AF00E0FA7E /* PBXContainerItemProxy */;
+			target = 9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */;
+			targetProxy = 9F3958D623D2BE4F0026C6E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
