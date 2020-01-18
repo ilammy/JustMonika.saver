@@ -100,7 +100,7 @@
 		9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
 		9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */; };
 		9FB113332393D8AF00E0FA7E /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		DCF8D5ABA68683B91449161A /* libPods-JustMonikaGL-JustMonika (no Sparkle).a in Frameworks */ = {isa = PBXBuildFile; fileRef = A8B74EFDC693BD99A202EF01 /* libPods-JustMonikaGL-JustMonika (no Sparkle).a */; };
+		F00807DAA448C37062DFCCA1 /* libPods-JustMonikaGL-JustMonika (Homebrew).a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89462F355639306D1587DDBD /* libPods-JustMonikaGL-JustMonika (Homebrew).a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,7 +178,10 @@
 		14B6F710FE9F10FF6D18A97E /* Pods-JustMonikaGL-JustMonika.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL-JustMonika.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL-JustMonika/Pods-JustMonikaGL-JustMonika.release.xcconfig"; sourceTree = "<group>"; };
 		2066C6250FB963BA9913D886 /* libPods-JustMonikaGL-JustMonika.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonikaGL-JustMonika.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5CFEB5EEC4E57BF0EA53B961 /* Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL-JustMonika (no Sparkle)/Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig"; sourceTree = "<group>"; };
+		5E10A7B978D12F9BDF889247 /* Pods-JustMonikaGL-JustMonika (Homebrew).release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL-JustMonika (Homebrew).release.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL-JustMonika (Homebrew)/Pods-JustMonikaGL-JustMonika (Homebrew).release.xcconfig"; sourceTree = "<group>"; };
 		61504E1D4359AA9061EE28EF /* libPods-JustMonikaGL.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonikaGL.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		89462F355639306D1587DDBD /* libPods-JustMonikaGL-JustMonika (Homebrew).a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonikaGL-JustMonika (Homebrew).a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D8C66CE373E9341ECDDBD28 /* Pods-JustMonikaGL-JustMonika (Homebrew).debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL-JustMonika (Homebrew).debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL-JustMonika (Homebrew)/Pods-JustMonikaGL-JustMonika (Homebrew).debug.xcconfig"; sourceTree = "<group>"; };
 		9F069C9E2381A7080081F32E /* JustMonika.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustMonika.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F069CA12381A7080081F32E /* JustMonikaView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaView.h; sourceTree = "<group>"; };
 		9F069CA32381A7080081F32E /* JustMonikaView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaView.m; sourceTree = "<group>"; };
@@ -255,7 +258,6 @@
 		9FB113212392F28300E0FA7E /* Shaders */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Shaders; sourceTree = "<group>"; };
 		9FB1132323939A8C00E0FA7E /* timer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = timer.h; sourceTree = "<group>"; };
 		9FB1132423939A8C00E0FA7E /* timer.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = timer.c; sourceTree = "<group>"; };
-		A8B74EFDC693BD99A202EF01 /* libPods-JustMonikaGL-JustMonika (no Sparkle).a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JustMonikaGL-JustMonika (no Sparkle).a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B95EB7F883F8CA7848D4F002 /* Pods-JustMonikaGL.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.release.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.release.xcconfig"; sourceTree = "<group>"; };
 		C5B89A685CC9217C7957F28B /* Pods-JustMonikaGL.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL/Pods-JustMonikaGL.debug.xcconfig"; sourceTree = "<group>"; };
 		E3E11CC5C8E3C689CCEE282C /* Pods-JustMonikaGL-JustMonika.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JustMonikaGL-JustMonika.debug.xcconfig"; path = "Target Support Files/Pods-JustMonikaGL-JustMonika/Pods-JustMonikaGL-JustMonika.debug.xcconfig"; sourceTree = "<group>"; };
@@ -297,7 +299,7 @@
 				9F3958BC23D2B90E0026C6E8 /* UserNotifications.framework in Frameworks */,
 				9F3958BD23D2B90E0026C6E8 /* JustMonikaGL.framework in Frameworks */,
 				9F3958BE23D2B90E0026C6E8 /* Sparkle.framework in Frameworks */,
-				DCF8D5ABA68683B91449161A /* libPods-JustMonikaGL-JustMonika (no Sparkle).a in Frameworks */,
+				F00807DAA448C37062DFCCA1 /* libPods-JustMonikaGL-JustMonika (Homebrew).a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,7 +359,7 @@
 				9F3FC436238A118000AD0621 /* OpenGL.framework */,
 				61504E1D4359AA9061EE28EF /* libPods-JustMonikaGL.a */,
 				2066C6250FB963BA9913D886 /* libPods-JustMonikaGL-JustMonika.a */,
-				A8B74EFDC693BD99A202EF01 /* libPods-JustMonikaGL-JustMonika (no Sparkle).a */,
+				89462F355639306D1587DDBD /* libPods-JustMonikaGL-JustMonika (Homebrew).a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -500,6 +502,8 @@
 				14B6F710FE9F10FF6D18A97E /* Pods-JustMonikaGL-JustMonika.release.xcconfig */,
 				5CFEB5EEC4E57BF0EA53B961 /* Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig */,
 				EC5F84AB24086389899FBA0B /* Pods-JustMonikaGL-JustMonika (no Sparkle).release.xcconfig */,
+				8D8C66CE373E9341ECDDBD28 /* Pods-JustMonikaGL-JustMonika (Homebrew).debug.xcconfig */,
+				5E10A7B978D12F9BDF889247 /* Pods-JustMonikaGL-JustMonika (Homebrew).release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -781,7 +785,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-JustMonikaGL-JustMonika (no Sparkle)-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-JustMonikaGL-JustMonika (Homebrew)-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1184,12 +1188,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C5B89A685CC9217C7957F28B /* Pods-JustMonikaGL.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1214,11 +1218,12 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B95EB7F883F8CA7848D4F002 /* Pods-JustMonikaGL.release.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1241,7 +1246,7 @@
 		};
 		9F3958D223D2B90E0026C6E8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CFEB5EEC4E57BF0EA53B961 /* Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig */;
+			baseConfigurationReference = 8D8C66CE373E9341ECDDBD28 /* Pods-JustMonikaGL-JustMonika (Homebrew).debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
@@ -1268,7 +1273,7 @@
 		};
 		9F3958D323D2B90E0026C6E8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EC5F84AB24086389899FBA0B /* Pods-JustMonikaGL-JustMonika (no Sparkle).release.xcconfig */;
+			baseConfigurationReference = 5E10A7B978D12F9BDF889247 /* Pods-JustMonikaGL-JustMonika (Homebrew).release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
