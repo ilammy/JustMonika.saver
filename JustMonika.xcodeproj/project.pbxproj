@@ -618,9 +618,9 @@
 			productReference = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */ = {
+		9F3958A523D2B90E0026C6E8 /* JustMonika (Homebrew) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (no Sparkle)" */;
+			buildConfigurationList = 9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (Homebrew)" */;
 			buildPhases = (
 				6D8941E12ECE833F0102BF7D /* [CP] Check Pods Manifest.lock */,
 				9F3958A923D2B90E0026C6E8 /* Headers */,
@@ -635,7 +635,7 @@
 			dependencies = (
 				9F3958A623D2B90E0026C6E8 /* PBXTargetDependency */,
 			);
-			name = "JustMonika (no Sparkle)";
+			name = "JustMonika (Homebrew)";
 			productName = JustMonika;
 			productReference = 9F3958D423D2B90E0026C6E8 /* JustMonika.saver */;
 			productType = "com.apple.product-type.bundle";
@@ -677,7 +677,7 @@
 			projectRoot = "";
 			targets = (
 				9F069C9D2381A7080081F32E /* JustMonika */,
-				9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */,
+				9F3958A523D2B90E0026C6E8 /* JustMonika (Homebrew) */,
 				9F242B6223B275EE00EF94D7 /* JustMonikaGL */,
 				9F069CAE2381B4090081F32E /* JustMonikaPreview */,
 			);
@@ -920,7 +920,7 @@
 		};
 		9F3958D723D2BE4F0026C6E8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */;
+			target = 9F3958A523D2B90E0026C6E8 /* JustMonika (Homebrew) */;
 			targetProxy = 9F3958D623D2BE4F0026C6E8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1332,7 +1332,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (no Sparkle)" */ = {
+		9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (Homebrew)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9F3958D223D2B90E0026C6E8 /* Debug */,

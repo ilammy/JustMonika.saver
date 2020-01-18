@@ -16,7 +16,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "9F3958A523D2B90E0026C6E8"
                BuildableName = "JustMonika.saver"
-               BlueprintName = "JustMonika (no Sparkle)"
+               BlueprintName = "JustMonika (Homebrew)"
                ReferencedContainer = "container:JustMonika.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -52,7 +52,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "9F3958A523D2B90E0026C6E8"
             BuildableName = "JustMonika.saver"
-            BlueprintName = "JustMonika (no Sparkle)"
+            BlueprintName = "JustMonika (Homebrew)"
             ReferencedContainer = "container:JustMonika.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
