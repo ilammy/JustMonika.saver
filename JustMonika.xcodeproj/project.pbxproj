@@ -201,7 +201,7 @@
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
 		9F3958A323D157640026C6E8 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
-		9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JustMonika (no Sparkle).saver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3958D423D2B90E0026C6E8 /* JustMonika.saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JustMonika.saver; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
 		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
@@ -319,7 +319,7 @@
 				9F069C9E2381A7080081F32E /* JustMonika.saver */,
 				9F069CAF2381B4090081F32E /* JustMonikaPreview.app */,
 				9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */,
-				9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */,
+				9F3958D423D2B90E0026C6E8 /* JustMonika.saver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -631,7 +631,7 @@
 			);
 			name = "JustMonika (no Sparkle)";
 			productName = JustMonika;
-			productReference = 9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */;
+			productReference = 9F3958D423D2B90E0026C6E8 /* JustMonika.saver */;
 			productType = "com.apple.product-type.bundle";
 		};
 /* End PBXNativeTarget section */
@@ -1253,7 +1253,7 @@
 				);
 				MARKETING_VERSION = "1.2-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = JustMonika;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Debug;
@@ -1280,7 +1280,7 @@
 				);
 				MARKETING_VERSION = "1.2-dev";
 				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = JustMonika;
 				WRAPPER_EXTENSION = saver;
 			};
 			name = Release;
