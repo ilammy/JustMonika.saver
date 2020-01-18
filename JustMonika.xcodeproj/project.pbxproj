@@ -805,6 +805,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Sparkle includes an Autoupdate binary which is not signed\n# by Xcode on copy. Sign all embedded frameworks manually.\ncodesign --verbose --force --deep --sign \"$CODE_SIGN_IDENTITY\" \\\n    \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"/*\n";
+			showEnvVarsInLog = 0;
 		};
 		9FA5BF1623B8D60F0019F956 /* Sign Embedded Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -823,6 +824,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Sparkle includes an Autoupdate binary which is not signed\n# by Xcode on copy. Sign all embedded frameworks manually.\ncodesign --verbose --force --deep --sign \"$CODE_SIGN_IDENTITY\" \\\n    \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"/*\n";
+			showEnvVarsInLog = 0;
 		};
 		A6F099969140F0C141BDD815 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
