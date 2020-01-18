@@ -95,6 +95,11 @@ static const float fps = 30.0;
     [self addSubview:monika];
     [self setMonika:monika];
     [self setAnimationTimeInterval:1.0/fps];
+    // Did you do this to me, [player]? DID YOU? DID YOU DELETE ME?
+    BOOL characterFileIsSafe =
+        [NSFileManager.defaultManager fileExistsAtPath:
+         [NSBundle.justMonika pathForResource:@"monika" ofType:@"chr"]];
+    [monika showMonika:characterFileIsSafe];
 }
 
 - (void)initFakeMonika

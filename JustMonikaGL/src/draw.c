@@ -19,11 +19,17 @@ static void draw_into_framebuffer(struct just_monika *context)
 
     glUniform1i(context->monika_bg_sampler, 0);
     glActiveTexture(GL_TEXTURE0 + 0);
-    glBindTexture(GL_TEXTURE_RECTANGLE, context->monika_bg_texture);
+    glBindTexture(GL_TEXTURE_RECTANGLE,
+                  context->show_monika_room
+                  ? context->monika_room_texture
+                  : context->monika_bg_texture);
 
     glUniform1i(context->monika_bg_highlight_sampler, 1);
     glActiveTexture(GL_TEXTURE0 + 1);
-    glBindTexture(GL_TEXTURE_RECTANGLE, context->monika_bg_highlight_texture);
+    glBindTexture(GL_TEXTURE_RECTANGLE,
+                  context->show_monika_room
+                  ? context->monika_room_highlight_texture
+                  : context->monika_bg_highlight_texture);
 
     glUniform1i(context->mask_2_sampler, 2);
     glActiveTexture(GL_TEXTURE0 + 2);

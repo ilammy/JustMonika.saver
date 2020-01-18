@@ -54,6 +54,11 @@
     just_monika_stop_animation(self.monika);
 }
 
+- (void)showMonika:(BOOL)visible
+{
+    just_monika_set_visible(self.monika, visible);
+}
+
 #pragma mark - NSOpenGLView overrides
 
 - (void)prepareOpenGL

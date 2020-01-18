@@ -82,4 +82,14 @@ int just_monika_start_animation(struct just_monika *context);
 JUST_MONIKA_API
 int just_monika_stop_animation(struct just_monika *context);
 
+/**
+ * Show or hide Monika.
+ *
+ * @param show set 0 to hide, non-zero to show again
+ *
+ * @returns zero in case of success, non-zero value otherwise.
+ */
+JUST_MONIKA_API
+int just_monika_set_visible(struct just_monika *context, int show);
+
 #endif /* JUST_MONIKA_GL_H */

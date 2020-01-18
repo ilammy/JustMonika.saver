@@ -139,6 +139,8 @@ static void init_textures(struct just_monika *context)
 {
     context->monika_bg_texture = load_texture_from_resource("monika_bg.png");
     context->monika_bg_highlight_texture = load_texture_from_resource("monika_bg_highlight.png");
+    context->monika_room_texture = load_texture_from_resource("monika_room.png");
+    context->monika_room_highlight_texture = load_texture_from_resource("monika_room_highlight.png");
     context->mask_2_texture = load_texture_from_resource("mask_2.png");
     context->mask_3_texture = load_texture_from_resource("mask_3.png");
     context->mask_texture = load_texture_from_resource("mask.png");

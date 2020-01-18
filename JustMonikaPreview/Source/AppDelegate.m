@@ -15,6 +15,7 @@
 
 @property (weak) IBOutlet NSWindow *adjustments;
 @property (weak) IBOutlet NSButton *animationCheckBox;
+@property (weak) IBOutlet NSButton *visibilityCheckBox;
 
 @property (weak) IBOutlet NSButton *settingsButton;
 
@@ -81,6 +82,11 @@
 - (IBAction)animationCheckBoxPressed:(id)sender
 {
     [self syncAnimationState];
+}
+
+- (IBAction)monikaVisibilityChanged:(id)sender
+{
+    [self.view.monika showMonika:self.visibilityCheckBox.state];
 }
 
 @end

@@ -37,6 +37,9 @@ struct just_monika {
     GLuint monika_bg_texture;
     GLuint monika_bg_highlight_sampler;
     GLuint monika_bg_highlight_texture;
+    GLuint monika_room_texture;
+    GLuint monika_room_highlight_texture;
+    GLboolean show_monika_room;
     GLuint mask_2_sampler;
     GLuint mask_2_texture;
     GLuint mask_3_sampler;

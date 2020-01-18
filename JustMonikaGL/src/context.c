@@ -28,3 +28,9 @@ void just_monika_free(struct just_monika *context)
 {
     free(context);
 }
+
+int just_monika_set_visible(struct just_monika *context, int show)
+{
+    context->show_monika_room = !show;
+    return 0;
+}
