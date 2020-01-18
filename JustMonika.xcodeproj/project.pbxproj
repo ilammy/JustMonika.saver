@@ -202,7 +202,6 @@
 		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
 		9F3958A323D157640026C6E8 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
 		9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JustMonika (no Sparkle).saver"; sourceTree = BUILT_PRODUCTS_DIR; };
-		9F3958D523D2B90E0026C6E8 /* JustMonika copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JustMonika copy-Info.plist"; path = "/Users/ilammy/Documents/dev/ilammy/JustMonika/JustMonika copy-Info.plist"; sourceTree = "<absolute>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
 		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
@@ -311,7 +310,6 @@
 				9F069C9F2381A7080081F32E /* Products */,
 				9F069CC02381B61D0081F32E /* Frameworks */,
 				D17BA13CEB5FA06B26B13846 /* Pods */,
-				9F3958D523D2B90E0026C6E8 /* JustMonika copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1246,7 +1244,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Sparkle",
 				);
-				INFOPLIST_FILE = "JustMonika copy-Info.plist";
+				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1273,7 +1271,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Sparkle",
 				);
-				INFOPLIST_FILE = "JustMonika copy-Info.plist";
+				INFOPLIST_FILE = JustMonika/Info.plist;
 				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
