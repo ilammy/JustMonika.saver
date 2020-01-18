@@ -48,6 +48,40 @@
 		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
 		9F33485B23B3C25200368291 /* monika.chr in Resources */ = {isa = PBXBuildFile; fileRef = 9F33485A23B3C25200368291 /* monika.chr */; };
 		9F3958A423D157640026C6E8 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9F3958A323D157640026C6E8 /* icon.icns */; };
+		9F3958AA23D2B90E0026C6E8 /* JustMonikaView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F069CA12381A7080081F32E /* JustMonikaView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9F3958AB23D2B90E0026C6E8 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9F3958AC23D2B90E0026C6E8 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		9F3958AD23D2B90E0026C6E8 /* JustMonikaUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */; };
+		9F3958AE23D2B90E0026C6E8 /* JustMonikaNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */; };
+		9F3958AF23D2B90E0026C6E8 /* NSBundle+Monika.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F4A148723BB727A003E9CB9 /* NSBundle+Monika.h */; };
+		9F3958B023D2B90E0026C6E8 /* NSView+Thumbnails.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F4A148B23BB7F77003E9CB9 /* NSView+Thumbnails.h */; };
+		9F3958B123D2B90E0026C6E8 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
+		9F3958B323D2B90E0026C6E8 /* NSView+Thumbnails.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148C23BB7F77003E9CB9 /* NSView+Thumbnails.m */; };
+		9F3958B423D2B90E0026C6E8 /* JustMonikaGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */; };
+		9F3958B523D2B90E0026C6E8 /* JustMonikaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */; };
+		9F3958B623D2B90E0026C6E8 /* NSBundle+Monika.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */; };
+		9F3958B723D2B90E0026C6E8 /* JustMonikaSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */; };
+		9F3958B823D2B90E0026C6E8 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
+		9F3958B923D2B90E0026C6E8 /* JustMonikaUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */; };
+		9F3958BA23D2B90E0026C6E8 /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CA32381A7080081F32E /* JustMonikaView.m */; };
+		9F3958BC23D2B90E0026C6E8 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9F3958BD23D2B90E0026C6E8 /* JustMonikaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; };
+		9F3958BE23D2B90E0026C6E8 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; };
+		9F3958BF23D2B90E0026C6E8 /* libPods-JustMonika.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */; };
+		9F3958C123D2B90E0026C6E8 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
+		9F3958C223D2B90E0026C6E8 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
+		9F3958C323D2B90E0026C6E8 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
+		9F3958C423D2B90E0026C6E8 /* ScreenSaverThumbMask.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149223BBAB1E003E9CB9 /* ScreenSaverThumbMask.png */; };
+		9F3958C523D2B90E0026C6E8 /* ScreenSaverThumbMask@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149023BBAB1E003E9CB9 /* ScreenSaverThumbMask@2x.png */; };
+		9F3958C623D2B90E0026C6E8 /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 9F3958A323D157640026C6E8 /* icon.icns */; };
+		9F3958C723D2B90E0026C6E8 /* ScreenSaverThumbFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A148F23BBAB1D003E9CB9 /* ScreenSaverThumbFrame.png */; };
+		9F3958C823D2B90E0026C6E8 /* ScreenSaverThumbFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149123BBAB1E003E9CB9 /* ScreenSaverThumbFrame@2x.png */; };
+		9F3958C923D2B90E0026C6E8 /* monika.chr in Resources */ = {isa = PBXBuildFile; fileRef = 9F33485A23B3C25200368291 /* monika.chr */; };
+		9F3958CA23D2B90E0026C6E8 /* sheet.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149B23C0E987003E9CB9 /* sheet.xib */; };
+		9F3958CB23D2B90E0026C6E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */; };
+		9F3958CC23D2B90E0026C6E8 /* JustMonika.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149E23C0F201003E9CB9 /* JustMonika.strings */; };
+		9F3958CE23D2B90E0026C6E8 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F3958CF23D2B90E0026C6E8 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
 		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -78,6 +112,13 @@
 			remoteGlobalIDString = 9F242B6223B275EE00EF94D7;
 			remoteInfo = JustMonikaGL;
 		};
+		9F3958A723D2B90E0026C6E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9F069C952381A7080081F32E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9F242B6223B275EE00EF94D7;
+			remoteInfo = JustMonikaGL;
+		};
 		9FB113342393D8AF00E0FA7E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 9F069C952381A7080081F32E /* Project object */;
@@ -96,6 +137,18 @@
 			files = (
 				9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */,
 				9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9F3958CD23D2B90E0026C6E8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				9F3958CE23D2B90E0026C6E8 /* JustMonikaGL.framework in Embed Frameworks */,
+				9F3958CF23D2B90E0026C6E8 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +203,8 @@
 		9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JustMonikaGL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F33485A23B3C25200368291 /* monika.chr */ = {isa = PBXFileReference; lastKnownFileType = file; path = monika.chr; sourceTree = "<group>"; };
 		9F3958A323D157640026C6E8 /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = icon.icns; sourceTree = "<group>"; };
+		9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "JustMonika (no Sparkle).saver"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9F3958D523D2B90E0026C6E8 /* JustMonika copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "JustMonika copy-Info.plist"; path = "/Users/ilammy/Documents/dev/ilammy/JustMonika/JustMonika copy-Info.plist"; sourceTree = "<absolute>"; };
 		9F3FC3F42389506300AD0621 /* NSView+Subviews.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSView+Subviews.h"; sourceTree = "<group>"; };
 		9F3FC3F52389506300AD0621 /* NSView+Subviews.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSView+Subviews.m"; sourceTree = "<group>"; };
 		9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaSettings.h; sourceTree = "<group>"; };
@@ -235,6 +290,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F3958BB23D2B90E0026C6E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F3958BC23D2B90E0026C6E8 /* UserNotifications.framework in Frameworks */,
+				9F3958BD23D2B90E0026C6E8 /* JustMonikaGL.framework in Frameworks */,
+				9F3958BE23D2B90E0026C6E8 /* Sparkle.framework in Frameworks */,
+				9F3958BF23D2B90E0026C6E8 /* libPods-JustMonika.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -247,6 +313,7 @@
 				9F069C9F2381A7080081F32E /* Products */,
 				9F069CC02381B61D0081F32E /* Frameworks */,
 				D17BA13CEB5FA06B26B13846 /* Pods */,
+				9F3958D523D2B90E0026C6E8 /* JustMonika copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -256,6 +323,7 @@
 				9F069C9E2381A7080081F32E /* JustMonika.saver */,
 				9F069CAF2381B4090081F32E /* JustMonikaPreview.app */,
 				9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */,
+				9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -469,6 +537,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F3958A923D2B90E0026C6E8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F3958AA23D2B90E0026C6E8 /* JustMonikaView.h in Headers */,
+				9F3958AB23D2B90E0026C6E8 /* JustMonikaGLView.h in Headers */,
+				9F3958AC23D2B90E0026C6E8 /* JustMonikaSettings.h in Headers */,
+				9F3958AD23D2B90E0026C6E8 /* JustMonikaUpdater.h in Headers */,
+				9F3958AE23D2B90E0026C6E8 /* JustMonikaNotifications.h in Headers */,
+				9F3958AF23D2B90E0026C6E8 /* NSBundle+Monika.h in Headers */,
+				9F3958B023D2B90E0026C6E8 /* NSView+Thumbnails.h in Headers */,
+				9F3958B123D2B90E0026C6E8 /* NSView+Subviews.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -533,6 +616,28 @@
 			productReference = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (no Sparkle)" */;
+			buildPhases = (
+				9F3958A823D2B90E0026C6E8 /* [CP] Check Pods Manifest.lock */,
+				9F3958A923D2B90E0026C6E8 /* Headers */,
+				9F3958B223D2B90E0026C6E8 /* Sources */,
+				9F3958BB23D2B90E0026C6E8 /* Frameworks */,
+				9F3958C023D2B90E0026C6E8 /* Resources */,
+				9F3958CD23D2B90E0026C6E8 /* Embed Frameworks */,
+				9F3958D023D2B90E0026C6E8 /* Sign Embedded Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9F3958A623D2B90E0026C6E8 /* PBXTargetDependency */,
+			);
+			name = "JustMonika (no Sparkle)";
+			productName = JustMonika;
+			productReference = 9F3958D423D2B90E0026C6E8 /* JustMonika (no Sparkle).saver */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -570,6 +675,7 @@
 			projectRoot = "";
 			targets = (
 				9F069C9D2381A7080081F32E /* JustMonika */,
+				9F3958A523D2B90E0026C6E8 /* JustMonika (no Sparkle) */,
 				9F242B6223B275EE00EF94D7 /* JustMonikaGL */,
 				9F069CAE2381B4090081F32E /* JustMonikaPreview */,
 			);
@@ -614,6 +720,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F3958C023D2B90E0026C6E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F3958C123D2B90E0026C6E8 /* ib_preview.png in Resources */,
+				9F3958C223D2B90E0026C6E8 /* thumbnail.png in Resources */,
+				9F3958C323D2B90E0026C6E8 /* thumbnail@2x.png in Resources */,
+				9F3958C423D2B90E0026C6E8 /* ScreenSaverThumbMask.png in Resources */,
+				9F3958C523D2B90E0026C6E8 /* ScreenSaverThumbMask@2x.png in Resources */,
+				9F3958C623D2B90E0026C6E8 /* icon.icns in Resources */,
+				9F3958C723D2B90E0026C6E8 /* ScreenSaverThumbFrame.png in Resources */,
+				9F3958C823D2B90E0026C6E8 /* ScreenSaverThumbFrame@2x.png in Resources */,
+				9F3958C923D2B90E0026C6E8 /* monika.chr in Resources */,
+				9F3958CA23D2B90E0026C6E8 /* sheet.xib in Resources */,
+				9F3958CB23D2B90E0026C6E8 /* InfoPlist.strings in Resources */,
+				9F3958CC23D2B90E0026C6E8 /* JustMonika.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -638,6 +763,46 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9F3958A823D2B90E0026C6E8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-JustMonika-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F3958D023D2B90E0026C6E8 /* Sign Embedded Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Sign Embedded Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Sparkle includes an Autoupdate binary which is not signed\n# by Xcode on copy. Sign all embedded frameworks manually.\ncodesign --verbose --force --deep --sign \"$CODE_SIGN_IDENTITY\" \\\n    \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}\"/*\n";
 		};
 		9FA5BF1623B8D60F0019F956 /* Sign Embedded Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -721,6 +886,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9F3958B223D2B90E0026C6E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9F3958B323D2B90E0026C6E8 /* NSView+Thumbnails.m in Sources */,
+				9F3958B423D2B90E0026C6E8 /* JustMonikaGLView.m in Sources */,
+				9F3958B523D2B90E0026C6E8 /* JustMonikaNotifications.m in Sources */,
+				9F3958B623D2B90E0026C6E8 /* NSBundle+Monika.m in Sources */,
+				9F3958B723D2B90E0026C6E8 /* JustMonikaSettings.m in Sources */,
+				9F3958B823D2B90E0026C6E8 /* NSView+Subviews.m in Sources */,
+				9F3958B923D2B90E0026C6E8 /* JustMonikaUpdater.m in Sources */,
+				9F3958BA23D2B90E0026C6E8 /* JustMonikaView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -728,6 +908,11 @@
 			isa = PBXTargetDependency;
 			target = 9F242B6223B275EE00EF94D7 /* JustMonikaGL */;
 			targetProxy = 9F242B8223B279F000EF94D7 /* PBXContainerItemProxy */;
+		};
+		9F3958A623D2B90E0026C6E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9F242B6223B275EE00EF94D7 /* JustMonikaGL */;
+			targetProxy = 9F3958A723D2B90E0026C6E8 /* PBXContainerItemProxy */;
 		};
 		9FB113352393D8AF00E0FA7E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1050,6 +1235,60 @@
 			};
 			name = Release;
 		};
+		9F3958D223D2B90E0026C6E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C21473527FB785A62FDA48F0 /* Pods-JustMonika.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Sparkle",
+				);
+				INFOPLIST_FILE = "JustMonika copy-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = "1.2-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = saver;
+			};
+			name = Debug;
+		};
+		9F3958D323D2B90E0026C6E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDE8E6A253D519005F87AF3A /* Pods-JustMonika.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 3;
+				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/Sparkle",
+				);
+				INFOPLIST_FILE = "JustMonika copy-Info.plist";
+				INSTALL_PATH = "$(HOME)/Library/Screen Savers";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MARKETING_VERSION = "1.2-dev";
+				PRODUCT_BUNDLE_IDENTIFIER = net.ilammy.JustMonika;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = saver;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1085,6 +1324,15 @@
 			buildConfigurations = (
 				9F242B6923B275EE00EF94D7 /* Debug */,
 				9F242B6A23B275EE00EF94D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9F3958D123D2B90E0026C6E8 /* Build configuration list for PBXNativeTarget "JustMonika (no Sparkle)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9F3958D223D2B90E0026C6E8 /* Debug */,
+				9F3958D323D2B90E0026C6E8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
