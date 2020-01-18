@@ -9,3 +9,9 @@ target 'JustMonika' do
     pod 'libpng', '~> 1.6'
   end
 end
+
+target 'JustMonika (no Sparkle)' do
+  target 'JustMonikaGL' do
+    pod 'libpng', '~> 1.6'
+  end
+end
