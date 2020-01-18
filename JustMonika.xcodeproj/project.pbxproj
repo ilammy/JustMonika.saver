@@ -66,7 +66,7 @@
 		9F3958BA23D2B90E0026C6E8 /* JustMonikaView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CA32381A7080081F32E /* JustMonikaView.m */; };
 		9F3958BC23D2B90E0026C6E8 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9F3958BD23D2B90E0026C6E8 /* JustMonikaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; };
-		9F3958BE23D2B90E0026C6E8 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; };
+		9F3958BE23D2B90E0026C6E8 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9F3958BF23D2B90E0026C6E8 /* libPods-JustMonika.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 89EB2B0B5C632DD504788B57 /* libPods-JustMonika.a */; };
 		9F3958C123D2B90E0026C6E8 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
 		9F3958C223D2B90E0026C6E8 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
@@ -81,7 +81,6 @@
 		9F3958CB23D2B90E0026C6E8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */; };
 		9F3958CC23D2B90E0026C6E8 /* JustMonika.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A149E23C0F201003E9CB9 /* JustMonika.strings */; };
 		9F3958CE23D2B90E0026C6E8 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		9F3958CF23D2B90E0026C6E8 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		9F3FC3F62389506300AD0621 /* NSView+Subviews.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F42389506300AD0621 /* NSView+Subviews.h */; };
 		9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC3F52389506300AD0621 /* NSView+Subviews.m */; };
 		9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -148,7 +147,6 @@
 			dstSubfolderSpec = 10;
 			files = (
 				9F3958CE23D2B90E0026C6E8 /* JustMonikaGL.framework in Embed Frameworks */,
-				9F3958CF23D2B90E0026C6E8 /* Sparkle.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
