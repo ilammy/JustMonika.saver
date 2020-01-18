@@ -1243,11 +1243,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5CFEB5EEC4E57BF0EA53B961 /* Pods-JustMonikaGL-JustMonika (no Sparkle).debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Sparkle",
@@ -1270,11 +1270,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EC5F84AB24086389899FBA0B /* Pods-JustMonikaGL-JustMonika (no Sparkle).release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
-				DEVELOPMENT_TEAM = 6ZBRQV5H93;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/Sparkle",
