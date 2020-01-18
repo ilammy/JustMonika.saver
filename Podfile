@@ -8,6 +8,6 @@ target 'JustMonikaGL' do
   target 'JustMonika' do
     pod 'Sparkle'
   end
-  target 'JustMonika (no Sparkle)' do
+  target 'JustMonika (Homebrew)' do
   end
 end
