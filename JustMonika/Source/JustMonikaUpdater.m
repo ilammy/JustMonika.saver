@@ -36,6 +36,10 @@
 
 + (instancetype)forView:(JustMonikaView *)view
 {
+    // We can be built without Sparkle support.
+    if (!SUUpdater.class) {
+        return nil;
+    }
     SUUpdater *updater = [SUUpdater updaterForBundle:NSBundle.justMonika];
     updater.sendsSystemProfile = NO; // don't you ever dare
     return [[JustMonikaUpdater alloc] initWithUpdater:updater
