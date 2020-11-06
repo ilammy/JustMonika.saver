@@ -207,6 +207,12 @@ static const CGFloat kVersionTextMargin = 3.0f;
 
 - (NSWindow*)configureSheet
 {
+    // Make sure to never show the configuration sheet if it is disabled.
+    // It may be requested even if "hasConfigureSheet" says NO because
+    // the System Settings dialog caches the value on first launch.
+    if (!self.settings.settingsSheetEnabled) {
+        return nil;
+    }
     return self.settingsSheet;
 }
 
@@ -226,6 +232,9 @@ static const CGFloat kVersionTextMargin = 3.0f;
     //
     // We can exploit the fact that Screen Savers are loaded as plugins into
     // System Settings, and thus we have access to full NSView hierarchy.
+    //
+    // Note: this does not work since macOS 10.15 Catalina because we don't
+    // have direct access to the view hierarchy anymore, like with thumbnails.
     NSView *contentView = self.settingsSheet.sheetParent.contentView;
     for (NSView *view in contentView.subviewsRecursive) {
         if (view.class == NSBox.class) {
