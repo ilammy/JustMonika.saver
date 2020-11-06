@@ -69,9 +69,7 @@
 
     just_monika_init(self.monika);
 
-    unsigned width = NSWidth(self.frame);
-    unsigned height = NSHeight(self.frame);
-    just_monika_set_viewport(self.monika, width, height);
+    [self updateMonikaViewport];
 }
 
 - (void)reshape
@@ -80,8 +78,15 @@
 
     [self.openGLContext makeCurrentContext];
 
-    unsigned width = NSWidth(self.frame);
-    unsigned height = NSHeight(self.frame);
+    [self updateMonikaViewport];
+}
+
+- (void)updateMonikaViewport
+{
+    // Cocoa coordinates may not be equivalent to OpenGL ones (high DPI).
+    NSSize size = [self convertSizeToBacking:self.frame.size];
+    unsigned width  = size.width;
+    unsigned height = size.height;
     just_monika_set_viewport(self.monika, width, height);
 }
 
