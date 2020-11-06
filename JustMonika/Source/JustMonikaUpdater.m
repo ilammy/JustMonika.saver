@@ -16,6 +16,9 @@
 @property (strong) SUUpdater *updater;
 @property (weak) JustMonikaView *view;
 
+@property (strong) NSURLSession *session;
+@property (strong) NSURLRequest *releaseRequest;
+
 @end
 
 @implementation JustMonikaUpdater
@@ -30,6 +33,7 @@
         self.view = view;
 
         [self listenToSparkleRestarts];
+        [self initReleaseRequestParameters];
     }
     return self;
 }
@@ -40,6 +44,43 @@
     updater.sendsSystemProfile = NO; // don't you ever dare
     return [[JustMonikaUpdater alloc] initWithUpdater:updater
                                               andView:view];
+}
+
+#pragma mark - Querying release info
+
+static NSString *githubURL =
+    @"https://api.github.com/repos/ilammy/JustMonika.saver/releases/latest";
+
+- (void)initReleaseRequestParameters
+{
+    NSURLSessionConfiguration *config =
+        [NSURLSessionConfiguration ephemeralSessionConfiguration];
+    config.HTTPAdditionalHeaders = @{
+        @"Accept": @"application/vnd.github.v3+json",
+    };
+    self.session = [NSURLSession sessionWithConfiguration:config];
+}
+
+- (void)queryLatestRelease
+{
+    NSURLSessionDataTask *task =
+        [self.session dataTaskWithURL:[NSURL URLWithString:githubURL]
+                    completionHandler:^(NSData *data,
+                                        NSURLResponse *response,
+                                        NSError *error) {
+            if (error) {
+                return;
+            }
+            NSDictionary *release =
+                [NSJSONSerialization JSONObjectWithData:data
+                                                options:0
+                                                  error:&error];
+            if (error) {
+                return;
+            }
+            // TODO: parse release
+        }];
+    [task resume];
 }
 
 #pragma mark - User Notifications
