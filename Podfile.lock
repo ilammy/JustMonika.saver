@@ -1,10 +1,10 @@
 PODS:
   - libpng (1.6.35)
-  - Sparkle (1.22.0)
+  - Sparkle (1.23.0)
 
 DEPENDENCIES:
   - libpng (~> 1.6)
-  - Sparkle
+  - Sparkle (~> 1.22)
 
 SPEC REPOS:
   trunk:
@@ -13,8 +13,8 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   libpng: c490b0523e94f78697f83ad434fbaf715050e15b
-  Sparkle: 593ac2e677c07bcb6c3b22d621240e7cbedaab57
+  Sparkle: 55b1a87ba69d56913375a281546b7c82dec95bb0
 
-PODFILE CHECKSUM: f6b7723b4752ecf68aefbb4959f88e8fcd92d32f
+PODFILE CHECKSUM: a8d11bc04a897a5ee30d1b29619e260c3d1b8697
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0
