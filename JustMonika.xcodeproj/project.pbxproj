@@ -16,7 +16,7 @@
 		9F069CB82381B40C0081F32E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9F069CB62381B40C0081F32E /* MainMenu.xib */; };
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 		9F1A08AF23B57F13007B6A80 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; };
-		9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */; };
 		9F1A08B423B66691007B6A80 /* JustMonikaUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */; };
 		9F1A08BA23B7E25E007B6A80 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -42,7 +42,7 @@
 		9F242B7C23B2770200EF94D7 /* timer.c in Sources */ = {isa = PBXBuildFile; fileRef = 9FB1132423939A8C00E0FA7E /* timer.c */; };
 		9F242B7D23B277D600EF94D7 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F3FC436238A118000AD0621 /* OpenGL.framework */; };
 		9F242B8023B279F000EF94D7 /* JustMonikaGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; };
-		9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		9F242B8123B279F000EF94D7 /* JustMonikaGL.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F242B6323B275EE00EF94D7 /* JustMonikaGL.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9F242B8523B2832100EF94D7 /* Monika in Resources */ = {isa = PBXBuildFile; fileRef = 9FB1131F2392EFD200E0FA7E /* Monika */; };
 		9F242B8623B2832400EF94D7 /* Shaders in Resources */ = {isa = PBXBuildFile; fileRef = 9FB113212392F28300E0FA7E /* Shaders */; };
 		9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F3FC43F238A138100AD0621 /* JustMonikaGLView.h */; settings = {ATTRIBUTES = (Private, ); }; };
@@ -539,7 +539,7 @@
 		9F069C952381A7080081F32E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1120;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "ilammy's tearoom";
 				TargetAttributes = {
 					9F069C9D2381A7080081F32E = {
@@ -811,6 +811,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -872,6 +873,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -977,6 +979,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = JustMonikaPreview/Resources/JustMonikaPreview.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 6ZBRQV5H93;
@@ -995,7 +998,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 53602FE507F4F77028C3C821 /* Pods-JustMonika-JustMonikaGL.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 3;
