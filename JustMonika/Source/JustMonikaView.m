@@ -249,6 +249,18 @@ static const CGFloat kVersionTextMargin = 3.0f;
 //
 // Again, we're exploiting the fact that screen savers are running as plugins
 // and have access to the whole view hierarchy.
+//
+// Unfortunately, all of this stopped working since macOS 10.15 Catalina as
+// it has moved all screen savers using the ScreenSaver.framework into the
+// separate "legacy screen saver" process. Now we do not have direct access
+// to the System Preferences window. Therefore, we can neither unfuck the
+// thumbnail, nor do any of the gimmicks. Presumably, there is some new
+// AppEx API cooking for some next macOS release, which might or might not
+// allow these tricks. It's likely to not allow it due to better separation,
+// but at least it might fix the tumbnail.
+//
+// The code below is left as it. It does not crash due to Objective-C ignoring
+// messages sent to nil objects, but it does not work either.
 
 - (void)improveThumbnail
 {
