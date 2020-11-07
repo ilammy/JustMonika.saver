@@ -21,6 +21,15 @@
 
 @end
 
+@interface JustMonikaVersionInfo : NSObject
+
+@property (strong) NSString *versionString;
+@property (strong) NSString *displayName;
+@property (strong) NSString *description;
+@property (strong) NSString *releaseURL;
+
+@end
+
 @implementation JustMonikaUpdater
 
 - (instancetype)initWithUpdater:(SUUpdater *)updater andView:(JustMonikaView *)view
@@ -48,17 +57,30 @@
 
 #pragma mark - Querying release info
 
+// See the following documentation for reference:
+// https://docs.github.com/v3/repos/releases/#get-the-latest-release
+
 static NSString *githubURL =
     @"https://api.github.com/repos/ilammy/JustMonika.saver/releases/latest";
 
 - (void)initReleaseRequestParameters
 {
+    // The defaults are fine for doing public API queries. We only need to set
+    // the MIME type for response to prefer the v3 API.
     NSURLSessionConfiguration *config =
-        [NSURLSessionConfiguration ephemeralSessionConfiguration];
+        [NSURLSessionConfiguration defaultSessionConfiguration];
     config.HTTPAdditionalHeaders = @{
         @"Accept": @"application/vnd.github.v3+json",
     };
     self.session = [NSURLSession sessionWithConfiguration:config];
+}
+
+- (void)checkForUpdates
+{
+    // TODO: check for updates
+    // 1. Check if we are allowed to check for updates at all.
+    // 2. Check if the previous check was long ago enough.
+    // 3. Query the latest release.
 }
 
 - (void)queryLatestRelease
@@ -68,7 +90,19 @@ static NSString *githubURL =
                     completionHandler:^(NSData *data,
                                         NSURLResponse *response,
                                         NSError *error) {
+            // The release description is a JSON object with the following
+            // interesting fields:
+            //
+            // {
+            //   "url": "https://api.github.com/repos/octocat/Hello-World/releases/1",
+            //   "html_url": "https://github.com/octocat/Hello-World/releases/v1.0.0",
+            //   "tag_name": "v1.0.0",
+            //   "name": "v1.0.0",
+            //   "body": "Description of the release",
+            //   ...
+            // }
             if (error) {
+                NSLog(@"Failed to get latest version: %@", error);
                 return;
             }
             NSDictionary *release =
@@ -76,11 +110,26 @@ static NSString *githubURL =
                                                 options:0
                                                   error:&error];
             if (error) {
+                NSLog(@"Failed to parse version info: %@", error);
                 return;
             }
-            // TODO: parse release
+            JustMonikaVersionInfo *version = [JustMonikaVersionInfo new];
+            version.releaseURL    = release[@"html_url"];
+            version.versionString = release[@"tag_name"];
+            version.displayName   = release[@"name"];
+            version.description   = release[@"body"];
+            [self handleLatestRelease:version];
         }];
+    // The task will be performed asynchronously and then scrubbed.
     [task resume];
+}
+
+- (void)handleLatestRelease:(JustMonikaVersionInfo *)version
+{
+    // TODO: notify about updates
+    // 1. Check that this is an update.
+    // 2. Decide whether we issue a notification or show an alert.
+    // 3. If the alert has decided to ignore the update, ignore it.
 }
 
 #pragma mark - User Notifications
