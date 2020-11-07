@@ -10,6 +10,10 @@
 
 @property (assign) BOOL settingsSheetEnabled;
 
+@property (assign) BOOL updateChecksAllowed;
+@property (strong) NSDate *lastCheckDate;
+@property (strong) NSString *lastSeenVersionString;
+
 - (void)reset;
 
 @end

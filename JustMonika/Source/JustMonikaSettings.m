@@ -31,12 +31,16 @@
         [self.defaults synchronize];
         [self.defaults registerDefaults:@{
             settingsSheetEnabledKey: @YES,
+            updateChecksAllowedKey: @NO,
         }];
     }
     return self;
 }
 
 static NSString *settingsSheetEnabledKey = @"settingsSheetEnabled";
+static NSString *updateChecksAllowedKey = @"updateChecksAllowed";
+static NSString *lastCheckDateKey = @"lastCheckDate";
+static NSString *lastSeenVersionStringKey = @"lastSeenVersionString";
 
 - (BOOL)settingsSheetEnabled
 {
@@ -47,6 +51,42 @@ static NSString *settingsSheetEnabledKey = @"settingsSheetEnabled";
 - (void)setSettingsSheetEnabled:(BOOL)enabled
 {
     [self.defaults setBool:enabled forKey:settingsSheetEnabledKey];
+    [self.defaults synchronize];
+}
+
+- (BOOL)updateChecksAllowed
+{
+    [self.defaults synchronize];
+    return [self.defaults boolForKey:updateChecksAllowedKey];
+}
+
+- (void)setUpdateChecksAllowed:(BOOL)allowed
+{
+    [self.defaults setBool:allowed forKey:updateChecksAllowedKey];
+    [self.defaults synchronize];
+}
+
+- (NSDate *)lastCheckDate
+{
+    [self.defaults synchronize];
+    return [self.defaults valueForKey:lastCheckDateKey];
+}
+
+- (void)setLastCheckDate:(NSDate *)date
+{
+    [self.defaults setValue:date forKey:lastCheckDateKey];
+    [self.defaults synchronize];
+}
+
+- (NSString *)lastSeenVersionString
+{
+    [self.defaults synchronize];
+    return [self.defaults stringForKey:lastSeenVersionStringKey];
+}
+
+- (void)setLastSeenVersionString:(NSString *)versionString
+{
+    [self.defaults setValue:versionString forKey:lastSeenVersionStringKey];
     [self.defaults synchronize];
 }
 
