@@ -32,6 +32,7 @@
         [self.defaults registerDefaults:@{
             settingsSheetEnabledKey: @YES,
             updateChecksAllowedKey: @NO,
+            updateChecksPermissionRequestedKey: @NO,
         }];
     }
     return self;
@@ -39,6 +40,7 @@
 
 static NSString *settingsSheetEnabledKey = @"settingsSheetEnabled";
 static NSString *updateChecksAllowedKey = @"updateChecksAllowed";
+static NSString *updateChecksPermissionRequestedKey = @"updateChecksPermissionRequested";
 static NSString *lastCheckDateKey = @"lastCheckDate";
 static NSString *lastSeenVersionStringKey = @"lastSeenVersionString";
 
@@ -63,6 +65,18 @@ static NSString *lastSeenVersionStringKey = @"lastSeenVersionString";
 - (void)setUpdateChecksAllowed:(BOOL)allowed
 {
     [self.defaults setBool:allowed forKey:updateChecksAllowedKey];
+    [self.defaults synchronize];
+}
+
+- (BOOL)updateChecksPermissionRequested
+{
+    [self.defaults synchronize];
+    return [self.defaults boolForKey:updateChecksPermissionRequestedKey];
+}
+
+- (void)setUpdateChecksPermissionRequested:(BOOL)requested
+{
+    [self.defaults setBool:requested forKey:updateChecksPermissionRequestedKey];
     [self.defaults synchronize];
 }
 

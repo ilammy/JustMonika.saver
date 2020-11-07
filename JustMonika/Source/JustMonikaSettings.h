@@ -11,6 +11,7 @@
 @property (assign) BOOL settingsSheetEnabled;
 
 @property (assign) BOOL updateChecksAllowed;
+@property (assign) BOOL updateChecksPermissionRequested;
 @property (strong) NSDate *lastCheckDate;
 @property (strong) NSString *lastSeenVersionString;
 
