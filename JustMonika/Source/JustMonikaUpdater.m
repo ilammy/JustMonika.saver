@@ -17,7 +17,6 @@
 @property (weak) JustMonikaView *view;
 
 @property (strong) NSURLSession *session;
-@property (strong) NSURLRequest *releaseRequest;
 
 @end
 
@@ -120,7 +119,7 @@ static NSString *githubURL =
             version.description   = release[@"body"];
             [self handleLatestRelease:version];
         }];
-    // The task will be performed asynchronously and then scrubbed.
+    // The task will be performed asynchronously and then dropped by the session.
     [task resume];
 }
 
