@@ -6,7 +6,6 @@
 
 #import "JustMonikaGLView.h"
 #import "JustMonikaSettings.h"
-#import "JustMonikaUpdater.h"
 #import "NSBundle+Monika.h"
 #import "NSView+Subviews.h"
 #import "NSView+Thumbnails.h"
@@ -20,8 +19,6 @@
 @property (strong) JustMonikaSettings *settings;
 
 @property (nonatomic, weak) NSTextField *versionText;
-
-@property (strong) JustMonikaUpdater *updater;
 
 @property (strong) NSArray<NSImage *> *whiteNoise;
 
@@ -41,7 +38,6 @@ static const float fps = 30.0;
         [self initMonikaView];
         [self initSettings];
         [self initVersionText];
-        [self initUpdater];
     }
     return self;
 }
@@ -112,20 +108,6 @@ static const float fps = 30.0;
     monika.frame = NSMakeRect(0, 0, NSWidth(self.frame), NSHeight(self.frame));
     monika.imageScaling = NSImageScaleProportionallyUpOrDown;
     [self addSubview:monika];
-}
-
-#pragma mark - Automatic updates
-
-- (void)initUpdater
-{
-    // Sparkle does not work in Catalina, go read a rant in JustMonikaUpdater.m
-    // This may change in future, but our Cupertino overlords are currently
-    // keeping silence.
-    NSOperatingSystemVersion version = NSProcessInfo.processInfo.operatingSystemVersion;
-    if (version.majorVersion == 10 && version.minorVersion >= 15) {
-        return;
-    }
-    self.updater = [JustMonikaUpdater forView:self];
 }
 
 #pragma mark - Version display

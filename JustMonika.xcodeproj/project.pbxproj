@@ -17,8 +17,6 @@
 		9F069CBB2381B40C0081F32E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F069CBA2381B40C0081F32E /* main.m */; };
 		9F1A08AF23B57F13007B6A80 /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; };
 		9F1A08B023B57F13007B6A80 /* Sparkle.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08AE23B57F13007B6A80 /* Sparkle.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */; };
-		9F1A08B423B66691007B6A80 /* JustMonikaUpdater.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */; };
 		9F1A08BA23B7E25E007B6A80 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		9F242B5C23B26D7800EF94D7 /* thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5A23B26D7800EF94D7 /* thumbnail.png */; };
 		9F242B5D23B26D7800EF94D7 /* thumbnail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */; };
@@ -142,8 +140,6 @@
 		9F069CBC2381B40C0081F32E /* JustMonikaPreview.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = JustMonikaPreview.entitlements; sourceTree = "<group>"; };
 		9F1A08A123B3E264007B6A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9F1A08AE23B57F13007B6A80 /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = Pods/Sparkle/Sparkle.framework; sourceTree = "<group>"; };
-		9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaUpdater.h; sourceTree = "<group>"; };
-		9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaUpdater.m; sourceTree = "<group>"; };
 		9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		9F242B5A23B26D7800EF94D7 /* thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thumbnail.png; sourceTree = "<group>"; };
 		9F242B5B23B26D7800EF94D7 /* thumbnail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "thumbnail@2x.png"; sourceTree = "<group>"; };
@@ -341,8 +337,6 @@
 				9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */,
 				9F3FC3F82389596300AD0621 /* JustMonikaSettings.h */,
 				9F3FC3F92389596300AD0621 /* JustMonikaSettings.m */,
-				9F1A08B123B66691007B6A80 /* JustMonikaUpdater.h */,
-				9F1A08B223B66691007B6A80 /* JustMonikaUpdater.m */,
 				9F4A148723BB727A003E9CB9 /* NSBundle+Monika.h */,
 				9F4A148823BB727A003E9CB9 /* NSBundle+Monika.m */,
 				9F3FC3F42389506300AD0621 /* NSView+Subviews.h */,
@@ -444,7 +438,6 @@
 				9F069CA22381A7080081F32E /* JustMonikaView.h in Headers */,
 				9F33485223B2CEF100368291 /* JustMonikaGLView.h in Headers */,
 				9F3FC3FA2389596300AD0621 /* JustMonikaSettings.h in Headers */,
-				9F1A08B323B66691007B6A80 /* JustMonikaUpdater.h in Headers */,
 				9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */,
 				9F4A148923BB727A003E9CB9 /* NSBundle+Monika.h in Headers */,
 				9F4A148D23BB7F77003E9CB9 /* NSView+Thumbnails.h in Headers */,
@@ -692,7 +685,6 @@
 				9F4A148A23BB727A003E9CB9 /* NSBundle+Monika.m in Sources */,
 				9F3FC3FB2389596300AD0621 /* JustMonikaSettings.m in Sources */,
 				9F3FC3F72389506300AD0621 /* NSView+Subviews.m in Sources */,
-				9F1A08B423B66691007B6A80 /* JustMonikaUpdater.m in Sources */,
 				9F069CA42381A7080081F32E /* JustMonikaView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
