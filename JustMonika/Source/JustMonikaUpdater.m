@@ -7,6 +7,7 @@
 #import <Sparkle/Sparkle.h>
 
 #import "JustMonikaNotifications.h"
+#import "JustMonikaSettings.h"
 #import "JustMonikaView.h"
 #import "NSBundle+Monika.h"
 
@@ -62,6 +63,8 @@
 static NSString *githubURL =
     @"https://api.github.com/repos/ilammy/JustMonika.saver/releases/latest";
 
+static NSTimeInterval updateInterval = 24 * 60 * 60;
+
 - (void)initReleaseRequestParameters
 {
     // The defaults are fine for doing public API queries. We only need to set
@@ -76,6 +79,26 @@ static NSString *githubURL =
 
 - (void)checkForUpdates
 {
+    JustMonikaSettings *settings = self.view.settings;
+    // Only do network requests if we have been allowed by the user to do so.
+    if (!settings.updateChecksAllowed) {
+        // If we did not ask for permission, now is the chance. But do this
+        // only if we are in the preview mode, not when running screen saver.
+        if (settings.updateChecksPermissionRequested || !self.view.isPreview) {
+            return;
+        }
+        // TODO: ask for permission
+    }
+
+    // Check if enough time has passed since the last check to avoid doing
+    // requests too often. If we did not check for the update ever, the date
+    // will be nil.
+    NSDate *lastCheck = settings.lastCheckDate;
+    NSDate *current = [NSDate date];
+    if (lastCheck && [current timeIntervalSinceDate:lastCheck] < updateInterval) {
+        return;
+    }
+
     // TODO: check for updates
     // 1. Check if we are allowed to check for updates at all.
     // 2. Check if the previous check was long ago enough.
