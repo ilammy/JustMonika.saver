@@ -140,7 +140,24 @@ static const CGFloat kVersionTextMargin = 3.0f;
     // Now actually put it there and save for later use
     [self addSubview:versionText];
     self.versionText = versionText;
-    self.showVersionText = self.isPreview;
+    self.showVersionText = self.shouldShowVersionText;
+}
+
+- (BOOL)shouldShowVersionText
+{
+    // For some reason "isPreview" is always YES in macOS 10.15, even when the
+    // screen saver is obviously running. I have no clue how broken it is in
+    // macOS 11, but considering this, I'll probably wait for a year until
+    // an upgrade. I'm not your beta tester, Apple! Not for $99 per year!
+    NSOperatingSystemVersion version = NSProcessInfo.processInfo.operatingSystemVersion;
+    if ((version.majorVersion == 10 && version.minorVersion >= 15)
+        || version.majorVersion >= 11)
+    {
+        BOOL isPreview = (self.bounds.size.width  < 640)
+                      && (self.bounds.size.height < 480);
+        return isPreview;
+    }
+    return self.isPreview;
 }
 
 - (BOOL)showVersionText
