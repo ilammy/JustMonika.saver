@@ -123,18 +123,6 @@ static void init_shader_program(struct just_monika *context)
     context->time_location = glGetUniformLocation(context->screen_program, "time");
 }
 
-static GLuint load_texture_from_resource(const char *name)
-{
-    GLuint texture = 0;
-    struct resource_file *resource = NULL;
-
-    resource = open_resource(name);
-    texture = load_texture(resource);
-    free_resource(resource);
-
-    return texture;
-}
-
 static void init_textures(struct just_monika *context)
 {
     context->monika_bg_texture = load_texture_from_resource("monika_bg.png");

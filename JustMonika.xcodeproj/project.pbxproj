@@ -61,6 +61,7 @@
 		9F4A14A423C0FB8E003E9CB9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F4A14A623C0FB8E003E9CB9 /* InfoPlist.strings */; };
 		9F6CC84A23B9485A00540B08 /* JustMonikaNotifications.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */; };
 		9F6CC84B23B9485A00540B08 /* JustMonikaNotifications.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */; };
+		9F7E51E9256F70CC0054558B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F7E51E8256F70CC0054558B /* CoreGraphics.framework */; };
 		9FA5BF1523B8BCEA0019F956 /* ib_preview.png in Resources */ = {isa = PBXBuildFile; fileRef = 9FA5BF1423B8BCEA0019F956 /* ib_preview.png */; };
 		9FB113292393D36500E0FA7E /* JustMonikaGLView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F3FC445238A13DA00AD0621 /* JustMonikaGLView.m */; };
 		9FB113332393D8AF00E0FA7E /* JustMonika.saver in Embed PlugIns */ = {isa = PBXBuildFile; fileRef = 9F069C9E2381A7080081F32E /* JustMonika.saver */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -186,6 +187,7 @@
 		9F4A14B923C235AE003E9CB9 /* uk */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = uk; path = uk.lproj/JustMonika.strings; sourceTree = "<group>"; };
 		9F6CC84823B9485A00540B08 /* JustMonikaNotifications.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JustMonikaNotifications.h; sourceTree = "<group>"; };
 		9F6CC84923B9485A00540B08 /* JustMonikaNotifications.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JustMonikaNotifications.m; sourceTree = "<group>"; };
+		9F7E51E8256F70CC0054558B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		9FA5BF1423B8BCEA0019F956 /* ib_preview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ib_preview.png; sourceTree = "<group>"; };
 		9FB11303238F2EEB00E0FA7E /* texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = texture.h; sourceTree = "<group>"; };
 		9FB11304238F2EEB00E0FA7E /* texture.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = texture.c; sourceTree = "<group>"; };
@@ -221,6 +223,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9F7E51E9256F70CC0054558B /* CoreGraphics.framework in Frameworks */,
 				9F242B7D23B277D600EF94D7 /* OpenGL.framework in Frameworks */,
 				90311291C839184E9D507CD4 /* libPods-JustMonika-JustMonikaGL.a in Frameworks */,
 			);
@@ -275,6 +278,7 @@
 		9F069CC02381B61D0081F32E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F7E51E8256F70CC0054558B /* CoreGraphics.framework */,
 				9F1A08B923B7E25E007B6A80 /* UserNotifications.framework */,
 				9F3FC447238A14A500AD0621 /* AppKit.framework */,
 				9F3FC436238A118000AD0621 /* OpenGL.framework */,

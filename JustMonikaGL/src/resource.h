@@ -17,4 +17,7 @@ size_t read_resource(struct resource_file *resource, uint8_t *buffer, size_t siz
 
 size_t load_resource(const char *name, uint8_t **buffer);
 
+void load_png_resource(const char *name, uint8_t **rgba,
+                       size_t *width, size_t *height);
+
 #endif /* JUST_MONIKA_GL_PRIVATE_RESOURCE_H */

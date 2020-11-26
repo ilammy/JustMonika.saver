@@ -6,13 +6,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#import <CoreGraphics/CoreGraphics.h>
 #import <Foundation/Foundation.h>
 
 struct resource_file {
     FILE *fp;
 };
 
-struct resource_file* open_resource(const char *name)
+static NSString* resource_path(const char *name)
 {
     NSBundle *thisBundle = [NSBundle bundleWithIdentifier:@"net.ilammy.JustMonikaGL"];
     NSString *resourceName = [NSString stringWithCString:name
@@ -28,6 +29,12 @@ struct resource_file* open_resource(const char *name)
                          stringByAppendingPathComponent:@"Shaders"]
                         stringByAppendingPathComponent:resourceName];
     }
+    return resourcePath;
+}
+
+struct resource_file* open_resource(const char *name)
+{
+    NSString *resourcePath = resource_path(name);
     if (!resourcePath) {
         return NULL;
     }
@@ -105,4 +112,50 @@ error:
     free_resource(resource);
 
     return total;
+}
+
+void load_png_resource(const char *name, uint8_t **rgba,
+                       size_t *width, size_t *height)
+{
+    // First, open the image.
+    NSString *resourcePath = resource_path(name);
+    const char *resourceCPath = [resourcePath cStringUsingEncoding:NSUTF8StringEncoding];
+    CGDataProviderRef data = CGDataProviderCreateWithFilename(resourceCPath);
+    CGImageRef image = CGImageCreateWithPNGDataProvider(data,
+                                                        NULL,  // decode array
+                                                        false, // shouldInterpolate
+                                                        kCGRenderingIntentDefault);
+    // Now create a context to decode the image into.
+    // Note that OpenGL needs RGBA component layout.
+    CGContextRef context =
+        CGBitmapContextCreate(NULL, // data
+                              CGImageGetWidth(image),
+                              CGImageGetHeight(image),
+                              8, // bits per component
+                              4 * CGImageGetWidth(image),
+                              CGImageGetColorSpace(image),
+                              kCGImageAlphaPremultipliedLast);
+
+    // Flip the context upside down because OpenGL expects origin to be in
+    // the top-left corner while Quartz2D has it in the bottom-left one.
+    CGContextTranslateCTM(context, 0, CGImageGetHeight(image));
+    CGContextScaleCTM(context, 1, -1);
+
+    // Draw the image into context, extracting its pixel values.
+    CGRect rect = CGRectMake(0, 0, CGImageGetWidth(image), CGImageGetHeight(image));
+    CGContextDrawImage(context, rect, image);
+
+    // Copy RGBA pixel values into output buffer.
+    size_t total_size = 4 * CGImageGetWidth(image) * CGImageGetHeight(image);
+    *width = CGImageGetWidth(image);
+    *height = CGImageGetHeight(image);
+    *rgba = malloc(total_size);
+    if (!*rgba) {
+        goto error;
+    }
+    memcpy(*rgba, CGBitmapContextGetData(context), total_size);
+
+error:
+    CFRelease(context);
+    CFRelease(image);
 }
