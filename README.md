@@ -16,18 +16,14 @@ _A little bit of Monika in my life_
 
 ### macOS
 
-1. `pod install`
-2. `open JustMonika.xcworkspace`
-3. Build **JustMonika** target.
+1. `open JustMonika.xcodeproj`
+2. Build **JustMonika** target.
 
 ## 📄 License
 
 Screen saver as a whole is distributed under the terms of [**GNU GPL**](LICENSE) version 3 or any later version.
 
 Screen saver OpenGL library is available under the terms of [**Apache Software License**](JustMonikaGL/LICENSE) version 2.0.
-
-We use and distribute [**libpng**](http://www.libpng.org/pub/png/libpng.html) as a part of the screen saver binaries for macOS.
-[**Sparkle**](https://sparkle-project.org) framework is also embedded for automatic updates on macOS.
 
 This screen saver is a fan work that includes original DDLC assets.
 They are hosted here and distributed in good faith,

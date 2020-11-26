@@ -29,10 +29,6 @@ just_monika_draw(monika);
 just_monika_free(monika);
 ```
 
-## Dependencies
-
-**libpng** for decoding PNG resources.
-
 ## OpenGL compatibility
 
 Currently tested with the following OpenGL flavors:
@@ -45,6 +41,9 @@ This code is intended to be easily portable to UNIX-like systems with a C99 comp
 
 Resource loading is platform-specific.
 Bundle files from [`res`](res) directory, implement loading interface from [`resource.h`](src/resource.h).
+
+Note that you will also need a way to load PNG files.
+On macOS this is performed via Core Graphics, but other systems may need to use **libpng**.
 
 ## License
 
