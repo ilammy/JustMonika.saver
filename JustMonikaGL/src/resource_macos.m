@@ -125,6 +125,8 @@ void load_png_resource(const char *name, uint8_t **rgba,
                                                         NULL,  // decode array
                                                         false, // shouldInterpolate
                                                         kCGRenderingIntentDefault);
+    CFRelease(data);
+
     // Now create a context to decode the image into.
     // Note that OpenGL needs RGBA component layout.
     CGContextRef context =

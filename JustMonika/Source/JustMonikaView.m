@@ -359,9 +359,11 @@ static const CGFloat kVersionTextMargin = 3.0f;
         // Set a clip mask in this block only:
         [currentContext saveGraphicsState];
         {
+            CGImageRef imageMask = loadImageMask(mask);
             CGContextClipToMask(currentContext.CGContext,
                                 maskRect,
-                                loadImageMask(mask));
+                                imageMask);
+            CFRelease(imageMask);
 
             [thumbnail drawInRect:thumbnailRect
                          fromRect:NSZeroRect
