@@ -102,7 +102,7 @@ void main()
 {
     canvas = vec4(0.0, 0.0, 0.0, 0.0);
     draw(canvas, getPixel(mask_2, mask_2_transform(UV)));
-    draw(canvas, getPixel(mask_3, mask_3_transform(UV)));
+    draw(canvas, getPixel(mask_3, mask_3_transform(UV)) * vec4(1.0, 1.0, 1.0, 0.8));
     const vec4 orange = vec4(1.0, 0.375, 0.0, 1.0);
     const vec4 white  = vec4(1.0, 1.0,   1.0, 1.0);
     overlay(canvas, WindowMask(orange, false, 0.35, 6.0,
