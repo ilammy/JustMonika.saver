@@ -19,7 +19,7 @@ _A little bit of Monika in my life_
 
 ## 📄 License
 
-Screen saver as a whole is distributed under the terms of [**GNU GPL**](LICENSE) version 3 or any later version.
+Screen saver as a whole is distributed under the terms of [**GNU GPL**](LICENSE) version 3 (exactly).
 
 Screen saver OpenGL library is available under the terms of [**Apache Software License**](JustMonikaGL/LICENSE) version 2.0.
 

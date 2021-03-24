@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-3.0-only
 // JustMonika.saver
 // Copyright (c) 2019 ilammy's tearoom
 
